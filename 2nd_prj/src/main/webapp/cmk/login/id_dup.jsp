@@ -1,6 +1,6 @@
-<%@page import="projectDAO.ClientDAO"%>
-<%@page import="projectDAO.ClientLoginDAO"%>
-<%@page import="project_VO.ClientLoginVO"%>
+<%@page import="ra.user.login.ClientDAO"%>
+<%@page import="ra.user.login.ClientLoginDAO"%>
+<%@page import="ra.user.login.ClientLoginVO"%>
 <%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

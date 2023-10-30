@@ -1,6 +1,6 @@
 <%@page import="oracle.net.resolver.TimeUnitSuffixUtility"%>
-<%@page import="myPage.userInfoVO"%>
-<%@page import="myPage.myPageDAO"%>
+<%@page import="ra.user.myinfo.userInfoVO"%>
+<%@page import="ra.user.myinfo.myPageDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="" %>
@@ -25,9 +25,9 @@
    
  </style>
  <script type="text/javascript">
-<% request.setCharacterEncoding("UTF-8");
+<%request.setCharacterEncoding("UTF-8");
 
-	myPageDAO mpDAO = new myPageDAO();
+	ra.user.myinfo.myPageDAO mpDAO = new ra.user.myinfo.myPageDAO();
    	//mpDAO.selectUserInfo(id값으로 변경);
     userInfoVO uiVO = mpDAO.selectUserInfo("HJS");
 
@@ -38,8 +38,7 @@
 			String uTel=request.getParameter("uTel");
 			String id=request.getParameter("id");
 			id="HJS";
-			mpDAO.modifyInfo(id, uNic, uEmail, uTel);
-			%>
+			mpDAO.modifyInfo(id, uNic, uEmail, uTel);%>
 			alert("변경이 완료되었습니다.");
 			<%
 		 uiVO = mpDAO.selectUserInfo("HJS");

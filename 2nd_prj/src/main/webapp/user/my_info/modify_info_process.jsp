@@ -1,4 +1,4 @@
-<%@page import="myPage.myPageDAO"%>
+<%@page import="ra.user.myinfo.myPageDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="수정된 개인정보를 트랜잭션 전송하는 페이지" %>
@@ -10,7 +10,6 @@ if("GET".equals(method)){
 	response.sendRedirect("modify_frm.jsp");
 	return;
 }
-
 %>
 <!DOCTYPE html>
 <html>
@@ -33,11 +32,11 @@ if("GET".equals(method)){
  </script>
 </head>
 <body>
-<jsp:useBean id="uiVO" class="myPage.userInfoVO" scope="page"/>
+<jsp:useBean id="uiVO" class="ra.user.myinfo.userInfoVO" scope="page"/>
 <jsp:setProperty property="*" name="uiVO"/>
 <c:catch var="se">
 <%
-myPageDAO mpDAO = new myPageDAO();
+ra.user.myinfo.myPageDAO mpDAO = new ra.user.myinfo.myPageDAO();
 String email=uiVO.getEmail();
 String id=uiVO.getId();
 String name=uiVO.getName();

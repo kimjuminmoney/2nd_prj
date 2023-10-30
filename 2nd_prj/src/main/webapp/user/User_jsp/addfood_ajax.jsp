@@ -13,7 +13,7 @@ json.add(request.getParameter("jsonArrayString"));
 for (int i = 0; i < json.length(); i++) {
     JSONObject jsonObject = json.getJSONObject(i);
     String foodName = jsonObject.getString("foodNm");
-
+}
 ManageFoodDAO mfDAO = ManageFoodDAO.getInstance();
 ManageFoodVO mfVO = new ManageFoodVO();
 /* mfVO.setRestAreaNum(restAreaNum);
