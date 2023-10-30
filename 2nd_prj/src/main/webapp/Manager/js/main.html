@@ -1,0 +1,856 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%@ page info="   " %>
+        <!DOCTYPE html>
+        <html>
+
+        <head>
+            <meta charset="UTF-8">
+            <title>Insert title here</title>
+            <link rel="icon" href="http://192.168.10.151/jsp_prj/common/main/favicon.ico">
+            <!-- boost -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+                crossorigin="anonymous">
+            <!-- Jquery CDN시작 -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+            <!-- 카카오 Map API -->
+            <script type="text/javascript"
+                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=768c6f1c275d1694e36faed4cbb9f196&libraries=services"></script>
+
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+            <meta name="description" content="" />
+            <meta name="author" content="" />
+            <!-- Favicon-->
+            <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+            <!-- Bootstrap icons-->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+            <!-- Core theme CSS (includes Bootstrap)-->
+            <!-- <link href="css/styles.css" rel="stylesheet" />     -->
+
+
+            <!-- 카카오 style -->
+            <style>
+                .map_wrap,
+                .map_wrap * {
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+                    font-size: 12px;
+                }
+
+                .map_wrap a,
+                .map_wrap a:hover,
+                .map_wrap a:active {
+                    color: #000;
+                    text-decoration: none;
+                }
+
+                .map_wrap {
+                    position: relative;
+                    width: 100%;
+                    height: 500px;
+                }
+
+                #menu_wrap {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    width: 250px;
+                    margin: 0px 0 0px 0px;
+                    padding: 5px;
+                    overflow-y: auto;
+                    background: rgba(255, 255, 255);
+                    z-index: 1;
+                    font-size: 12px;
+
+                }
+
+                .bg_white {
+                    background: #EAEAEA;
+                }
+
+                #menu_wrap hr {
+                    display: block;
+                    height: 1px;
+                    border: 0;
+                    border-top: 2px solid #5F5F5F;
+                    margin: 3px 0;
+                }
+
+                #menu_wrap .option {
+                    text-align: center;
+                }
+
+                #menu_wrap .option p {
+                    margin: 10px 0;
+                }
+
+                #menu_wrap .option button {
+                    margin-left: 5px;
+                }
+
+                #placesList li {
+                    list-style: none;
+                }
+
+                #placesList .item {
+                    position: relative;
+                    border-bottom: 1px solid #888;
+                    overflow: hidden;
+                    cursor: pointer;
+                    min-height: 65px;
+                }
+
+                #placesList .item span {
+                    display: block;
+                    margin-top: 4px;
+                }
+
+                #placesList .item h5,
+                #placesList .item .info {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+
+                #placesList .item .info {
+                    padding: 10px 0 10px 55px;
+                }
+
+                #placesList .info .gray {
+                    color: #8a8a8a;
+                }
+
+                #placesList .info .jibun {
+                    padding-left: 26px;
+                    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+                }
+
+                #placesList .info .tel {
+                    color: #009900;
+                }
+
+                #placesList .item .markerbg {
+                    float: left;
+                    position: absolute;
+                    width: 36px;
+                    height: 37px;
+                    margin: 10px 0 0 10px;
+                    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
+                }
+
+                #placesList .item .marker_1 {
+                    background-position: 0 -10px;
+                }
+
+                #placesList .item .marker_2 {
+                    background-position: 0 -56px;
+                }
+
+                #placesList .item .marker_3 {
+                    background-position: 0 -102px
+                }
+
+                #placesList .item .marker_4 {
+                    background-position: 0 -148px;
+                }
+
+                #placesList .item .marker_5 {
+                    background-position: 0 -194px;
+                }
+
+                #placesList .item .marker_6 {
+                    background-position: 0 -240px;
+                }
+
+                #placesList .item .marker_7 {
+                    background-position: 0 -286px;
+                }
+
+                #placesList .item .marker_8 {
+                    background-position: 0 -332px;
+                }
+
+                #placesList .item .marker_9 {
+                    background-position: 0 -378px;
+                }
+
+                #placesList .item .marker_10 {
+                    background-position: 0 -423px;
+                }
+
+                #placesList .item .marker_11 {
+                    background-position: 0 -470px;
+                }
+
+                #placesList .item .marker_12 {
+                    background-position: 0 -516px;
+                }
+
+                #placesList .item .marker_13 {
+                    background-position: 0 -562px;
+                }
+
+                #placesList .item .marker_14 {
+                    background-position: 0 -608px;
+                }
+
+                #placesList .item .marker_15 {
+                    background-position: 0 -654px;
+                }
+
+                #pagination {
+                    margin: 10px auto;
+                    text-align: center;
+                }
+
+                #pagination a {
+                    display: inline-block;
+                    margin-right: 10px;
+                }
+
+                #pagination .on {
+                    font-weight: bold;
+                    cursor: default;
+                    color: #777;
+                }
+
+                /*   .strBtn {
+                	display: none;
+                } 
+                .endBtn {
+                	display: none;
+                }
+                
+                .info:hover .strBtn {
+                	display: block;
+				}
+                .info:hover .endBtn {
+                	display: block;
+				} */
+            </style>
+
+            <style>
+                /* 사이드바 래퍼 스타일 */
+
+                #page-wrapper {
+                    padding-left: 100px;
+                }
+
+                #sidebar-wrapper {
+                    position: fixed;
+                    width: 100px;
+                    height: 100%;
+                    margin-left: -100px;
+                    background: #000;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                }
+
+                #page-content-wrapper {
+                    width: 100%;
+                    padding: 20px;
+                }
+
+                /* 사이드바 스타일 */
+
+                .sidebar-nav {
+                    width: 250px;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                }
+
+                .sidebar-nav li {
+                    text-indent: 1.5em;
+                    line-height: 2.8em;
+                }
+
+                .sidebar-nav li a {
+                    display: block;
+                    text-decoration: none;
+                    color: #999;
+                }
+
+                .sidebar-nav li a:hover {
+                    color: #fff;
+                    background: rgba(255, 255, 255, 0.2);
+                }
+
+                .sidebar-nav>.sidebar-brand {
+                    font-size: 1.3em;
+                    line-height: 3em;
+                }
+            </style>
+
+
+            <!-- 카카오 맵, 검색 JS  -->
+            <script>
+                var map
+                // 마커를 담을 배열입니다
+                var markers = [];
+                window.onload = function () {
+                    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                        mapOption = {
+                            center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+                            level: 3 // 지도의 확대 레벨
+                        };
+
+                    // 지도를 생성합니다    
+                    map = new kakao.maps.Map(mapContainer, mapOption);
+                }
+                // 장소 검색 객체를 생성합니다
+                var ps = new kakao.maps.services.Places();
+
+                // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+                var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+                // 키워드로 장소를 검색합니다
+                /* searchPlaces(); */
+
+                // 키워드 검색을 요청하는 함수입니다
+                function searchPlaces() {
+                    var keyword = document.getElementById("keyword");
+                    if (keyword !== null) {
+                        var keyword = keyword.value;
+                    }
+
+                    /* var keyword = document.getElementById('keyword').value;
+
+                    if (!keyword.replace(/^\s+|\s+$/g, '')) {
+                        alert('키워드를 입력해주세요!');
+                        return false;
+                    } */
+
+                    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+                    ps.keywordSearch(keyword, placesSearchCB, { size: 5 });
+                }
+
+                // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+                function placesSearchCB(data, status, pagination) {
+                    if (status === kakao.maps.services.Status.OK) {
+
+                        // 정상적으로 검색이 완료됐으면
+                        // 검색 목록과 마커를 표출합니다
+                        displayPlaces(data);
+
+                        // 페이지 번호를 표출합니다
+                        displayPagination(pagination);
+
+                    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+
+                        alert('검색 결과가 존재하지 않습니다.');
+                        return;
+
+                    } else if (status === kakao.maps.services.Status.ERROR) {
+
+                        alert('검색 결과 중 오류가 발생했습니다.');
+                        return;
+
+                    }
+                }
+
+                // 검색 결과 목록과 마커를 표출하는 함수입니다
+                function displayPlaces(places) {
+
+                    var listEl = document.getElementById('placesList'),
+                        menuEl = document.getElementById('menu_wrap'),
+                        fragment = document.createDocumentFragment(),
+                        bounds = new kakao.maps.LatLngBounds(),
+                        listStr = '';
+
+                    // 검색 결과 목록에 추가된 항목들을 제거합니다
+                    removeAllChildNods(listEl);
+
+                    // 지도에 표시되고 있는 마커를 제거합니다
+                    removeMarker();
+
+                    for (var i = 0; i < places.length; i++) {
+
+                        // 마커를 생성하고 지도에 표시합니다
+                        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+                            marker = addMarker(placePosition, i),
+                            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+
+                        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+                        // LatLngBounds 객체에 좌표를 추가합니다
+                        bounds.extend(placePosition);
+
+                        // 마커와 검색결과 항목에 mouseover 했을때
+                        // 해당 장소에 인포윈도우에 장소명을 표시합니다
+                        // mouseout 했을 때는 인포윈도우를 닫습니다
+                        (function (marker, title) {
+                            kakao.maps.event.addListener(marker, 'mouseover', function () {
+                                displayInfowindow(marker, title);
+                            });
+
+                            kakao.maps.event.addListener(marker, 'mouseout', function () {
+                                infowindow.close();
+                            });
+
+                            itemEl.onmouseover = function () {
+                                displayInfowindow(marker, title);
+                            };
+
+                            itemEl.onmouseout = function () {
+                                infowindow.close();
+                            };
+                        })(marker, places[i].place_name);
+
+                        fragment.appendChild(itemEl);
+                    }
+
+                    // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
+                    listEl.appendChild(fragment);
+                    menuEl.scrollTop = 0;
+
+                    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+                    map.setBounds(bounds);
+                }
+
+                // 검색결과 항목을 Element로 반환하는 함수입니다
+                function getListItem(index, places) {
+
+                    var el = document.createElement('li'),
+                        itemStr =
+                            '<p class="p-3 mb-2 bg-dark text-white">' + (index + 1) + '</p>' +
+                            '<div class="info">' + '   <h5>' + places.place_name + '</h5>';
+                    /*                         itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
+                                                '<div class="info">' +
+                                                '   <h5>' + places.place_name + '</h5>'; */
+
+                    if (places.road_address_name) {
+                        itemStr += '    <span>' + places.road_address_name + '</span>' +
+                            '   <span class="jibun gray">' + places.address_name + '</span>';
+                    } else {
+                        itemStr += '    <span>' + places.address_name + '</span>';
+                    }
+
+                    itemStr += '  <span class="tel">' + places.phone + '</span>';
+
+                    itemStr += '<span> x : ' + places.x + ' y : ' + places.y + '</span>' +
+                        '<input type="button" class="strBtn"value="출발지">' +
+                        '<input type="button" class="endBtn"value="도착지">' +
+                        '</div>';
+
+
+                    el.innerHTML = itemStr;
+                    el.className = 'item';
+
+
+                    btnEvent(el, places);
+                    return el;
+                }
+
+                //출발지, 도착지 버튼처리 이벤트
+                function btnEvent(el, places) {
+                    // 동적으로 생성된 버튼을 선택합니다.
+                    var strBtn = el.querySelector(".strBtn");
+                    var endBtn = el.querySelector(".endBtn");
+                    //출발지, 도착지에 경로 입력
+                    var strInput = document.getElementById('strInput');
+                    var endInput = document.getElementById('endInput');
+
+
+                    // 출발지 버튼에 대한 클릭 이벤트 핸들러를 등록합니다.
+                    strBtn.addEventListener("click", function () {
+                        alert("출발지 버튼이 클릭되었습니다!");
+                        // 원하는 동작을 추가할 수 있습니다.
+                        //출발지 input값 설정
+                        strInput.value = places.place_name;
+                        setHidden(places, "strHidden");
+                        deleteElement();
+                    });
+
+                    endBtn.addEventListener("click", function () {
+                        alert("도착지 버튼이 클릭되었습니다!");
+                        // 원하는 동작을 추가할 수 있습니다.
+                        //도착지 input에 값 설정
+                        endInput.value = places.place_name;
+                        setHidden(places, "endHidden");
+                        deleteElement();
+                    });
+                };
+
+                //input hidden에 동적으로 값 설정하기
+                function setHidden(places, hidden) {
+                    // 이미 존재하는 input 요소를 선택합니다.
+                    var Hidden = document.getElementById(hidden);
+
+                    // dataset을 사용하여 data-이름 속성을 동적으로 추가하고 값을 설정합니다.
+                    Hidden.setAttribute("data-place-name", places.place_name);
+                    Hidden.setAttribute("data-place-x", places.x);
+                    Hidden.setAttribute("data-place-y", places.y);
+                };
+
+                //검색목록, 페이지번호 삭제
+                function deleteElement() {
+                    //검색목록가져오기
+                    var listEl = document.getElementById('placesList')
+                    //검색목록 페이지번호 가져오기
+                    var paginationEl = document.getElementById('pagination'),
+                        fragment = document.createDocumentFragment(),
+                        i;
+                    // 검색 결과 목록에 추가된 항목들을 제거합니다
+                    removeAllChildNods(listEl);
+                    // 지도에 표시되고 있는 마커를 제거합니다
+                    removeMarker();
+
+                    // 기존에 추가된 페이지번호를 삭제합니다
+                    while (paginationEl.hasChildNodes()) {
+                        paginationEl.removeChild(paginationEl.lastChild);
+                    };
+                };
+
+                //길찾기 메소드
+                /*  `````````````````````````````````````````````````````````````````````````````````````````````*/
+                function getKakaoDirections() {
+
+                    // 출발지와 도착지 좌표
+                    var strHidden = document.getElementById('strHidden');
+                    var endHidden = document.getElementById('endHidden');
+                    var origin = strHidden.getAttribute("data-place-x").substring(0, 9) + ',' + strHidden.getAttribute("data-place-y").substring(0, 9);
+                    var destination = endHidden.getAttribute("data-place-x").substring(0, 9) + ',' + endHidden.getAttribute("data-place-y").substring(0, 9);
+
+                    // API 요청 URL 생성
+                    var apiUrl = 'https://apis-navi.kakaomobility.com/v1/directions?origin=' + origin + '&destination=' + destination +
+                        '&waypoints=&priority=RECOMMEND&car_fuel=GASOLINE&car_hipass=false&alternatives=false&road_details=false';
+
+                    // API 호출
+                    fetch(apiUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'KakaoAK 8b7f8f63f919e489457742800cfe5f95'
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // API 응답 데이터 처리
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            // 오류 처리
+                            console.error(error);
+                        });
+                }
+                /*  `````````````````````````````````````````````````````````````````````````````````````````````*/
+
+
+
+
+                // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+                function addMarker(position, idx, title) {
+                    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+                        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+                        imgOptions = {
+                            spriteSize: new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+                            spriteOrigin: new kakao.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+                            offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+                        },
+                        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+                        marker = new kakao.maps.Marker({
+                            position: position, // 마커의 위치
+                            image: markerImage
+                        });
+
+                    marker.setMap(map); // 지도 위에 마커를 표출합니다
+                    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+
+                    return marker;
+                }
+
+                // 지도 위에 표시되고 있는 마커를 모두 제거합니다
+                function removeMarker() {
+                    for (var i = 0; i < markers.length; i++) {
+                        markers[i].setMap(null);
+                    }
+                    markers = [];
+                }
+
+                // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+                function displayPagination(pagination) {
+                    var paginationEl = document.getElementById('pagination'),
+                        fragment = document.createDocumentFragment(),
+                        i;
+
+                    // 기존에 추가된 페이지번호를 삭제합니다
+                    while (paginationEl.hasChildNodes()) {
+                        paginationEl.removeChild(paginationEl.lastChild);
+                    }
+
+                    for (i = 1; i <= pagination.last; i++) {
+                        var el = document.createElement('a');
+                        el.href = "#";
+                        el.innerHTML = i;
+
+                        if (i === pagination.current) {
+                            el.className = 'on';
+                        } else {
+                            el.onclick = (function (i) {
+                                return function () {
+                                    pagination.gotoPage(i);
+                                }
+                            })(i);
+                        }
+
+                        fragment.appendChild(el);
+                    }
+                    paginationEl.appendChild(fragment);
+                }
+
+                // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+                // 인포윈도우에 장소명을 표시합니다
+                function displayInfowindow(marker, title) {
+                    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
+                    infowindow.setContent(content);
+                    infowindow.open(map, marker);
+                }
+
+                // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+                function removeAllChildNods(el) {
+                    while (el.hasChildNodes()) {
+                        el.removeChild(el.lastChild);
+                    }
+                }
+            </script>
+            <style type="text/css">
+
+            </style>
+            <script type="text/javascript">
+                $(function () {
+                    $("#btn1").click(function () {
+                        alert(strHidden.getAttribute("data-place-name"))
+                        alert(strHidden.getAttribute("data-place-x"))
+                        alert(strHidden.getAttribute("data-place-y"))
+                        alert(endHidden.getAttribute("data-place-name"))
+                        alert(endHidden.getAttribute("data-place-x"))
+                        alert(endHidden.getAttribute("data-place-y"))
+                    })
+                    $("#btn2").click(function () {
+                        alert(" 되라 ㅠㅠ")
+                        /* getCarDirection(); */
+                        getKakaoDirections();
+                    })
+                    $("#button-addon2").click(function () {
+                        alert(" 온로드아니지?")
+                        searchPlaces();
+                    })
+                })
+            </script>
+
+			<style>
+			    body, html {
+			        height: 100%;
+			        margin: 0;
+			        padding: 0;
+			    }
+			
+			    header, footer {
+			        height: 5%;
+			        /* background: lightgray; */
+			    }
+			
+			    section {
+			        height: 90%;
+			        display: flex;
+			        align-items: center;
+			        justify-content: center;
+			    }
+			
+			    #all-wrapper {
+			        display: flex;
+			        /* justify-content: space-between; */
+			        width: 100%;
+			        height: 750px;
+			        flex-wrap: nowrap;
+			        /* max-width: 800px; */ /* 섹션 내부의 최대 너비 조절 */
+			    }
+			
+			    #page-wrapper{
+			        width: 100px;  /* 3개의 div를 옆으로 나란히 배치 */ 
+			        height: 750px;
+			        background: lightblue;
+			        /* margin: 5px; */
+			    } 
+			    #menu-box{
+			        width: 30%;  /* 3개의 div를 옆으로 나란히 배치 */ 
+			        height: 750px;
+			        background: lightblue;
+			        /* margin: 5px; */
+			    } 
+			    #map{
+			        width: 60%;  /* 3개의 div를 옆으로 나란히 배치 */ 
+			        height: 750px;
+			        background: lightblue;
+			        /* margin: 5px; */
+			        flex: 1;
+			    } 
+			    #search, #menu_wrap{
+			    	width: 100%;
+			    }
+			    
+			  
+			    
+			</style>
+
+
+        </head>
+
+        <body class="d-flex flex-column h-100">
+            <!-- <main class=" flex-shrink-0"> -->
+                <header>
+                <!-- Navigation-->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container px-5">
+                        <a class="navbar-brand" href="index.html">휴게소 정보검색</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation"><span
+                                class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                                <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+                                <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                                        <li><a class="dropdown-item" href="blog-home.html">Blog Home</a></li>
+                                        <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">Portfolio</a>
+                                    <ul class="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="navbarDropdownPortfolio">
+                                        <li><a class="dropdown-item" href="portfolio-overview.html">Portfolio
+                                                Overview</a></li>
+                                        <li><a class="dropdown-item" href="portfolio-item.html">Portfolio Item</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                </header>
+                <section class="bg-dark py-5" id="features">
+                    <!-- ===============================================사이드바================================================= -->
+                <div id="all-wrapper">
+                    <div id="page-wrapper">
+                        <div id="sidebar-wrapper">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="sidebar-brand nav-item" role="presentation">
+                                    하이루
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">검색</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab" aria-controls="local" aria-selected="false">지역별 휴게소</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="highway-tab" data-bs-toggle="tab" data-bs-target="#highway" type="button" role="tab" aria-controls="highway" aria-selected="false">고속도로별 휴게소</button>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>    
+                        <!-- /사이드바 -->
+                    <!-- 검색창, 지역별, 고속도로별 -->
+                    <div id="menu-box"class="tab-content" >
+                        <!-- 검색창 -->
+                        <div class="tab-pane active" id="search" role="tabpanel" aria-labelledby="search-tab">
+                            <div id="menu_wrap" class="bg_white" >
+                                <div class="option">
+                                        <form onsubmit="searchPlaces(); return false;">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Recipient's username" aria-label="Recipient's username"
+                                                    id="keyword" size="15"><!-- aria-describedby="button-addon2" -->
+                                                <input class="btn btn-outline-secondary" type="button"
+                                                    id="button-addon2" value="검색하기" />
+
+                                                <div class="input-group mb-3">
+                                                    
+                                                    <span class="input-group-text"
+                                                        id="inputGroup-sizing-default">출발지</span>
+                                                    <input type="text" id="strInput" class="form-control"
+                                                        aria-label="Sizing example input"
+                                                        aria-describedby="inputGroup-sizing-default"
+                                                        readonly="readonly">
+                                                    <input type="hidden" id="strHidden">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text"
+                                                        id="inputGroup-sizing-default">도착지</span>
+                                                    <input type="text" id="endInput" class="form-control"
+                                                        aria-label="Sizing example input"
+                                                        aria-describedby="inputGroup-sizing-default"
+                                                        readonly="readonly">
+                                                    <input type="hidden" id="endHidden">
+                                                    <input type="button" id="btn1">
+                                                    <input type="button" id="btn2">
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <ul id="placesList"></ul>
+                                <div id="pagination"></div>
+                        </div>
+                        <!-- 다영 -->
+                        <div class="tab-pane" id="local" role="tabpanel" aria-labelledby="local-tab">
+                            지역별 휴게소
+                                <jsp:include page="local.jsp" />
+                        </div>
+                        <!-- 다영 -->
+                            
+                        <!-- 지성 -->
+                        <div class="tab-pane" id="highway" role="tabpanel" aria-labelledby="highway-tab">
+                            고속도로별 휴게소
+                        </div>
+                        <!-- 지성 -->
+                    </div>
+                    
+                    <!-- 지도 -->
+                    <div id="map" >
+                    </div>
+                </div>        
+
+
+                </section>
+            <!-- </main> -->
+            <!-- Footer-->
+            <footer class="bg-dark py-4 mt-auto">
+                <div class="container px-5">
+                    <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                        <div class="col-auto">
+                            <div class="small m-0 text-white">Copyright &copy; Your Website 2023</div>
+                        </div>
+                        <div class="col-auto">
+                            <a class="link-light small" href="#!">Privacy</a>
+                            <span class="text-white mx-1">&middot;</span>
+                            <a class="link-light small" href="#!">Terms</a>
+                            <span class="text-white mx-1">&middot;</span>
+                            <a class="link-light small" href="#!">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Bootstrap core JS-->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Core theme JS-->
+            <!-- <script src="js/scripts.js"></script> -->
+        </body>
+
+        </html>
