@@ -1,6 +1,57 @@
+<%@page import="myPage.BoardUtil"%>
+<%@page import="myPage.BoardUtilVO"%>
+<%@page import="myPage.MyCSVO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="myPage.myCSDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page info="" %>
+<%@ page info=" cs페이지" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% request.setCharacterEncoding("UTF-8"); 
+int totalCount=0;
+String id="HJS";
+myCSDAO mcDAO= myCSDAO.getInstance();
+try{
+totalCount=mcDAO.selectTotalCount(id);//리뷰 전체 개수 count
+}catch(SQLException se){
+	se.printStackTrace();
+}
+//한 페이지에서 보여줄 게시글의 수
+int pageScale=3;
+//총 페이지 수
+int totalPage = totalCount/pageScale;
+//딱코가 아닐때 방지용
+if( totalCount % pageScale != 0){
+totalPage++;
+}
+//페이지별 시작번호
+String tempPage=request.getParameter("currentPage");
+int currentPage=1;
+if(tempPage != null){
+	currentPage=Integer.parseInt(tempPage);
+}
+int startNum=currentPage*pageScale-pageScale+1;
+//끝 페이지
+int endNum=startNum+pageScale-1;
+
+//많은양의 레코드를 잘라서 보여준다.
+//1.화면에 보여줄 페이지 인덱스의 수
+int pageNumber=5;
+//2.화면에 보여줄 시작페이지 번호
+int startPage=((currentPage-1)/pageNumber)*pageNumber+1;
+//3.화면에 보여줄 마지막 페이지 번호
+int endPage=(((startPage-1)+pageNumber/pageNumber)*pageNumber);
+//4.총 페이지수가 연산된 마지막 페이지 수보다 작으면 총 페이지 수가 마지막 페이지 수로 설정
+if( totalPage < endPage){
+    endPage = totalPage;
+}
+
+List<MyCSVO> csList=mcDAO.selectMyCS(id,startNum,endNum);//리뷰조회
+pageContext.setAttribute("csList",csList);
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,20 +62,33 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
- <!-- jQuery CDN 끝 -->
+ <!-- jQuery CDN 끝 -->\
  <!-- css연결 -->
  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="http://192.168.10.150/jsp_prj/common/css/styles.css">
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
 <!-- 연결 끗 -->    
- 
  <style type="text/css">
    
  </style>
  <script type="text/javascript">
  $(function(){
-	 
+
  });//ready
+ 
+ function open_detail( i ){
+	 
+		 var csNO=$("#csNO"+i).val();
+		 alert( csNO );
+		window.open("complain_sub.jsp?csNO="+csNO,"cs_detail","width=800,height=400,top="
+	            +( window.screenY+150)+",left="+( window.screenX+200));
+		
+		
+ }
+ 
+ 
  </script>
 </head>
 <body class="sb-nav-fixed">
@@ -33,8 +97,12 @@
         	<jsp:include page="include_side_nav.jsp"></jsp:include>
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid px-4" style="margin-top:3%; margin-left:2%">
-                        <h1 class="mt-4">문의 내역</h1>
+				  <div class="container-fluid px-4">
+						<div class="mb-4" style="width:20%; height:75px; margin-top:50px; padding: 10px;" >
+                       	 	<h1 class="list-unstyled" >문의 내역</h1>
+                        </div>
+                     </div>
+                    <div class="container-fluid px-4">
                         <div class="card mb-4">
                             <div class="card-body">
                                     <table  class="datatable-table">
@@ -47,28 +115,46 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                    	<td>1</td><td>2</td><td>3</td><td>4</td>
-                                    </tr>
-                                    <tr>
-                                    	<td>1</td><td>2</td><td>3</td><td>4</td>
-                                    </tr>
-                                    <tr>
-                                    	<td>1</td><td>2</td><td>3</td><td>4</td>
-                                    </tr>
-                                    </tbody>
+                                    	<c:forEach var="cs" items="${ csList }" varStatus="i">
+	                                    	<tr id="cs_detail${ i.count }" onclick="open_detail(${i.count})">
+	                                    	
+	                                    		<c:if test="${ cs.csType eq 'U' }">
+	                                    			<td>회원정보</td>
+	                                    		</c:if>
+	                                    		<c:if test="${ cs.csType eq 'R' }">
+	                                    			<td>휴게소</td>
+	                                    		</c:if>
+	                                    		<td>${ cs.csDate }</td>
+	                                    		<td>${ cs.csText }<input type="hidden" value="${ cs.csNO }" id="csNO${ i.count }" name="csNO${ i.count }"></td>
+	                                    		<td>${ cs.raName }</td>
+	                                    	</tr>
+	                                    </c:forEach>
+	                                    </tbody>
 									</table>
+									<div id="tbottom">
+									<%
+			                        	BoardUtilVO buVO=new BoardUtilVO("complain.jsp",currentPage,totalPage);
+										BoardUtil bu=BoardUtil.getInstance();
+			                        	out.println(bu.pageNation(buVO));
+		                        	%>
+									</div>												
                             	</div>
                         	</div>
                         </div>
-                        <div style="height: 3vh"></div>
-                    <div class="container-fluid px-4" style="margin-left:2%;">
-                     	<h1 class="mt-4">문의하기</h1>
+                        
+                        <div style="height: 1vh"></div>
+                        
+                      <div class="container-fluid px-4">
+						<div class="mb-4" style="width:20%; height:75px; margin-top:50px; padding: 10px;" >
+                       	 	<h1 class="list-unstyled" >문의하기</h1>
+                        </div>
+                     </div>
+                     <div class="container-fluid px-4">
                         <div class="card mb-4">
     	                   	<div class="card-header">
                         		<div id="select_cs">
                         		<select id="select_dropdown" class="datatable-selector">
-                        			<option>고속도로관련</option><option> 휴게소관련</option><option> 회원정보관련</option></select>
+                        			<option>유형선택</option><option value="R"> 휴게소관련</option><option value="U"> 회원정보관련</option></select>
                         		<select id="select_CSType" class="datatable-selector">
                         			<option>휴게소명</option><option>경부선휴게소1</option>
                         			</select>
@@ -93,20 +179,10 @@
                 </main>
                 
                 <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
+                    <jsp:include page="include_footer.jsp"></jsp:include>
                 </footer>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        
     </body>
 </html>

@@ -29,49 +29,53 @@
 </head>
 <body class="sb-nav-fixed">
 	<jsp:include page="include_nav.jsp"></jsp:include>
-        <div id="layoutSidenav">
-        	<jsp:include page="include_side_nav.jsp"></jsp:include>
-	        <div id="layoutSidenav_content">
+    <div id="layoutSidenav">
+    	<jsp:include page="include_side_nav.jsp"></jsp:include>
+	    <div id="layoutSidenav_content">
 	        <main>
-	         <div class="container-fluid px-4">
-						<div class="mb-4" style="width:20%; height:75px; margin-top:50px; padding: 10px;" >
-                       	 	<h1 class="list-unstyled" >비밀번호 변경</h1>
-                        </div>
-                     </div>
-	        	<div class="containter-fluid px-4" >
-	            	<div class="card-body">
-                        <div class="card mb-3" style="margin:10px; padding:10px">
-		            		<div class="row" id="pw" style="margin-top:1%; margin-left:1%;">
-			            		<div class="row">
-			            			<label for="inputPassword5" class="form-label">Password</label>
-			            		</div>
-								<div class="row">
+	        <div class="container-fluid px-4">
+				<div class="mb-4" style="width:20%; height:75px; margin-top:50px; padding: 10px;" >
+                	<h1 class="list-unstyled" >비밀번호 변경</h1>
+                </div>
+            </div>
+	        <div class="containter-fluid px-4" >
+	        	<div class="card-body">
+                	<div class="card mb-3" style="margin:10px; padding:10px">
+		            	<div class="row" id="pw" style="margin-top:2%; margin-left:1%;">
+			            	<div class="row">
+			            		<label for="inputPassword5" class="form-label">Password</label>
+			            	</div>
+							<div class="row">
+								<div class="col-8">
 									<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
 								</div>
-								<div class="row">
-									<div id="passwordHelpBlock" class="form-text">
+							</div>
+							<div class="row">
+								<div id="passwordHelpBlock" class="form-text">
 				  					Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-									</div>
 								</div>
-	            			</div>
-		            		<div class="row" id="pw2" style="margin-top:5%; margin-left:1%;">
-				            		<div class="row">
-					        			<label for="inputPassword5" class="form-label">Confirm Password</label>
-					        	  	</div>
-			            			<div class="row">
-				            			<div class="col-8">
-											<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-										</div>
-									<div class="row">
-										<div class="col">
-											<div id="passwordHelpBlock" class="form-text">
-					  					Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-					  						</div>
-										</div>
+							</div>
+	            		</div>
+		            	<div class="row" id="pw2" style="margin-top:5%; margin-left:1%;">
+				        	<div class="row">
+					    		<label for="inputPassword5" class="form-label">
+					    			Confirm Password
+					    		</label>
+					       	</div>
+			            	<div class="row">
+				            	<div class="col-8">
+									<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+								</div>
+							</div>
+								<div class="row">
+									<div class="col">
+										<div id="passwordHelpBlock" class="form-text">
+					  						Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+					  					</div>
 									</div>
 								</div>
 							</div>
-							<div class="row g-3 align-items-center" id="btn_myinfo" style="margin-top:10px;">
+							<div class="row g-3 align-items-center"  id="btn_myinfo" style="margin-top:2%; margin-left:1%;">
 								<div class="col-auto">
 									<input type="button" id="btn_modify" class="btn btn-outline-dark" value="수정" style="border:1px solid #000"/>
 								</div>
@@ -82,11 +86,11 @@
 	            			</div>
 	            		</div>
             		</div>
-            	</div>
             	</main>
-            
-            
-            
+	            <footer class="py-4 bg-light mt-auto">
+                    <jsp:include page="include_footer.jsp"></jsp:include>
+             </footer>
+           	</div>
 		</div>
  </div>        
 </body>

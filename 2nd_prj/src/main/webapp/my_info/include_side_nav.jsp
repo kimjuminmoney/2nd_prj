@@ -7,7 +7,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading" style="margin-top:40px;">내 정보</div>
-                            <a class="nav-link" href="personal_info.jsp" >
+                            <a class="nav-link" href="modify_info.jsp" >
                                 개인정보 수정
                             </a>
                             <a class="nav-link" href="change_pw.jsp" >

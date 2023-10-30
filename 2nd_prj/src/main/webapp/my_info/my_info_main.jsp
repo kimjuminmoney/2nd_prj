@@ -30,24 +30,7 @@
 <body class="sb-nav-fixed">
         <jsp:include page="include_nav.jsp"></jsp:include>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">내 정보</div>
-                            <a class="nav-link" href="personal_info.jsp" >
-                                개인정보 수정
-                            </a>
-                            <a class="nav-link" href="my_review.jsp" >
-                                리뷰관리
-                            </a>
-                            <a class="nav-link" href="complain.jsp">
-                                문의하기
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+            <jsp:include page="include_side_nav.jsp"></jsp:include>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
@@ -128,16 +111,7 @@
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
+                     <jsp:include page="include_footer.jsp"></jsp:include>
                 </footer>
             </div>
         </div>
