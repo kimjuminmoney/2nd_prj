@@ -1,10 +1,10 @@
+<%@page import="ra.util.BoardUtil"%>
+<%@page import="ra.util.BoardUtilVO"%>
+<%@page import="ra.user.myreview.MyReviewVO"%>
+<%@page import="ra.user.myreview.MyReviewDAO"%>
 <%@page import="org.json.simple.JSONObject"%>
-<%@page import="myPage.BoardUtilVO"%>
-<%@page import="myPage.BoardUtil"%>
-<%@page import="myPage.MyReviewVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="myPage.MyReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="review page" %>
@@ -138,9 +138,9 @@ pageContext.setAttribute("rvList",rvList);
  </script>
 </head>
 <body class="sb-nav-fixed">
-         <jsp:include page="include_nav.jsp"></jsp:include>
+         <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include>
         <div id="layoutSidenav">
-        	<jsp:include page="include_side_nav.jsp"></jsp:include>
+        	<jsp:include page="../myinfo_nav/include_side_nav.jsp"></jsp:include>
             <div id="layoutSidenav_content">
                 <main>
 					  <div class="container-fluid px-4">
@@ -201,7 +201,7 @@ pageContext.setAttribute("rvList",rvList);
                     	</div>
                 	</main>
                 <footer class="py-4 bg-light mt-auto">
-                    <jsp:include page="include_footer.jsp"></jsp:include>
+                    <jsp:include page="../myinfo_nav/include_footer.jsp"></jsp:include>
                 </footer>
                 </div>
             </div>

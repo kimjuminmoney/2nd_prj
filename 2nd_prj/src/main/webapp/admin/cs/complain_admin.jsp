@@ -32,9 +32,9 @@
  </script>
 </head>
 <body class="sb-nav-fixed">
-        <jsp:include page="include_nav.jsp"></jsp:include><!-- 위쪽 사이드 nav 넣기 -->
+       <!--  <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include><!-- 위쪽 사이드 nav 넣기 -->
         <div id="layoutSidenav">
-        	<jsp:include page="include_side_nav.jsp"></jsp:include><!-- 왼쪽 사이드 nav 넣기 -->
+        	<!--<jsp:include page="../myinfo_nav/include_side_nav.jsp"></jsp:include><!-- 왼쪽 사이드 nav 넣기 -->
             <div id="layoutSidenav_content">
                 <main>
                       <div class="container-fluid px-4">

@@ -28,9 +28,9 @@
  </script>
 </head>
 <body class="sb-nav-fixed">
-	<jsp:include page="include_nav.jsp"></jsp:include>
+	<jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include>
     <div id="layoutSidenav">
-    	<jsp:include page="include_side_nav.jsp"></jsp:include>
+    	<jsp:include page="../myinfo_nav/include_side_nav.jsp"></jsp:include>
 	    <div id="layoutSidenav_content">
 	        <main>
 	        <div class="container-fluid px-4">
@@ -88,7 +88,7 @@
             		</div>
             	</main>
 	            <footer class="py-4 bg-light mt-auto">
-                    <jsp:include page="include_footer.jsp"></jsp:include>
+                    <jsp:include page="../myinfo_nav/include_footer.jsp"></jsp:include>
              </footer>
            	</div>
 		</div>
