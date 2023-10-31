@@ -595,7 +595,7 @@
                     	//길찾기 버튼이 눌리면 상세보기
                     	// 휴게소상세페이지 생기면 href수정하기
                     	itemStr +=  '<div class="btn-group-vertical">'+
-			            			'<a href="index.jsp?rano=' + places.rano + '"type="button" class="strBtn btn btn-success"value="휴게소번호">상세보기</a>'+
+			            			'<a href="../User_jsp/index.jsp?rano=' + places.rano + '"type="button" class="strBtn btn btn-success"value="휴게소번호">상세보기</a>'+
 			                		'</div>';
                     }    		
                     			

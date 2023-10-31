@@ -1,8 +1,8 @@
 package ra.admin.notice;
 
 public class NoticeVO {
-	String empno, ntitle, ncontent, input_date, writer;
-	int nno;
+	private String empno, ntitle, ncontent, input_date, writer;
+	private int nno;
 	public NoticeVO() {
 		super();
 		// TODO Auto-generated constructor stub

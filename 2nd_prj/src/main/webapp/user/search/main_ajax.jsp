@@ -1,7 +1,7 @@
-<%@page import="prj.RestAreaDAO"%>
 <%@page import="com.google.gson.Gson"%>
+<%@page import="ra.user.search.SearchDAO"%>
+<%@page import="ra.user.search.SearchVO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="prj.RestAreaVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.BufferedReader"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,7 +9,7 @@
 <%@ page info="   " %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 	response.setHeader("Access-Control-Allow-Origin", "http://localhost");
 	// 클라이언트에서 전송한 JSON 데이터 수신
 	BufferedReader reader = request.getReader();
@@ -28,11 +28,11 @@
 	    System.out.println(part);
 	} */
 		
-		RestAreaVO raVO = null;
+		SearchVO raVO = null;
 	// JSON 데이터를 ArrayList<VO>로 변환
-	RestAreaDAO raDAO = RestAreaDAO.getInstance();
-	List<RestAreaVO> resultList = new ArrayList<RestAreaVO>();
-	List<RestAreaVO> list = null;
+	SearchDAO raDAO = SearchDAO.getInstance();
+	List<SearchVO> resultList = new ArrayList<SearchVO>();
+	List<SearchVO> list = null;
 	for(int i =0; i < parts.length;i++){
 		list = raDAO.selectra(parts[i]);
 		for(int j =0; j < list.size();j++){

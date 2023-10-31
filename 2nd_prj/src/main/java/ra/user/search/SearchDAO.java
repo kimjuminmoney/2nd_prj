@@ -1,4 +1,4 @@
-package ra.user.ra;
+package ra.user.search;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,30 +7,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kjm.prj.DbConnection;
+import ra.util.DbConnection;
 
-public class RestAreaDAO {
-	private static RestAreaDAO raDAO;
 
-	private RestAreaDAO() {
+public class SearchDAO {
+	private static SearchDAO raDAO;
+
+	private SearchDAO() {
 
 	}//RestAreaDAO
 
-	public static RestAreaDAO getInstance() {
+	public static SearchDAO getInstance() {
 		if (raDAO == null) {
-			raDAO = new RestAreaDAO();
+			raDAO = new SearchDAO();
 		}//end if
 		return raDAO;
 	}//getInstance
 
-	public List<RestAreaVO> selectra(String RAName) throws SQLException {
+	public List<SearchVO> selectra(String RAName) throws SQLException {
 
 		DbConnection db = DbConnection.getInstance();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<RestAreaVO> list = new ArrayList<RestAreaVO>();
-		RestAreaVO raVO = null;
+		List<SearchVO> list = new ArrayList<SearchVO>();
+		SearchVO raVO = null;
 		try {
 			con = db.getConn("jdbc/dbcp");
 			StringBuilder sb = new StringBuilder();
@@ -46,7 +47,7 @@ public class RestAreaDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				raVO = new RestAreaVO(rs.getString("raname"),rs.getString("raaddr"), rs.getString("ray"), rs.getString("rax"), rs.getString("rano"));
+				raVO = new SearchVO(rs.getString("raname"),rs.getString("raaddr"), rs.getString("ray"), rs.getString("rax"), rs.getString("rano"));
 				list.add(raVO);
 			}//end while
 		} finally {
