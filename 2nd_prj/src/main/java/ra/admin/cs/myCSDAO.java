@@ -1,4 +1,4 @@
-package ra.user.cs;
+package ra.admin.cs;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -17,7 +17,7 @@
  <!-- jQuery CDN 끝 -->
  <!-- css연결 -->
  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="http://192.168.10.150/jsp_prj/common/css/styles.css">
+<link rel="stylesheet" type="text/css" href="../../common/css/styles.css">
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <!-- 연결 끗 -->    
  

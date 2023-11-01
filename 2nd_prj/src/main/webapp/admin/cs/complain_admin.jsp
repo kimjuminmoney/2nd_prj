@@ -1,6 +1,54 @@
+<%@page import="ra.admin.cs.MyCSVO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="ra.admin.cs.myCSDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page info="" %>
+<%@ page info="cs_admin" %>
+<% request.setCharacterEncoding("UTF-8"); 
+int totalCount=0;
+String id="HJS";
+myCSDAO mcDAO= myCSDAO.getInstance();
+try{
+totalCount=mcDAO.selectTotalCount(id);//리뷰 전체 개수 count
+}catch(SQLException se){
+	se.printStackTrace();
+}
+//한 페이지에서 보여줄 게시글의 수
+int pageScale=3;
+//총 페이지 수
+int totalPage = totalCount/pageScale;
+//딱코가 아닐때 방지용
+if( totalCount % pageScale != 0){
+totalPage++;
+}
+//페이지별 시작번호
+String tempPage=request.getParameter("currentPage");
+int currentPage=1;
+if(tempPage != null){
+	currentPage=Integer.parseInt(tempPage);
+}
+int startNum=currentPage*pageScale-pageScale+1;
+//끝 페이지
+int endNum=startNum+pageScale-1;
+
+//많은양의 레코드를 잘라서 보여준다.
+//1.화면에 보여줄 페이지 인덱스의 수
+int pageNumber=5;
+//2.화면에 보여줄 시작페이지 번호
+int startPage=((currentPage-1)/pageNumber)*pageNumber+1;
+//3.화면에 보여줄 마지막 페이지 번호
+int endPage=(((startPage-1)+pageNumber/pageNumber)*pageNumber);
+//4.총 페이지수가 연산된 마지막 페이지 수보다 작으면 총 페이지 수가 마지막 페이지 수로 설정
+if( totalPage < endPage){
+    endPage = totalPage;
+}
+
+List<MyCSVO> csList=mcDAO.selectMyCS(id,startNum,endNum);//리뷰조회
+pageContext.setAttribute("csList",csList);
+
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +62,7 @@
  <!-- jQuery CDN 끝 -->
 <!-- css연결 -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="http://192.168.10.150/jsp_prj/common/css/styles.css">
+<link rel="stylesheet" type="text/css" href="../../common/css/styles.css">
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <!-- 연결 끗 -->    
  
@@ -32,9 +80,12 @@
  </script>
 </head>
 <body class="sb-nav-fixed">
-       <!--  <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include><!-- 위쪽 사이드 nav 넣기 -->
+
+       <jsp:include page="../admin_include/header_nav.jsp"></jsp:include><!-- 위쪽 사이드 nav 넣기 -->
         <div id="layoutSidenav">
-        	<!--<jsp:include page="../myinfo_nav/include_side_nav.jsp"></jsp:include><!-- 왼쪽 사이드 nav 넣기 -->
+        	<div id="layoutSidenav_nav">
+        	<jsp:include page="../admin_include/side_bar.jsp"></jsp:include><!-- 왼쪽 사이드 nav 넣기 -->
+        	</div>
             <div id="layoutSidenav_content">
                 <main>
                       <div class="container-fluid px-4">
@@ -110,19 +161,9 @@
                         
                 </main>
                 <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
+                   <jsp:include page="../admin_include/footer.jsp"></jsp:include>
                 </footer>
             </div>
         </div>
-ㅌ
     </body>
 </html>
