@@ -1,12 +1,12 @@
+<%@page import="ra.user.loc.LocalSearchVO"%>
+<%@page import="ra.user.loc.LocalRestDAO"%>
+<%@page import="ra.user.loc.LatLngVO"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="restAreaVO.LatLngVO"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="org.json.simple.JSONObject"%>
-<%@page import="restAreaVO.LocalSearchVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="restAreaDAO.LocalRestDAO"%>
 <%@page import="java.io.BufferedReader"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -47,7 +47,7 @@
 		
 	if(loc != null ) {
 
-	LocalRestDAO lrDAO = LocalRestDAO.getInstance();
+		LocalRestDAO lrDAO = LocalRestDAO.getInstance();
 	
 	try{
 		List<LocalSearchVO> list = lrDAO.selectLoc(loc);

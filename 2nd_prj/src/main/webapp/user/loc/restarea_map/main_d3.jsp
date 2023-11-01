@@ -166,9 +166,9 @@ $(function(){
 							</div> 
 							
 						<!-- post방식으로 불러오기 -->
-								<form method="post" id="hidFrm" action="../day1020/member_detail.jsp">
+								<!-- <form method="post" id="hidFrm" action="../day1020/member_detail.jsp">
 									<input type="hidden" name="id" id="id"/>
-								</form>
+								</form> -->
 							 
 						</div>
                         <!-- 다영 -->

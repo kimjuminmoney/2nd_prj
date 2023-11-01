@@ -1,5 +1,3 @@
-<%@page import="restAreaVO.LocalSearchVO"%>
-<%@page import="restAreaDAO.LocalRestDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ page info="  지도검색, 길찾기 " %>
             <link rel="icon" href="http://192.168.10.144/jsp_prj/common/main/favicon.ico">
