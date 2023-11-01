@@ -9,20 +9,20 @@ import java.util.List;
 
 import ra.util.DbConnection;
 
-public class myCSDAO {
+public class AdminCSDAO {
 
-	private static myCSDAO mcDAO;
-	private myCSDAO() {
+	private static AdminCSDAO mcDAO;
+	private AdminCSDAO() {
 		
 	}
-	public static myCSDAO getInstance() {
+	public static AdminCSDAO getInstance() {
 		if(mcDAO ==null) {
-			mcDAO=new myCSDAO();
+			mcDAO=new AdminCSDAO();
 		}
 		return mcDAO;
 	}
 	
-	public int selectTotalCount( String id ) throws SQLException {
+	public int selectTotalCount( ) throws SQLException {
 		int cnt=0;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -34,11 +34,10 @@ public class myCSDAO {
 			con= db.getConn("jdbc/dbcp");
 			StringBuilder Query = new StringBuilder();
 			Query.append("    select count(csNO) cnt    ")
-			.append("    from customerService    ")
-			.append("    where userid=?    ");
+			.append("    from customerService    ");
 			
 			pstmt=con.prepareStatement(Query.toString());
-			pstmt.setString(1, id);
+
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -53,15 +52,15 @@ public class myCSDAO {
 	}//selectTotalCount
 	
 	
-	public List<MyCSVO> selectMyCS( String id, int startNum, int endNum ) throws SQLException {
+	public List<AdminCSVO> selectAllCS( int startNum, int endNum ) throws SQLException {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
 		DbConnection db= DbConnection.getInstance();
 		
-		MyCSVO cVO=null;
-		List<MyCSVO> csList=new ArrayList<MyCSVO>();
+		AdminCSVO cVO=null;
+		List<AdminCSVO> csList=new ArrayList<AdminCSVO>();
 		try {
 			con=db.getConn("jdbc/dbcp");
 			StringBuilder Query = new StringBuilder();
@@ -71,18 +70,18 @@ public class myCSDAO {
 			.append("    from Customerservice CS    ")
 			.append("    left join RestArea ra on   cs.rano=ra.rano    ")
 			.append("    left join employee e on    cs.empno= e.empno    ")
-			.append("    where cs.userid=? )    ")
+			.append("    )    ")
 			.append("    where idx between ? and ?    ");
 			
 			
 			pstmt=con.prepareStatement(Query.toString());
-			pstmt.setString(1, id);
-			pstmt.setInt(2, startNum);
-			pstmt.setInt(3, endNum);
+
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endNum);
 			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				cVO=new MyCSVO();
+				cVO=new AdminCSVO();
 				cVO.setUserId(rs.getString("userid"));
 				cVO.setCsNO(rs.getInt("csNo"));
 				cVO.setRaNO(rs.getString("rano"));
@@ -104,14 +103,14 @@ public class myCSDAO {
 		return csList;
 	}//selectAllCS
 	
-	public MyCSVO selectOneCS( String id, int csNO ) throws SQLException {
+	public AdminCSVO selectOneCS( String id, int csNO ) throws SQLException {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
 		DbConnection db= DbConnection.getInstance();
 		
-		MyCSVO cVO=null;
+		AdminCSVO cVO=null;
 		try {
 			con=db.getConn("jdbc/dbcp");
 			StringBuilder Query = new StringBuilder();
@@ -131,7 +130,7 @@ public class myCSDAO {
 			
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				cVO=new MyCSVO();
+				cVO=new AdminCSVO();
 				cVO.setUserId(rs.getString("userid"));
 				cVO.setCsNO(rs.getInt("csNO"));
 				cVO.setRaNO(rs.getString("rano"));
@@ -216,12 +215,12 @@ public class myCSDAO {
 			return list;
 	}//selectAllLocation
 
-	public int insertCS( String id, MyCSVO mcVO ) throws SQLException {
+	public int insertCS( String id, AdminCSVO mcVO ) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
 		
-		MyCSVO cVO=mcVO;
+		AdminCSVO cVO=mcVO;
 		DbConnection db= DbConnection.getInstance();
 		int cnt=0;
 		try {

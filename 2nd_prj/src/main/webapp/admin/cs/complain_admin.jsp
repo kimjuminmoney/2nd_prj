@@ -1,21 +1,26 @@
-<%@page import="ra.admin.cs.MyCSVO"%>
+<%@page import="ra.util.BoardUtil"%>
+<%@page import="ra.util.BoardUtilVO"%>
+<%@page import="ra.admin.cs.AdminCSVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="ra.admin.cs.myCSDAO"%>
+<%@page import="ra.admin.cs.AdminCSDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="cs_admin" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); 
 int totalCount=0;
-String id="HJS";
-myCSDAO mcDAO= myCSDAO.getInstance();
+String id=(String)session.getAttribute("id");
+id="HJS";
+AdminCSDAO acDAO= AdminCSDAO.getInstance();
 try{
-totalCount=mcDAO.selectTotalCount(id);//리뷰 전체 개수 count
+totalCount=acDAO.selectTotalCount();//리뷰 전체 개수 count
 }catch(SQLException se){
 	se.printStackTrace();
 }
 //한 페이지에서 보여줄 게시글의 수
-int pageScale=3;
+int pageScale=10;
 //총 페이지 수
 int totalPage = totalCount/pageScale;
 //딱코가 아닐때 방지용
@@ -44,10 +49,8 @@ if( totalPage < endPage){
     endPage = totalPage;
 }
 
-List<MyCSVO> csList=mcDAO.selectMyCS(id,startNum,endNum);//리뷰조회
+List<AdminCSVO> csList=acDAO.selectAllCS(startNum,endNum);//리뷰조회
 pageContext.setAttribute("csList",csList);
-
-
 %>
 <!DOCTYPE html>
 <html>
@@ -71,12 +74,15 @@ pageContext.setAttribute("csList",csList);
  </style>
  <script type="text/javascript">
  $(function(){
-		 $("#cs_detail").click(function(){
-				var id=$("#id").val();
-				window.open("complain_sub_admin.jsp","cs_detail","width=800,height=700,top="
-			            +( window.screenY+150)+",left="+( window.screenX+200));	
-			}); 
+		
+	 
  });//ready
+ 
+ function open_detail( i ){
+	 var csNO=$("#csNO"+i).val();
+ 	 window.open("complain_sub_admin.jsp?csNO="+csNO,"cs_detail","width=800,height=400,top="
+            +( window.screenY+150)+",left="+( window.screenX+200));
+ }//open_detail
  </script>
 </head>
 <body class="sb-nav-fixed">
@@ -108,32 +114,31 @@ pageContext.setAttribute("csList",csList);
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr id="cs_detail">
-                                    	<td>2013-12-01</td><td>bluecarrot0217</td><td>어쩌고저쩌고</td><td>가평휴게소</td><td>휴게소</td><td>Y</td>
-                                    </tr>
-                                    <tr id="cs_detail">
-                                    	<td>2013-12-01</td><td>bluecarrot0217</td><td>어쩌고저쩌고</td><td>가평휴게소</td><td>휴게소</td><td>Y</td>
-                                    </tr>
-                                    <tr id="cs_detail">
-                                    	<td>2013-12-01</td><td>bluecarrot0217</td><td>어쩌고저쩌고</td><td>가평휴게소</td><td>휴게소</td><td>Y</td>
-                                    </tr>
-                                    <tr id="cs_detail">
-                                    	<td>2013-12-01</td><td>bluecarrot0217</td><td>어쩌고저쩌고</td><td>가평휴게소</td><td>휴게소</td><td>Y</td>
-                                    </tr>
-                                    <tr id="cs_detail">
-                                    	<td>2013-12-01</td><td>bluecarrot0217</td><td>어쩌고저쩌고</td><td>가평휴게소</td><td>휴게소</td><td>Y</td>
-                                    </tr>
-                                    <tr id="cs_detail">
-                                    	<td>2013-12-01</td><td>bluecarrot0217</td><td>어쩌고저쩌고</td><td>가평휴게소</td><td>휴게소</td><td>Y</td>
-                                    </tr>
-                                    <tr id="cs_detail">
-                                    	<td>2013-12-01</td><td>bluecarrot0217</td><td>어쩌고저쩌고</td><td>가평휴게소</td><td>휴게소</td><td>Y</td>
-                                    </tr>
-                                    <tr id="cs_detail">
-                                    	<td>2013-12-01</td><td>bluecarrot0217</td><td>어쩌고저쩌고</td><td>가평휴게소</td><td>휴게소</td><td>Y</td>
-                                    </tr>
+                                    <c:forEach var="cs" items="${ csList }" varStatus="i">
+                                   		<tr id="cs_detail${ i.count }" onclick="open_detail(${i.count})">
+	                                    		<td>${ cs.csDate }</td>
+	                                    		<td>${ cs.userId }</td>
+	                                    		<td>${ cs.csText }<input type="hidden" value="${ cs.csNO }" id="csNO${ i.count }" name="csNO${ i.count }"></td>
+	                                    		<td>${ cs.raName }</td>
+	                                    		<td>
+		                                    		<c:if test="${ cs.csType eq 'U' }">회원정보</c:if>
+		                                    		<c:if test="${ cs.csType eq 'R' }">휴게소</c:if>
+	                                    		</td>
+	                                    		<td>
+		                                    		<c:if test="${ empty cs.empno }">N</c:if>
+		                                    		<c:if test="${ not empty cs.empno }">Y</c:if>
+	                                    		</td>
+	                                    </tr>
+                                    </c:forEach>
                                     </tbody>
 									</table>
+									<div id="tfoot">
+									<%
+			                        	BoardUtilVO buVO=new BoardUtilVO("complain_admin.jsp",currentPage,totalPage);
+										BoardUtil bu=BoardUtil.getInstance();
+			                        	out.println(bu.pageNation(buVO));
+		                        	%>
+									</div>
                             	</div>
                         	</div>
                         </div>
@@ -144,7 +149,7 @@ pageContext.setAttribute("csList",csList);
 								<div id="searchType" class="col col-lg-2">
 									<select class="form-select" >
 										<option>유형선택</option>
-										<option>아이디</option>
+										<option>고객아이디</option>
 										<option>닉네임</option>
 										<option>휴게소명</option>
 									</select>

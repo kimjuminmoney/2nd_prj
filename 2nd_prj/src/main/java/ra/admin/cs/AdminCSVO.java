@@ -2,16 +2,16 @@ package ra.admin.cs;
 
 import java.sql.Date;
 
-public class MyCSVO {
+public class AdminCSVO {
 
 	private String userId,csType,raName,csText,empno,csAnswer,raNO;
 	private int csNO;
 	private Date csDate,csAdate;
 	
-		public MyCSVO() {
+		public AdminCSVO() {
 		}
 
-		public MyCSVO(String userId, String csType, String raName, String csText, String empno, String csAnswer,
+		public AdminCSVO(String userId, String csType, String raName, String csText, String empno, String csAnswer,
 			String raNO, int csNO, Date csDate, Date csAdate) {
 		this.userId = userId;
 		this.csType = csType;
