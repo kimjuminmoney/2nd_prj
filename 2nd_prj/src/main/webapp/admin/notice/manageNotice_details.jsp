@@ -27,11 +27,6 @@
 <style type="text/css">
 
 </style>
-<script type="text/javascript">
-$(function(){
-	
-});//ready
-</script>
 <%
 String noticeNo = request.getParameter("nno");
 NoticeDAO nDAO = NoticeDAO.getInstance();
@@ -44,6 +39,26 @@ try{
 }
 
 %>
+<script type="text/javascript">
+
+$(function(){
+	$("#modifyBtn").click(function(){
+		 window.location.href = "manageNotice_update.jsp?nno=<c:out value='${ noticeVO.nno }' />"
+	});//click
+	$("#deleteBtn").click(function(){
+		var answer = confirm("삭제하시겠습니까?");
+		if (answer) {
+		 window.location.href = "manageNotice_delete_process.jsp?nno=<c:out value='${ noticeVO.nno }' />"
+		}//end if
+	});//click
+	$("#backBtn").click(function() {
+        window.history.back(); // 브라우저에서 뒤로 가기
+    });//click
+	
+	
+});//ready
+</script>
+
 
 </head>
 <body class="sb-nav-fixed">
@@ -76,6 +91,8 @@ try{
                                 <i class="fas fa-table me-1"></i>
                                 <h1>${ noticeVO.ntitle }</h1>
                                 <span>작성자 : ${ noticeVO.writer }</span><span>작성일 : ${ noticeVO.input_date }</span>
+                                <input type="button" class="btn btn-success" value="수정" id="modifyBtn" >
+                                <input type="button" class="btn btn-success" value="삭제" id="deleteBtn" >
                                 
                             </div>
                             <div class="card-body">
@@ -98,6 +115,7 @@ try{
                             </div>
                         </div>
                     </div>
+                    <input type="button" value="목록으로" class="btn btn-success" id="backBtn">
                 </main>
                 <!-- 풋터 -->
                 <jsp:include page="../admin_include/footer.jsp"></jsp:include>

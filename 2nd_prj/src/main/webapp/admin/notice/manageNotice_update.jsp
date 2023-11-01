@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Tables - SB Admin</title>
+        <title>수정하기</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="../../common/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -42,14 +42,11 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 String input_date = sdf.format(temp_date);
 
 pageContext.setAttribute("input_date", input_date);
-
+NoticeVO nVO = null;
 try{
-	NoticeVO nVO = nDAO.selectNoticeDetail(noticeNo);
+	nVO = nDAO.selectNoticeDetail(noticeNo);
 	
-	int max = nDAO.selectNnoMax();
-	
-	
-	pageContext.setAttribute("maxNno",max);
+	pageContext.setAttribute("noticeVO", nVO);
 } catch(SQLException se){
 	se.printStackTrace();
 }
@@ -70,7 +67,10 @@ $(function(){
          height: 300,
          lang: 'ko-KR'
      });//summernote
-	 
+     //content값을 summernote에 할당
+     var content = "${ noticeVO.ncontent}";
+     $('#note').summernote('code', content);
+     
 	 $("#saveBtn").click(function(){
 		 var confirmation = confirm("저장하시겠습니까?");
          
@@ -109,31 +109,31 @@ $(function(){
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Tables</li>
                         </ol> -->
-                        <!-- <div class="card mb-4">
+                        <div class="card mb-4">
                             <div class="card-body">
-                                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+                               <!--  DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
                                 <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                .
+                                . -->
                             </div>
-                        </div> -->
-						        <form action="manageNotice_write_process.jsp" method="post" id="frm">
-						        <input type="hidden" id="nno" name="nno" value="${ maxNno+1 }">
+                        </div>
+						        <form action="manageNotice_update_process.jsp" method="post" id="frm">
+						        <input type="hidden" id="nno" name="nno" value="${ noticeVO.nno }">
 						        <!-- 세션넘어오면 value empno로 변경하기 -->
 						        <input type="hidden" id="empno" name="empno" value="1">
                         <div class="card mb-4">
 						    <div class="card-header">
 						        <div class="input-group input-group-lg">
 								  <span class="input-group-text" id="inputGroup-sizing-lg">제 목</span>
-								  <input type="text" id="ntitle" name="ntitle" class="form-control" placeholder="제목을 입력하세요" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+								  <input type="text" id="ntitle" value="${ noticeVO.ntitle }"name="ntitle" class="form-control" placeholder="제목을 입력하세요" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
 								</div>
 						        <!-- 세션 들어가면 작성자랑 날짜 넣기 -->
 						        <div class="input-group mb-3">
 								  <span class="input-group-text" id="basic-addon1">작성자</span>
-								  <input type="text" id="writer" value="홍지성" name="writer"class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" readonly="readonly">
+								  <input type="text" id="writer" value="${ noticeVO.writer }" name="writer"class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" readonly="readonly">
 								</div>
 						        <div class="input-group mb-3">
 								  <span class="input-group-text" id="basic-addon1">작성일</span>
-								  <input type="text" id="input_date" name="input_date" class="form-control" value="${ input_date }" aria-label="Username" aria-describedby="basic-addon1" readonly="readonly">
+								  <input type="text" id="input_date" name="input_date" class="form-control" value="${ noticeVO.input_date }" aria-label="Username" aria-describedby="basic-addon1" readonly="readonly">
 						        </div>
 						    </div>
 						    <div class="card-body">
