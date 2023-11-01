@@ -1,8 +1,6 @@
+<%@page import="ra.admin.dashboard.DashboardVO"%>
+<%@page import="ra.admin.dashboard.DashboardDAO"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="restArea.DashboardUtil"%>
-<%@page import="restAreaVO.DashboardUtilVO"%>
-<%@page import="restAreaVO.DashboardVO"%>
-<%@page import="restAreaDAO.DashboardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,7 +8,6 @@
 <script>
 
 </script>
-<!-- 우측 div -->
 
 <!-- 하단 테이블  -->
 <%

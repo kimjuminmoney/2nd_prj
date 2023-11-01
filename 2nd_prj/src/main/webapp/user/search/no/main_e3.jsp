@@ -1,24 +1,23 @@
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ page info="  지도검색, 길찾기 " %>
-            <link rel="icon" href="http://192.168.10.144/jsp_prj/common/main/favicon.ico">
-            <!-- boost -->
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-                crossorigin="anonymous">
-            <!-- Jquery CDN시작 -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-            <!-- 카카오 Map API -->
-            <!-- <script type="text/javascript"
-                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36678bc719ca21832c0fe5e7f326ba22&libraries=services"></script> -->
-                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36678bc719ca21832c0fe5e7f326ba22&libraries=services"></script>
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-            <meta name="description" content="" />
-            <meta name="author" content="" />
-            <!-- Favicon-->
-            <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-            <!-- Bootstrap icons-->
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-            <!-- Core theme CSS (includes Bootstrap)-->
+<%@ page info="  지도검색, 길찾기 " %>
+ <link rel="icon" href="http://192.168.10.151/jsp_prj/common/main/favicon.ico">
+ <!-- boost -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ <!-- Jquery CDN시작 -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+ <!-- 카카오 Map API -->
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=768c6f1c275d1694e36faed4cbb9f196&libraries=services"></script>
+     
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+ <meta name="description" content="" />
+ <meta name="author" content="" />
+ <!-- Favicon-->
+ <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+ <!-- Bootstrap icons-->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+ <!-- Core theme CSS (includes Bootstrap)-->
             
             <!-- 카카오 style -->
             <style>
@@ -191,6 +190,8 @@
                 #placesList .item .marker_15 {
                     background-position: 0 -654px;
                 }
+                
+                
  
                 #pagination {
                     margin: 10px auto;
@@ -228,7 +229,7 @@
             	width: 70%;
             	height: 800px;
             	
-            	}
+            	}*/
             	
             	.nav-link {
 				    width: 120px; /* 버튼의 폭을 조절합니다. */
@@ -273,19 +274,38 @@
 				    list-style: none;
 				  }
 				  
-				  .sidebar-nav li {
+				   /* .sidebar-nav li {
 				    text-indent: 1.5em;
 				    line-height: 2.8em;
-				  }
+				  } */
+				  
+				  .nav.nav-tabs li {
+				  
+				  text-indent: 1.5em;
+				  line-height: 2.8em;
+				  font-size: 16px;
+				  color: white;
+				  
+				}
 				  
 				  
 				  
 				  
-				  .sidebar-nav li button {
+				  /* .sidebar-nav li input {
 				    display: block;
 				    text-decoration: none;
 				    color: #212529;
-				  }
+				    width: 200px;
+				    
+				  }  */
+				  .nav-tabs .nav-link {
+				    display: block;
+				    text-decoration: none;
+				    color: #FFFFFF;
+/* 				    color: #212529; */
+				    width: 95px;
+				    font-family: '맑은 고딕';
+				  }  
 				  
 				  .sidebar-nav li button:hover {
 				    color: #fff;
@@ -296,7 +316,16 @@
 				    font-size: 1.3em;
 				    line-height: 3em;
 				  }
-				
+				  /
+				  .nav-tabs .nav-link {
+				    width: 180px;  /* 버튼의 폭을 조절합니다.  */
+				    height: 180px;  /* 버튼의 높이를 조절합니다.  */
+				    padding: 5px;  /* 버튼 내부 여백을 설정합니다.  */
+				   font-size: 16px; /*  폰트 크기를 조절합니다.  */
+				   /* white-space: nowrap; */
+				   
+				}
+				 
 				</style>
 				
 				<style>
@@ -367,32 +396,30 @@
                     }
                     
                     .list-group li {
-					  margin-bottom: 12px;
-					}
-					
-					.list-group-item {
-					}
-					
-					.list li {
-					  list-style: none;
-					  padding: 10px;
-					  border: 2px solid #e3dada;
-					  margin-top: 12px;
-					  margin-left: 7px;
-					  margin-right: 5px;
-					  border-radius: 5px;
-					  background: #fff;
-					}
-					#spanNum{
-						font-size: 20px;
-					}
-					.ml-2 {
-					 padding-left: 20px;
-					}
+  margin-bottom: 12px;
+}
+
+.list-group-item {
+}
+
+.list li {
+  list-style: none;
+  padding: 10px;
+  border: 2px solid #e3dada;
+  margin-top: 12px;
+  margin-left: 7px;
+  margin-right: 5px;
+  border-radius: 5px;
+  background: #fff;
+}
+#spanNum{
+	font-size: 20px;
+}
+.ml-2 {
+ padding-left: 20px;
+}
 
 			    </style>
-			    
-			    
             
             <!-- 카카오 맵, 검색 JS  -->
             <script>
@@ -443,17 +470,18 @@
                     } */
 
                     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-                    ps.keywordSearch(keyword, placesSearchCB,{size:10});
+                    ps.keywordSearch(keyword, placesSearchCB,{size:15});
                 }
 
                 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
                 function placesSearchCB(data, status, pagination) {
                     if (status === kakao.maps.services.Status.OK) {
-
+						console.log(data);
                         // 정상적으로 검색이 완료됐으면
                         // 검색 목록과 마커를 표출합니다
-                        displayPlaces(data);
-
+                        var flag = true;
+                        displayPlaces(data,flag);
+	
                         // 페이지 번호를 표출합니다
                         displayPagination(pagination);
 
@@ -471,7 +499,8 @@
                 }
 
                 // 검색 결과 목록과 마커를 표출하는 함수입니다
-                function displayPlaces(places) {
+                function displayPlaces(places, flag) {
+                	
 
                     var listEl = document.getElementById('placesList'),
                         menuEl = document.getElementById('menu_wrap'),
@@ -490,7 +519,7 @@
                         // 마커를 생성하고 지도에 표시합니다
                         var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
                             marker = addMarker(placePosition, i),
-                            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+                            itemEl = getListItem(i, places[i],flag); // 검색 결과 항목 Element를 생성합니다
 
                         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                         // LatLngBounds 객체에 좌표를 추가합니다
@@ -509,6 +538,11 @@
                             });
 
                             itemEl.onmouseover = function () {
+                            	// 클릭된 항목과 연관된 마커의 좌표를 가져옵니다
+                                var markerPosition = marker.getPosition();
+
+                                // 해당 마커의 위치로 지도를 이동합니다
+                                map.panTo(markerPosition);
                                 displayInfowindow(marker, title);
                             };
 
@@ -529,7 +563,7 @@
                 }
 
                 // 검색결과 항목을 Element로 반환하는 함수입니다
-                function getListItem(index, places) {
+                function getListItem(index, places,flag) {
 
                     var el = document.createElement('li'),
                         itemStr = 
@@ -537,7 +571,7 @@
                         '<div class="d-flex flex-row align-items-center">'+
 /*                         '<div class="info">' + */
                         '<div class="d-flex flex-row align-items-center">'+
-                        '<span id="spanNum" class="badge bg-primary rounded-pill">'+(index + 1) +'</span>'+
+                        '<span id="spanNum" class="badge rounded-pill bg-success">'+(index + 1) +'</span>'+
                         '<div class="ml-2">'+
                         '<h5>' +  places.place_name + '</h5>';
                         
@@ -549,19 +583,29 @@
                         itemStr += '    <span>' + places.address_name + '</span>';
                     }
 
-                    itemStr +=  '</div>'+'</div>'+'</div>'+
-		                        '<div class="btn-group-vertical">'+
-                    			'<input type="button" class="strBtn btn btn-primary"value="출발지">'+
-                    			'<input type="button" class="endBtn btn btn-primary"value="도착지">'+
-                        		'</div>';
-                        		
+                    itemStr +=  '</div>'+'</div>'+'</div>';
+                    
+                    if(flag){
+                    	//검색하기 눌리면 출발지, 도착지 버튼 생성
+	                    itemStr +=  '<div class="btn-group-vertical">'+
+	                    			'<input type="button" class="strBtn btn btn-success"value="출발지">'+
+	                    			'<input type="button" class="endBtn btn btn-success"value="도착지">'+
+	                        		'</div>';
+                    } else {
+                    	//길찾기 버튼이 눌리면 상세보기
+                    	// 휴게소상세페이지 생기면 href수정하기
+                    	itemStr +=  '<div class="btn-group-vertical">'+
+			            			'<a href="../User_jsp/index.jsp?rano=' + places.rano + '"type="button" class="strBtn btn btn-success"value="휴게소번호">상세보기</a>'+
+			                		'</div>';
+                    }    		
                     			
                     el.innerHTML = itemStr;
                     el.className = 'd-flex justify-content-between';
 /*                     el.className = 'item'; */
                     
-                    
+                    if(flag){
                     btnEvent(el,places);
+                    }
                     return el;
                 }
                 
@@ -644,9 +688,8 @@
             /* 지도검색 */
             /* ----------------------------------------------------------- */
             //길찾기 메소드
-					var polyline = null;
+				var polyline = null;
                  function getKakaoDirections() {
-					
 					  // 출발지와 도착지 좌표
 					  var strHidden = document.getElementById('strHidden');
 					  var endHidden = document.getElementById('endHidden');
@@ -661,7 +704,7 @@
 					  fetch(apiUrl, {
 					    method: 'GET',
 					    headers: {
-					      'Authorization': 'KakaoAK 66627a8c409df00f4fac34dd1e77b381'
+					      'Authorization': 'KakaoAK 8b7f8f63f919e489457742800cfe5f95'
 					    }
 					  })
 					  .then(response => response.json())
@@ -670,8 +713,10 @@
 					    console.log(data);
 					    
 					 // 데이터를 hidden input 요소에 저장
-					      var hidData = document.getElementById('hidData');
-					      hidData.value = JSON.stringify(data);
+					     /*  var hidData = document.getElementById('hidData');
+					      hidData.value = JSON.stringify(data); */
+					    //길찾기 결과 처리메소드
+					   /*  directionFrm(data); */
 					    
 					    // 기존 폴리라인을 제거
 					    if (polyline) {
@@ -680,12 +725,102 @@
 					    // 새로운 폴리라인을 그림
 					    polyline = createPolyline(data);
 					    polyline.setMap(map);
+					    
+					   sendDirectionDataToServer(data);
 					  })
 					  .catch(error => {
 					    // 오류 처리
 					    console.error(error);
 					  });
-					} 
+					}//getKakaoDirections 
+               //길찾기 메소드
+                	
+                /*  `````````````````````````````````````````````````````````````````````````````````````````````*/
+// 페이지네이션을 생성하고 페이지를 클릭할 때 데이터를 표시
+        function createPagination(responseData) {
+            // JSON 데이터를 JavaScript 배열로 파싱
+            const data = responseData;
+
+            // 페이지당 아이템 수
+            const itemsPerPage = 10;
+
+            // 페이지네이션을 담을 엘리먼트
+            const paginationElement = document.getElementById('pagination');
+            
+         // 이전 페이지네이션을 지우기
+            while (paginationElement.firstChild) {
+                paginationElement.removeChild(paginationElement.firstChild);
+            }
+
+            for (let page = 1; page <= Math.ceil(data.length / itemsPerPage); page++) {
+                const li = document.createElement('li');
+                li.classList.add('page-item');
+                const a = document.createElement('a');
+                a.classList.add('page-link');
+                a.textContent = page;
+                a.href = '#';
+
+                a.addEventListener('click', function () {
+                    const startIdx = (page - 1) * itemsPerPage;
+                    const endIdx = Math.min(startIdx + itemsPerPage, data.length);
+                    const pageData = data.slice(startIdx, endIdx);
+                    displayPageData(page, pageData);
+                });
+
+                li.appendChild(a);
+                paginationElement.appendChild(li);
+            }
+         // 최초에 1번 페이지의 데이터를 표시
+            const startIdx = 0;
+            const endIdx = Math.min(itemsPerPage, data.length);
+            const pageData = data.slice(startIdx, endIdx);
+            displayPageData(1, pageData);
+        }
+
+     // 데이터를 페이지네이션에 맞게 휴게소 표시하는 함수
+        function displayPageData(page, data) {
+            // 이 예제에서는 페이지 번호와 해당 페이지의 데이터를 콘솔에 출력합니다.
+            console.log('Page', page, 'data:', data);
+            var flag = false;
+			displayPlaces(data, flag); 
+            
+        }
+
+
+
+
+                /*  `````````````````````````````````````````````````````````````````````````````````````````````*/
+                /* 검색결과 데이터 세션에 저장 메소드 */
+				function sendDirectionDataToServer(data) {
+               		// 클라이언트에서 데이터 추출
+					const guides = data.routes[0].sections[0].guides;
+                	const filteredNames = guides.filter(guide => guide.name.includes('휴게소')).map(guide => guide.name);
+                	console.log(filteredNames);
+                	
+					// 서버로 보낼 데이터 준비
+					var sendData = JSON.stringify(filteredNames);
+					
+					$.ajax({
+						url: 'http://localhost/2nd_prj_sub/prj/v3/main_ajax.jsp', // 서버의 URL
+						method: 'POST',
+						contentType: 'application/json',
+						data: sendData,
+						success: function(responseData) {
+						// 서버 응답 처리
+						console.log('서버 응답:', responseData);
+						// responseData를 원하는 방식으로 처리
+						//페이지네이션
+						createPagination(responseData);
+						},
+						error: function(jqXHR, textStatus, errorThrown) {
+						// 오류 처리
+							console.error('오류 발생:', textStatus, errorThrown);
+						}
+					});
+				}//sendDirectionDataToServer
+
+                
+                /* 검색결과 데이터 세션에 저장 메소드 */
                 /*  `````````````````````````````````````````````````````````````````````````````````````````````*/
                 
                 /* 폴리라인 메소드 */
@@ -714,7 +849,7 @@
 				  return new kakao.maps.Polyline({
 				    path: path,
 				    strokeWeight: 5,
-				    strokeColor: '#000000',
+				    strokeColor: '#198754',
 				    strokeOpacity: 0.7,
 				    strokeStyle: 'solid'
 				  });
@@ -768,7 +903,6 @@
 
                     // 출발지 버튼에 대한 클릭 이벤트 핸들러를 등록합니다.
                     strBtn.addEventListener("click", function() {
-                        alert("출발지 버튼이 클릭되었습니다!");
                         // 원하는 동작을 추가할 수 있습니다.
                         //출발지 input값 설정
                         strInput.value=places.place_name;
@@ -780,7 +914,6 @@
                     });
                     
                     endBtn.addEventListener("click", function() {
-                        alert("도착지 버튼이 클릭되었습니다!");
                         // 원하는 동작을 추가할 수 있습니다.
                         //도착지 input에 값 설정
                         endInput.value=places.place_name;
@@ -808,6 +941,14 @@
                   } else if (hidden === 'endHidden' && endMarker) {
                     endMarker.setMap(null);
                   }
+                  
+               // 마커 이미지 URL 설정
+                  var markerImageURL = hidden === 
+               'strHidden' ? 'http://localhost/2nd_prj_sub/prj/common/icons/png/start.png' : 'http://localhost/2nd_prj_sub/prj/common/icons/png/end.png';
+
+               // 마커 이미지 설정
+                  var markerImage = new kakao.maps.MarkerImage(markerImageURL, new kakao.maps.Size(40, 40));
+
 
                   // 마커가 표시될 위치입니다
                   var markerPosition = new kakao.maps.LatLng(Y, X);
@@ -817,7 +958,8 @@
                     map: map,
                     position: markerPosition,
                     clickable: true,
-                    title: hiddenValue.getAttribute("data-place-name")
+                    title: hiddenValue.getAttribute("data-place-name"),
+                    image: markerImage // 마커 이미지 설정
                   });
 
                   // 마커가 지도 위에 표시되도록 설정합니다
@@ -825,7 +967,7 @@
 
                   // 마커 이벤트 등록
                   // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-                  var iwContent = '<div style="padding:5px;">' + hiddenValue.getAttribute("data-place-name") + '</div';
+                  var iwContent = '<div style="padding:5px;">' + hiddenValue.getAttribute("data-place-name") + '</div>';
                   var iwRemoveable = true;
 
                   // 인포윈도우를 생성합니다
@@ -876,177 +1018,82 @@
                 	});
               	}
                 
-              	
-              	
-				function setCenter() {            
-				    // 이동할 위도 경도 위치를 생성합니다 
-				    var moveLatLon = new kakao.maps.LatLng(37.4993118,127.0331422);
-				    
-				    // 지도 중심을 이동 시킵니다
-				    map.panTo(moveLatLon);
-				}
-
-				function panTo( latLng ) {
-				    // 이동할 위도 경도 위치를 생성합니다 
-				    var tempLatLng=latLng.split(",");
-				    var moveLatLon = new kakao.maps.LatLng(tempLatLng[0],tempLatLng[1] );
-				    
-				    // 지도 중심을 부드럽게 이동시킵니다
-				    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-				    map.panTo(moveLatLon);            
-				}        
-				
-				
-				
-				
-				//다영
-				
-				var map ;
-				window.onload=function(){ //기본 지도 위치는 서울 시청
-				var container = document.getElementById('map');
-				var options = {
-					center: new kakao.maps.LatLng(37.56680618275856, 126.97865226396553),
-					level: 13
-				};
-		
-				map = new kakao.maps.Map(container, options);
-				}//onload
-				
-				/* function setCenter() {            
-			    // 이동할 위도 경도 위치를 생성합니다 
-			    var moveLatLon = new kakao.maps.LatLng(37.46706395633558, 126.97308517871186);
-			    
-			     
-			    // 지도 중심을 이동 시킵니다
-			    map.panTo(moveLatLon);
-				}*/
-				
-				
-				function panTo( latLng ) {
-			    // 이동할 위도 경도 위치를 생성합니다 
-			    var tempLatLng=latLng.split(",");
-			    var moveLatLon = new kakao.maps.LatLng(tempLatLng[0],tempLatLng[1], tempLatLng[2],
-			    		tempLatLng[3],tempLatLng[4],tempLatLng[5],tempLatLng[6],tempLatLng[7],
-			    		tempLatLng[8],tempLatLng[9],tempLatLng[10],tempLatLng[11],tempLatLng[12],
-			    		tempLatLng[13],tempLatLng[14]);
-			    
-			    // 지도 중심을 부드럽게 이동시킵니다
-			    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-			    map.panTo(moveLatLon);            
-				}        
-            	  
+               
+		            
                 
             </script>
-          <style type="text/css">
+            <style type="text/css">
 
-           </style>
+            </style>
+            <script type="text/javascript">
+                $(function () {
+                	//초기화버튼
+                	$("#resetBtn").click(function(){
+                		// 검색 폼 초기화
+                	    document.getElementById('resetBtn').form.reset();
+                	    var listEl = document.getElementById('placesList')
+                		
+                	 // 검색 결과 목록에 추가된 항목들을 제거합니다
+                        removeAllChildNods(listEl);
 
+                        // 지도에 표시되고 있는 마커를 제거합니다
+                        removeMarker();
+                        
+                        var paginationEl = document.getElementById('pagination')
 
-			<script type="text/javascript">
-			/* var arr=["36.521262837135794, 127.08059923438643", "36.521262837135794, 127.08059923438643",
-					"36.521262837135794, 127.08059923438643", "36.658823851198, 126.67277789438113", "36.6353144624646, 127.49146431652277", 
-					"36.35048259471354, 127.38482899946409", "34.816043439644275, 126.46280006087093", "35.820195455176155, 127.10898501017087", 
-					"35.16005239546396, 126.85163828080933", "35.23768689993227, 128.69192143849028","36.57597416220703, 128.505798268333",
-					"35.8713631180291, 128.60180736020476","35.53957875859995, 129.31160847733696", "35.179707926039455, 129.07508354364657"]; */
-					
-					$("#seoul").click( function(){ //37.56680618275856, 126.97865226396553
-						$("#hidden").submit();
-					} );
-					
-					$("#InCheon").click( function(){ //36.521262837135794, 127.08059923438643
-						$("#hidden").submit();
-					} );
-					
-					$("#gyeongGiDo").click( function(){ //36.521262837135794, 127.08059923438643
-						$("#hidden").submit();
-					} );
-					
-					$("#gangWon").click( function(){ //36.521262837135794, 127.08059923438643
-						$("#hidden").submit();
-					} );
-					
-					$("#chungNam").click( function(){ //36.658823851198, 126.67277789438113
-						$("#hidden").submit();
-					} );
-					
-					$("#chungBug").click( function(){ //36.6353144624646, 127.49146431652277
-						$("#hidden").submit();
-					} );
-					
-					$("#daeJeon").click( function(){ //36.35048259471354, 127.38482899946409
-						$("#hidden").submit();
-					} );
-					
-					$("#jeonNam").click( function(){ //34.816043439644275, 126.46280006087093
-						$("#hidden").submit();
-					} );
-					
-					$("#jeonBug").click( function(){ //35.820195455176155, 127.10898501017087
-						$("#hidden").submit();
-					} );
-					
-					$("#gwangJu").click( function(){ //35.16005239546396, 126.85163828080933
-						$("#hidden").submit();
-					} );
-					
-					$("#gyeongNam").click( function(){ //35.23768689993227, 128.69192143849028
-						$("#hidden").submit();
-					} );
-					
-					$("#gyeongBug").click( function(){ //36.57597416220703, 128.505798268333
-						$("#hidden").submit();
-					} );
-					
-					$("#daeGu").click( function(){ //35.8713631180291, 128.60180736020476
-						$("#hidden").submit();
-					} );
-					
-					$("#ulSan").click( function(){ //35.53957875859995, 129.31160847733696
-						$("#hidden").submit();
-					} );
-					
-					$("#buSan").click( function(){ //35.179707926039455, 129.07508354364657
-						$("#hidden").submit();
-					} );
-					
-					$("#jeJu").click( function(){ 
-						$("#hidden").submit();
-					} );
-					
-			</script>
-			</head>
-			<body>
-             
-             <!-- 다영 -->
-            <%--  <%
-			LocalRestDAO lDao = LocalRestDAO.getInstance();
-			LocalSearchVO lsVO = new LocalSearchVO();
-			
-			String field=request.getParameter("field");
-			String keyword=request.getParameter("keyword");
-			
-			/* 페이지가 최초 호출 시에는 field나 keyword가 없다. 
-			검색을 하지 않는 경우에도 값이 없다. */
-			lsVO.setPointX(request.getParameter("pointX"));
-			lsVO.setPointY(request.getParameter("pointY"));
-	
-             %>
-            </body>
+	                    // 기존에 추가된 페이지번호를 삭제합니다
+	                    while (paginationEl.hasChildNodes()) {
+	                        paginationEl.removeChild(paginationEl.lastChild);
+	                    }
+                        
+                     // 기존 폴리라인을 제거
+					    if (polyline) {
+					      polyline.setMap(null);
+					    }
+                     
+					 // 이전 마커가 존재하는 경우 제거
+		                  if (strMarker) {
+		                    strMarker.setMap(null);
+		                  } 
+					 		if (endMarker) {
+		                    endMarker.setMap(null);
+		                  }
+                        
+                        
+                	    // 폼 제출 방지
+                	    return false;
+                	})
+                	//길찾기버튼
+                	$("#directionsBtn").click(function(){
+                		// 출발지와 도착지 입력란의 값을 가져옵니다
+                	    const startInputValue = document.getElementById('strInput').value;
+                	    const endInputValue = document.getElementById('endInput').value;
+
+                	    // 출발지 또는 도착지 중 하나라도 값이 비어있을 경우
+                	    if (startInputValue === '' || endInputValue === '') {
+                	        // 경고 메시지를 띄웁니다
+                	        alert('출발지와 도착지를 확인해주세요.');
+                	        return;
+                	    }
+                		//길찾기 메소드
+                		getKakaoDirections();
+                		
+                	})
+                	
+                	//지도검색버튼
+                	$("#searchBtn").click(function(){
+                		 searchPlaces(); 
+                	})//click
+                	$("#keyword").keypress(function(evt){
+                		if (event.which === 13) { // 13은 Enter 키의 키 코드입니다.
+                		 	searchPlaces(); 
+                		}//end if
+                	})//
+                	
+                })
+            </script>
             
-            <tbody>
-			<!-- list가 존재하지 않을 경우 -->
-			<c:if test="${ empty localrestList }">
-				<tr>
-					<td colspan="8" style="text-align: center;"> 
-						회원정보가 존재하지 않습니다. </td>
-				</tr>
-			</c:if>
-			
-			<!-- list가 존재하는 경우 -->
-			<c:forEach var="localName" items="${ localrestList }" varStatus="i">
-				<tr>
-					<td><c:out value="${ localrestList.localName }"/></td>
-					<td><a href="#void" onclick="memberDetail('${ localrestList.localName }')"><c:out value="${ member.name }"/></a></td>
-				</tr>
-			</c:forEach>
-		</tbody> --%>
+          
+
+
+

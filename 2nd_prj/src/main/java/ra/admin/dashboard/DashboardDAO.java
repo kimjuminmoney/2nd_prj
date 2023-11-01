@@ -3,11 +3,15 @@ package ra.admin.dashboard;
 import java.sql.Connection;
 
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import restArea.DbConnection;
+import ra.util.DbConnection;
+
 
 
 
@@ -42,8 +46,8 @@ public class DashboardDAO {
 	
 	
 	//휴게소별 누적 리뷰수
-	public int selectReviewSum() throws SQLException{
-		int cnt = 0;
+	public List<DashboardReviewVO> selectReviewSum() throws SQLException{
+		List<DashboardReviewVO> list = new ArrayList<DashboardReviewVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
@@ -54,22 +58,31 @@ public class DashboardDAO {
 
 			con = db.getConn("jdbc/dbcp");
 			StringBuilder sb=new StringBuilder();
-			sb.append("SELECT RVNO, COUNT(*) cnt	")
-			.append("FROM REVIEW 					")
-			.append("GROUP BY  RVNO					");
+			sb.append("SELECT COUNT(*) AS count, ra.raname")
+			.append("FROM review r")
+			.append("INNER JOIN restarea ra ON r.rano = ra.rano")
+			.append("GROUP BY ra.raname")
+			.append("ORDER BY count DESC")
+			.append("FETCH FIRST 3 ROWS ONLY;");
 
-
+			
 			pstmt = con.prepareStatement(sb.toString());
 			rs=pstmt.executeQuery();
-			if(rs.next()) {
-			cnt=rs.getInt("cnt");
+			
+			DashboardReviewVO dbrVO = null;
+			
+			while(rs.next()) {
+				dbrVO = new DashboardReviewVO();
+				dbrVO.setCount(rs.getInt("count"));
+				dbrVO.setCount(rs.getInt("raname"));
+				list.add(dbrVO); //list가 더 큰 개념. 값을 넣는다
 			}
 			
 		} finally {
 			db.dbClose(rs, pstmt, con);
 		} // finally
 
-		return cnt;
+		return list;
 	}
 	
 	

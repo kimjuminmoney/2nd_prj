@@ -13,7 +13,7 @@
         <meta name="author" content="" />
         <title>Dashboard - SB Admin</title>
         <!-- <link href="https://cdn.jsdelivr.net/npm/simples-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-         --><link href="css/styles.css" rel="stylesheet" />
+         --><link href="../../common/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 <body class="sb-nav-fixed">
@@ -151,17 +151,27 @@
                                     <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
+                         </div>
+                         <div class="right">
                             <div class="col-xl-6">
-                               <div class="card" style="width: 100%; height=40px;">
-								  <ul class="list-group list-group-flush">
-								    <li class="list-group-item"></li>
-								    <li class="list-group-item"></li>
-								    <li class="list-group-item"></li>
-								  </ul>
-								</div>
-                                     <jsp:include page="dashboard_list.jsp" />
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        휴게소별 리뷰수
+                                    </div>
+                                    <table>
+                                        <ul class="list-group ">
+										  <li class="list-group-item"></li>
+										  <li class="list-group-item"></li>
+										  <li class="list-group-item"></li>
+										  <jsp:include page=""/>
+										</ul>
+									</table>
                                 </div>
                             </div>
+                         </div>
+                         
+                         
                         </div>
                         
                         

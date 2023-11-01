@@ -1,14 +1,14 @@
-package ra.user.ra;
+package ra.user.search;
 
-public class RestAreaVO {
+public class SearchVO {
 	String place_name,address_name, x, y, rano;
 
-	public RestAreaVO() {
+	public SearchVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public RestAreaVO(String place_name, String address_name, String x, String y, String rano) {
+	public SearchVO(String place_name, String address_name, String x, String y, String rano) {
 		super();
 		this.place_name = place_name;
 		this.address_name = address_name;
