@@ -1,6 +1,6 @@
-<%@page import="ra.user.login.ClientDataVO"%>
-<%@page import="ra.user.login.Client_joinVO"%>
-<%@page import="ra.user.login.ClientLoginDAO"%>
+<%@page import="project_VO.ClientDataVO"%>
+<%@page import="project_VO.Client_joinVO"%>
+<%@page import="projectDAO.ClientLoginDAO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,7 +8,7 @@
 <%@ page info="" %>
 <%
 if("GET".equals(request.getMethod().toUpperCase())){
-	response.sendRedirect("main.html");
+	response.sendRedirect("Client_login.html");
 	return;
 }
 %>
@@ -34,7 +34,7 @@ $(function(){
 </head>
 <body>
 
-<jsp:useBean id="clVO" class="ra.user.login.ClientLoginVO" scope="page"/>
+<jsp:useBean id="clVO" class="project_VO.ClientLoginVO" scope="page"/>
 <jsp:setProperty property="*" name="clVO"/>
 
 <%
@@ -48,7 +48,7 @@ try{
 		session.setAttribute("sesId", clVO.getUSERID());
 		session.setAttribute("userData", cdVO);
 		
-		response.sendRedirect("main.html");
+		response.sendRedirect("test.jsp");
 }else{
 	%>
 	아이디나 비밀번호를 확인해 주세요<br/>

@@ -23,9 +23,6 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <style type="text/css">
-            #termsTextarea {
-        }; 
-        /* 스타일시트에 다음 CSS 코드 추가 */
     </style>
     
     <script type="text/javascript">
@@ -117,9 +114,9 @@
 </div>
 
 <div class="form-group mb-3">
-    <label for="inputPasswordConfirm">비밀번호 확인</label>
+    <label for="pwchk">비밀번호 확인</label>
     <div class="input-group">
-        <input class="form-control" name="pwchk" id="passwordchk" type="password" placeholder="비밀번호를 다시 한번 입력해주세요." />
+        <input class="form-control" name="pwchk" id="pwchk" type="password" placeholder="비밀번호를 다시 한번 입력해주세요." />
         <span class="input-group-text">
             <i class="bi bi-lock"></i>
         </span>
@@ -127,16 +124,16 @@
 </div>
 
 <div class="form-group mb-3">
-    <label for="inputLastName">이름</label>
+    <label for="UNAME">이름</label>
     <input class="form-control" name="UNAME" id="UNAME" type="text" placeholder="이름을 입력해주세요." />
 </div>
 
 <div class="form-group mb-3">
-    <label for="inputNickname">닉네임</label>
+    <label for="UNICK">닉네임</label>
     <input class="form-control" name="UNICK" id="UNICK" type="text" placeholder="닉네임을 입력해주세요." />
 </div>
 <div class="form-group mb-3">
-    <label for="inputEmail">이메일</label>
+    <label for="email">이메일</label>
     <div class="input-group">
         <input class="form-control" name="email1" id="email1" type="text" maxlength="100" placeholder="이메일을 입력해주세요." />
         <span class="input-group-text">@</span>
@@ -153,11 +150,11 @@
 </div>
 
 <div class="form-group mb-3">
-    <label for="inputPhoneNumber">전화번호</label>
+    <label for="UTEL">전화번호</label>
     <input class="form-control" name="UTEL" id="UTEL" type="text" placeholder="전화번호를 입력해주세요" />
 </div>
     <p>약관에 동의합니다.</p>
-     <textarea id="termsTextarea" rows="10" cols="93" style="resize: horizontal; width: 100%;">
+     <textarea id="termsTextarea" rows="10" cols="93" style="resize: horizontal; width: 100% ;" disabled readonly>
 가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
 회원가입
 - 이름, 생년월일, 성별, 아이디, 비밀번호, 별명, 연락처(메일주소, 휴대폰 번호 중 선택), 가입인증정보

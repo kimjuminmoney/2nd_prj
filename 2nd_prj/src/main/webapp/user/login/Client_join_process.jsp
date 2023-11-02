@@ -1,6 +1,6 @@
-<%@page import="ra.user.login.ClientDAO"%>
-<%@page import="ra.user.login.ClientLoginVO"%>
-<%@page import="ra.user.login.Client_joinVO"%>
+<%@page import="projectDAO.ClientDAO"%>
+<%@page import="project_VO.ClientLoginVO"%>
+<%@page import="project_VO.Client_joinVO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,7 +12,7 @@ request.setCharacterEncoding("UTF-8");
 //GET방식의 요청이라면 memberjoin_frm.jsp로 이동
 String method=request.getMethod();
 if("GET".equals(method)){
-	response.sendRedirect("Client_join.jsp");
+	response.sendRedirect("Client_join.html");
 	return;
 }
 %>
@@ -37,7 +37,7 @@ $(function(){
 
 </head>
 <body>
-<jsp:useBean id="cjVO" class="ra.user.login.Client_joinVO" scope="page"/>
+<jsp:useBean id="cjVO" class="project_VO.Client_joinVO" scope="page"/>
 <jsp:setProperty property="*" name="cjVO"/>
 <c:catch var="se">
 
@@ -47,7 +47,7 @@ DataEncrypt de=new DataEncrypt("a12345678901234567");
 cjVO.setUPW(DataEncrypt.messageDigest("MD5",cjVO.getUPW()));
 cjVO.setUNAME(de.encryption(cjVO.getUNAME()));
 cjVO.setUTEL(de.encryption(cjVO.getUTEL()));
-cjVO.setUEMAIL(de.encryption(cjVO.getEmail1()+"@"+cjVO.getEmail2()));
+cjVO.setEmail(de.encryption(cjVO.getEmail1()+"@"+cjVO.getEmail2()));
 
 ClientDAO cDAO =ClientDAO.getInstance();
  cDAO.insertMember(cjVO); 
@@ -61,21 +61,20 @@ ClientDAO cDAO =ClientDAO.getInstance();
   <div class="card-body">
     <h5 class="card-title">회원가입 성공</h5>
     <h6 class="card-subtitle mb-2 text-body-secondary">회원가입해주셔서 감사합니다.</h6>
-    <p class="card-text"><c:out value="${ param.uNAME }"/>님께서 입력하신 정보는 아래와 같습니다.</p>
-    <p class="card-text">이메일 : <c:out value="${ Client_joinVO.uEMAIL }"/></p>
-    <p class="card-text">전화번호 : <c:out value="${ param.uTEL}"/></p>
+    <p class="card-text"><c:out value="${ param.UNAME }"/>님께서 입력하신 정보는 아래와 같습니다.</p>
+    <p class="card-text">아이디 : <c:out value="${ cjVO.USERID}"/></p>
+    <p class="card-text">이메일 : <c:out value="${ cjVO.email }"/></p>
     <a href="E:/dev/workspace/project_2/src/main/webapp/login/main.html" class="card-link">메인으로</a>
     <a href="E:/dev/workspace/project_2/src/main/webapp/login/Client_login.html" class="card-link">로그인</a>
   </div>
 </div>
 </c:catch>
 <c:if test="${not empty se }">
-입력하신 아이디는 [<c:out value="${ Client_joinVO.userId }"/>] 이미 사용중입니다. <br/>
-다른 id로 재가입 해주세요.<br/>
+입력하신 아이디는 [<c:out value="${cjVO.USERID}"/>] 이미 사용중입니다. <br/>
+다른 id로 재가입 해주세요.
 <a href="javascript:history.back();">뒤로</a>
 </c:if>
 <%-- ${ ClientVO } --%>
 
-</form>
 </body>
 </html>

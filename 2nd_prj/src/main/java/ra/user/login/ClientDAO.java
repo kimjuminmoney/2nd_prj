@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import projectDAO.DbConnection;
+import project_VO.Client_joinVO;
 
 
 public class ClientDAO {
@@ -60,23 +60,21 @@ public class ClientDAO {
 				con=db.getConn("jdbc/dbcp");
 			//4.쿼리문 생성객체 얻기
 				
-				StringBuilder insertClientMember = new StringBuilder();
-				insertClientMember
-				.append("insert into ClientMember")
-				.append("(USERID,UPW,UNAME,UNIC,UTEL,UEMAIL,UJOIN,UQUIT)")
-				.append("values(?,?,?,?,?,?,?,?)");
-				pstmt = con.prepareStatement( insertClientMember.toString() );
+				StringBuilder insertUSERINFO = new StringBuilder();
+				insertUSERINFO
+				.append("insert into USERINFO")
+				.append("(USERID, UPW,  UNAME, unic, UTEL, UEMAIL,ujoin)")
+				.append("values(?,?,?,?,?,?,sysdate)");
+				pstmt = con.prepareStatement( insertUSERINFO.toString() );
 				
 				//5.바인드 변수 값 설정
-				
+				System.out.print(cjVO.getUTEL());
 				pstmt.setString(1, cjVO.getUSERID());
 				pstmt.setString(2, cjVO.getUPW());
 				pstmt.setString(3, cjVO.getUNAME());
 				pstmt.setString(4, cjVO.getUNICK());
 				pstmt.setString(5, cjVO.getUTEL());
-				pstmt.setString(6, cjVO.getUEMAIL());
-				pstmt.setDate(7, cjVO.getUJOIN());
-				pstmt.setDate(8, cjVO.getUQUIT());
+				pstmt.setString(6, cjVO.getEmail());
 				//6.쿼리 수행 후 결과 얻기
 				pstmt.executeUpdate();
 			}finally {
