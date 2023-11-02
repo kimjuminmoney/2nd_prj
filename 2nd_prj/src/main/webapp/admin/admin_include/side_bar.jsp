@@ -90,7 +90,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 리뷰 관리
                             </a>
-                            <a class="nav-link" href="manageService.html">
+                            <a class="nav-link" href="../cs/complain_admin.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 문의
                             </a>

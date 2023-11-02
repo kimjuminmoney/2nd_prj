@@ -14,7 +14,7 @@
  <!-- jQuery CDN 끝 -->
  <!-- css연결 -->
  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="http://192.168.10.150/jsp_prj/common/css/styles.css">
+<link rel="stylesheet" type="text/css" href="../../common/css/styles.css">
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <!-- 연결 끗 -->    
  
@@ -28,9 +28,9 @@
  </script>
 </head>
 <body class="sb-nav-fixed">
-        <jsp:include page="include_nav.jsp"></jsp:include>
+        <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include>
         <div id="layoutSidenav">
-            <jsp:include page="include_side_nav.jsp"></jsp:include>
+            <jsp:include page="../myinfo_nav/include_side_nav.jsp"></jsp:include>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
@@ -111,7 +111,7 @@
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
-                     <jsp:include page="include_footer.jsp"></jsp:include>
+                     <jsp:include page="../myinfo_nav/include_footer.jsp"></jsp:include>
                 </footer>
             </div>
         </div>

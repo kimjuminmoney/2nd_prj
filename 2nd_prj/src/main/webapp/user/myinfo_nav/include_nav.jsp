@@ -7,9 +7,9 @@
             <!-- Navbar Search-->
 		<div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                	<a class="navbar-brand ps-3" href="#">공지사항</a>
-                	<a class="navbar-brand ps-3" href="complain.jsp">문의</a>
-                	<a class="navbar-brand ps-3" href="my_info_main.jsp">로그아웃</a> 
+                	<a class="navbar-brand ps-3" href="#void">공지사항</a>
+                	<a class="navbar-brand ps-3" href="../cs/complain.jsp">문의</a>
+                	<a class="navbar-brand ps-3" href="../myinfo/my_info_main.jsp">로그아웃</a> 
                 </div>
            </div>
         </nav>

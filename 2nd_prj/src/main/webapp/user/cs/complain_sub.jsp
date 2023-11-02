@@ -1,5 +1,5 @@
-<%@page import="myPage.MyCSVO"%>
-<%@page import="myPage.myCSDAO"%>
+<%@page import="ra.user.cs.MyCSVO"%>
+<%@page import="ra.user.cs.myCSDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="complain_sub" %>

@@ -1,7 +1,7 @@
+<%@page import="ra.user.myreview.MyReviewDAO"%>
+<%@page import="ra.user.myreview.MyReviewVO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="org.json.simple.JSONObject"%>
-<%@page import="myPage.MyReviewDAO"%>
-<%@page import="myPage.MyReviewVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="" %>
