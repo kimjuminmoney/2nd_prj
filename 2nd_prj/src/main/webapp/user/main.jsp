@@ -16,7 +16,7 @@ Jquery CDN시작
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
 <jsp:include page="search/css_include.jsp"></jsp:include>
 <jsp:include page="search/function_include.jsp"></jsp:include>
-
+<jsp:include page="highway/highway_list.jsp"></jsp:include>
 </head>
   <body class="d-flex flex-column h-100">
             <!-- <main class=" flex-shrink-0"> -->
@@ -101,8 +101,15 @@ Jquery CDN시작
                             
                         <!-- 지성 -->
                         <div class="tab-pane" id="highway" role="tabpanel" aria-labelledby="highway-tab">
-                            고속도로별 휴게소
-                        </div>
+                            <div class="container text-center">
+                            	<div class="row">
+		                            <div class="col" id="hList">
+		                            </div>
+		                            <div class="col" id="raList">
+		                            </div>
+		                        </div>
+							</div>
+						</div>
                         <!-- 지성 -->
                     </div>
                     
