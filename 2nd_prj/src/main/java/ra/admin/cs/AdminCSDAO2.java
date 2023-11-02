@@ -9,15 +9,15 @@ import java.util.List;
 
 import ra.util.DbConnection;
 
-public class AdminCSDAO {
+public class AdminCSDAO2 {
 
-	private static AdminCSDAO mcDAO;
-	private AdminCSDAO() {
+	private static AdminCSDAO2 mcDAO;
+	private AdminCSDAO2() {
 		
 	}
-	public static AdminCSDAO getInstance() {
+	public static AdminCSDAO2 getInstance() {
 		if(mcDAO ==null) {
-			mcDAO=new AdminCSDAO();
+			mcDAO=new AdminCSDAO2();
 		}
 		return mcDAO;
 	}
@@ -52,7 +52,7 @@ public class AdminCSDAO {
 	}//selectTotalCount
 	
 	
-	public List<AdminCSVO> selectAllCS() throws SQLException {
+	public List<AdminCSVO> selectAllCS( int startNum, int endNum ) throws SQLException {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -70,10 +70,14 @@ public class AdminCSDAO {
 			.append("    from Customerservice CS    ")
 			.append("    left join RestArea ra on   cs.rano=ra.rano    ")
 			.append("    left join employee e on    cs.empno= e.empno    ")
-			.append("    )    ");
+			.append("    )    ")
+			.append("    where idx between ? and ?    ");
 			
 			
 			pstmt=con.prepareStatement(Query.toString());
+
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endNum);
 			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -99,7 +103,7 @@ public class AdminCSDAO {
 		return csList;
 	}//selectAllCS
 	
-	public AdminCSVO selectOneCS( String userid, int csNO ) throws SQLException {
+	public AdminCSVO selectOneCS( String id, int csNO ) throws SQLException {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -121,7 +125,7 @@ public class AdminCSDAO {
 			
 			
 			pstmt=con.prepareStatement(Query.toString());
-			pstmt.setString(1, userid);
+			pstmt.setString(1, id);
 			pstmt.setInt(2, csNO);
 			
 			rs=pstmt.executeQuery();
@@ -147,38 +151,100 @@ public class AdminCSDAO {
 		
 	}//selectAllCS
 	
-	public int modifyCS(AdminCSVO acsVO) throws SQLException {
-
+	public List<raVO> selectRA( String loc) throws SQLException{
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+		ResultSet rs= null;
 		DbConnection db= DbConnection.getInstance();
-		System.out.println("1");
-		AdminCSVO aVO = acsVO;
-		System.out.println(acsVO);
 		
-		int cnt=0;
+		List<raVO> list=new ArrayList<raVO>(); 
 		try {
-			
-			con= db.getConn("jdbc/dbcp");
+			con=db.getConn("jdbc/dbcp");
 			StringBuilder Query = new StringBuilder();
-			Query.append("    update customerservice     ")
-			.append("    set empno=?, csAnswer=?, csadate=sysdate     ")
-			.append("    where userid=? and csNo=?    ");
+			Query.append("    SELECT rano,raname     ")
+			.append("    from restarea     ")
+			.append("    where ralo=?     ");
+			
+			pstmt=con.prepareStatement(Query.toString());
+			pstmt.setString(1, loc);
+			
+			rs=pstmt.executeQuery();
+			
+			raVO raVO=null;
+			
+			while(rs.next()) {
+				raVO=new raVO();
+				raVO.setRaNo(rs.getInt("rano"));
+				raVO.setRaName(rs.getString("raname"));
+				list.add(raVO);
+				
+			}//end while
+			
+		} finally {
+			db.dbClose(rs, pstmt, con);
+		}
+			return list;
+	}//selectAllLocation
+	
+	public List<String> selectAllLocation() throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		DbConnection db= DbConnection.getInstance();
+		
+		List<String> list=new ArrayList<String>(); 
+		try {
+			con=db.getConn("jdbc/dbcp");
+			StringBuilder Query = new StringBuilder();
+			Query.append("    SELECT distinct ralo     ")
+			.append("    from restarea     ");
 			
 			pstmt=con.prepareStatement(Query.toString());
 			
-			pstmt.setString(1, aVO.getEmpno());
-			pstmt.setString(2, aVO.getCsAnswer());
-			pstmt.setString(3, aVO.getUserId());
-			pstmt.setInt(4, aVO.getCsNO());
+			rs=pstmt.executeQuery();
+			String ralo=null;
+			while(rs.next()) {
+				ralo=rs.getString("ralo");
+				list.add(ralo);
+				
+			}//end while
+				
+		} finally {
+			db.dbClose(rs, pstmt, con);
+		}
+			return list;
+	}//selectAllLocation
+
+	public int insertCS( String id, AdminCSVO mcVO ) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		
+		AdminCSVO cVO=mcVO;
+		DbConnection db= DbConnection.getInstance();
+		int cnt=0;
+		try {
+			con=db.getConn("jdbc/dbcp");
+			StringBuilder Query = new StringBuilder();
+			Query.append("    insert into customerservice(userid,csno,cstype,rano,csdate,cstext)     ")
+			.append("    values (?,(select max(csno)+1 from customerservice where userid=?),? ,?,sysdate,? )    ");
+			 		
+			pstmt=con.prepareStatement(Query.toString());
+			String cstype=cVO.getCsType();
+			String rano=cVO.getRaNO();
+			String cstext=cVO.getCsText();
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			pstmt.setString(3, cstype);
+			pstmt.setString(4, rano);
+			pstmt.setString(5, cstext);
 			
 			cnt=pstmt.executeUpdate();
+			
 		} finally {
-			db.dbClose(null, pstmt, con);
+			db.dbClose(rs, pstmt, con);
 		}
-		return cnt;
-	}//ModifyInfo
+			return cnt;
+	}//insertCS
 
-
-}//class
+}

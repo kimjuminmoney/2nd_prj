@@ -27,7 +27,7 @@ public class AdminCSVO {
 
 			@Override
 		public String toString() {
-			return "MyCSVO [userId=" + userId + ", csType=" + csType + ", raName=" + raName + ", csText=" + csText
+			return "AdminCSVO [userId=" + userId + ", csType=" + csType + ", raName=" + raName + ", csText=" + csText
 					+ ", empno=" + empno + ", csAnswer=" + csAnswer + ", raNO=" + raNO + ", csNO=" + csNO + ", csDate="
 					+ csDate + ", csAdate=" + csAdate + "]";
 		}

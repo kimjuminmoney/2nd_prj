@@ -50,11 +50,11 @@ pageContext.setAttribute("cVO", cVO);
  </style>
  <script type="text/javascript">
  $(function(){
-	 
-	 
 	 $("#btn_close").click(function(){
-		self.close(); 
-	 });
+			self.close(); 
+		 });
+		 
+		 
 	 
 	 
  });//ready

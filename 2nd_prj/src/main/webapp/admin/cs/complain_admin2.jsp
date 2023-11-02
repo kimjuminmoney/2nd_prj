@@ -14,8 +14,42 @@ int totalCount=0;
 String id=(String)session.getAttribute("id");
 id="HJS";
 AdminCSDAO acDAO= AdminCSDAO.getInstance();
+try{
+totalCount=acDAO.selectTotalCount();//리뷰 전체 개수 count
+}catch(SQLException se){
+	se.printStackTrace();
+}
+//한 페이지에서 보여줄 게시글의 수
+int pageScale=10;
+//총 페이지 수
+int totalPage = totalCount/pageScale;
+//딱코가 아닐때 방지용
+if( totalCount % pageScale != 0){
+totalPage++;
+}
+//페이지별 시작번호
+String tempPage=request.getParameter("currentPage");
+int currentPage=1;
+if(tempPage != null){
+	currentPage=Integer.parseInt(tempPage);
+}
+int startNum=currentPage*pageScale-pageScale+1;
+//끝 페이지
+int endNum=startNum+pageScale-1;
 
-List<AdminCSVO> csList=acDAO.selectAllCS();//리뷰조회
+//많은양의 레코드를 잘라서 보여준다.
+//1.화면에 보여줄 페이지 인덱스의 수
+int pageNumber=5;
+//2.화면에 보여줄 시작페이지 번호
+int startPage=((currentPage-1)/pageNumber)*pageNumber+1;
+//3.화면에 보여줄 마지막 페이지 번호
+int endPage=(((startPage-1)+pageNumber/pageNumber)*pageNumber);
+//4.총 페이지수가 연산된 마지막 페이지 수보다 작으면 총 페이지 수가 마지막 페이지 수로 설정
+if( totalPage < endPage){
+    endPage = totalPage;
+}
+
+List<AdminCSVO> csList=acDAO.selectAllCS(startNum,endNum);//리뷰조회
 pageContext.setAttribute("csList",csList);
 %>
 <!DOCTYPE html>
@@ -33,10 +67,6 @@ pageContext.setAttribute("csList",csList);
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="../../common/css/styles.css">
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
- <script src="../../common/js/scripts.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
- <script src="../../common/js/datatables-simple-demo.js"></script>
 <!-- 연결 끗 -->    
  
  <style type="text/css">
@@ -44,21 +74,15 @@ pageContext.setAttribute("csList",csList);
  </style>
  <script type="text/javascript">
  $(function(){
-	
- 
-	 
+		
 	 
  });//ready
- 	
  
  function open_detail( i ){
 	 var csNO=$("#csNO"+i).val();
-	 var userId=$("#userId"+i).val();
- 	 window.open("complain_sub_admin.jsp?csNO="+csNO+"&userId="+userId,"cs_detail_admin","width=900,height=650,top="
+ 	 window.open("complain_sub_admin.jsp?csNO="+csNO,"cs_detail","width=800,height=400,top="
             +( window.screenY+150)+",left="+( window.screenX+200));
- 	 
  }//open_detail
- 	
  </script>
 </head>
 <body class="sb-nav-fixed">
@@ -78,7 +102,7 @@ pageContext.setAttribute("csList",csList);
                     <div class="container-fluid px-4" style="margin-top:50px;">
                         <div class="card mb-4">
                             <div class="card-body">
-                                    <table id="datatablesSimple">
+                                    <table class="datatable-table">
                                     <thead>
                                     <tr>
                                     	<th>날짜</th>
@@ -91,10 +115,10 @@ pageContext.setAttribute("csList",csList);
                                     </thead>
                                     <tbody>
                                     <c:forEach var="cs" items="${ csList }" varStatus="i">
-                                   		<tr id="cs_detail${ i.count }" >
+                                   		<tr id="cs_detail${ i.count }" onclick="open_detail(${i.count})">
 	                                    		<td>${ cs.csDate }</td>
-	                                    		<td>${ cs.userId }<input type="hidden"  value="${ cs.userId }" id="userId${ i.count }" name="userId${ i.count }"></td>
-	                                    		<td><a href="#void" onclick="open_detail(${i.count})">${ cs.csText }</a><input type="hidden" value="${ cs.csNO }" id="csNO${ i.count }" name="csNO${ i.count }"></td>
+	                                    		<td>${ cs.userId }</td>
+	                                    		<td>${ cs.csText }<input type="hidden" value="${ cs.csNO }" id="csNO${ i.count }" name="csNO${ i.count }"></td>
 	                                    		<td>${ cs.raName }</td>
 	                                    		<td>
 		                                    		<c:if test="${ cs.csType eq 'U' }">회원정보</c:if>
@@ -108,9 +132,37 @@ pageContext.setAttribute("csList",csList);
                                     </c:forEach>
                                     </tbody>
 									</table>
+									<div id="tfoot">
+									<%
+			                        	BoardUtilVO buVO=new BoardUtilVO("complain_admin.jsp",currentPage,totalPage);
+										BoardUtil bu=BoardUtil.getInstance();
+			                        	out.println(bu.pageNation(buVO));
+		                        	%>
+									</div>
                             	</div>
                         	</div>
                         </div>
+                    
+                    <div class="container text-center" style="margin-top:50px;">    
+						<div id="searchCS" class="self-align-center">
+							<div class="row justify-content-md-center">
+								<div id="searchType" class="col col-lg-2">
+									<select class="form-select" >
+										<option>유형선택</option>
+										<option>고객아이디</option>
+										<option>닉네임</option>
+										<option>휴게소명</option>
+									</select>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" id="search_var"/>
+								</div>
+								<div class="col col-lg-2">
+									<input type="button" class="btn btn-outline-dark" id="search_search_btn" value="검색"/>
+								</div>
+							</div>
+						</div>
+					</div>
                         
                 </main>
                 <footer class="py-4 bg-light mt-auto">
