@@ -22,7 +22,7 @@ public class ManagerLoginDAO{
 	public ManagerDataVO selectLogin( ManagerLoginVO mlVO) throws SQLException{
 		ManagerDataVO mdVO=null;
 		
-		DbConnection db= DbConnection.getInstance();
+		ra.util.DbConnection db= ra.util.DbConnection.getInstance();
 		
 		Connection con = null;
 		PreparedStatement pstmt =null;
