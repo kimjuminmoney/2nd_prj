@@ -382,7 +382,7 @@
 					var sendData = JSON.stringify(filteredNames);
 					
 					$.ajax({
-						url: 'http://localhost/2nd_prj_sub/prj/v3/main_ajax.jsp', // 서버의 URL
+						url: 'search/search_ajax.jsp', // 서버의 URL
 						method: 'POST',
 						contentType: 'application/json',
 						data: sendData,

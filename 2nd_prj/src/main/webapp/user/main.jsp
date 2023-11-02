@@ -71,14 +71,17 @@ Jquery CDN시작
                                     </a>
                                 </li> -->
                                 <li class="nav-item" role="presentation">
-                                    <input class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true" value="검색">
-<!--                                     <button class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">검색</button> -->
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <input class="nav-link" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab" aria-controls="local" aria-selected="false" value="지역별">
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <input class="nav-link" id="highway-tab" data-bs-toggle="tab" data-bs-target="#highway" type="button" role="tab" aria-controls="highway" aria-selected="false"value="고속도로별">
+									<button class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">검색</button>
+									<!--                                     <input class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true" value="검색"> -->
+									<!--                                     <button class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">검색</button> -->
+	                                </li>
+	                                <li class="nav-item" role="presentation">
+									<button class="nav-link" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab" aria-controls="local" aria-selected="false">지역별 휴게소</button>
+									<!--                                     <input class="nav-link" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab" aria-controls="local" aria-selected="false" value="지역별"> -->
+	                                </li>
+	                                <li class="nav-item" role="presentation">
+									<button class="nav-link" id="highway-tab" data-bs-toggle="tab" data-bs-target="#highway" type="button" role="tab" aria-controls="highway" aria-selected="false">고속도로별 휴게소</button>
+									<!--                                     <input class="nav-link" id="highway-tab" data-bs-toggle="tab" data-bs-target="#highway" type="button" role="tab" aria-controls="highway" aria-selected="false"value="고속도로별"> -->
                                 </li>
                                 
                             </ul>
