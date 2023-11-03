@@ -48,7 +48,7 @@ try{
 		session.setAttribute("sesNo",mlVO.getEMPNO());
 		session.setAttribute("managerData", mdVO);
 		
-		response.sendRedirect("test.jsp");
+		response.sendRedirect("../dashboard/index.jsp");
 }else{
 %>
 	아이디나 비밀번호를 확인해 주세요<br/>
