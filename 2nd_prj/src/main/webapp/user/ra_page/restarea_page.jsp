@@ -1,4 +1,5 @@
 <%@page import="ra.user.restarea.ConvVO"%>
+<%@page import="ra.user.restarea.BrandVO"%>
 <%@page import="ra.user.restarea.FoodVO"%>
 <%@page import="ra.user.restarea.RestAreaVO"%>
 <%@page import="ra.user.restarea.ReviewVO"%>
@@ -89,16 +90,16 @@ $(function(){
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
                             <%
-                            RestAreaVO raVO = rDAO.selectRestArea("1");
+                            RestAreaVO raVO = rDAO.selectRestArea("7");
                             %>
                                 <h1 class="display-5 fw-bolder text-white mb-2"><%=raVO.getRestAreaName() %></h1>
                                 <p class="lead fw-normal text-white-50 mb-4">주소: <%=raVO.getAddress() %></p>
                                 <p class="lead fw-normal text-white-50 mb-4">전화번호: <%=raVO.getTel() %></p>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                                     <a class="btn btn-outline-light btn-lg px-4" href="#food">먹거리</a>
-                                    <a class="btn btn-outline-light btn-lg px-4" href="#review">리뷰</a>
-                                    <a class="btn btn-outline-light btn-lg px-4" href="#conv">편의시설</a>
                                     <a class="btn btn-outline-light btn-lg px-4" href="#brand">매장</a>
+                                    <a class="btn btn-outline-light btn-lg px-4" href="#conv">편의시설</a>
+                                    <a class="btn btn-outline-light btn-lg px-4" href="#review">리뷰</a>
                                     <a class="btn btn-outline-light btn-lg px-4" href="#gas">주유시설</a>
                                 </div>
                             </div>
@@ -112,14 +113,14 @@ $(function(){
              <script>
             $(function(){
 	            
-	         /* // 현재 URL에서 파라미터 가져오기
+	            /* // 현재 URL에서 파라미터 가져오기
 	            const urlParams = new URLSearchParams(window.location.search);
 
 	            // rano 파라미터 가져오기
 	            const ranoValue = urlParams.get('rano');
 	            
 	            $.ajax({
-	            	url: "index_ajax.jsp",
+	            	url: "gasstation_ajax.jsp",
 	            	type : "get",
 	            	dataType : "text",
 	            	data : "rano=" + ranoValue,
@@ -129,7 +130,7 @@ $(function(){
 	            	success : function(gsno){
 	            		gasData(gsno);
 	            	}
-	            })*/
+	            })
 	
 	            // gsno 값을 사용하여 API 호출
 	            
@@ -202,7 +203,7 @@ $(function(){
 					
 	            });//$ajax
 	            
-	            });//$click
+	            });//$click */
 	            
 		      });//ready
 		      
@@ -217,7 +218,9 @@ $(function(){
             <section class="py-5" id="food">
                 <div class="container px-5 my-5">
                     <div class="row gx-8" style="width: 1500px; margin 0 auto">
-                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success"><h2 class="fw-bolder mb-0 bg-success">먹거리</h2></div>
+                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success" style="border-radius: 10px">
+                        <h2 class="fw-bolder mb-0 bg-success" style="margin-top: 10px">먹거리</h2>
+                        </div>
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
@@ -229,25 +232,38 @@ $(function(){
 								  </div> -->
 								  <div class="carousel-inner">
 									<%
-								      List<FoodVO> foodList = rDAO.selectFood("1");
-								      for(int i=0; i<foodList.size(); i++){
-											FoodVO fVO = foodList.get(i);
-								      %>
+								  	List<FoodVO> foodList = rDAO.selectFood("7");
+									String fDetail = "";
+								    for(int i=0; i<foodList.size(); i++){
+										FoodVO fVO = foodList.get(i);
+ 										fDetail=fVO.getFoodDetail();
+										if(fDetail==null){
+											fDetail="";
+										}
+ 								      %>
 								    <div class="carousel-item<%= i==0?" active":"" %>">
-								      <div style="width: 950px; height:400px margin: 0px auto; border: 1px solid #D2D2D2; border-radius: 10px">
-								      <img src="images/kj2.png" style=" width:950px; height:300px; margin-bottom: 10px; border-radius: 10px"><br/>
-								      <div style="margin-left: 100px; margin-right: 100px">
-								      <strong><%=fVO.getFoodName() %></strong>
-								      <ul>
-								      	<li><%=fVO.getFoodDetail() %></li>
-								      	<li><%=fVO.getFoodPrice() %>원</li>
-								      </ul>
+								      <div style="width: 950px; height:400px margin: 0px auto; border-radius: 10px">
+								      <img src="food_image/<%=fVO.getFoodImage() %>" style=" width:950px; height:280px; margin-bottom: 10px; border-radius: 10px; object-fit: cover;"/><br/>
+								      <div style="margin-tom:50px; margin-left: 25px; margin-right: 25px">
+								      
+								      <table>
+								      	<tr>
+								      		<td style="border-right: 1px solid gray; padding-right: 10px;  font-size: 20px;"><strong><%=fVO.getFoodName() %></strong></td>
+								      		<td style="padding-left: 10px;"><strong>￦<%=fVO.getFoodPrice() %></strong></td>
+								      	<tr>
+								      </table>
+								      
+								      
+								      <hr style="background-color: #E9ECED;">
+								      
+								      	<%=fDetail %>
+								      
 								      </div>
 								      
 								      </div>
 								    </div>
 								      <%
-								      }
+								      }//end for
 								      %>
 								  </div>
 								  <button class="carousel-control-prev" type="button" data-bs-target="#carouselFood" data-bs-slide="prev">
@@ -265,7 +281,81 @@ $(function(){
                     </div>
                 </div>
             </section>
-            <!-- review section-->
+            <!-- brand section-->
+            <section class="py-5" id="brand">
+                <div class="container px-5 my-5">
+                    <div class="row gx-8" style="width: 1500px; margin 0 auto">
+                        
+                        <div class="col-lg-8">
+                            <div class="row gx-5 row-cols-1 row-cols-md-2">
+
+								<div id="carouselBrand" class="carousel slide" style="width: 1500px; height: 400px; display: grid; place-items: center;">
+								  <div id="convItem">
+								    <%
+								      List<BrandVO> brandList = rDAO.selectBrand("1");
+								      for(int i=0; i<brandList.size(); i++){
+											BrandVO bVO = brandList.get(i);
+								      %>
+								      <table style=" margin-bottom: 20px">							
+								      	<tr>
+								      		<td><img src="images/mom.png"><br/></td>
+								      		<td><strong><%=bVO.getBrandName() %></strong><br/><%=bVO.getBrandHome() %></td>
+								      	</tr>
+								      </table>
+								      <hr style="background-color: #E9ECED;">
+								     
+								      <%
+								      }
+								      %>
+								  </div>
+								</div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success" style="border-radius: 10px">
+                        <h2 class="fw-bolder mb-0" style="margin-top: 10px">매장</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- conv section-->
+            <section class="py-5" id="conv">
+                <div class="container px-5 my-5">
+                    <div class="row gx-8" style="width: 1500px; margin 0 auto"> 
+                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success" style="border-radius: 10px">
+                        <h2 class="fw-bolder mb-0" style="margin-top: 10px">편의 시설</h2>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="row gx-5 row-cols-1 row-cols-md-2">
+
+								<div id="carouselConv" class="carousel slide" style="width: 1500px; height: 400px; display: grid; place-items: center;">
+								  <div id="convItem">
+								    <%
+								      List<ConvVO> convList = rDAO.selectConv("1");
+								      for(int i=0; i<convList.size(); i++){
+											ConvVO cVO = convList.get(i);
+								      %>
+								      <table style=" margin-bottom: 20px">							
+								      	<tr>
+								      		<td><img src="images/mom.png"><br/></td>
+								      		<td><strong><%=cVO.getConvName() %></strong><br/><%=cVO.getConvDetail() %></td>
+								      	</tr>
+								      </table>
+								      <hr style="background-color: #E9ECED;">
+								     
+								      <%
+								      }
+								      %>
+								  </div>
+								</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+			<!-- review section-->
             <section class="py-5" id="review">
                 <div class="container px-5 my-5">
                     <div class="row gx-8" style="width: 1500px; margin 0 auto">
@@ -302,121 +392,24 @@ $(function(){
 
                             </div>
                         </div>
-                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success"><h2 class="fw-bolder mb-0">리뷰</h2></div>
-                    </div>
-                </div>
-            </section>
-            <!-- conv section-->
-            <section class="py-5" id="conv">
-                <div class="container px-5 my-5">
-                    <div class="row gx-8" style="width: 1500px; margin 0 auto"> 
-                        <div class="col-lg-2 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">편의 시설</h2></div>
-                        <div class="col-lg-8">
-                            <div class="row gx-5 row-cols-1 row-cols-md-2">
-
-								<div id="carouselConv" class="carousel slide" style="width: 1500px; height: 400px">
-								  <div class="carousel-indicators">
-								    <button type="button" data-bs-target="#carouselConv" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-								    <button type="button" data-bs-target="#carouselConv" data-bs-slide-to="1" aria-label="Slide 2" class="btn btn-success"></button>
-								    <button type="button" data-bs-target="#carouselConv" data-bs-slide-to="2" aria-label="Slide 3"></button>
-								  </div>
-								  <div class="carousel-inner">
-								    <%
-								      List<ConvVO> convList = rDAO.selectConv("1");
-								      for(int i=0; i<convList.size(); i++){
-											ConvVO cVO = convList.get(i);
-								      %>
-								    <div class="carousel-item<%= i==0?" active":"" %>">
-								      <div style="width: 950px; margin: 0px auto; border: 1px solid #D2D2D2; border-radius: 10px">
-								      <img src="images/kj.png" style=" height:300px; margin-bottom: 10px"><br/>
-								      <strong><%=cVO.getConvName() %></strong><br/>
-								      <%=cVO.getConvDetail() %><br/>
-								      </div>
-								    </div>
-								      <%
-								      }
-								      %>
-								  </div>
-								  <button class="carousel-control-prev" type="button" data-bs-target="#carouselConv" data-bs-slide="prev">
-								    <span class="carousel-control-prev-icon btn btn-success" aria-hidden="true"></span>
-								    <span class="visually-hidden">Previous</span>
-								  </button>
-								  <button class="carousel-control-next" type="button" data-bs-target="#carouselConv" data-bs-slide="next">
-								    <span class="carousel-control-next-icon btn btn-success" aria-hidden="true"></span>
-								    <span class="visually-hidden">Next</span>
-								  </button>
-								</div>
-
-                            </div>
+                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success" style="border-radius: 10px">
+                        <h2 class="fw-bolder mb-0" style="margin-top: 10px">리뷰</h2>
                         </div>
-                    </div>
-                </div>
-            </section>
-            <!-- brand section-->
-            <section class="py-5" id="brand">
-                <div class="container px-5 my-5">
-                    <div class="row gx-8" style="width: 1500px; margin 0 auto">
-                        
-                        <div class="col-lg-8">
-                            <div class="row gx-5 row-cols-1 row-cols-md-2">
-
-								<div id="carouselBrand" class="carousel slide" style="width: 1500px; height: 400px">
-								  <div class="carousel-indicators">
-								    <button type="button" data-bs-target="#carouselBrand" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-								    <button type="button" data-bs-target="#carouselBrand" data-bs-slide-to="1" aria-label="Slide 2" class="btn btn-success"></button>
-								    <button type="button" data-bs-target="#carouselBrand" data-bs-slide-to="2" aria-label="Slide 3"></button>
-								  </div>
-								  <div class="carousel-inner">
-								    <div class="carousel-item active">
-								      페이지1 ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
-								      <div class="carousel-caption d-none d-md-block">
-								        <h5>First slide label</h5>
-								        <p>Some representative placeholder content for the first slide.</p>
-								      </div>
-								    </div>
-								    <div class="carousel-item">
-								      페이지2
-								      <div class="carousel-caption d-none d-md-block">
-								        <h5>Second slide label</h5>
-								        <p>Some representative placeholder content for the second slide.</p>
-								      </div>
-								    </div>
-								    <div class="carousel-item">
-								      페이지3
-								      <div class="carousel-caption d-none d-md-block">
-								        <h5>Third slide label</h5>
-								        <p>Some representative placeholder content for the third slide.</p>
-								      </div>
-								    </div>
-								  </div>
-								  <button class="carousel-control-prev" type="button" data-bs-target="#carouselBrand" data-bs-slide="prev">
-								    <span class="carousel-control-prev-icon btn btn-success" aria-hidden="true"></span>
-								    <span class="visually-hidden">Previous</span>
-								  </button>
-								  <button class="carousel-control-next" type="button" data-bs-target="#carouselBrand" data-bs-slide="next">
-								    <span class="carousel-control-next-icon btn btn-success" aria-hidden="true"></span>
-								    <span class="visually-hidden">Next</span>
-								  </button>
-								</div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-2 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">매장</h2></div>
                     </div>
                 </div>
             </section>
             <!-- gas section-->
-            <!-- <script>
+            <script>
             $(function(){
 	            
 	         // 현재 URL에서 파라미터 가져오기
 	            const urlParams = new URLSearchParams(window.location.search);
-
+	            gasData(urlParams)
 	            // rano 파라미터 가져오기
-	            const ranoValue = urlParams.get('rano');
-	            
+	            /* const ranoValue = "1";
+	            alert(ranoValue)
 	            $.ajax({
-	            	url: "index_ajax.jsp",
+	            	url: "gasstation_ajax.jsp",
 	            	type : "get",
 	            	dataType : "text",
 	            	data : "rano=" + ranoValue,
@@ -426,8 +419,8 @@ $(function(){
 	            	success : function(gsno){
 	            		gasData(gsno);
 	            	}
-	            })
-	        })
+	            });//ajax */
+	        });//function
 	
 	            // gsno 값을 사용하여 API 호출
 	            function gasData(gsno){
@@ -486,13 +479,13 @@ $(function(){
 		                });
 		            }
 	            }
-            </script> -->
+            </script>
 
             
             <section class="py-5" id="gas">
                 <div class="container px-5 my-5">
                     <div class="row gx-8" style="width: 1500px; margin 0 auto">
-                        <div class="col-lg-2 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">주유 시설</h2></div>
+                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success"><h2 class="fw-bolder mb-0">주유 시설</h2></div>
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 

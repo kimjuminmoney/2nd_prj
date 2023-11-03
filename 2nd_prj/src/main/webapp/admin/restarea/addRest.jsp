@@ -89,7 +89,7 @@ $(function(){
         // AJAX 요청을 수행
         $.ajax({
             url: "ajax_addRest.jsp",
-            type: "POST", // POST 방식을 사용해 데이터를 서버로 보냅니다.
+            type: "POST",
             data: data,
             dataType: "json",
             error: function(xhr){
@@ -97,11 +97,7 @@ $(function(){
                 console.log(xhr.status);
             },
             success: function(jsonObj){
-                if (jsonObj.status === "success") {
                     alert("추가완료.");
-                } else {
-                    alert("추가 중 오류가 발생했습니다: " + jsonObj.message);
-                }
             }
         });//ajax
     });//click

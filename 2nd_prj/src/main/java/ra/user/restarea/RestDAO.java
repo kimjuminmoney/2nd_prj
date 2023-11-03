@@ -63,6 +63,67 @@ public class RestDAO {
 		return raVO;
 	}
 	
+	public List<String> selectRestAreaName() throws SQLException{
+		List<String> raList = new ArrayList<String>();
+		
+		DbConnection db = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = db.getConn("jdbc/dbcp");
+			
+			String selectFood = "select raname from restarea	";
+			
+			pstmt=con.prepareStatement(selectFood.toString());
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				raList.add(rs.getString("raname"));
+			}
+			
+		}finally {
+			db.dbClose(rs, pstmt, con);
+		}
+		
+		return raList;
+	}
+	
+	public String selectRestAreaNum(String raname) throws SQLException {
+		String restareaNum = "";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		DbConnection db = DbConnection.getInstance();
+		
+		try {
+			con = db.getConn("jdbc/dbcp");
+			
+			String selectRestareaNum = "select rano from restarea where raname=?";
+			
+			pstmt = con.prepareStatement(selectRestareaNum);
+			
+			pstmt.setString(1, raname);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				restareaNum = rs.getString("rano");
+			}
+			
+		}finally {
+			db.dbClose(rs, pstmt, con);
+		}
+		return restareaNum;
+	}//selectrestareaNum
+	
+	
 	public List<FoodVO> selectFood(String raNo) throws SQLException{
 		FoodVO fVO;
 		
@@ -80,7 +141,7 @@ public class RestDAO {
 			
 			StringBuilder selectFood = new StringBuilder();
 			selectFood
-			.append("	select fno, fname, fimage, fdetail, fprice	")
+			.append("	select fno, fname, fimage, fdetail, to_char(fprice,'9,999,999') fpr	")
 			.append("	from food									")
 			.append("	where rano=?								");
 			
@@ -91,7 +152,7 @@ public class RestDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				fVO = new FoodVO(rs.getString("fno"), rs.getString("fname"), rs.getString("fimage"),rs.getString("fdetail"),rs.getInt("fprice"));
+				fVO = new FoodVO(rs.getString("fno"), rs.getString("fname"), rs.getString("fimage"),rs.getString("fdetail"),rs.getString("fpr"));
 				foodlist.add(fVO);
 			}
 			
@@ -158,7 +219,7 @@ public class RestDAO {
 			
 			StringBuilder selectBrand = new StringBuilder();
 			selectBrand
-			.append("	select bname, btel, bhome,ino, bno			")
+			.append("	select bname, btel, bdetail, bino, bno			")
 			.append("	from brand									")
 			.append("	where rano=?								");
 			
@@ -169,7 +230,7 @@ public class RestDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				bVO = new BrandVO(rs.getString("bname"), rs.getString("btel"), rs.getString("bhome"),rs.getString("ino"),rs.getInt("bno"));
+				bVO = new BrandVO(rs.getString("bname"), rs.getString("btel"), rs.getString("bdetail"),rs.getString("bino"),rs.getInt("bno"));
 				brandlist.add(bVO);
 			}
 			

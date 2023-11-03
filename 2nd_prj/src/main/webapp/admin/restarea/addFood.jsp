@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page info=""%>
@@ -6,6 +7,12 @@
 <html lang="en">
 <style>
 #inputRest {
+	width: 600px;
+	display: block; /* 블록 수준 요소로 변환 */
+	margin: 0 auto; /* 가운데 정렬 */
+}
+
+#btnRest {
 	width: 600px;
 	display: block; /* 블록 수준 요소로 변환 */
 	margin: 0 auto; /* 가운데 정렬 */
@@ -45,10 +52,41 @@
 <link href="../../common/css/styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-	$(function() {
 
+	$(function(){
+		$("#btnRest").click(function(){
+			alert(123);
+	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
+	        var foodImage = $("#foodImage").val(); 
+	        var foodName = $("#foodName").val(); 
+	        var foodPrice = $("#foodPrice").val();
+	        var foodDetail = $("#foodDetail").val();
+
+	        // 데이터를 객체로 구성
+	        var data = {
+	        	foodImage: foodImage ,
+	            foodName: foodName ,
+	            foodPrice: foodPrice,
+	            foodDetail: foodDetail,
+	        };
+
+	        // AJAX 요청을 수행
+	        $.ajax({
+	            url: "ajax_addFood.jsp",
+	            type: "POST",
+	            data: data,
+	            dataType: "json",
+	            error: function(xhr){
+	                alert("서버에서 문제가 발생하였습니다.");
+	                console.log(xhr.status);
+	            },
+	            success: function(jsonObj){
+	                    alert("추가완료.");
+	            }
+	        });//ajax
+	    });//click
 	});//ready
 	
 	function displaySelectedImage() {
@@ -251,7 +289,7 @@
 							<div class="card" style="width: 18rem;">
         						<img id="selected-image" src="images/selectImage.png" class="card-img-top">
         						<div class="card-body">
-            						<input class="form-control form-control-sm" id="formFileSm" type="file" onchange="displaySelectedImage()">
+            						<input class="form-control form-control-sm" id="foodImage" type="file" onchange="displaySelectedImage()">
         						</div>
     						</div>
 							
@@ -260,18 +298,18 @@
 						<div id="hw" class="align-self-center">
 						
 							<label id="inputRest" class="form-label">메뉴명</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br/>
+							<input id="foodName" class="form-control" type="text" placeholder="Default input"><br/>
 
 							<label id="inputRest" class="form-label">가격</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br />
+							<input id="foodPrice" class="form-control" type="text" placeholder="Default input"><br />
 
 							<label id="inputRest" class="form-label">설명</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br/>
+							<input id="foodDetail" class="form-control" type="text" placeholder="Default input"><br/>
 
 						</div>
 					</div>
 					<br />
-					<button id="inputRest" type="button" class="btn btn-primary btn-lg"
+					<button id="btnRest" type="button" class="btn btn-primary btn-lg"
 						style="margin-top: 30px;">추가</button>
 				</div>
 			</main>

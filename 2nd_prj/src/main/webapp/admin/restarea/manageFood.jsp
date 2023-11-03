@@ -50,7 +50,29 @@
 
 <script type="text/javascript">
 	$(function() {
+		$("#restareaname").change(function(){
+			alert("dasf")
+	    	if($("#restareaname").selectedIndex != 0){
+	    		var data=$("#restareaname").val();
+	    		  // AJAX 요청을 수행
+	            $.ajax({
+	                url: "ajax_restarea_num.jsp",
+	                type: "POST", // POST 방식을 사용해 데이터를 서버로 보냅니다.
+	                data: "restareaname="+data,
+	                dataType: "json",
+	                error: function(xhr){
+	                    alert("서버에서 문제가 발생하였습니다.");
+	                    console.log(xhr.status);
+	                },
+	                success: function(jsonObj){
+	                	var raNum = jsonObj.raNum;
 
+	                    }
+	                    
+	            });//ajax
+	    		
+	    	}//end if    	
+	    });//change
 	});//ready
 </script>
 
@@ -230,13 +252,27 @@
 						<li class="breadcrumb-item"><a href="index.jsp">휴게소 관리</a></li>
 						<li class="breadcrumb-item active">메뉴 관리</li>
 					</ol>
-					<div class="card mb-4">
-						<div class="card-body">
-							DataTables is a third party plugin that is used to generate the
-							demo table below. For more information about DataTables, please
-							visit the <a target="_blank" href="https://datatables.net/">official
-								DataTables documentation</a> .
-						</div>
+					<div>
+							<select id="restareaname" name="restareaname" class="form-select" style="width: 300px">
+							<% 
+							RestDAO rDAO = RestDAO.getInstance();
+							List<String> raNameList = rDAO.selectRestAreaName();
+							
+							String raName = "";
+							
+							for(int i=0; i<raNameList.size(); i++){
+								
+							raName=raNameList.get(i);
+							%>
+							
+							<option value="<%=raName%>"><%= raName %></option>
+							
+							<% } %>
+							</select>
+							<br/>
+							<span id="inputRaNum">
+							
+							</span>
 					</div>
 					<div class="card mb-4">
 						<div class="card-header">
@@ -255,14 +291,14 @@
 								</thead>
 								<tbody>
 										<%
-										RestDAO rDAO = RestDAO.getInstance();
+										
 										List<FoodVO> foodList = rDAO.selectFood("1");
 										for(int i=0; i<foodList.size(); i++){
 										FoodVO fVO = foodList.get(i);
 										%>
 										<tr>
 											<td><input type="checkbox" /></td>
-											<td><%=fVO.getFoodImage() %></td>
+											<td style="text-align: center"><img src="../User_jsp/food_image/<%=fVO.getFoodImage() %>" style="height:50px; border-radius: 10px;"/></td>
 											<td><%=fVO.getFoodName() %></td>
 											<td><%=fVO.getFoodPrice() %></td>
 											<td><%=fVO.getFoodDetail() %></td>
