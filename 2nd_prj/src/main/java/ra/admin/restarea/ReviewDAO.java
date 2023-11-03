@@ -1,4 +1,4 @@
-package ra.user.restarea;
+package ra.admin.restarea;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ra.user.restarea.ReviewVO;
 import ra.util.DbConnection;
 
 public class ReviewDAO {

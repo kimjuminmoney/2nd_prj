@@ -1,4 +1,4 @@
-package ra.user.restarea;
+package ra.admin.restarea;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ra.user.restarea.BrandVO;
+import ra.user.restarea.ConvVO;
+import ra.user.restarea.FoodVO;
+import ra.user.restarea.GasTypeVO;
+import ra.user.restarea.GasVO;
+import ra.user.restarea.RestAreaVO;
 import ra.util.DbConnection;
 
 public class RestDAO {

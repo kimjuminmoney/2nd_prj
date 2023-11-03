@@ -36,6 +36,7 @@ $(function(){
     </head>
     <body class="d-flex flex-column h-100">
     <%
+    String rano = request.getParameter("rano");
     RestDAO rDAO = RestDAO.getInstance();
     ReviewDAO rvDAO = ReviewDAO.getInstance();
     AddRestDAO arDAO = AddRestDAO.getInstance();
@@ -90,7 +91,7 @@ $(function(){
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
                             <%
-                            RestAreaVO raVO = rDAO.selectRestArea("7");
+                            RestAreaVO raVO = rDAO.selectRestArea(rano);
                             %>
                                 <h1 class="display-5 fw-bolder text-white mb-2"><%=raVO.getRestAreaName() %></h1>
                                 <p class="lead fw-normal text-white-50 mb-4">주소: <%=raVO.getAddress() %></p>

@@ -1,14 +1,13 @@
 package ra.user.restarea;
 
 public class FoodVO {
-	String foodNum, foodName, foodImage, foodDetail;
-	int foodPrice;
+	String foodNum, foodName, foodImage, foodDetail, foodPrice;
 	
 	public FoodVO() {
 		super();
 	}
 
-	public FoodVO(String foodNum, String foodName, String foodImage, String foodDetail, int foodPrice) {
+	public FoodVO(String foodNum, String foodName, String foodImage, String foodDetail, String foodPrice) {
 		super();
 		this.foodNum = foodNum;
 		this.foodName = foodName;
@@ -49,11 +48,11 @@ public class FoodVO {
 		this.foodDetail = foodDetail;
 	}
 
-	public int getFoodPrice() {
+	public String getFoodPrice() {
 		return foodPrice;
 	}
 
-	public void setFoodPrice(int foodPrice) {
+	public void setFoodPrice(String foodPrice) {
 		this.foodPrice = foodPrice;
 	}
 

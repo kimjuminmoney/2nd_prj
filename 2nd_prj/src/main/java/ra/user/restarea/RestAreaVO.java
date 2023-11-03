@@ -7,6 +7,14 @@ public class RestAreaVO {
 	public RestAreaVO() {
 		super();
 	}
+	
+
+	public RestAreaVO(String restAreaNum, String restAreaName) {
+		super();
+		this.restAreaNum = restAreaNum;
+		this.restAreaName = restAreaName;
+	}
+
 
 	public RestAreaVO(String restAreaNum, String highwayNum, String restAreaName, String direction, String address,
 			String tel, String locate) {

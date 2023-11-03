@@ -1,4 +1,4 @@
-<%@page import="ra.user.raDetail.GasstationDAO"%>
+<%@page import="ra.user.restarea.GasstationDAO"%>
 <%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
