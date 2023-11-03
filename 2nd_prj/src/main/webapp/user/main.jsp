@@ -119,7 +119,7 @@ Jquery CDN시작
 	                   <div class="tab-pane" id="highway" role="tabpanel" aria-labelledby="highway-tab">
 	                            <div class="container text-center">
 	                               <div class="row">
-	                                  <div class="col" id="">
+	                                  <div class="col" id="hList">
 	                                     <div class="collapse collapse-horizontal" id="collapseWidthExample">
 	                                     </div>
 	                                  </div>

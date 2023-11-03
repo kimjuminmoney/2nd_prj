@@ -10,6 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); 
+
 int totalCount=0;
 String id=(String)session.getAttribute("id");
 id="HJS";
@@ -17,6 +18,7 @@ AdminCSDAO acDAO= AdminCSDAO.getInstance();
 
 List<AdminCSVO> csList=acDAO.selectAllCS();//리뷰조회
 pageContext.setAttribute("csList",csList);
+
 %>
 <!DOCTYPE html>
 <html>
