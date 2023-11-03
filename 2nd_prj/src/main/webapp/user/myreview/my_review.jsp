@@ -159,12 +159,12 @@ pageContext.setAttribute("rvList",rvList);
 	                        <c:forEach var="rv" items="${ rvList }" varStatus="i"> 
 	                        <div class="card mb-4">
 	                        	<div class="card-header" id="review_head">
-	                        		<label class="btn btn-outline-dark" >${ rv.rvDate }</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark" >날짜 : ${ rv.rvDate }</label>&nbsp;&nbsp;&nbsp;
 	                        		<input type="hidden" id="rvNo${i.count}" name="rvNo${i.count}" value="${ rv.rvNo }"/>
 	                        		<%-- <input type="hidden" id="raName${i.count}" name="raName${i.count}" value="${ rv.raName }"/> --%>
-	                        		<label class="btn btn-outline-dark">${rv.raName }</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark">휴게소 명 : ${rv.raName }</label>&nbsp;&nbsp;&nbsp;
 	                        		<input type="hidden" id="rvScore${i.count}" name="rvScore${i.count}" value="${ rv.rvScore }"/>
-	                        		<label class="btn btn-outline-dark">${ rv.rvScore }</label>
+	                        		<label class="btn btn-outline-dark">평점 : ${ rv.rvScore }</label>
 	                       		</div>
 		                           <c:choose>
 		                                <c:when test="${ not empty rv.rvdType}"> 

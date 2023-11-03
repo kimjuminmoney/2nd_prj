@@ -53,12 +53,15 @@ function raList( hNo ){
 			}//success
 		});//ajax
 }//raList
-function moveRA( rano ){
 
+function moveRA( rano ){
+	if(markers){
+	removeMarker();
+	};
 	//휴게소 이름
 	var raName=$("#raName"+rano).val();
 
-	var marker = null;
+	marker = null;
 	//x,y좌표값 설정
 	var rax=$("#raX"+rano).val();
 	var ray=$("#raY"+rano).val();
@@ -70,8 +73,11 @@ function moveRA( rano ){
 	    clickable: true
 	});
 	
+	
+	
 	marker.setMap(map);
-
+	markers.push(marker);
+	
 	var iwContent = "<div style='padding:5px;'><a href='ra_page/restarea_page.jsp?rano='"+rano+"'>"+raName+"</a></div>"
 	var iwRemoveable = true; 
 	var infowindow = new kakao.maps.InfoWindow({
