@@ -2,8 +2,6 @@ package ra.admin.dashboard;
 
 import java.sql.Connection;
 
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,12 +56,12 @@ public class DashboardDAO {
 
 			con = db.getConn("jdbc/dbcp");
 			StringBuilder sb=new StringBuilder();
-			sb.append("SELECT COUNT(*) AS count, ra.raname")
-			.append("FROM review r")
-			.append("INNER JOIN restarea ra ON r.rano = ra.rano")
-			.append("GROUP BY ra.raname")
-			.append("ORDER BY count DESC")
-			.append("FETCH FIRST 3 ROWS ONLY;");
+			sb.append(" SELECT COUNT(*) AS count, ra.raname			")
+			.append(" FROM review r									")
+			.append(" INNER JOIN restarea ra ON r.rano = ra.rano	")
+			.append(" GROUP BY ra.raname							")
+			.append(" ORDER BY count DESC							")
+			.append(" FETCH FIRST 3 ROWS ONLY						");
 
 			
 			pstmt = con.prepareStatement(sb.toString());
@@ -74,7 +72,7 @@ public class DashboardDAO {
 			while(rs.next()) {
 				dbrVO = new DashboardReviewVO();
 				dbrVO.setCount(rs.getInt("count"));
-				dbrVO.setCount(rs.getInt("raname"));
+				dbrVO.setRaname(rs.getString("raname"));
 				list.add(dbrVO); //list가 더 큰 개념. 값을 넣는다
 			}
 			

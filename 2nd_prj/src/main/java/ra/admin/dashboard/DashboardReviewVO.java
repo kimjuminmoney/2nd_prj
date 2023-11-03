@@ -3,6 +3,7 @@ package ra.admin.dashboard;
 public class DashboardReviewVO {
 	
 	private int rvno, count;
+	private String raname;
 	
 	public DashboardReviewVO() {
 	}
@@ -23,12 +24,21 @@ public class DashboardReviewVO {
 		this.count = count;
 	}
 
-	public DashboardReviewVO(int rvno, int count) {
+	public String getRaname() {
+		return raname;
+	}
+
+	public void setRaname(String raname) {
+		this.raname = raname;
+	}
+
+	public DashboardReviewVO(int rvno, int count, String raname) {
 		super();
 		this.rvno = rvno;
 		this.count = count;
+		this.raname = raname;
 	}
-	
+
 	
 
 }

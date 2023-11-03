@@ -89,29 +89,46 @@ Jquery CDN시작
                     </div>    
                         <!-- /사이드바 -->
                     <!-- 검색창, 지역별, 고속도로별 -->
-                    <div id="menu-box"class="tab-content" >
+                   <div id="menu-box"class="tab-content" >
                         <!-- 검색창 -->
                         <jsp:include page="search/include.jsp"></jsp:include>
+                        
+                        
                         <!-- 다영 -->
                         <div class="tab-pane" id="local" role="tabpanel" aria-labelledby="local-tab">
-                            지역별 휴게소
-                                
-                        </div>
-                        <!-- 다영 -->
-                            
+					    <!--  지역별 지도 모습 -->
+					    <jsp:include page="loc/css_local.jsp"></jsp:include>
+					    <jsp:include page="loc/function_local.jsp"></jsp:include>
+					    
+					    <!-- 지도 위 안내문-->
+					    <div class="local_box">
+					        <nav class="navbar bg-body-tertiary">
+					            <div class="container-fluid">
+					                <div class="alert alert-success text-center" role="alert">
+					                    <p>지역별 휴게소</p>
+					                    <hr>
+					                    <p class="mb-0">원하는 지역을 눌러 휴게소의 상세 정보를 확인 할 수 있습니다.</p>
+					                </div>
+					            </div>
+					        </nav>
+					    </div> 
+					    </div>
+					    
                         <!-- 지성 -->
-                        <div class="tab-pane" id="highway" role="tabpanel" aria-labelledby="highway-tab">
-                            <div class="container text-center">
-                            	<div class="row">
-		                            <div class="col" id="hList">
-		                            </div>
-		                            <div class="col" id="raList">
-		                            </div>
-		                        </div>
-							</div>
-						</div>
-                        <!-- 지성 -->
-                    </div>
+                        
+	                   <div class="tab-pane" id="highway" role="tabpanel" aria-labelledby="highway-tab">
+	                            <div class="container text-center">
+	                               <div class="row">
+	                                  <div class="col" id="">
+	                                     <div class="collapse collapse-horizontal" id="collapseWidthExample">
+	                                     </div>
+	                                  </div>
+	                                  <div class="col" id="raList">
+	                                  </div>
+	                              </div>
+	                            </div>
+	                   </div>
+	                  </div>
                     
                     <!-- 지도 -->
                     <div id="map" >

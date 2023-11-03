@@ -31,6 +31,7 @@ public class LocalRestDAO {
 	} //getInstance
 	
 	
+	//지역별 지도 선택 시 중심(시청/도청으로 이동)
 	public List<LocalSearchVO> selectLoc(String LocalName) throws SQLException{
 		LocalSearchVO lsVO = null;
 
@@ -73,9 +74,10 @@ public class LocalRestDAO {
 		
 	}
 	
-	public List<LocalSearchVO> selectLocaionRest(String localName) throws SQLException{
-		List<LocalSearchVO> list = new ArrayList<LocalSearchVO>();
-		LocalSearchVO lsVO = null;
+	//각 지역별 휴게소 마크업
+	public List<RestSearchVO> selectRest(String local) throws SQLException{
+		List<RestSearchVO> list = new ArrayList<RestSearchVO>();
+		RestSearchVO rsVO = null;
 		
 		Connection con=null;
 		PreparedStatement pstmt = null;
@@ -90,19 +92,21 @@ public class LocalRestDAO {
 			StringBuilder sb = new StringBuilder();
 
 			sb
-			.append("	select RANAME, RAX, RAY	")
-			.append("	from RESTAREA					")
-			.append("	where RALO = ?					");
+			.append("	SELECT RALO, RANAME, RAADDR, RAX, RAY		")
+			.append("	FROM RESTAREA								")
+			.append("	GROUP BY RALO, RANAME, RAADDR, RAX, RAY		")
+			.append("	ORDER BY RALO;								");
 			pstmt=con.prepareStatement(sb.toString());
 			
-			pstmt.setString(1, localName);
+			pstmt.setString(1, local);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-			lsVO = new LocalSearchVO(rs.getString("raNAme"),rs.getString("raX"),rs.getString("raY"));
+			rsVO = new RestSearchVO(rs.getString("RALO"),rs.getString("RANAME"),rs.getString("RAADDR"),
+									rs.getInt("RAX"), rs.getInt("RAY"));
 			
-			list.add(lsVO);
+			list.add(rsVO);
 			}
 			
 		}finally {

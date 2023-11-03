@@ -211,36 +211,6 @@
                 
             </style>
             
-            <!-- 수정 CSS -->
-            <!-- <style>
-            	#features {
-            	height: 800px;
-            	 margin-top: -40px; 
-            	}
-            	.navbar navbar-expand-lg navbar-dark bg-dark{
-            	margin: 0px;
-            	}
-            	
-            	#div-wrapper{
-            	height: 800px;
-            	}
-            	#map{
-            	width: 70%;
-            	height: 800px;
-            	
-            	}
-            	
-            	.nav-link {
-				    width: 120px; /* 버튼의 폭을 조절합니다. */
-				   /* height: 40px; /* 버튼의 높이를 조절합니다. */
-				   /* padding: 5px; /* 버튼 내부 여백을 설정합니다. */
-				   /*font-size: 16px; /* 폰트 크기를 조절합니다. */
-				}
-            
-                
-            </style> -->
-            <!-- 수정 CSS -->
-            
 			<!-- 사이드바 래퍼 스타일 --> 
             <style>
 				  
