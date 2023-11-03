@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import project_VO.ManagerDataVO;
-import project_VO.ManagerLoginVO;
+import ra.util.DbConnection;
 
 public class ManagerLoginDAO{
 	private static ManagerLoginDAO mlDAO;

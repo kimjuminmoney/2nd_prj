@@ -47,7 +47,7 @@ try{
 		session.setAttribute("sesId", clVO.getUSERID());
 		session.setAttribute("userData", cdVO);
 		
-		response.sendRedirect("test.jsp");
+		response.sendRedirect("index.jsp");
 }else{
 	%>
 	아이디나 비밀번호를 확인해 주세요<br/>
