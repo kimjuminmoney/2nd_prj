@@ -1,6 +1,4 @@
-<%@page import="projectDAO.ClientDAO"%>
-<%@page import="project_VO.ClientLoginVO"%>
-<%@page import="project_VO.Client_joinVO"%>
+<%@page import="ra.user.login.ClientDAO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -37,7 +35,7 @@ $(function(){
 
 </head>
 <body>
-<jsp:useBean id="cjVO" class="project_VO.Client_joinVO" scope="page"/>
+<jsp:useBean id="cjVO" class="ra.user.login.Client_joinVO" scope="page"/>
 <jsp:setProperty property="*" name="cjVO"/>
 <c:catch var="se">
 

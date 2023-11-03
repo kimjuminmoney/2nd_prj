@@ -1,7 +1,5 @@
-<%@page import="project_VO.ManagerDataVO"%>
-<%@page import="projectDAO.ManagerLoginDAO"%>
-<%@page import="project_VO.Client_joinVO"%>
-<%@page import="projectDAO.ClientLoginDAO"%>
+<%@page import="ra.admin.login.ManagerDataVO"%>
+<%@page import="ra.admin.login.ManagerLoginDAO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -35,7 +33,7 @@ $(function(){
 
 </head>
 <body>
-<jsp:useBean id="mlVO" class="project_VO.ManagerLoginVO" scope="page"/>
+<jsp:useBean id="mlVO" class="ra.admin.login.ManagerLoginVO" scope="page"/>
 <jsp:setProperty property="*" name="mlVO"/>
 
 <%
