@@ -10,8 +10,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); 
+
 int totalCount=0;
-String id="HJS";
+String id=request.getParameter("sesId");
 myCSDAO mcDAO= myCSDAO.getInstance();
 try{
 totalCount=mcDAO.selectTotalCount(id);//리뷰 전체 개수 count
@@ -51,10 +52,9 @@ if( totalPage < endPage){
 List<MyCSVO> csList=mcDAO.selectMyCS(id,startNum,endNum);//리뷰조회
 pageContext.setAttribute("csList",csList);
 
-
 %>
 <c:if test="${ empty sesId }">
-<c:redirect url="../day1019/login_frm.jsp"/>
+<c:redirect url="../login/Client_login.html"/>
 </c:if>
 <!DOCTYPE html>
 <html>

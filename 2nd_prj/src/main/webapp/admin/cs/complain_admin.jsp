@@ -11,15 +11,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); 
 
+
+
 int totalCount=0;
-String id=(String)session.getAttribute("id");
-id="HJS";
+String id=(String)session.getAttribute("sesId");
+
 AdminCSDAO acDAO= AdminCSDAO.getInstance();
 
 List<AdminCSVO> csList=acDAO.selectAllCS();//리뷰조회
 pageContext.setAttribute("csList",csList);
 
 %>
+<c:if test="${ empty sesId }">
+<c:redirect url="../login/Manager_login.html"/>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
