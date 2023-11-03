@@ -5,7 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import projectDAO.DbConnection;
+import project_VO.ManagerDataVO;
+import project_VO.ManagerLoginVO;
 
 public class ManagerLoginDAO{
 	private static ManagerLoginDAO mlDAO;
@@ -22,7 +23,7 @@ public class ManagerLoginDAO{
 	public ManagerDataVO selectLogin( ManagerLoginVO mlVO) throws SQLException{
 		ManagerDataVO mdVO=null;
 		
-		ra.util.DbConnection db= ra.util.DbConnection.getInstance();
+		DbConnection db= DbConnection.getInstance();
 		
 		Connection con = null;
 		PreparedStatement pstmt =null;
