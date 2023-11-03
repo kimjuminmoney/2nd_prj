@@ -52,7 +52,7 @@
 
                     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
                     ps.keywordSearch(keyword, placesSearchCB,{size:15});
-                }
+                }//searchPlaces
 
                 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
                 function placesSearchCB(data, status, pagination) {
@@ -77,7 +77,7 @@
                         return;
 
                     }
-                }
+                }//placesSearchCB
 
                 // 검색 결과 목록과 마커를 표출하는 함수입니다
                 function displayPlaces(places, flag) {
@@ -141,7 +141,7 @@
 
                     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                     map.setBounds(bounds);
-                }
+                }//displayPlaces
 
                 // 검색결과 항목을 Element로 반환하는 함수입니다
                 function getListItem(index, places,flag) {
@@ -185,10 +185,10 @@
 /*                     el.className = 'item'; */
                     
                     if(flag){
-                    btnEvent(el,places);
+                   		btnEvent(el,places);
                     }
                     return el;
-                }
+                }//getListItem
                 
              // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
                 function addMarker(position, idx, title) {
@@ -209,7 +209,7 @@
                     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
                     return marker;
-                }
+                }//addMarker
 
                 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
                 function removeMarker() {
@@ -328,7 +328,7 @@
             // 페이지네이션을 담을 엘리먼트
             const paginationElement = document.getElementById('pagination');
             
-         // 이전 페이지네이션을 지우기
+         	// 이전 페이지네이션을 지우기
             while (paginationElement.firstChild) {
                 paginationElement.removeChild(paginationElement.firstChild);
             }
@@ -356,7 +356,7 @@
             const endIdx = Math.min(itemsPerPage, data.length);
             const pageData = data.slice(startIdx, endIdx);
             displayPageData(1, pageData);
-        }
+        }//createPagination
 
      // 데이터를 페이지네이션에 맞게 휴게소 표시하는 함수
         function displayPageData(page, data) {
@@ -364,8 +364,7 @@
             console.log('Page', page, 'data:', data);
             var flag = false;
 			displayPlaces(data, flag); 
-            
-        }
+        }//displayPageData
 
 
 
@@ -434,7 +433,7 @@
 				    strokeOpacity: 0.7,
 				    strokeStyle: 'solid'
 				  });
-				}
+				}//createPolyline
             	
             	
                 /* 폴리라인 메소드 */

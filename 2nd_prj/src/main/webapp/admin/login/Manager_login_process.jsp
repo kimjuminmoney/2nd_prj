@@ -44,6 +44,7 @@ $(function(){
 mlVO.setEPW(DataEncrypt.messageDigest("MD5",mlVO.getEPW()));
 
 ManagerLoginDAO mlDAO = ManagerLoginDAO.getInstance();
+
 try{
 	ManagerDataVO  mdVO=mlDAO.selectLogin(mlVO);
 	if(mdVO != null){

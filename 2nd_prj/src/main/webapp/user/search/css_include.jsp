@@ -299,6 +299,10 @@
 	font-family: '맑은 고딕';
 }
 
+.sidebar-nav li button {
+	margin-right: 0px
+}
+
 .sidebar-nav li button:hover {
 	color: #fff;
 	background: rgba(255, 255, 255, 0.5);
@@ -332,7 +336,7 @@ header, footer {
 }
 
 section {
-	height: 836px;
+	height: 825px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
