@@ -14,9 +14,9 @@ boost
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 Jquery CDN시작
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
-<jsp:include page="search/css_include.jsp"></jsp:include>
-<jsp:include page="search/function_include.jsp"></jsp:include>
-<jsp:include page="highway/highway_list.jsp"></jsp:include>
+<jsp:include page="../search/css_include.jsp"></jsp:include>
+<jsp:include page="../search/function_include.jsp"></jsp:include>
+<jsp:include page="../highway/highway_list.jsp"></jsp:include>
 </head>
   <body class="d-flex flex-column h-100">
             <!-- <main class=" flex-shrink-0"> -->
@@ -91,14 +91,14 @@ Jquery CDN시작
                     <!-- 검색창, 지역별, 고속도로별 -->
                    <div id="menu-box"class="tab-content" >
                         <!-- 검색창 -->
-                        <jsp:include page="search/include.jsp"></jsp:include>
+                        <jsp:include page="../search/include.jsp"></jsp:include>
                         
                         
                         <!-- 다영 -->
                         <div class="tab-pane" id="local" role="tabpanel" aria-labelledby="local-tab">
 					    <!--  지역별 지도 모습 -->
-					    <jsp:include page="loc/css_local.jsp"></jsp:include>
-					    <jsp:include page="loc/function_local.jsp"></jsp:include>
+					    <jsp:include page="../loc/css_local.jsp"></jsp:include>
+					    <jsp:include page="../loc/function_local.jsp"></jsp:include>
 					    
 					    <!-- 지도 위 안내문-->
 					    <div class="local_box">

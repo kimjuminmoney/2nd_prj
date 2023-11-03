@@ -1,7 +1,5 @@
 <%@page import="ra.admin.login.ManagerDataVO"%>
 <%@page import="ra.admin.login.ManagerLoginDAO"%>
-<%@page import="ra.user.login.Client_joinVO"%>
-<%@page import="ra.user.login.ClientLoginDAO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,7 +7,7 @@
 <%@ page info="" %>
 <%
 if("GET".equals(request.getMethod().toUpperCase())){
-	response.sendRedirect("main.html");
+	response.sendRedirect("Manager_login.html");
 	return;
 }
 %>
@@ -44,14 +42,13 @@ $(function(){
 mlVO.setEPW(DataEncrypt.messageDigest("MD5",mlVO.getEPW()));
 
 ManagerLoginDAO mlDAO = ManagerLoginDAO.getInstance();
-
 try{
 	ManagerDataVO  mdVO=mlDAO.selectLogin(mlVO);
 	if(mdVO != null){
 		session.setAttribute("sesNo",mlVO.getEMPNO());
 		session.setAttribute("managerData", mdVO);
 		
-		response.sendRedirect("main.html");
+		response.sendRedirect("test.jsp");
 }else{
 %>
 	아이디나 비밀번호를 확인해 주세요<br/>
