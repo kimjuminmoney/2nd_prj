@@ -11,8 +11,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); 
+
+String id=request.getParameter("sesId");
+
+
 int totalCount=0;
-String id="HJS";
 MyReviewDAO mrDAO = MyReviewDAO.getInstance();
 try{
 totalCount=mrDAO.selectTotalCount(id);//리뷰 전체 개수 count
@@ -53,7 +56,9 @@ List<MyReviewVO> rvList=mrDAO.selectReview(id,startNum,endNum);//리뷰조회
 pageContext.setAttribute("rvList",rvList);
 
 %>
-
+<c:if test="${ empty sesId }">
+<c:redirect url="../login/Client_login.html"/>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>

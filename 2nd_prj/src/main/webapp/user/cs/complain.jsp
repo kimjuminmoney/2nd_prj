@@ -53,6 +53,9 @@ pageContext.setAttribute("csList",csList);
 
 
 %>
+<c:if test="${ empty sesId }">
+<c:redirect url="../day1019/login_frm.jsp"/>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
