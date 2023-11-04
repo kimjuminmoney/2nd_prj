@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class ManageBrandVO {
 	
-	String restAreaNum, brandName, brandTel, brandHome;
-	int brandNum, iconNum;
+	String restAreaNum, brandName, brandTel, brandHome, iconNum;
+	int brandNum;
 	Date brandDate;
 	
 	public ManageBrandVO() {
@@ -13,7 +13,7 @@ public class ManageBrandVO {
 	}
 
 	public ManageBrandVO(String restAreaNum, String brandName, String brandTel, String brandHome, int brandNum,
-			int iconNum, Date brandDate) {
+			String iconNum, Date brandDate) {
 		super();
 		this.restAreaNum = restAreaNum;
 		this.brandName = brandName;
@@ -64,11 +64,11 @@ public class ManageBrandVO {
 		this.brandNum = brandNum;
 	}
 
-	public int getIconNum() {
+	public String getIconNum() {
 		return iconNum;
 	}
 
-	public void setIconNum(int iconNum) {
+	public void setIconNum(String iconNum) {
 		this.iconNum = iconNum;
 	}
 

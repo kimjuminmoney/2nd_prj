@@ -1,5 +1,5 @@
 <%@page import="ra.user.restarea.ConvVO"%>
-<%@page import="ra.user.restarea.RestDAO"%>
+<%@page import="ra.admin.restarea.RestDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -43,15 +43,43 @@
 <link href="../../common/css/styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 <script type="text/javascript">
-	$(function() {
-
+	$(function(){
+		$("#restareaname").change(function(){
+	    	if($("#restareaname").selectedIndex != 0){
+	    		var data=$("#restareaname").val();
+	    		  // AJAX 요청을 수행
+	            $.ajax({
+	                url: "ajax_restarea_num.jsp",
+	                type: "POST", // POST 방식을 사용해 데이터를 서버로 보냅니다.
+	                data: "restareaname="+data,
+	                dataType: "json",
+	                error: function(xhr){
+	                    alert("서버에서 문제가 발생하였습니다.");
+	                    console.log(xhr.status);
+	                },
+	                success: function(jsonObj){
+	                	var raNum = jsonObj.raNum;
+							$("#raNum").val(raNum);
+							$("#restareaname2").val($("#restareaname").val());
+							$("#raFrm").submit();
+	                    }
+	                    
+	            });//ajax
+	    		
+	    	}//end if    	
+	    });//change
 	});//ready
 </script>
 
 </head>
 <body class="sb-nav-fixed">
+<form  method="get" name="raFrm" id="raFrm">
+<input type="hidden" name="raNum" id="raNum">
+<input type="hidden" name="restareaname" id="restareaname2">
+</form>
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
 		<a class="navbar-brand ps-3" href="index.jsp">Start Bootstrap</a>
@@ -226,14 +254,36 @@
 						<li class="breadcrumb-item"><a href="index.jsp">대쉬보드</a></li>
 						<li class="breadcrumb-item active">편의시설 관리</li>
 					</ol>
-					<div class="card mb-4">
-						<div class="card-body">
-							DataTables is a third party plugin that is used to generate the
-							demo table below. For more information about DataTables, please
-							visit the <a target="_blank" href="https://datatables.net/">official
-								DataTables documentation</a> .
-						</div>
+					
+					<div>
+							<select id="restareaname" name="restareaname" class="form-select" style="width: 300px">
+							<% 
+							RestDAO rDAO = RestDAO.getInstance();
+							List<String> raNameList = rDAO.selectRestAreaName();
+							
+							String raNo = request.getParameter("raNum");
+							String restareaname = request.getParameter("restareaname");
+							if(raNo == null){
+								raNo="1";
+								restareaname="화성(서울)휴게소";
+							}
+							
+							String raName = "";
+							String raNum = "";
+							
+							for(int i=0; i<raNameList.size(); i++){
+								
+							raName=raNameList.get(i);
+							raNum = rDAO.selectRestAreaNum(raName);
+							%>
+							
+							<option value="<%=raName%>"<%=raName.equals(restareaname) ?" selected='selected'":"" %>><%= raName %></option>
+							
+							<% } %>
+							</select>
+							<br/>
 					</div>
+					
 					<div class="card mb-4">
 						<div class="card-header">
 							<i class="fas fa-table me-1"></i> 편의 시설 정보
@@ -251,8 +301,7 @@
 								</thead>
 								<tbody>
 									<%
-										RestDAO rDAO = RestDAO.getInstance();
-										List<ConvVO> convList = rDAO.selectConv("1");
+										List<ConvVO> convList = rDAO.selectConv(raNo);
 										for(int i=0; i<convList.size(); i++){
 										ConvVO cVO = convList.get(i);
 										%>
@@ -270,8 +319,8 @@
 							</table>
 						</div>
 					</div>
-					<a href="addConv.jsp"><input class="btn btn-primary" type="button" value="추가"></a>
-					<a href="updateConv.jsp"><input class="btn btn-primary" type="submit" value="수정"></a> 
+					<a href="addConv.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="button" value="추가"></a>
+					<a href="updateConv.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="submit" value="수정"></a> 
 					<input class="btn btn-primary" type="reset" value="삭제">
 				</div>
 			</main>

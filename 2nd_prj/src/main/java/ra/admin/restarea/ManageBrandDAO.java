@@ -35,8 +35,8 @@ public class ManageBrandDAO {
 				StringBuilder insertBrand = new StringBuilder();
 				
 				insertBrand
-				.append("	insert into brand(rano, bno, bname, btel, bhome, bdate)	")
-				.append("	values(?,(select max(bno)+1 from brand),?,?,?,sysdate)		");
+				.append("	insert into brand(rano, bno, bname, btel, bdetail, bino, bdate)	")
+				.append("	values(?,(select max(bno)+1 from brand),?,?,?,?,sysdate)		");
 				
 				pstmt = con.prepareStatement(insertBrand.toString());
 				
@@ -44,6 +44,7 @@ public class ManageBrandDAO {
 				pstmt.setString(2, mbVO.getBrandName());
 				pstmt.setString(3, mbVO.getBrandTel());
 				pstmt.setString(4, mbVO.getBrandHome());
+				pstmt.setString(5, mbVO.getIconNum());
 				
 				boolean flag = pstmt.execute();
 				
@@ -68,12 +69,12 @@ public class ManageBrandDAO {
 				StringBuilder updateBrand = new StringBuilder();
 				updateBrand
 				.append("	update Brand							")
-				.append("	set ino=?, bname=?, btel=?, bhome=?		")
+				.append("	set ino=?, bname=?, btel=?, bdetail=?		")
 				.append("	where bno=?								");
 				
 				pstmt = con.prepareStatement(updateBrand.toString());
 				
-				pstmt.setInt(1, mbVO.getIconNum());
+				pstmt.setString(1, mbVO.getIconNum());
 				pstmt.setString(2, mbVO.getBrandName());
 				pstmt.setString(3, mbVO.getBrandTel());
 				pstmt.setString(4, mbVO.getBrandHome());

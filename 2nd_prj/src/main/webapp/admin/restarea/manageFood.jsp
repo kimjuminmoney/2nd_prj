@@ -1,5 +1,5 @@
+<%@page import="ra.admin.restarea.RestDAO"%>
 <%@page import="ra.user.restarea.FoodVO"%>
-<%@page import="ra.user.restarea.RestDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -17,7 +17,7 @@
 }
 
 .table th:nth-child(2) {
-	width: 100px; /* 첫 번째 열의 너비 설정 */
+	width: 2s0px; /* 첫 번째 열의 너비 설정 */
 }
 
 .table th:nth-child(3) {

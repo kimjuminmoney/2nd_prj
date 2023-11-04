@@ -46,24 +46,57 @@
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		$("#btnInput").click(function(){
+			alert(123);
+	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
+	        var restAreaNum = $("#restAreaNum").val();
+	        var convImage = $("#convImage").val(); 
+	        var convName = $("#convName").val(); 
+	        var convTel = $("#convTel").val();
+	        var convDetail = $("#convDetail").val();
 
+	        // 데이터를 객체로 구성
+	        var data = {
+	        	restAreaNum: restAreaNum,
+	        	convImage: convImage,
+	        	convName: convName,
+	        	convTel: convTel,
+	        	convDetail: convDetail,
+	        };
+
+	        // AJAX 요청을 수행
+	        $.ajax({
+	            url: "ajax_addConv.jsp",
+	            type: "POST",
+	            data: data,
+	            dataType: "json",
+	            error: function(xhr){
+	                alert("서버에서 문제가 발생하였습니다.");
+	                console.log(xhr.status);
+	            },
+	            success: function(jsonObj){
+	                    alert("추가완료.");
+	            }
+	        });//ajax
+	    });//click
 	});//ready
 	
 	function displaySelectedImage() {
-        const input = document.getElementById("formFileSm");
-        const image = document.getElementById("selected-image");
+		 const input = document.getElementById("convImage");
+		    const image = document.getElementById("selected-image");
 
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
+		    if (input.files && input.files[0]) {
+		        const reader = new FileReader();
 
-            reader.onload = function (e) {
-                image.src = e.target.result;
-            };
+		        reader.onload = function (e) {
+		            image.src = e.target.result;
+		        };
 
-            reader.readAsDataURL(input.files[0]);
-        }
+		        reader.readAsDataURL(input.files[0]);
+		    }
     }
 </script>
 
@@ -241,7 +274,7 @@
 					<h1 class="mt-4">편의시설 추가</h1>
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="index.jsp">대시보드</a></li>
-						<li class="breadcrumb-item"><a href="manageFood.jsp">편의시설 관리</a></li>
+						<li class="breadcrumb-item"><a href="manageConv.jsp">편의시설 관리</a></li>
 						<li class="breadcrumb-item active">편의시설 추가</li>
 					</ol>
 
@@ -250,28 +283,32 @@
 						
 							<div class="card" style="width: 18rem;">
         						<img id="selected-image" src="images/selectImage.png" class="card-img-top">
-        						<div class="card-body">
-            						<input class="form-control form-control-sm" id="formFileSm" type="file" onchange="displaySelectedImage()">
-        						</div>
+							    <div class="card-body">
+							        <input class="form-control form-control-sm" id="convImage" type="file" onchange="displaySelectedImage()">
+							    </div>
     						</div>
 							
 						</div>
 
 						<div id="hw" class="align-self-center">
 						
+							<% String raNo = request.getParameter("raNo"); %>
+						<label id="inputRest" class="form-label">휴게소번호</label> 
+						<input id="restAreaNum" class="form-control" type="text" value="<%=raNo %>" readonly="readonly" disabled><br/>
+						
 							<label id="inputRest" class="form-label">시설명</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br/>
+							<input id="convName" class="form-control" type="text" placeholder="Default input"><br/>
 
 							<label id="inputRest" class="form-label">전화번호</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br />
+							<input id="convTel" class="form-control" type="text" placeholder="Default input"><br />
 
 							<label id="inputRest" class="form-label">비고</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br/>
+							<input id="convDetail" class="form-control" type="text" placeholder="Default input"><br/>
 
 						</div>
 					</div>
 					<br />
-					<button id="inputRest" type="button" class="btn btn-primary btn-lg"
+					<button id="btnInput" type="button" class="btn btn-primary btn-lg"
 						style="margin-top: 30px;">추가</button>
 				</div>
 			</main>
