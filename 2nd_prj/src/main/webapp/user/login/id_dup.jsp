@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     
     <%@ page info="아이디 중복확인" %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/CSS/main_v20230906.css" /> -->
 <style type="text/css">
    #wrap{ width:502px; height:303px; margin:0px auto;}
-#idDup{width: 502px; height: 303px; background: #FFFFFF url(images/id_background.png) no-repeat;}
+#idDup{width: 502px; height: 303px; background: #FFFFFF url(../../common/images/id_background.png) no-repeat;}
 #idDiv{ position: absolute; top:100px; left:80px; width:300px; }
 #idResult{ position: absolute; top:200px; left:80px}
 </style>
