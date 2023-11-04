@@ -12,10 +12,10 @@ var container = document.getElementById('map');
 var options = {
 	center: new kakao.maps.LatLng(37.56680618275856, 126.97865226396553),//기본 지도 위치는 서울 시청
 	level: 13
-}; */
+}; 
 
-map = new kakao.maps.Map(container, options);
-}//onload
+}//onload*/
+//map = new kakao.maps.Map(container, options);
 
 
 
@@ -138,38 +138,38 @@ mus15off = new Image( );
 mus16on  = new Image( );
 mus16off = new Image( );
 /* 마우스가 올라가면 색이 바뀜 */
-mus1off.src = 'loc/map/m061.gif';
-mus2off.src = 'loc/map/m063.gif';
-mus3off.src = 'loc/map/m055.gif';
-mus4off.src = 'loc/map/m033.gif';
-mus5off.src = 'loc/map/m041.gif';
-mus6off.src = 'loc/map/m031.gif';
-mus7off.src = 'loc/map/m043.gif';
-mus8off.src = 'loc/map/m054.gif';
-mus9off.src = 'loc/map/m064.gif';
-mus10off.src = 'loc/map/m02.gif';
-mus11off.src = 'loc/map/m032.gif';
-mus12off.src = 'loc/map/m042.gif';
-mus13off.src = 'loc/map/m062.gif';
-mus14off.src = 'loc/map/m053.gif';
-mus15off.src = 'loc/map/m052.gif';
-mus16off.src = 'loc/map/m051.gif';
-mus1on.src  = 'loc/map/m061o.gif';
-mus2on.src  = 'loc/map/m063o.gif';
-mus3on.src  = 'loc/map/m055o.gif';
-mus4on.src  = 'loc/map/m033o.gif';
-mus5on.src  = 'loc/map/m041o.gif';
-mus6on.src  = 'loc/map/m031o.gif';
-mus7on.src  = 'loc/map/m043o.gif';
-mus8on.src  = 'loc/map/m054o.gif';
-mus9on.src  = 'loc/map/m064o.gif';
-mus10on.src  = 'loc/map/m02o.gif';
-mus11on.src  = 'loc/map/m032o.gif';
-mus12on.src  = 'loc/map/m042o.gif';
-mus13on.src  = 'loc/map/m062o.gif';
-mus14on.src  = 'loc/map/m053o.gif';
-mus15on.src  = 'loc/map/m052o.gif';
-mus16on.src  = 'loc/map/m051o.gif';
+mus1off.src = '../loc/map/m061.gif';
+mus2off.src = '../loc/map/m063.gif';
+mus3off.src = '../loc/map/m055.gif';
+mus4off.src = '../loc/map/m033.gif';
+mus5off.src = '../loc/map/m041.gif';
+mus6off.src = '../loc/map/m031.gif';
+mus7off.src = '../loc/map/m043.gif';
+mus8off.src = '../loc/map/m054.gif';
+mus9off.src = '../loc/map/m064.gif';
+mus10off.src = '../loc/map/m02.gif';
+mus11off.src = '../loc/map/m032.gif';
+mus12off.src = '../loc/map/m042.gif';
+mus13off.src = '../loc/map/m062.gif';
+mus14off.src = '../loc/map/m053.gif';
+mus15off.src = '../loc/map/m052.gif';
+mus16off.src = '../loc/map/m051.gif';
+mus1on.src  = '../loc/map/m061o.gif';
+mus2on.src  = '../loc/map/m063o.gif';
+mus3on.src  = '../loc/map/m055o.gif';
+mus4on.src  = '../loc/map/m033o.gif';
+mus5on.src  = '../loc/map/m041o.gif';
+mus6on.src  = '../loc/map/m031o.gif';
+mus7on.src  = '../loc/map/m043o.gif';
+mus8on.src  = '../loc/map/m054o.gif';
+mus9on.src  = '../loc/map/m064o.gif';
+mus10on.src  = '../loc/map/m02o.gif';
+mus11on.src  = '../loc/map/m032o.gif';
+mus12on.src  = '../loc/map/m042o.gif';
+mus13on.src  = '../loc/map/m062o.gif';
+mus14on.src  = '../loc/map/m053o.gif';
+mus15on.src  = '../loc/map/m052o.gif';
+mus16on.src  = '../loc/map/m051o.gif';
 
 
 var cMuName="";
@@ -191,28 +191,26 @@ function mus_off(musName) {
 }
 
  function smenu_click(musName){ 
-     alert(musName); 
- 
-     
 // 서버로 보낼 데이터 준비
      $.ajax({
-         url: 'loc/local_ajax.jsp', // 서버의 URL
+         url: '../loc/local_ajax.jsp', // 서버의 URL
          type: 'GET',
          dataType: 'json',
          data: "loc=" + musName,
          success: function(jsonObj) {
          // 서버 응답 처리
-         //console.log('서버 응답:', responseData);
+         console.log('서버 응답:', jsonObj);
          // responseData를 원하는 방식으로 처리
          /* displayPlaces2(responseData); */
+         var locData = jsonObj.data;
+         viewRA( locData )
+         
         
     	    // 이동할 위도 경도 위치를 생성합니다 
     	    var moveLatLon = new kakao.maps.LatLng(jsonObj.lat, jsonObj.lng);
     	    // 지도 중심을 이동 시킵니다
     	    map.setCenter(moveLatLon);
     	    map.setLevel(10);
-    	    
-    	    
          },
          error: function(xhr) {
          // 오류 처리
@@ -232,98 +230,46 @@ function mus_off(musName) {
 
 
 <script> 
-
-$(function(){
-
-	$("#").click(function(){
-		var jsonObj ={};
-		$.ajax({
-			url:"loc/rest_ajax.jsp",
-			type:"post",
-			data:jsonObj,
-			dataType:"json",
-			error:function(xhr){
-				console.log(xhr.status);
-			},
-			success:function( tempArr ){
-				var output="";
-					output+="<table>"
-				$.each(tempArr, function(i, json ){
-					output+="<tr class=''><td><div value='"+tempArr[i].rest
-					+"' onclick='raList("+tempArr[i].rest+")'>"
-					+tempArr[i].raName+"</div></td></tr>"
-
-					});//end each
-					output+="</table>"
-				$("#").html(output);			
-				}//success 
-			});//ajax
-	})//click
+function viewRA( locData ){
 	
-})//ready
+	resetFunction();
 
-function raList( ralo ){
-	var jsonObj ={ "ralo" : ralo };
-	$.ajax({
-		url:"loc/rest_ajax.jsp",
-		type:"post",
-		data:jsonObj,
-		dataType:"json",
-		error:function(xhr){
-			console.log(xhr.status);
-		},
-		success:function( tempArr ){
-			var output="";
-			output+="<table>"
-		$.each(tempArr, function(i, json ){
-			output+="<tr class='row'><td><div value='"+tempArr[i].raNo
-			+ "' onclick='moveRA("+tempArr[i].ralo+")'>"+tempArr[i].raName+"</div>";
-			output+="<input type='hidden' id='raName"+tempArr[i].ralo+"' value='"+tempArr[i].raName+"'>";
-			output+="<input type='hidden' id='raX"+tempArr[i].ralo+"' value='"+tempArr[i].raX+"'>";
-			output+="<input type='hidden' id='raY"+tempArr[i].ralo+"' value='"+tempArr[i].raY+"'>";
-			output+="</td></tr>";
+	for (var i = 0; i < locData.length; i ++) {
+    
+		var infowindow = null;
+    var latlng = new kakao.maps.LatLng(locData[i].x, locData[i].y)
+    
+    // 마커를 생성합니다
+    marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: latlng, // 마커를 표시할 위치
+        title : locData[i].localName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        clickable: true
+    });
+	markers.push(marker);
+	var iwContent = "<div class='btn btn-success' style='padding:5px;'>" + locData[i].localName + "</div>";
+    var iwRemoveable = true;
 
-			});//end each
-			output+="</table>";
-			$("#raList").html(output);
-			}//success
-		});//ajax
-}//raList
+    // 인포윈도우를 생성하고 지도에 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        content: iwContent,
+        removable: iwRemoveable
+    });
 
-function viewRA( ralo ){
-
-	//휴게소 이름
-	var raName=$("#raName"+ralo).val();
-
-	var marker = null;
-	//x,y좌표값 설정
-	var rax=$("#raX"+ralo).val();
-	var ray=$("#raY"+ralo).val();
+    // 클로저를 사용하여 이벤트 핸들러를 등록합니다
+    (function (marker, infowindow) {
+        kakao.maps.event.addListener(marker, 'click', function () {
+            infowindow.open(map, marker);
+        });
+    })(marker, infowindow);
+ 	// 인포윈도우를 생성하면서 바로 열기
+    infowindow.open(map, marker);
 	
-	var markerPosition  = new kakao.maps.LatLng(rax, ray); 
-	//배치
-	marker = new kakao.maps.Marker({
-	    position: markerPosition,
-	    clickable: true
-	});
-	
-	marker.setMap(map);
-
-	var iwContent = "<div style='padding:5px;'><a href=''"+ralo+"'>"
-					+raName+"</a></div>"
-	var iwRemoveable = true; 
-	var infowindow = new kakao.maps.InfoWindow({
-	    content : iwContent,
-	    removable : iwRemoveable
-	});
-	
-	kakao.maps.event.addListener(marker, 'click', function() {
-		 infowindow.open(map, marker);  
-	});
-	
-	map.setCenter(markerPosition);
+	}
+    
+    
     
 }//moveRA
 
- </script>
+</script>
 

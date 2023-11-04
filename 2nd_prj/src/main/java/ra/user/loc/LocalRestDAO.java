@@ -50,7 +50,7 @@ public class LocalRestDAO {
 			StringBuilder sb = new StringBuilder();
 
 			sb
-			.append("	select RANAME, RALO, RAX, RAY	")
+			.append("	select RANAME, RAADDR, RALO, RAX, RAY	")
 			.append("	from RESTAREA					")
 			.append("	where RALO = ?					");
 			pstmt=con.prepareStatement(sb.toString());
@@ -60,7 +60,14 @@ public class LocalRestDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-			lsVO = new LocalSearchVO(rs.getString("raNAme"),rs.getString("raX"),rs.getString("raY"));
+			lsVO = new LocalSearchVO();
+			lsVO.setRaname(rs.getString("raname"));
+			lsVO.setRaaddr(rs.getString("raaddr"));
+			lsVO.setRalo(rs.getString("ralo"));
+			lsVO.setX(rs.getString("rax"));
+			lsVO.setY(rs.getString("ray"));
+			
+			
 			
 			list.add(lsVO);
 			}
@@ -90,12 +97,11 @@ public class LocalRestDAO {
 			con = db.getConn("jdbc/dbcp");
 			
 			StringBuilder sb = new StringBuilder();
-
+			
 			sb
 			.append("	SELECT RALO, RANAME, RAADDR, RAX, RAY		")
 			.append("	FROM RESTAREA								")
-			.append("	GROUP BY RALO, RANAME, RAADDR, RAX, RAY		")
-			.append("	ORDER BY RALO;								");
+			.append("	where ralo = ?		");
 			pstmt=con.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, local);

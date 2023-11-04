@@ -43,7 +43,6 @@
 
 	JSONObject jsonObj = new JSONObject();
 	jsonObj.put("flag", false);
-	System.out.print(loc);
 		
 	if(loc != null ) {
 
@@ -56,9 +55,11 @@
 		JSONArray jsonArr=new JSONArray(); //조회결과를 저장한 JSONObject을 저장할 JSONArray
 		for(LocalSearchVO lsVO : list){ //조회결과가 있다면 반복시켜
 			jsonTemp=new JSONObject();//JSONObject을 생성하고
-			jsonTemp.put("localName", lsVO.getLocalName()); //값 을 설정한다.
+			jsonTemp.put("localName", lsVO.getRaname()); //값 을 설정한다.
 			jsonTemp.put("x", lsVO.getX());
 			jsonTemp.put("y", lsVO.getY());
+			jsonTemp.put("addr",lsVO.getRaaddr());
+			jsonTemp.put("ralo",lsVO.getRalo());
 			
 			jsonArr.add( jsonTemp );//값을 추가한다.
 			

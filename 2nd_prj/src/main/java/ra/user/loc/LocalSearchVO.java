@@ -1,7 +1,7 @@
 package ra.user.loc;
 
 public class LocalSearchVO {
-	private String localName;
+	private String raname,ralo,raaddr;
 	private String x, y;
 	
 	
@@ -10,13 +10,43 @@ public class LocalSearchVO {
 	}//LocalSearchVO
 
 
-	public String getLocalName() {
-		return localName;
+	public LocalSearchVO(String raname, String ralo, String raaddr, String x, String y) {
+		super();
+		this.raname = raname;
+		this.ralo = ralo;
+		this.raaddr = raaddr;
+		this.x = x;
+		this.y = y;
 	}
 
 
-	public void setLocalName(String localName) {
-		this.localName = localName;
+	public String getRaname() {
+		return raname;
+	}
+
+
+	public void setRaname(String raname) {
+		this.raname = raname;
+	}
+
+
+	public String getRalo() {
+		return ralo;
+	}
+
+
+	public void setRalo(String ralo) {
+		this.ralo = ralo;
+	}
+
+
+	public String getRaaddr() {
+		return raaddr;
+	}
+
+
+	public void setRaaddr(String raaddr) {
+		this.raaddr = raaddr;
 	}
 
 
@@ -42,22 +72,9 @@ public class LocalSearchVO {
 
 	@Override
 	public String toString() {
-		return "LocalSearchVO [localName=" + localName + ", x=" + x + ", y=" + y + "]";
+		return "LocalSearchVO [raname=" + raname + ", ralo=" + ralo + ", raaddr=" + raaddr + ", x=" + x + ", y=" + y
+				+ "]";
 	}
-
-
-	public LocalSearchVO(String localName, String x, String y) {
-		super();
-		this.localName = localName;
-		this.x = x;
-		this.y = y;
-	}
-
-	
-	
-	
-	
-	
 }
 
 	

@@ -597,6 +597,24 @@
                     alert('marker click!');
                 	});
               	}
+              	
+              	function resetFunction(){
+              		 // 지도에 표시되고 있는 마커를 제거합니다
+              		if(markers){
+              			removeMarker();
+              		};
+                 	// 이전 마커가 존재하는 경우 제거
+	                  if (strMarker) {
+	                    strMarker.setMap(null);
+	                  } 
+				 		if (endMarker) {
+	                    endMarker.setMap(null);
+	                  }
+				 	// 기존 폴리라인을 제거
+					    if (polyline) {
+					      polyline.setMap(null);
+					    }
+              	}
                 
                
 		            
@@ -613,32 +631,17 @@
                 	    document.getElementById('resetBtn').form.reset();
                 	    var listEl = document.getElementById('placesList')
                 		
-                	 // 검색 결과 목록에 추가된 항목들을 제거합니다
+                	 	// 검색 결과 목록에 추가된 항목들을 제거합니다
                         removeAllChildNods(listEl);
 
-                        // 지도에 표시되고 있는 마커를 제거합니다
-                        removeMarker();
-                        
                         var paginationEl = document.getElementById('pagination')
 
 	                    // 기존에 추가된 페이지번호를 삭제합니다
 	                    while (paginationEl.hasChildNodes()) {
 	                        paginationEl.removeChild(paginationEl.lastChild);
 	                    }
-                        
-                     // 기존 폴리라인을 제거
-					    if (polyline) {
-					      polyline.setMap(null);
-					    }
-                     
-					 // 이전 마커가 존재하는 경우 제거
-		                  if (strMarker) {
-		                    strMarker.setMap(null);
-		                  } 
-					 		if (endMarker) {
-		                    endMarker.setMap(null);
-		                  }
-                        
+                        //리셋 펑션
+					    resetFunction();
                         
                 	    // 폼 제출 방지
                 	    return false;

@@ -44,77 +44,77 @@
 <!-- 수도권: 서울, 인천, 경기 -->
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus10') onmouseout=mus_off('mus10') onclick=smenu_click('서울')>
 <input type="hidden" value="서울" id="seoul">
-<img src='loc/map/m02.gif' alt='' border='0' name='mus10' class='list10' ></a>
+<img src='../loc/map/m02.gif' alt='' border='0' name='mus10' class='list10' ></a>
 
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus11') onmouseout=mus_off('mus11') onclick=smenu_click('인천')>
 <input type="hidden" value="인천" id="InCheon">
-<img src='loc/map/m032.gif' alt='' border='0' name='mus11' class='list11' ></a>
+<img src='../loc/map/m032.gif' alt='' border='0' name='mus11' class='list11' ></a>
 
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus6') onmouseout=mus_off('mus6') onclick=smenu_click('경기')>
 <input type="hidden" value="경기" id="gyeongGiDo">
-<img src='loc/map/m031.gif' alt='' border='0' name='mus6' class='list6' ></a>
+<img src='../loc/map/m031.gif' alt='' border='0' name='mus6' class='list6' ></a>
 
 
 <!-- 강원 -->
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus4') onmouseout=mus_off('mus4') onclick=smenu_click('강원')>
 <input type="hidden" value="강원"id="gangWon">
-<img src='loc/map/m033.gif' alt='' border='0' name='mus4' class='list4' ></a>
+<img src='../loc/map/m033.gif' alt='' border='0' name='mus4' class='list4' ></a>
 
 
 <!-- 충청: 충남, 충북, 대전 -->
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus5') onmouseout=mus_off('mus5') onclick=smenu_click('충남')>
 <input type="hidden" value="충남" id="chungNam">
-<img src='loc/map/m041.gif' alt='' border='0' name='mus5' class='list5' ></a>
+<img src='../loc/map/m041.gif' alt='' border='0' name='mus5' class='list5' ></a>
 
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus7') onmouseout=mus_off('mus7') onclick=smenu_click('충북')>
 <input type="hidden" value="충북" id="chungBug">
-<img src='loc/map/m043.gif' alt='' border='0' name='mus7' class='list7' ></a>
+<img src='../loc/map/m043.gif' alt='' border='0' name='mus7' class='list7' ></a>
 
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus12') onmouseout=mus_off('mus12') onclick=smenu_click('대전')>
 <input type="hidden" value="대전" id="daeJeon">
-<img src='loc/map/m042.gif' alt='' border='0' name='mus12' class='list12' ></a>
+<img src='../loc/map/m042.gif' alt='' border='0' name='mus12' class='list12' ></a>
 
 
 <!-- 호남: 전남, 전북, 광주 -->
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus1') onmouseout=mus_off('mus1') onclick=smenu_click('전남')>
 <input type="hidden" value="전남" id="jeonNam">
-<img src='loc/map/m061.gif' alt='' border='0' name='mus1' class='list1' ></a>
+<img src='../loc/map/m061.gif' alt='' border='0' name='mus1' class='list1' ></a>
 
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus2') onmouseout=mus_off('mus2') onclick=smenu_click('전북')>
 <input type="hidden" value="전북" id="jeonBug">
-<img src='loc/map/m063.gif' alt='' border='0' name='mus2' class='list2' ></a>
+<img src='../loc/map/m063.gif' alt='' border='0' name='mus2' class='list2' ></a>
 
 <a href="#void" onfocus='this.blur()' onmouseover=mus_on('mus13') onmouseout=mus_off('mus13') onclick=smenu_click('광주')>
 <input type="hidden" value="광주" id="gwangJu">
-<img src='loc/map/m062.gif' alt='' border='0' name='mus13' class='list13' ></a>
+<img src='../loc/map/m062.gif' alt='' border='0' name='mus13' class='list13' ></a>
 
 
 <!-- 영남: 경남, 경북, 대구, 울산, 부산  -->
 <a href='#void' onfocus='this.blur()' onmouseover=mus_on('mus3') onmouseout=mus_off('mus3') onclick=smenu_click('경남')>
 <input type="hidden" value="경남" id="gyeongNam">
-<img src='loc/map/m055.gif' alt='' border='0' name='mus3' class='list3' ></a>
+<img src='../loc/map/m055.gif' alt='' border='0' name='mus3' class='list3' ></a>
 
 <a href='#void' onfocus='this.blur()' onmouseover=mus_on('mus8') onmouseout=mus_off('mus8') onclick=smenu_click('경북')>
 <input type="hidden" value="경북" id="gyeongBug">
-<img src='loc/map/m054.gif' alt='' border='0' name='mus8' class='list8' ></a>
+<img src='../loc/map/m054.gif' alt='' border='0' name='mus8' class='list8' ></a>
 
 <a href='#void' onfocus='this.blur()' onmouseover=mus_on('mus14') onmouseout=mus_off('mus14') onclick=smenu_click('대구')>
 <input type="hidden" value="대구" id="daeGu">
-<img src='loc/map/m053.gif' alt='' border='0' name='mus14' class='list14' ></a>
+<img src='../loc/map/m053.gif' alt='' border='0' name='mus14' class='list14' ></a>
 
 <a href='#void' onfocus='this.blur()' onmouseover=mus_on('mus15') onmouseout=mus_off('mus15') onclick=smenu_click('울산')>
 <input type="hidden" value="울산" id="ulSan">
-<img src='loc/map/m052.gif' alt='' border='0' name='mus15' class='list15' ></a>
+<img src='../loc/map/m052.gif' alt='' border='0' name='mus15' class='list15' ></a>
 
 <a href='#void' onfocus='this.blur()' onmouseover=mus_on('mus16') onmouseout=mus_off('mus16') onclick=smenu_click('부산')>
 <input type="hidden" value="부산" id="buSan">
-<img src='loc/map/m051.gif' alt='' border='0' name='mus16' class='list16' ></a>
+<img src='../loc/map/m051.gif' alt='' border='0' name='mus16' class='list16' ></a>
 
 
 <!-- 제주 -->
 <a href='#void' onfocus='this.blur()' onmouseover="mus_on('mus9')" onmouseout="mus_off('mus9')" onclick="smenu_click('제주는 서비스 불가 지역 입니다.')">
 <input type="hidden" value="제주" id="jeJu">
-<img src='loc/map/m064.gif' alt='' border='0' name='mus9' class='list9' ></a>
+<img src='../loc/map/m064.gif' alt='' border='0' name='mus9' class='list9' ></a>
 
 
 
