@@ -88,7 +88,7 @@ public class ManageFoodDAO {
 		return rowCnt;
 	}//updateFood
 	
-	public int deleteFood(ManageFoodVO mfVO) throws SQLException {
+	public int deleteFood(String fno, String rano) throws SQLException {
 		int rowCnt = 0;
 		
 		Connection con = null;
@@ -99,11 +99,12 @@ public class ManageFoodDAO {
 		try {
 			con = db.getConn("jdbc/dbcp");
 			
-			String updateFood = "delete from food where fno=?";
+			String updateFood = "delete from food where fno=? and rano=?";
 			
 			pstmt = con.prepareStatement(updateFood);
 			
-			pstmt.setInt(1, mfVO.getFoodNum());
+			pstmt.setString(1, fno);
+			pstmt.setString(2, rano);
 			
 			rowCnt = pstmt.executeUpdate();
 			

@@ -233,7 +233,7 @@ $(function(){
 								  </div> -->
 								  <div class="carousel-inner">
 									<%
-								  	List<FoodVO> foodList = rDAO.selectFood("7");
+								  	List<FoodVO> foodList = rDAO.selectFood(rano);
 									String fDetail = "";
 								    for(int i=0; i<foodList.size(); i++){
 										FoodVO fVO = foodList.get(i);
@@ -291,9 +291,9 @@ $(function(){
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
 								<div id="carouselBrand" class="carousel slide" style="width: 1500px; height: 400px; display: grid; place-items: center;">
-								  <div id="convItem">
+								  <div id="brandItem" style="width: 950px;">
 								    <%
-								      List<BrandVO> brandList = rDAO.selectBrand("1");
+								      List<BrandVO> brandList = rDAO.selectBrand(rano);
 								      for(int i=0; i<brandList.size(); i++){
 											BrandVO bVO = brandList.get(i);
 								      %>
@@ -331,9 +331,9 @@ $(function(){
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
 								<div id="carouselConv" class="carousel slide" style="width: 1500px; height: 400px; display: grid; place-items: center;">
-								  <div id="convItem">
+								  <div id="convItem" style="width: 950px;">
 								    <%
-								      List<ConvVO> convList = rDAO.selectConv("1");
+								      List<ConvVO> convList = rDAO.selectConv(rano);
 								      for(int i=0; i<convList.size(); i++){
 											ConvVO cVO = convList.get(i);
 								      %>

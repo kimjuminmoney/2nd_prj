@@ -51,7 +51,6 @@
 <script type="text/javascript">
 	$(function() {
 		$("#restareaname").change(function(){
-			alert("dasf")
 	    	if($("#restareaname").selectedIndex != 0){
 	    		var data=$("#restareaname").val();
 	    		  // AJAX 요청을 수행
@@ -66,18 +65,70 @@
 	                },
 	                success: function(jsonObj){
 	                	var raNum = jsonObj.raNum;
-
+							$("#raNum").val(raNum);
+							$("#restareaname2").val($("#restareaname").val());
+							$("#raFrm").submit();
 	                    }
 	                    
 	            });//ajax
 	    		
 	    	}//end if    	
 	    });//change
+	    
+	    $("#deleteBtn").click(function(){
+	    	var checkboxes = document.querySelectorAll('.food-checkbox');
+	    	<%
+	    	String paramRaNum=request.getParameter("raNum");
+	    	if(paramRaNum==null){
+	    		paramRaNum="1";
+	    	}
+	    	%>
+			var restareaNum = <%=paramRaNum%>;
+	    	
+	        // 체크박스를 반복하면서 선택된 것을 확인하고 해당 행을 삭제합니다.
+	        checkboxes.forEach(function (checkbox, index) {
+	            if (checkbox.checked) {
+	                // 선택된 체크박스의 상위 tr 요소를 찾아 삭제합니다.
+	                var tr = checkbox.closest('tr');
+	                
+	                if (tr) {
+	                	var foodNum = checkbox.getAttribute('data-food-num');
+	                	alert(foodNum)
+	                	alert(restareaNum)
+	                    tr.remove();
+	                	
+	                	var data = {
+	        	        		restareaNum: restareaNum,
+	        	        		foodNum: foodNum
+	        	            };
+	        	        
+	        	    	$.ajax({
+	        	            url: "ajax_deleteFood.jsp",
+	        	            type: "POST",
+	        	            data: data,
+	        	            dataType: "json",
+	        	            error: function(xhr){
+	        	            	alert("서버에 문제가 발생하였습니다.");
+	        	            	console.log(xhr);
+	        	            },
+	        	            success: function(response) {
+	        	                alert("삭제완료");
+	        	            }//success
+	        	        });//ajax
+	                }
+	            }
+	        });//forEach
+					 
+	    })//click
 	});//ready
 </script>
 
 </head>
 <body class="sb-nav-fixed">
+<form  method="get" name="raFrm" id="raFrm">
+<input type="hidden" name="raNum" id="raNum">
+<input type="hidden" name="restareaname" id="restareaname2">
+</form>
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
 		<a class="navbar-brand ps-3" href="index.jsp">Start Bootstrap</a>
@@ -258,21 +309,27 @@
 							RestDAO rDAO = RestDAO.getInstance();
 							List<String> raNameList = rDAO.selectRestAreaName();
 							
+							String raNo = request.getParameter("raNum");
+							String restareaname = request.getParameter("restareaname");
+							if(raNo == null){
+								raNo="1";
+								restareaname="화성(서울)휴게소";
+							}
+							
 							String raName = "";
+							String raNum = "";
 							
 							for(int i=0; i<raNameList.size(); i++){
 								
 							raName=raNameList.get(i);
+							raNum = rDAO.selectRestAreaNum(raName);
 							%>
 							
-							<option value="<%=raName%>"><%= raName %></option>
+							<option value="<%=raName%>"<%=raName.equals(restareaname) ?" selected='selected'":"" %>><%= raName %></option>
 							
 							<% } %>
 							</select>
 							<br/>
-							<span id="inputRaNum">
-							
-							</span>
 					</div>
 					<div class="card mb-4">
 						<div class="card-header">
@@ -283,6 +340,7 @@
 								<thead>
 									<tr>
 										<th><input type="checkbox" /></th>
+										<th>번호</th>
 										<th>이미지</th>
 										<th>메뉴명</th>
 										<th>가격</th>
@@ -291,13 +349,13 @@
 								</thead>
 								<tbody>
 										<%
-										
-										List<FoodVO> foodList = rDAO.selectFood("1");
+										List<FoodVO> foodList = rDAO.selectFood(raNo);
 										for(int i=0; i<foodList.size(); i++){
 										FoodVO fVO = foodList.get(i);
 										%>
 										<tr>
-											<td><input type="checkbox" /></td>
+											<td><input type="checkbox" class="food-checkbox" data-food-num="<%= fVO.getFoodNum() %>"/></td>
+											<td><%=fVO.getFoodNum() %></td>
 											<td style="text-align: center"><img src="../User_jsp/food_image/<%=fVO.getFoodImage() %>" style="height:50px; border-radius: 10px;"/></td>
 											<td><%=fVO.getFoodName() %></td>
 											<td><%=fVO.getFoodPrice() %></td>
@@ -310,9 +368,9 @@
 							</table>
 						</div>
 					</div>
-					<a href="addFood.jsp"><input class="btn btn-primary" type="button" value="추가"></a>
-					<a href="updateFood.jsp"><input class="btn btn-primary" type="button" value="수정"></a>
-					<input class="btn btn-primary" type="button" value="삭제">
+					<a href="addFood.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="button" value="추가"></a>
+					<a href="updateFood.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="button" value="수정"></a>
+					<input id="deleteBtn" class="btn btn-primary" type="button" value="삭제">
 				</div>
 			</main>
 			<footer class="py-4 bg-light mt-auto">
