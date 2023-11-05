@@ -31,19 +31,19 @@
 </style>
 
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Tables - SB Admin</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
-	rel="stylesheet" />
-<link href="../../common/css/styles.css" rel="stylesheet" />
-<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-	crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Tables - SB Admin</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="../../common/css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+<link rel="icon" href="http://192.168.10.148/jsp_prj/common/main/favicon.ico">
+<!-- boost -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- jQuery CDN시작 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 
@@ -55,7 +55,7 @@
 	    		var data=$("#restareaname").val();
 	    		  // AJAX 요청을 수행
 	            $.ajax({
-	                url: "ajax_restarea_num.jsp",
+	                url: "ajax/ajax_restarea_num.jsp",
 	                type: "POST", // POST 방식을 사용해 데이터를 서버로 보냅니다.
 	                data: "restareaname="+data,
 	                dataType: "json",
@@ -103,7 +103,7 @@
 	        	            };
 	        	        
 	        	    	$.ajax({
-	        	            url: "ajax_deleteFood.jsp",
+	        	            url: "ajax/ajax_deleteFood.jsp",
 	        	            type: "POST",
 	        	            data: data,
 	        	            dataType: "json",
@@ -356,7 +356,7 @@
 										<tr>
 											<td><input type="checkbox" class="food-checkbox" data-food-num="<%= fVO.getFoodNum() %>"/></td>
 											<td><%=fVO.getFoodNum() %></td>
-											<td style="text-align: center"><img src="../User_jsp/food_image/<%=fVO.getFoodImage() %>" style="height:50px; border-radius: 10px;"/></td>
+											<td style="text-align: center"><img src="../../common/food_images/<%=fVO.getFoodImage() %>" style="height:50px; border-radius: 10px;"/></td>
 											<td><%=fVO.getFoodName() %></td>
 											<td><%=fVO.getFoodPrice() %></td>
 											<td><%=fVO.getFoodDetail() %></td>
@@ -390,11 +390,11 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
-	<script src="js/scripts.js"></script>
+	<script src="../../common/js/scripts.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
-	<script src="js/datatables-simple-demo.js"></script>
+	<script src="../../common/js/datatables-simple-demo.js"></script>
 	
 	
 	

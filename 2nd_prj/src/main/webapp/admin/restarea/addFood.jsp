@@ -76,7 +76,7 @@ $(function(){
 
         // AJAX 요청을 수행
         $.ajax({
-            url: "ajax_addFood.jsp",
+            url: "ajax/ajax_addFood.jsp",
             type: "POST",
             data: data,
             dataType: "json",
@@ -289,7 +289,7 @@ function displaySelectedImage() {
 					<div id="fc">
 					
 						<div class="card" style="width: 18rem;">
-    						<img id="selected-image" src="images/selectImage.png" class="card-img-top">
+    						<img id="selected-image" src="../../common/images/selectImage.png" class="card-img-top">
     						<div class="card-body">
         						<input class="form-control form-control-sm" id="foodImage" type="file" onchange="displaySelectedImage()">
     						</div>

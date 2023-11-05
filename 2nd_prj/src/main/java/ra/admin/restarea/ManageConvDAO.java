@@ -89,7 +89,7 @@ private static ManageConvDAO mcDAO;
 		return rowCnt;
 	}//updateConv
 	
-	public int deleteConv(ManageConvVO mcVO) throws SQLException {
+	public int deleteConv(String cno, String rano) throws SQLException {
 		int rowCnt = 0;
 		
 		Connection con = null;
@@ -100,11 +100,12 @@ private static ManageConvDAO mcDAO;
 		try {
 			con = db.getConn("jdbc/dbcp");
 			
-			String updateConv = "delete from convinient where cno=?";
+			String updateConv = "delete from convinient where cno=? and rano=?";
 			
 			pstmt = con.prepareStatement(updateConv);
 			
-			pstmt.setInt(1, mcVO.getConvNum());
+			pstmt.setString(1, cno);
+			pstmt.setString(2, rano);
 			
 			rowCnt = pstmt.executeUpdate();
 			

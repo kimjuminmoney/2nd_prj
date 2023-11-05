@@ -88,7 +88,7 @@ public class ManageBrandDAO {
 			return rowCnt;
 		}//updateBrand
 		
-		public int deleteBrand(ManageBrandVO mbVO) throws SQLException {
+		public int deleteBrand(String bno, String rano) throws SQLException {
 			int rowCnt = 0;
 			
 			Connection con = null;
@@ -99,11 +99,12 @@ public class ManageBrandDAO {
 			try {
 				con = db.getConn("jdbc/dbcp");
 				
-				String updateBrand = "delete from brand where bno=?";
+				String updateBrand = "delete from brand where bno=? and rano=?";
 				
 				pstmt = con.prepareStatement(updateBrand);
 				
-				pstmt.setInt(1, mbVO.getBrandNum());
+				pstmt.setString(1, bno);
+				pstmt.setString(2, rano);
 				
 				rowCnt = pstmt.executeUpdate();
 				

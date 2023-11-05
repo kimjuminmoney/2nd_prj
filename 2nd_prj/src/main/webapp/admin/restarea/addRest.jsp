@@ -88,7 +88,7 @@ $(function(){
 
         // AJAX 요청을 수행
         $.ajax({
-            url: "ajax_addRest.jsp",
+            url: "ajax/ajax_addRest.jsp",
             type: "POST",
             data: data,
             dataType: "json",
@@ -107,7 +107,7 @@ $(function(){
     		var data=$("#inputHname").val();
     		  // AJAX 요청을 수행
             $.ajax({
-                url: "ajax_highway_num.jsp",
+                url: "ajax/ajax_highway_num.jsp",
                 type: "POST", // POST 방식을 사용해 데이터를 서버로 보냅니다.
                 data: "highwayname="+data,
                 dataType: "json",

@@ -41,17 +41,6 @@ $(function(){
     ReviewDAO rvDAO = ReviewDAO.getInstance();
     AddRestDAO arDAO = AddRestDAO.getInstance();
     ReviewVO rvVO = new ReviewVO();
-		/* try {
-			
-			System.out.println("--2--"+rDAO.selectConv("1"));
-			System.out.println("--3--"+rDAO.selectBrand("1"));
-			System.out.println("--4--"+rDAO.selectGas("1"));
-			System.out.println("--5--"+rDAO.selectGasType("1"));
-			System.out.println("--6--"+rvDAO.selectReview("1"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} */
-
     %>
         <main class="flex-shrink-0">
             <!-- Navigation-->
@@ -114,107 +103,9 @@ $(function(){
              <script>
             $(function(){
 	            
-	            /* // 현재 URL에서 파라미터 가져오기
-	            const urlParams = new URLSearchParams(window.location.search);
-
-	            // rano 파라미터 가져오기
-	            const ranoValue = urlParams.get('rano');
-	            
-	            $.ajax({
-	            	url: "gasstation_ajax.jsp",
-	            	type : "get",
-	            	dataType : "text",
-	            	data : "rano=" + ranoValue,
-	            	error : function(xhr){
-	            		console.log(xhr.status);
-	            	},
-	            	success : function(gsno){
-	            		gasData(gsno);
-	            	}
-	            })
-	
-	            // gsno 값을 사용하여 API 호출
-	            
-	            
-	            var rac = '000048';
-	            gasData(rac);
-	            
-	            var foodData = "";
-	            
-	            
-	            function gasData(rac){
-		            if (rac) {
-		            	var key = '3332053980';
-		                var apiUrl = " http://data.ex.co.kr/openapi/restinfo/restBrandList?key="
-		                		+key+"&type=json&numOfRows=100&pageNo=1&stdRestCd=" + rac;
-		                
-		
-		                // jQuery를 사용하여 API 요청 보내기
-		                $.ajax({
-		                    url: apiUrl,
-		                    method: 'GET',
-		                    dataType: 'json',
-		                    success: function(jsonData) {
-		                        // API 응답 데이터를 처리
-		                        console.log('휴게소음식 : ',jsonData); 
-		                        data(jsonData);
-		                        var foodList=jsonData.list
-		                        var sel=document.getElementById("sel");
-		                        var data1="";
-		                       for(var i=0 ; i < foodList.length ; i++){
-		                    	   data1=foodList[i];
-		                    	   sel.options[i]=new Option( data1.brdName, data1.brdName+"/"+data1.stdRestCd
-		                    			   +"/"+data1.brdDesc);
-		                    	   
-		                       }//end for
-
-		                    },
-		                    error: function(jqXHR, textStatus, errorThrown) {
-		                        console.error('Request failed:', errorThrown);
-		                    }
-		                });//ajax
-		            }//end if
-	            }//gasdata
-	            
-	            function data(json){
-	            	
-	            }
-	            
-	            $("#btnAdd").click(function(){
-					alert($("#sel").val())	 
-					
-					var foodData = $("#sel").val();
-					
-					$.ajax({
-	            		url :"addfood_ajax.jsp",
-	            		type: 'POST',
-	            		data : "foodData="+foodData,
-	            		dataType: 'json',
-	            		error: function(xhr){
-	            			alert("서버에서 문제가 발생하였습니다.");
-	                        console.log(xhr.status);
-	            		},
-	            		success: function(jsonData){
-	            			if (jsonData.status == "success") {
-	                            alert("추가완료.");
-	                        } else {
-	                            alert("추가 중 오류가 발생했습니다: " + jsonData.message);
-	                        }
-	            		}
-					
-	            });//$ajax
-	            
-	            });//$click */
-	            
 		      });//ready
 		      
-		      
-		      
-		        
             </script>
-            <!-- <select id="sel" name="sel">
-            </select>
-            <input type="button" value="추가" id="btnAdd"/> -->
             <!-- food section-->
             <section class="py-5" id="food">
                 <div class="container px-5 my-5">
@@ -226,11 +117,6 @@ $(function(){
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
 								<div id="carouselFood" class="carousel slide" style="width: 1500px; height: 400px">
-								  <!-- <div class="carousel-indicators">
-								    <button type="button" data-bs-target="#carouselFood" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-								    <button type="button" data-bs-target="#carouselFood" data-bs-slide-to="1" aria-label="Slide 2" class="btn btn-success"></button>
-								    <button type="button" data-bs-target="#carouselFood" data-bs-slide-to="2" aria-label="Slide 3"></button>
-								  </div> -->
 								  <div class="carousel-inner">
 									<%
 								  	List<FoodVO> foodList = rDAO.selectFood(rano);
@@ -244,7 +130,7 @@ $(function(){
  								      %>
 								    <div class="carousel-item<%= i==0?" active":"" %>">
 								      <div style="width: 950px; height:400px margin: 0px auto; border-radius: 10px">
-								      <img src="food_image/<%=fVO.getFoodImage() %>" style=" width:950px; height:280px; margin-bottom: 10px; border-radius: 10px; object-fit: cover;"/><br/>
+								      <img src="../../common/food_images/<%=fVO.getFoodImage() %>" style=" width:950px; height:280px; margin-bottom: 10px; border-radius: 10px; object-fit: cover;"/><br/>
 								      <div style="margin-tom:50px; margin-left: 25px; margin-right: 25px">
 								      
 								      <table>
@@ -299,7 +185,7 @@ $(function(){
 								      %>
 								      <table style=" margin-bottom: 20px">							
 								      	<tr>
-								      		<td><img src="images/mom.png"><br/></td>
+								      		<td><img src="../../common/icon_images/mom.png"><br/></td>
 								      		<td><strong><%=bVO.getBrandName() %></strong><br/><%=bVO.getBrandHome() %></td>
 								      	</tr>
 								      </table>
@@ -339,7 +225,7 @@ $(function(){
 								      %>
 								      <table style=" margin-bottom: 20px">							
 								      	<tr>
-								      		<td><img src="images/mom.png"><br/></td>
+								      		<td><img src="../../common/icon_images/mom.png"><br/></td>
 								      		<td><strong><%=cVO.getConvName() %></strong><br/><%=cVO.getConvDetail() %></td>
 								      	</tr>
 								      </table>

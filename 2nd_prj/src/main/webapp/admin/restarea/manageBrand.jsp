@@ -52,7 +52,7 @@
 	    		var data=$("#restareaname").val();
 	    		  // AJAX 요청을 수행
 	            $.ajax({
-	                url: "ajax_restarea_num.jsp",
+	                url: "ajax/ajax_restarea_num.jsp",
 	                type: "POST", // POST 방식을 사용해 데이터를 서버로 보냅니다.
 	                data: "restareaname="+data,
 	                dataType: "json",
@@ -71,6 +71,53 @@
 	    		
 	    	}//end if    	
 	    });//change
+	    
+	    $("#deleteBtn").click(function(){
+	    	var checkboxes = document.querySelectorAll('.brand-checkbox');
+	    	<%
+	    	String paramRaNum=request.getParameter("raNum");
+	    	if(paramRaNum==null){
+	    		paramRaNum="1";
+	    	}
+	    	%>
+			var restareaNum = <%=paramRaNum%>;
+	    	
+	        // 체크박스를 반복하면서 선택된 것을 확인하고 해당 행을 삭제합니다.
+	        checkboxes.forEach(function (checkbox, index) {
+	            if (checkbox.checked) {
+	                // 선택된 체크박스의 상위 tr 요소를 찾아 삭제합니다.
+	                var tr = checkbox.closest('tr');
+	                
+	                if (tr) {
+	                	var brandNum = checkbox.getAttribute('data-brand-num');
+	                	alert(brandNum)
+	                	alert(restareaNum)
+	                    tr.remove();
+	                	
+	                	var data = {
+	        	        		restareaNum: restareaNum,
+	        	        		brandNum: brandNum
+	        	            };
+	        	        
+	        	    	$.ajax({
+	        	            url: "ajax/ajax_deleteBrand.jsp",
+	        	            type: "POST",
+	        	            data: data,
+	        	            dataType: "json",
+	        	            error: function(xhr){
+	        	            	alert("서버에 문제가 발생하였습니다.");
+	        	            	console.log(xhr);
+	        	            },
+	        	            success: function(response) {
+	        	                alert("삭제완료");
+	        	            }//success
+	        	        });//ajax
+	                }
+	            }
+	        });//forEach
+					 
+	    })//click
+	    
 	});//ready
 </script>
 
@@ -304,7 +351,7 @@
 										BrandVO bVO = brandList.get(i);
 										%>
 										<tr>
-											<td><input type="checkbox" /></td>
+											<td><input type="checkbox" class="brand-checkbox" data-brand-num="<%= bVO.getBarndNum() %>"/></td>
 											<td><%=bVO.getBrandIcon() %></td>
 											<td><%=bVO.getBrandName() %></td>
 											<td><%=bVO.getBrandTel() %></td>
@@ -319,7 +366,7 @@
 					</div>
 					<a href="addBrand.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="button" value="추가"></a>
 					<a href="updateBrand.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="submit" value="수정"></a> 
-					<input class="btn btn-primary" type="reset" value="삭제">
+					<input id="deleteBtn" class="btn btn-primary" type="reset" value="삭제">
 				</div>
 			</main>
 			<footer class="py-4 bg-light mt-auto">
@@ -339,10 +386,10 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
-	<script src="js/scripts.js"></script>
+	<script src="../../common/js/scripts.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
-	<script src="js/datatables-simple-demo.js"></script>
+	<script src="../../common/js/datatables-simple-demo.js"></script>
 </body>
 </html>
