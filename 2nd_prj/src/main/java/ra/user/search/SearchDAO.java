@@ -41,7 +41,7 @@ public class SearchDAO {
 			.append("	where raname like ?						");
 			
 			pstmt = con.prepareStatement(sb.toString());
-			System.out.println(RAName);
+			//System.out.println(RAName);
 			
 			pstmt.setString(1, RAName+"(%");
 			

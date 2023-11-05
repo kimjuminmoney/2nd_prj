@@ -1,27 +1,30 @@
+<%@page import="ra.admin.login.ManagerDataVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="   " %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+/* String sesNo = session.getAttribute("sesNo").toString();
+ManagerDataVO  mdVO = (ManagerDataVO)session.getAttribute("managerData");
+System.out.println(sesNo);
+System.out.println(mdVO); */
+session.setAttribute("sesNo", 1);
+%>
+<c:choose>
+    <c:when test="${empty sesNo}">
+        <c:redirect url="../login/Manager_login.html" />
+    </c:when>
+    <c:otherwise>
+        <!-- 다른 처리를 수행하거나 필요에 따라 다른 페이지로 이동 -->
+    </c:otherwise>
+</c:choose>
+
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-             <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="login.html">로그인</a></li>
-                        <li><a class="dropdown-item" href="register.html">회원가입</a></li>
-                        <li><a class="dropdown-item" href="#!">로그아웃</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+	<!-- Navbar Brand-->
+	<a class="navbar-brand ps-3" href="../dashboard/index.jsp"><img src="../../common/logo_images/logo_white.png"></a>
+	<!-- Sidebar Toggle-->
+	<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+	<div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+	    <a class="btn btn-secondary" id="btnNavbarSearch" onclick="<% session.removeAttribute("sesNo");session.removeAttribute("managerData");%>"href="../login/Manager_login.html">로그아웃</a>
+	</div>
+</nav>

@@ -95,7 +95,8 @@ $("#buSan").click( function(){ //35.179707926039455, 129.07508354364657
 } );
 
 $("#jeJu").click( function(){ //서비스 불가 지역
-	$("#hidden").submit();
+	//$("#hidden").submit();
+	alert("휴게소가 존재하지 않습니다.")
 } );
 
 </script>
@@ -191,6 +192,10 @@ function mus_off(musName) {
 }
 
  function smenu_click(musName){ 
+	 if(musName =="제주"){
+		 alert("휴게소가 존재하지 않습니다.")
+		 return;
+	 }
 // 서버로 보낼 데이터 준비
      $.ajax({
          url: '../loc/local_ajax.jsp', // 서버의 URL
@@ -236,7 +241,7 @@ function viewRA( locData ){
 
 	for (var i = 0; i < locData.length; i ++) {
     
-		var infowindow = null;
+	//var infowindow = null;
     var latlng = new kakao.maps.LatLng(locData[i].x, locData[i].y)
     
     // 마커를 생성합니다
@@ -247,11 +252,18 @@ function viewRA( locData ){
         clickable: true
     });
 	markers.push(marker);
-	var iwContent = "<div class='btn btn-success' style='padding:5px;'>" + locData[i].localName + "</div>";
+	
+	if (infowindow) {
+        infowindow.close(); // 이미 열려있는 인포윈도우가 있다면 닫기
+    }
+	
+	var iwContent = /* "<div  style='padding:5px;'>" +  */
+	"<a class='btn btn-success' href='../ra_page/restarea_page.jsp?rano=" + locData[i].rano + "'>"+
+			locData[i].localName + "</a>";
     var iwRemoveable = true;
 
     // 인포윈도우를 생성하고 지도에 표시합니다
-    var infowindow = new kakao.maps.InfoWindow({
+    infowindow = new kakao.maps.InfoWindow({
         content: iwContent,
         removable: iwRemoveable
     });

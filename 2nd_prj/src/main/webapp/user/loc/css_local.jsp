@@ -112,7 +112,7 @@
 
 
 <!-- 제주 -->
-<a href='#void' onfocus='this.blur()' onmouseover="mus_on('mus9')" onmouseout="mus_off('mus9')" onclick="smenu_click('제주는 서비스 불가 지역 입니다.')">
+<a href='#void' onfocus='this.blur()' onmouseover="mus_on('mus9')" onmouseout="mus_off('mus9')" onclick=smenu_click('제주')>
 <input type="hidden" value="제주" id="jeJu">
 <img src='../loc/map/m064.gif' alt='' border='0' name='mus9' class='list9' ></a>
 

@@ -60,6 +60,8 @@
 			jsonTemp.put("y", lsVO.getY());
 			jsonTemp.put("addr",lsVO.getRaaddr());
 			jsonTemp.put("ralo",lsVO.getRalo());
+			jsonTemp.put("rano",lsVO.getRano());
+			
 			
 			jsonArr.add( jsonTemp );//값을 추가한다.
 			

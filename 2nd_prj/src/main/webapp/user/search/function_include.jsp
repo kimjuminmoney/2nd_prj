@@ -176,7 +176,8 @@
                     	//길찾기 버튼이 눌리면 상세보기
                     	// 휴게소상세페이지 생기면 href수정하기
                     	itemStr +=  '<div class="btn-group-vertical">'+
-			            			'<a href="User_jsp/index.jsp?rano=' + places.rano + '"type="button" class="strBtn btn btn-success"value="휴게소번호">상세보기</a>'+
+			            			'<a href="../ra_page/restarea_page.jsp?rano=' + places.rano + '"type="button"'+
+			            			' class="strBtn btn btn-success"value="휴게소번호" style="padding-top: 15px;">상세보기</a>'+
 			                		'</div>';
                     }    		
                     			
@@ -292,13 +293,13 @@
 					    .then(data => {
 					    // API 응답 데이터 처리
 					    console.log(data);
-					    
-					 // 데이터를 hidden input 요소에 저장
-					     /*  var hidData = document.getElementById('hidData');
-					      hidData.value = JSON.stringify(data); */
-					    //길찾기 결과 처리메소드
-					   /*  directionFrm(data); */
-					    
+					    var flag = data.routes[0].result_code;
+					    if(flag != 0){
+					    	alert("경로를 다시 확인해주세요.")
+					    	return;
+					    }
+					   sendDirectionDataToServer(data);
+					   
 					    // 기존 폴리라인을 제거
 					    if (polyline) {
 					      polyline.setMap(null);
@@ -307,7 +308,6 @@
 					    polyline = createPolyline(data);
 					    polyline.setMap(map);
 					    
-					   sendDirectionDataToServer(data);
 					  })
 					  .catch(error => {
 					    // 오류 처리
@@ -374,14 +374,15 @@
 				function sendDirectionDataToServer(data) {
                		// 클라이언트에서 데이터 추출
 					const guides = data.routes[0].sections[0].guides;
-                	const filteredNames = guides.filter(guide => guide.name.includes('휴게소')).map(guide => guide.name);
-                	console.log(filteredNames);
+                	//const filteredNames = guides.filter(guide => guide.name.includes('휴게소')).map(guide => guide.name);
+                	//console.log(filteredNames);
                 	
 					// 서버로 보낼 데이터 준비
-					var sendData = JSON.stringify(filteredNames);
+					//var sendData = JSON.stringify(filteredNames);
+					var sendData = JSON.stringify(guides);
 					
 					$.ajax({
-						url: 'search/search_ajax.jsp', // 서버의 URL
+						url: '../search/search_ajax.jsp', // 서버의 URL
 						method: 'POST',
 						contentType: 'application/json',
 						data: sendData,
@@ -594,7 +595,6 @@
               	//마커 이벤트 등록
 				function markerEvn(marker){
               		kakao.maps.event.addListener(marker, 'click', function() {
-                    alert('marker click!');
                 	});
               	}
               	
@@ -613,6 +613,10 @@
 				 	// 기존 폴리라인을 제거
 					    if (polyline) {
 					      polyline.setMap(null);
+					    }
+					 // 이미 열려있는 인포윈도우가 있다면 닫기
+					    if (infowindow) {
+					        infowindow.close(); 
 					    }
               	}
                 

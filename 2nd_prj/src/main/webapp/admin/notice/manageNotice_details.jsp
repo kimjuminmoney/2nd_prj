@@ -52,7 +52,7 @@ $(function(){
 		}//end if
 	});//click
 	$("#backBtn").click(function() {
-        window.history.back(); // 브라우저에서 뒤로 가기
+		 window.location.href = "manageNotice.jsp"
     });//click
 	
 	
@@ -75,17 +75,6 @@ $(function(){
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">공지사항</h1>
-                        <!-- <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Tables</li>
-                        </ol> -->
-                        <div class="card mb-4">
-                            <div class="card-body">
-                               <!--  DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                . -->
-                            </div>
-                        </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -96,26 +85,17 @@ $(function(){
                                 
                             </div>
                             <div class="card-body">
-                                <div class="container mt-5">
-								    <div class="card" >
-								     ${ noticeVO.ncontent }
-								        <!-- <div class="card-header">
-								            <h4>게시물 제목</h4>
-								        </div>
-								        <div class="card-body">
-								            <p class="card-text">작성자: 글쓴이 이름</p>
-								            <p class="card-text">작성일: 2023-10-30</p>
-								            <p class="card-text">게시물 내용:</p>
-								            <p class="card-text">게시물 내용이 여기에 나타납니다.</p>
-								        </div> -->
-								        
-								    </div>
+							    <div class="card" >
+							     ${ noticeVO.ncontent }
+							        
+							    </div>
+							    <div style="text-align: center; margin-top: 20px">
+				                    <input type="button" value="목록으로" class="btn btn-success" id="backBtn">
 								</div>
                                 
                             </div>
                         </div>
                     </div>
-                    <input type="button" value="목록으로" class="btn btn-success" id="backBtn">
                 </main>
                 <!-- 풋터 -->
                 <jsp:include page="../admin_include/footer.jsp"></jsp:include>

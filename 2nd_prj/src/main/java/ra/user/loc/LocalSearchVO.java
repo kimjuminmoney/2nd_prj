@@ -1,23 +1,13 @@
 package ra.user.loc;
 
 public class LocalSearchVO {
-	private String raname,ralo,raaddr;
+	private String raname,ralo,raaddr, rano;
 	private String x, y;
 	
 	
 	public LocalSearchVO() { //기본 생성자
 		
 	}//LocalSearchVO
-
-
-	public LocalSearchVO(String raname, String ralo, String raaddr, String x, String y) {
-		super();
-		this.raname = raname;
-		this.ralo = ralo;
-		this.raaddr = raaddr;
-		this.x = x;
-		this.y = y;
-	}
 
 
 	public String getRaname() {
@@ -50,6 +40,16 @@ public class LocalSearchVO {
 	}
 
 
+	public String getRano() {
+		return rano;
+	}
+
+
+	public void setRano(String rano) {
+		this.rano = rano;
+	}
+
+
 	public String getX() {
 		return x;
 	}
@@ -72,9 +72,13 @@ public class LocalSearchVO {
 
 	@Override
 	public String toString() {
-		return "LocalSearchVO [raname=" + raname + ", ralo=" + ralo + ", raaddr=" + raaddr + ", x=" + x + ", y=" + y
-				+ "]";
+		return "LocalSearchVO [raname=" + raname + ", ralo=" + ralo + ", raaddr=" + raaddr + ", rano=" + rano + ", x="
+				+ x + ", y=" + y + "]";
 	}
+	
+	
+
+
 }
 
 	

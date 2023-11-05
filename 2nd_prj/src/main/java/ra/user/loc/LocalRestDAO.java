@@ -50,7 +50,7 @@ public class LocalRestDAO {
 			StringBuilder sb = new StringBuilder();
 
 			sb
-			.append("	select RANAME, RAADDR, RALO, RAX, RAY	")
+			.append("	select RANAME, RAADDR, RALO, RAX, RAY, RANO	")
 			.append("	from RESTAREA					")
 			.append("	where RALO = ?					");
 			pstmt=con.prepareStatement(sb.toString());
@@ -66,6 +66,7 @@ public class LocalRestDAO {
 			lsVO.setRalo(rs.getString("ralo"));
 			lsVO.setX(rs.getString("rax"));
 			lsVO.setY(rs.getString("ray"));
+			lsVO.setRano(rs.getString("rano"));
 			
 			
 			

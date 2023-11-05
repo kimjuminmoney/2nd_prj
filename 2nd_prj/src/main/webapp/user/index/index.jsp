@@ -57,7 +57,7 @@ Jquery CDN시작
                     <!-- 검색창, 지역별, 고속도로별 -->
                    <div id="menu-box"class="tab-content" >
                         <!-- 검색창 -->
-                        <jsp:include page="../search/include.jsp"></jsp:include>
+                        <jsp:include page="../search/search_include.jsp"></jsp:include>
                         
                         
                         <!-- 다영 -->
