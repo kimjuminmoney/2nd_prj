@@ -41,7 +41,7 @@ public class ReviewDAO {
 			
 			StringBuilder selectReview = new StringBuilder();
 			selectReview
-			.append("	select u.uname, r.rvtext, r.rvscore, r.rvreport, r.rvdate	")
+			.append("	select u.unic, r.rvtext, r.rvscore, r.rvreport, r.rvdate	")
 			.append("	from review r, userinfo u									")
 			.append("	where r.userid=u.userid and rano=?								");
 			
@@ -52,7 +52,7 @@ public class ReviewDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				rvVO = new ReviewVO(rs.getString("uname"),rs.getString("rvtext"),rs.getInt("rvscore"),rs.getInt("rvreport"),rs.getDate("rvdate"));
+				rvVO = new ReviewVO(rs.getString("unic"),rs.getString("rvtext"),rs.getInt("rvscore"),rs.getInt("rvreport"),rs.getDate("rvdate"));
 				reviewList.add(rvVO);
 			}
 			
@@ -63,7 +63,7 @@ public class ReviewDAO {
 		return reviewList;
 	}//selectReview
 
-	public boolean insertReview(ReviewVO rvVO) throws SQLException {
+	public boolean insertReview(String userId, String raNum, String rvText, int rvScore) throws SQLException {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -82,10 +82,10 @@ public class ReviewDAO {
 			
 			pstmt = con.prepareStatement(insertReview.toString());
 			
-			pstmt.setString(1, rvVO.getUserId());
-			pstmt.setString(2, rvVO.getRestAreaNum());
-			pstmt.setString(3, rvVO.getReviewText());
-			pstmt.setInt(4, rvVO.getReviewScore());
+			pstmt.setString(1, userId);
+			pstmt.setString(2, raNum);
+			pstmt.setString(3, rvText);
+			pstmt.setInt(4, rvScore);
 			
 			boolean flag = pstmt.execute();
 			

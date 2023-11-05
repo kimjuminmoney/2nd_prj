@@ -30,11 +30,48 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-   
+   $("#btnReview").click(function(){
+       // 데이터를 수집하거나 사용자 입력을 가져옵니다.
+       var reviewDetail = $("#inputReview").val(); 
+       var reviewScore = $("#selectScore").val(); 
+       var restareaNum = $("#raNum").val();
+       var userId = "CJS";
+
+       if (reviewDetail === "") {
+           alert("리뷰를 입력해주세요");
+       } else if(reviewScore === "평점"){
+    	   alert("평점을 선택해주세요");
+       }else{
+       
+	       // 데이터를 객체로 구성
+	       var data = {
+	    		reviewDetail: reviewDetail,
+	    		reviewScore: reviewScore ,
+	    		restareaNum: restareaNum ,
+	    		userId: userId,
+	       };
+	
+	       // AJAX 요청을 수행
+	       $.ajax({
+	           url: "addReview_ajax.jsp",
+	           type: "POST",
+	           data: data,
+	           dataType: "json",
+	           error: function(xhr){
+	               alert("서버에서 문제가 발생하였습니다.");
+	               console.log(xhr.status);
+	           },
+	           success: function(jsonObj){
+	                   alert("리뷰가 등록되었습니다.");
+	           }
+	       });//ajax
+       }
+   });//click
 });//ready
 </script>
     </head>
     <body class="d-flex flex-column h-100">
+    <input type="hidden" name="raNum" id="raNum" value="<%=request.getParameter("rano")%>">
     <%
     String rano = request.getParameter("rano");
     RestDAO rDAO = RestDAO.getInstance();
@@ -89,8 +126,8 @@ $(function(){
                                     <a class="btn btn-outline-light btn-lg px-4" href="#food">먹거리</a>
                                     <a class="btn btn-outline-light btn-lg px-4" href="#brand">매장</a>
                                     <a class="btn btn-outline-light btn-lg px-4" href="#conv">편의시설</a>
-                                    <a class="btn btn-outline-light btn-lg px-4" href="#review">리뷰</a>
                                     <a class="btn btn-outline-light btn-lg px-4" href="#gas">주유시설</a>
+                                    <a class="btn btn-outline-light btn-lg px-4" href="#review">리뷰</a>
                                 </div>
                             </div>
                         </div>
@@ -242,49 +279,7 @@ $(function(){
                     </div>
                 </div>
             </section>
-			<!-- review section-->
-            <section class="py-5" id="review">
-                <div class="container px-5 my-5">
-                    <div class="row gx-8" style="width: 1500px; margin 0 auto">
-                        
-                        <div class="col-lg-8">
-                            <div class="row gx-5 row-cols-1 row-cols-md-2">
-
-								<div id="carouselReview" class="carousel slide" style="width: 1500px; height: 400px">
-								  <div class="carousel-indicators">
-								    <button type="button" data-bs-target="#carouselReview" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-								    <button type="button" data-bs-target="#carouselReview" data-bs-slide-to="1" aria-label="Slide 2" class="btn btn-success"></button>
-								    <button type="button" data-bs-target="#carouselReview" data-bs-slide-to="2" aria-label="Slide 3"></button>
-								  </div>
-								  <div class="carousel-inner">
-								    <div class="carousel-item active">
-								      페이지1 ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
-								    </div>
-								    <div class="carousel-item">
-								      페이지2
-								    </div>
-								    <div class="carousel-item">
-								      페이지3
-								    </div>
-								  </div>
-								  <button class="carousel-control-prev" type="button" data-bs-target="#carouselReview" data-bs-slide="prev">
-								    <span class="carousel-control-prev-icon btn btn-success" aria-hidden="true"></span>
-								    <span class="visually-hidden">Previous</span>
-								  </button>
-								  <button class="carousel-control-next" type="button" data-bs-target="#carouselReview" data-bs-slide="next">
-								    <span class="carousel-control-next-icon btn btn-success" aria-hidden="true"></span>
-								    <span class="visually-hidden">Next</span>
-								  </button>
-								</div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success" style="border-radius: 10px">
-                        <h2 class="fw-bolder mb-0" style="margin-top: 10px">리뷰</h2>
-                        </div>
-                    </div>
-                </div>
-            </section>
+			
             <!-- gas section-->
             <script>
             $(function(){
@@ -372,7 +367,7 @@ $(function(){
             <section class="py-5" id="gas">
                 <div class="container px-5 my-5">
                     <div class="row gx-8" style="width: 1500px; margin 0 auto">
-                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success"><h2 class="fw-bolder mb-0">주유 시설</h2></div>
+                        
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
@@ -423,6 +418,94 @@ $(function(){
 
                             </div>
                         </div>
+                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success" style="border-radius: 10px">
+                        <h2 class="fw-bolder mb-0" >주유 시설</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- review section-->
+            <section class="py-5" id="review">
+                <div class="container px-5 my-5">
+                    <div class="row gx-8" style="width: 1500px; margin 0 auto">
+                        <div class="col-lg-2 mb-5 mb-lg-0 bg-success" style="border-radius: 10px">
+                        <h2 class="fw-bolder mb-0" style="margin-top: 10px">리뷰</h2>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="row gx-5 row-cols-1 row-cols-md-2">
+
+								<div id="carouselReview" class="carousel slide" style="width: 1500px; height: 500px; display: grid; place-items: center;">
+								  <div class="carousel-inner">
+								    <%
+								    List<ReviewVO> reviewList = rvDAO.selectReview(rano);
+								    int batchSize = 2; // 리뷰를 한 번에 표시할 개수
+								    for (int i = 0; i < reviewList.size(); i += batchSize) {
+								    %>
+								    <div class="carousel-item<%= i == 0 ? " active" : "" %>">
+								      <% for (int j = i; j < i + batchSize && j < reviewList.size(); j++) {
+								        rvVO = reviewList.get(j);
+								      %>
+								      <div id="reviewContent" style="width: 900px; height: 120px; margin: 0px auto; border: 1px solid gray; border-radius: 10px; display: flex; align-items: center;">
+								        <div style="margin-left: 25px; margin-right: 25px;">
+								          <table>
+								            <tr>
+								              <td style="width: 700px;"><strong><%= rvVO.getUserNick() %></strong></td>
+								              <td>작성일: <%= rvVO.getReviewDate() %></td>
+								            </tr>
+								          </table>
+								          <hr style="background-color: #E9ECED;">
+								          <table>
+								            <tr>
+								              <td style="width: 700px;"><%= rvVO.getReviewText() %></td>
+								              <td>평점: <%= rvVO.getReviewScore() %>/5</td>
+								            </tr>
+								          </table>
+								        </div>
+								      </div>
+								      <br/>
+								      <% } // end for
+								      %>
+								      <div id="reviewContent" style="width: 900px; height: 200px; margin: 0px auto; border: 1px solid gray; border-radius: 10px;">
+								      	<table style="margin-top:10px">
+								      		<tr>
+								      			<td style="width: 775px;">
+											      	<label style="margin-left:20px" class="form-label"><strong>리뷰 작성</strong></label>
+								      			</td>
+								      			<td>
+											      	<select id="selectScore" style="width:100px" class="form-select form-select-sm">
+													  <option selected="selected">평점</option>
+													  <option value="1">1</option>
+													  <option value="2">2</option>
+													  <option value="3">3</option>
+													  <option value="4">4</option>
+													  <option value="5">5</option>
+													</select>
+								      			</td>
+								      		</tr>
+								      	</table>
+								          <hr style="background-color: #E9ECED;">
+								        <textarea style="width:850px; margin:0px auto;" class="form-control" id="inputReview" rows="2"></textarea>
+								        <button id="btnReview" type="button" class="btn btn-outline-success" style="width: 200px; margin-top:10px; margin-left:350px">등록</button>
+								      </div>
+								    </div>
+								    <%
+								    } // end for
+								    %>
+								  </div>
+								  <button style="width:50px" class="carousel-control-prev" type="button" data-bs-target="#carouselReview" data-bs-slide="prev">
+								    <span class="carousel-control-prev-icon btn btn-success" aria-hidden="true"></span>
+								    <span class="visually-hidden">Previous</span>
+								  </button>
+								  <button style="width:55px" class="carousel-control-next" type="button" data-bs-target="#carouselReview" data-bs-slide="next">
+								    <span class="carousel-control-next-icon btn btn-success" aria-hidden="true"></span>
+								    <span class="visually-hidden">Next</span>
+								  </button>
+								</div>
+
+
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </section>

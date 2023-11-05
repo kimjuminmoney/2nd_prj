@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ReviewVO {
 	
-	String userName, userId, reviewText, restAreaNum;
+	String userNick, userId, reviewText, restAreaNum;
 	int reviewNum,reviewScore, reviewReport;
 	Date reviewDate;
 	
@@ -12,21 +12,21 @@ public class ReviewVO {
 		super();
 	}
 
-	public ReviewVO(String userName, String reviewText, int reviewScore, int reviewReport, Date reviewDate) {
+	public ReviewVO(String userNick, String reviewText, int reviewScore, int reviewReport, Date reviewDate) {
 		super();
-		this.userName = userName;
+		this.userNick = userNick;
 		this.reviewText = reviewText;
 		this.reviewScore = reviewScore;
 		this.reviewReport = reviewReport;
 		this.reviewDate = reviewDate;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUserNick() {
+		return userNick;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
 	}
 
 	public String getUserId() {
@@ -87,7 +87,7 @@ public class ReviewVO {
 
 	@Override
 	public String toString() {
-		return "ReviewVO [userName=" + userName + ", reviewText=" + reviewText + ", reviewScore=" + reviewScore
+		return "ReviewVO [userNick=" + userNick + ", reviewText=" + reviewText + ", reviewScore=" + reviewScore
 				+ ", reviewReport=" + reviewReport + ", reviewDate=" + reviewDate + "]";
 	}
 	

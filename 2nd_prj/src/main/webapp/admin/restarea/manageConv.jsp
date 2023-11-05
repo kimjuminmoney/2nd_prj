@@ -20,13 +20,6 @@
 	width: 100px; /* 첫 번째 열의 너비 설정 */
 }
 
-.table th:nth-child(3) {
-	width: 200px; /* 두 번째 열의 너비 설정 */
-}
-
-.table th:nth-child(4) {
-	width: 200px; /* 세 번째 열의 너비 설정 */
-}
 /* 나머지 열들에 대한 너비 설정 */
 </style>
 <head>
@@ -343,7 +336,6 @@
 										<th><input type="checkbox" /></th>
 										<th>아이콘</th>
 										<th>시설명</th>
-										<th>전화번호</th>
 										<th>비고</th>
 									</tr>
 								</thead>
@@ -357,7 +349,6 @@
 											<td><input type="checkbox" class="conv-checkbox" data-conv-num="<%= cVO.getConvNum() %>"/></td>
 											<td><%=cVO.getConvIcon() %></td>
 											<td><%=cVO.getConvName() %></td>
-											<td><%=cVO.getConvTel() %></td>
 											<td><%=cVO.getConvDetail() %></td>
 										</tr>
 										<%
