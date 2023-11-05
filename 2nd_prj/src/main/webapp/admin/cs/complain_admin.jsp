@@ -15,6 +15,7 @@
 
 int totalCount=0;
 String id=(String)session.getAttribute("sesId");
+id="HJS";
 
 AdminCSDAO acDAO= AdminCSDAO.getInstance();
 

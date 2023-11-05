@@ -1,3 +1,5 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="kr.co.sist.util.cipher.DataDecrypt"%>
 <%@page import="oracle.net.resolver.TimeUnitSuffixUtility"%>
 <%@page import="ra.user.myinfo.userInfoVO"%>
 <%@page import="ra.user.myinfo.myPageDAO"%>
@@ -6,9 +8,27 @@
 <%@ page info="개인정보 수정 페이지" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:if test="${ empty sesId }">
+<%request.setCharacterEncoding("UTF-8");
+
+DataDecrypt dd= new DataDecrypt("a12345678901234567");
+
+   	String id= request.getParameter("sesId");
+   	id="kjm";
+
+	myPageDAO mpDAO = myPageDAO.getInstance();
+	   	//mpDAO.selectUserInfo(id값으로 변경);
+    userInfoVO uiVO = mpDAO.selectUserInfo(id);
+    
+    String uName=uiVO.getName();
+   //String uName=dd.decryption(uiVO.getName());
+   String uNic=uiVO.getNick();
+    String uTel=dd.decryption(uiVO.getTel());
+    String uEmail=dd.decryption(uiVO.getEmail());
+		    
+%>
+<%-- <c:if test="${ empty sesId }">
 <c:redirect url="../login/Client_login.html"/>
-</c:if>
+</c:if> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,31 +50,53 @@
    
  </style>
  <script type="text/javascript">
-<%request.setCharacterEncoding("UTF-8");
 
-	myPageDAO mpDAO = new myPageDAO();
-   	//mpDAO.selectUserInfo(id값으로 변경);
-    userInfoVO uiVO = mpDAO.selectUserInfo("HJS");
-
-		String uNic=request.getParameter("uNick");
-
-		if( uNic != null && !"".equals(uNic)){
-			String uEmail=request.getParameter("uEmail");
-			String uTel=request.getParameter("uTel");
-			String id=request.getParameter("id");
-			id="HJS";
-			mpDAO.modifyInfo(id, uNic, uEmail, uTel);%>
-			alert("변경이 완료되었습니다.");
-			<%
-		 uiVO = mpDAO.selectUserInfo("HJS");
-		}
-			//session.removeAttribute("flag");
-%>
  $(function(){
 	 
 	 $("#btn_modify").click(function(){
 		
-	 $("#info_frm").submit();
+		 //닉네임 유효성 검증
+		 if(!( $("#uNic").val() !== null && $.trim($("#uNic").val()) !== '' && !/\s/.test($("#uNic").val()) && /^[\wㄱ-ㅎㅏ-ㅣ가-힣]+$/.test($("#uNic").val()) && $("#uNic").val().length >= 1 && $("#uNic").val().length <= 8 )){
+			alert("1");	
+		 return; 
+		 }	
+		 
+		 //이메일 유효성 검증
+		 if (!($("#uEmail").val() !== null && $.trim($("#uEmail").val()) !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#uEmail").val()))) {
+			 alert("2");
+			 return;
+		 }
+		 /*
+		 //핸드폰번호 유효성 검증
+		 if( !($("#uTel").val() !== null && $.trim($("#uTel").val()) !== '' && /^\d{3}-\d{4}-\d{3}$/.test($("#uTel").val()) &&  /^\d{3}-\d{4}-\d{3}$/.test($("#uTel").val().replace(/-/g, ''))) ){
+			 alert($("#uTel").val());
+			 alert("3");
+		 	return;
+		 } */
+
+		 var jsonObj={
+				 "uId":$("#uId").val(),
+				 "uNic":$("#uNic").val(),
+				 "uTel":$("#uTel").val(),
+				 "uEmail":$("#uEmail").val(),
+			 };
+		 $.ajax({
+			 url:"modify_info_process.jsp",
+			 type:"post",
+				data:jsonObj,
+				dataType:"json",
+				error:function(xhr){
+					console.log(xhr.status);
+				},
+				success:function( temp ){
+					
+					if(temp.cnt == 1 ){
+						alert("수정되었습니다.");
+						location.reload();
+					}//endif	
+				}//success
+			 });//ajax 
+		 $("#info_frm").submit();
 	
 	});//click
 	 
@@ -85,13 +127,13 @@
 		                        <div class="row g-3 align-items-center" style="margin-top:1%; margin-left:1%;">
     								<div class="col-6" style="margin-top:10px;">
 			                     	<label >아이디</label>
-                                    <input class="form-control form-control-lg" type="text" value="<%= uiVO.getId() %>" disabled readonly />
+                                    <input class="form-control form-control-lg"  id="uId" name="uId" type="text" value="<%= id %>" disabled readonly />
                             		</div>
                             	</div>
 			                  <div class="row g-3 align-items-center" style="margin-top:1%; margin-left:1%;">
-			                  <label><span>닉네임 변경</span></label>
+			                  <label><span>닉네임</span></label>
     							<div class="col-auto">
-			                   		<input class="form-control form-control-lg" type="text" id="uNick" name="uNick" value="<%= uiVO.getNick() %>" />
+			                   		<input class="form-control form-control-lg" type="text" id="uNic" name="uNic" value="<%= uNic %>" />
 			                  	</div>
 			                  	<div class="col-auto">
 			                  		<span id="passwordHelpInline" class="form-text">
@@ -102,13 +144,13 @@
 							<div class="row g-3 align-items-center"  style="margin-top:1%; margin-left:1%;">
 							<label><span>이름</span></label>
 								<div id="user_name" class="col-auto">
-							 		<input class="form-control form-control-lg" type="text" id="uName" name="uName" value="<%= uiVO.getName() %>" disabled readonly/>
+							 		<input class="form-control form-control-lg" type="text" id="uName" name="uName" value="<%= uName %>" disabled readonly/>
 								</div>
 							</div>
 							<div class="row g-3 align-items-center" style="margin-top:1%; margin-left:1%;">
 							<label><span>이메일 변경</span></label>
 							 	<div class="col-6">
-			                   		<input class="form-control form-control-lg" type="text" id="uEmail" name="uEmail" value="<%= uiVO.getEmail() %>" />
+			                   		<input class="form-control form-control-lg" type="text" id="uEmail" name="uEmail" value="<%= uEmail %>" />
 			                  	</div>
 			                  	<div class="col-auto">
 			                  		<span id="passwordHelpInline" class="form-text">
@@ -119,7 +161,7 @@
 							<div class="row g-3 align-items-center" style="margin-top:1%; margin-left:1%;">
 								<label><span>전화번호 변경</span></label>
 								<div class="col-6">		
-									<input class="form-control form-control-lg" type="text" id="uTel" name="uTel" value="<%= uiVO.getTel() %>" />
+									<input class="form-control form-control-lg" type="text" id="uTel" name="uTel" value="<%= uTel %>" />
 								</div>
 								<div class="col-auto">
 				                	<span id="passwordHelpInline" class="form-text">

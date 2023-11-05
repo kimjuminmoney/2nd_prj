@@ -9,6 +9,18 @@ import ra.util.DbConnection;
 
 public class myPageDAO {
 
+	private static myPageDAO mpDAO;
+	
+	private myPageDAO() {
+		
+	};
+	public static myPageDAO getInstance() {
+		if(mpDAO == null) {
+			mpDAO = new myPageDAO();
+		}
+		return mpDAO;
+	}
+	
 	/**
 	 * 개인정보 수정 메소드
 	 * @param id
@@ -39,7 +51,7 @@ public class myPageDAO {
 			pstmt.setString(3, tel);
 			pstmt.setString(4, id);
 			cnt=pstmt.executeUpdate();
-			System.out.println( sb +" / "+id + " "+nick+" "+email + " cnt "+ cnt);
+			System.out.println( id + " "+nick+" "+email + " cnt "+ cnt);
 			
 		} finally {
 			db.dbClose(null, pstmt, con);

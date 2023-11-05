@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page info="" %>
+<%@ page info="비밀번호 변경" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+String id= request.getParameter("sesId");
+
+%>
+<c:if test="${ empty sesId }">
+<c:redirect url="../login/Client_login.html"/>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
