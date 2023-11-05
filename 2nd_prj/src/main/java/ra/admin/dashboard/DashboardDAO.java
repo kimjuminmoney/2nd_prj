@@ -41,6 +41,7 @@ public class DashboardDAO {
 	//누적 조회수 상위 3 휴게소
 	public List<DashboardCountVO> selectHitsSum() throws SQLException{
 		List<DashboardCountVO> list = new ArrayList<DashboardCountVO>();
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
@@ -64,7 +65,7 @@ public class DashboardDAO {
 			
 			while(rs.next()) {
 				dbcVO = new DashboardCountVO();
-				dbcVO.setHIT(rs.getInt("hits"));
+				dbcVO.setHits(rs.getInt("hits"));
 				dbcVO.setRaname(rs.getString("raname"));
 				list.add(dbcVO); //list가 더 큰 개념. 값을 넣는다
 			}
@@ -76,7 +77,29 @@ public class DashboardDAO {
 		return list;
 	}
 	
-	
+	//방문자수를 +1 업데이트 해줌
+	public void updateHitsSum () throws SQLException {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    DbConnection db = DbConnection.getInstance();
+
+	    try {
+	        con = db.getConn("jdbc/dbcp");
+	        StringBuilder sb = new StringBuilder();
+	        sb.append("	UPDATE restarea			")
+	        .append("	SET hits = hits + 1		")
+	        .append("	WHERE raname = ?		");
+	        
+	        pstmt = con.prepareStatement(sb.toString());
+	        
+	        pstmt.setInt(1, "hits");
+	        pstmt.setString(2, "raname");
+	        pstmt.executeUpdate();
+	    } finally {
+	        db.dbClose(null, pstmt, con);
+	    }
+	}
+
 	
 	//휴게소별 누적 리뷰수
 	public List<DashboardReviewVO> selectReviewSum() throws SQLException{
@@ -92,11 +115,11 @@ public class DashboardDAO {
 			con = db.getConn("jdbc/dbcp");
 			StringBuilder sb=new StringBuilder();
 			sb.append(" SELECT COUNT(*) AS count, ra.raname			")
-			.append(" FROM review r									")
-			.append(" INNER JOIN restarea ra ON r.rano = ra.rano	")
-			.append(" GROUP BY ra.raname							")
-			.append(" ORDER BY count DESC							")
-			.append(" FETCH FIRST 3 ROWS ONLY						");
+			.append(" 	FROM review r								")
+			.append(" 	INNER JOIN restarea ra ON r.rano = ra.rano	")
+			.append(" 	GROUP BY ra.raname							")
+			.append(" 	ORDER BY count DESC							")
+			.append(" 	FETCH FIRST 3 ROWS ONLY						");
 
 			
 			pstmt = con.prepareStatement(sb.toString());

@@ -2,15 +2,19 @@ package ra.admin.dashboard;
 
 public class DashboardCountVO {
 	
-	private int hit;
+	private int hits, cnt;
 	private String raname;
 	
 	public DashboardCountVO() {
 		
 	}
 
-	public int getHIT() {
-		return hit;
+	public int getHits() {
+		return hits;
+	}
+	
+	public int getCnt() {
+		return cnt;
 	}
 
 	public String getRaname() {
@@ -21,13 +25,18 @@ public class DashboardCountVO {
 		this.raname = raname;
 	}
 	
-	public void setHIT(int hit) {
-		this.hit = hit;
+	public void setHits(int hits) {
+		this.hits = hits;
+	}
+	
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 
-	public DashboardCountVO(int hit, String raname) {
+	public DashboardCountVO(int hits, int cnt, String raname) {
 		super();
-		this.hit = hit;
+		this.hits = hits;
+		this.cnt = cnt;
 		this.raname = raname;
 	}
 
