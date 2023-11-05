@@ -2,6 +2,7 @@ package ra.admin.dashboard;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,10 +38,44 @@ public class DashboardDAO {
 	
 	  
 	//top-left
+	//누적 조회수 상위 3 휴게소
+	public List<DashboardCountVO> selectHitsSum() throws SQLException{
+		List<DashboardCountVO> list = new ArrayList<DashboardCountVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+
+		DbConnection db = DbConnection.getInstance();
+
+		try {
+
+			con = db.getConn("jdbc/dbcp");
+			StringBuilder sb=new StringBuilder();
+			sb.append(" SELECT raname, hits		")
+			.append(" 	FROM restarea 			")
+			.append(" 	ORDER BY hits DESC		")
+			.append(" 	FETCH FIRST 3 ROWS ONLY	");
+
+			
+			pstmt = con.prepareStatement(sb.toString());
+			rs=pstmt.executeQuery();
+			
+			DashboardCountVO dbcVO = null;
+			
+			while(rs.next()) {
+				dbcVO = new DashboardCountVO();
+				dbcVO.setHIT(rs.getInt("hits"));
+				dbcVO.setRaname(rs.getString("raname"));
+				list.add(dbcVO); //list가 더 큰 개념. 값을 넣는다
+			}
+			
+		} finally {
+			db.dbClose(rs, pstmt, con);
+		} // finally
+
+		return list;
+	}
 	
-	//휴게소별 누적 방문자수
-	//session으로 연결해서 서버가 언 꺼지게 하기!
-	//이건 별도의 추가하는게 아님!!!
 	
 	
 	//휴게소별 누적 리뷰수

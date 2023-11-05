@@ -150,9 +150,7 @@
 		                                <i class="fas fa-chart-area me-1"></i>
 		                                휴게소 조회수
 		                            </div>
-		                            <div class="card-body">
-		                                <canvas id="myAreaChart" width="100%" height="40"></canvas>
-		                            </div>
+		                            <jsp:include page="dashboard_hits.jsp"/>
 		                        </div>
 		                    </div>
 		                    
