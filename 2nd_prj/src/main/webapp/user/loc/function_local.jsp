@@ -204,12 +204,8 @@ function mus_off(musName) {
          data: "loc=" + musName,
          success: function(jsonObj) {
          // 서버 응답 처리
-         console.log('서버 응답:', jsonObj);
-         // responseData를 원하는 방식으로 처리
-         /* displayPlaces2(responseData); */
          var locData = jsonObj.data;
          viewRA( locData )
-         
         
     	    // 이동할 위도 경도 위치를 생성합니다 
     	    var moveLatLon = new kakao.maps.LatLng(jsonObj.lat, jsonObj.lng);
@@ -235,10 +231,11 @@ function mus_off(musName) {
 
 
 <script> 
+	var infowindows  = [];
 function viewRA( locData ){
 	
 	resetFunction();
-
+	var previousInfowindow = null;
 	for (var i = 0; i < locData.length; i ++) {
     
 	//var infowindow = null;
@@ -265,17 +262,23 @@ function viewRA( locData ){
     // 인포윈도우를 생성하고 지도에 표시합니다
     infowindow = new kakao.maps.InfoWindow({
         content: iwContent,
-        removable: iwRemoveable
+        //removable: iwRemoveable
     });
+    
+    infowindows.push(infowindow);
 
     // 클로저를 사용하여 이벤트 핸들러를 등록합니다
     (function (marker, infowindow) {
         kakao.maps.event.addListener(marker, 'click', function () {
+        	// 이전에 열린 인포윈도우가 있다면 닫기
+                if (previousInfowindow) {
+                    previousInfowindow.close();
+                }
             infowindow.open(map, marker);
+            // 열린 인포윈도우를 previousInfowindow에 저장
+            previousInfowindow = infowindow;
         });
     })(marker, infowindow);
- 	// 인포윈도우를 생성하면서 바로 열기
-    infowindow.open(map, marker);
 	
 	}
     

@@ -57,7 +57,6 @@
                 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
                 function placesSearchCB(data, status, pagination) {
                     if (status === kakao.maps.services.Status.OK) {
-						console.log(data);
                         // 정상적으로 검색이 완료됐으면
                         // 검색 목록과 마커를 표출합니다
                         var flag = true;
@@ -81,7 +80,6 @@
 
                 // 검색 결과 목록과 마커를 표출하는 함수입니다
                 function displayPlaces(places, flag) {
-                	
 
                     var listEl = document.getElementById('placesList'),
                         menuEl = document.getElementById('menu_wrap'),
@@ -254,8 +252,8 @@
                 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
                 // 인포윈도우에 장소명을 표시합니다
                 function displayInfowindow(marker, title) {
-                    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>이거냐?';
-
+                    var content = '<div class="btn btn-success">' + title + '</a></div>';
+                    //<a href="../ra_page/restarea_page.jsp?rano=' + places.rano + '
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
                 }
@@ -292,13 +290,11 @@
 					  .then(response => response.json())
 					    .then(data => {
 					    // API 응답 데이터 처리
-					    console.log(data);
 					    var flag = data.routes[0].result_code;
 					    if(flag != 0){
 					    	alert("경로를 다시 확인해주세요.")
 					    	return;
 					    }
-					   sendDirectionDataToServer(data);
 					   
 					    // 기존 폴리라인을 제거
 					    if (polyline) {
@@ -306,7 +302,10 @@
 					    }
 					    // 새로운 폴리라인을 그림
 					    polyline = createPolyline(data);
-					    polyline.setMap(map);
+					    if (polyline) {
+					    	polyline.setMap(map);
+					   		sendDirectionDataToServer(data);
+					    }
 					    
 					  })
 					  .catch(error => {
@@ -361,7 +360,6 @@
      // 데이터를 페이지네이션에 맞게 휴게소 표시하는 함수
         function displayPageData(page, data) {
             // 이 예제에서는 페이지 번호와 해당 페이지의 데이터를 콘솔에 출력합니다.
-            console.log('Page', page, 'data:', data);
             var flag = false;
 			displayPlaces(data, flag); 
         }//displayPageData
@@ -374,11 +372,8 @@
 				function sendDirectionDataToServer(data) {
                		// 클라이언트에서 데이터 추출
 					const guides = data.routes[0].sections[0].guides;
-                	//const filteredNames = guides.filter(guide => guide.name.includes('휴게소')).map(guide => guide.name);
-                	//console.log(filteredNames);
                 	
 					// 서버로 보낼 데이터 준비
-					//var sendData = JSON.stringify(filteredNames);
 					var sendData = JSON.stringify(guides);
 					
 					$.ajax({
@@ -388,8 +383,6 @@
 						data: sendData,
 						success: function(responseData) {
 						// 서버 응답 처리
-						console.log('서버 응답:', responseData);
-						// responseData를 원하는 방식으로 처리
 						//페이지네이션
 						createPagination(responseData);
 						},
@@ -617,6 +610,10 @@
 					 // 이미 열려있는 인포윈도우가 있다면 닫기
 					    if (infowindow) {
 					        infowindow.close(); 
+					    }
+					 
+					    for (var i = 0; i < infowindows.length; i++) {
+					        infowindows[i].close();
 					    }
               	}
                 
