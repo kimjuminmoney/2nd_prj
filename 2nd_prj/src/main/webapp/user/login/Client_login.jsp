@@ -1,4 +1,3 @@
-<%@page import="projectDAO.ClientLoginDAO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -100,7 +99,9 @@ function checkNull() {
                 </div>
                 </div>
                 <!-- 풋터 -->
-                <jsp:include page="../admin_include/footer.jsp"></jsp:include>
+                <footer class="py-4 bg-light mt-auto">
+                    <jsp:include page="../myinfo_nav/include_footer.jsp"></jsp:include>
+                </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../../common/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
