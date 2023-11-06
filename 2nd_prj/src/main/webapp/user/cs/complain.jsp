@@ -12,8 +12,8 @@
 <% request.setCharacterEncoding("UTF-8"); 
 
 int totalCount=0;
-String id=request.getParameter("sesId");
-id="test";
+String id=String.valueOf(session.getAttribute("sesId"));
+
 myCSDAO mcDAO= myCSDAO.getInstance();
 try{
 totalCount=mcDAO.selectTotalCount(id);//리뷰 전체 개수 count
@@ -54,9 +54,9 @@ List<MyCSVO> csList=mcDAO.selectMyCS(id,startNum,endNum);//리뷰조회
 System.out.println(csList);
 pageContext.setAttribute("csList",csList);
 %>
-<%-- <c:if test="${ empty sesId }">
-<c:redirect url="../login/Client_login.html"/>
-</c:if> --%>
+<c:if test="${ empty sesId }">
+<c:redirect url="../login/Client_login.jsp"/>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>

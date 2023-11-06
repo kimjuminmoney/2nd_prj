@@ -16,7 +16,7 @@
                 		<a class="navbar-brand ps-3" href="../login/Client_login.jsp">로그인</a>
                 	</c:when>
                 	<c:otherwise>
-                		<a class="navbar-brand ps-3" href="../logout/logout.jsp">로그아웃</a>
+                		<a class="navbar-brand ps-3" href="../login/logout.jsp">로그아웃</a>
                 	</c:otherwise>
                 	</c:choose> 
                 </div>

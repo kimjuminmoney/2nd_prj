@@ -32,59 +32,6 @@
 </style>
 <script type="text/javascript">
 $(function(){
-	 
-	 $("#btn_modify").click(function(){
-		
-	 $("#info_frm").submit();
-	
-	});//click
-	 
-});//ready
-
-function modifyMm(i) {
-	var jsonObj={
-			"UNICK" : $("#UNICK"+i).val()
-	}
-	$.ajax({
-		url:"modifyMm_process.jsp",
-		type:"post",
-		data:jsonObj,
-		dataType:"json",
-		error:function(xhr){
-			console.log(xhr.status);
-		},
-		success:function(temp){
-			var tempScore = temp.Score;
-			var tempText = temp.Text;
-			var cnt=temp.cnt;
-			
-			if(cnt==1){
-				$("#mmText")
-			}
-		}
-	})
-}
-
-function deleteMm(i) {
-	var jsonObj={
-		"UNIC" : $("#UNIC"+i).val(),
-		
-	}
-	$.ajax({
-		url:"removeMm_process.jsp",
-		type:"post",
-		data:jsonObj,
-		dayaType:"json",
-		error:function(xhr){
-			console.log(xhr.status);
-		},
-		success:function( temp ){
-			var tempId=temp.UNIC;
-			var cnt=temp.cnt;
-			alert(tempNic+"삭제되었습니다.");
-			location.reload()
-		}
-	});;//ajax
 	
 }
 

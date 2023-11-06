@@ -1,3 +1,4 @@
+<%@page import="kr.co.sist.util.cipher.DataDecrypt"%>
 <%@page import="ra.util.BoardUtil"%>
 <%@page import="ra.util.BoardUtilVO"%>
 <%@page import="ra.admin.cs.AdminCSVO"%>
@@ -12,11 +13,10 @@
 <%@ include file="../admin_include/login_session_confirm.jsp" %>
 <% request.setCharacterEncoding("UTF-8"); 
 
-
+DataDecrypt dd= new DataDecrypt("a12345678901234567");
 
 int totalCount=0;
-String id=(String)session.getAttribute("sesId");
-id="1";
+String id=String.valueOf(session.getAttribute("sesNo"));
 
 AdminCSDAO acDAO= AdminCSDAO.getInstance();
 

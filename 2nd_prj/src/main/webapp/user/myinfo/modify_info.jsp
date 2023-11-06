@@ -13,17 +13,16 @@
 
 	 DataDecrypt dd= new DataDecrypt("a12345678901234567");
 
-	    String id= request.getParameter("sesId");
+	    String id= (String)session.getAttribute("sesId");
 	 	
-	    if(!(id == null && "".equals(id))){
+	    /* if(!(id == null && "".equals(id))){
 	 		response.sendRedirect("../login/Client_login.html");
 	 		return;
-	 	}
+	 	} */
 	 	
 	 	myPageDAO mpDAO = myPageDAO.getInstance();
 	 	   	//mpDAO.selectUserInfo(id값으로 변경);
 	     userInfoVO uiVO = mpDAO.selectUserInfo(id);
-	 	System.out.println(uiVO);  
 	 	
 	   	String uName=dd.decryption(uiVO.getName());
 	    	String uNic=uiVO.getNick();
@@ -31,7 +30,7 @@
 	     String uEmail=dd.decryption(uiVO.getEmail());
 	 %>
 <c:if test="${ empty sesId }">
-<c:redirect url="../login/Client_login.html"/>
+<c:redirect url="../login/Client_login.jsp"/>
 </c:if>
 <!DOCTYPE html>
 <html>
@@ -56,7 +55,6 @@
  <script type="text/javascript">
 
  $(function(){
-	 
 	 
 	 $("#btn_modify").click(function(){
 		

@@ -12,8 +12,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); 
 
-String id=request.getParameter("sesId");
-id="test";
+String id=String.valueOf(session.getAttribute("sesId"));
 
 int totalCount=0;
 MyReviewDAO mrDAO = MyReviewDAO.getInstance();
@@ -56,9 +55,9 @@ List<MyReviewVO> rvList=mrDAO.selectReview(id,startNum,endNum);//리뷰조회
 pageContext.setAttribute("rvList",rvList);
 
 %>
-<%-- <c:if test="${ empty sesId }">
-<c:redirect url="../login/Client_login.html"/>
-</c:if> --%>
+<c:if test="${ empty sesId }">
+<c:redirect url="../login/Client_login.jsp"/>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>

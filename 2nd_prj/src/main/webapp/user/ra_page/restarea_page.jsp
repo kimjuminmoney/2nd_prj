@@ -35,7 +35,7 @@ $(function(){
        var reviewDetail = $("#inputReview").val(); 
        var reviewScore = $("#selectScore").val(); 
        var restareaNum = $("#raNum").val();
-       var userId = "CJS";
+       var userId = ${ sesId } ;
 
        if (reviewDetail === "") {
            alert("리뷰를 입력해주세요");
