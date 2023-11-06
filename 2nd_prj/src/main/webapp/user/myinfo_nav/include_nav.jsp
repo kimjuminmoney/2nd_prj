@@ -9,15 +9,15 @@
             <!-- Navbar Search-->
 		<div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
+                	<a class="navbar-brand ps-3" href="../index/index.jsp">메인으로</a>
                 	<a class="navbar-brand ps-3" href="../notice/userNotice.jsp">공지사항</a>
-                	<a class="navbar-brand ps-3" href="../cs/complain.jsp">문의</a>
+                	<a class="navbar-brand ps-3" href="../myinfo/modify_info.jsp">마이페이지</a>
                 	<c:choose>
                 	<c:when test="${ empty sesId }">
-                		<div class="navbar-brand ps-3" onclick="<% response.sendRedirect("../login/login.html.jsp");%>">로그인</div	>
+                		<a class="navbar-brand ps-3" href="../login/Client_login.jsp">로그인</a>
                 	</c:when>
                 	<c:otherwise>
-                		
-                		<div class="navbar-brand ps-3"  onclick="<% session.removeAttribute("sesId"); response.sendRedirect("../index/index.jsp");%>">로그아웃</div>
+                		<a class="navbar-brand ps-3" href="../logout/logout.jsp">로그아웃</a>
                 	</c:otherwise>
                 	</c:choose> 
                 </div>

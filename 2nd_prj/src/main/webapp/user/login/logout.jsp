@@ -3,8 +3,8 @@
 <%@ page info="" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-session.removeAttribute("ssId");
+session.removeAttribute("sesId");
 session.removeAttribute("userData");
 session.invalidate();
-response.sendRedirect("main.html");
+response.sendRedirect("../index/index.jsp");
 %>
