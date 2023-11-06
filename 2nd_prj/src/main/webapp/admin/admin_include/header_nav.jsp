@@ -9,12 +9,17 @@ ManagerDataVO  mdVO = (ManagerDataVO)session.getAttribute("managerData");
 System.out.println(sesNo);
 System.out.println(mdVO); */
 //session.setAttribute("sesNo", 1);
-if (session.getAttribute("sesNo") == null) {
-	System.out.println(session.getAttribute("sesNo")==null);
+/* if (session.getAttribute("sesNo") == null) {
     response.sendRedirect("../login/Manager_login.html");
     return;
-}
+} */
+	System.out.println("세션값 : " + session.getAttribute("sesNo"));
+
 %>
+<c:if test="${ empty sesNo }">
+<c:redirect url="http://localhost/2nd_prj/admin/login/Manager_login.html"/>
+<%-- <c:redirect url="../login/Manager_login.html"/> --%>
+</c:if>
 <%-- <c:choose>
     <c:when test="${empty sesNo}">
         <c:redirect url="../login/Manager_login.html" />

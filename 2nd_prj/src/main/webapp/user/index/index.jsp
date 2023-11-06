@@ -8,20 +8,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <jsp:include page="search/main_e3.jsp" /> --%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <link rel="icon" href="http://192.168.10.151/jsp_prj/common/main/favicon.ico">
-boost
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-Jquery CDN시작
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
 <jsp:include page="../search/css_include.jsp"></jsp:include>
 <jsp:include page="../search/function_include.jsp"></jsp:include>
 <jsp:include page="../highway/highway_list.jsp"></jsp:include>
 </head>
   <body class="d-flex flex-column h-100">
-            <!-- <main class=" flex-shrink-0"> -->
                 <header>
                 <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include>
                 </header>
@@ -31,23 +24,14 @@ Jquery CDN시작
                     <div id="page-wrapper">
                         <div id="sidebar-wrapper">
                             <ul class="nav nav-tabs" id="myTab" role="tablist" style="border-bottom-width: 0px; padding-left: 20px;">
-                                <!-- <li class="sidebar-brand nav-item" role="presentation">
-                                    <a href="#">
-                                    <img src="../img/logo_white.png">
-                                    </a>
-                                </li> -->
                                 <li class="nav-item" role="presentation">
-									<button class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">검색</button>
-									<!--                                     <input class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true" value="검색"> -->
-									<!--                                     <button class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">검색</button> -->
+									<button style="width: 120px"class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">검색</button>
 	                                </li>
 	                                <li class="nav-item" role="presentation">
-									<button class="nav-link" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab" aria-controls="local" aria-selected="false">지역별 휴게소</button>
-									<!--                                     <input class="nav-link" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab" aria-controls="local" aria-selected="false" value="지역별"> -->
+									<button style="width: 120px"class="nav-link" id="local-tab" data-bs-toggle="tab" data-bs-target="#local" type="button" role="tab" aria-controls="local" aria-selected="false">지역별<br> 휴게소</button>
 	                                </li>
 	                                <li class="nav-item" role="presentation">
-									<button class="nav-link" id="highway-tab" data-bs-toggle="tab" data-bs-target="#highway" type="button" role="tab" aria-controls="highway" aria-selected="false">고속도로별 휴게소</button>
-									<!--                                     <input class="nav-link" id="highway-tab" data-bs-toggle="tab" data-bs-target="#highway" type="button" role="tab" aria-controls="highway" aria-selected="false"value="고속도로별"> -->
+									<button style="width: 120px"class="nav-link" id="highway-tab" data-bs-toggle="tab" data-bs-target="#highway" type="button" role="tab" aria-controls="highway" aria-selected="false">고속도로별<br> 휴게소</button>
                                 </li>
                                 
                             </ul>
@@ -123,9 +107,5 @@ Jquery CDN시작
             </footer>
             <!-- Bootstrap core JS-->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-            <!-- Core theme JS-->
-            <!-- <script src="js/scripts.js"></script> -->
         </body>
-
         </html>
-</html>

@@ -6,6 +6,12 @@
     pageEncoding="UTF-8"%>
 <%@ page info="   " %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+if (session.getAttribute("sesNo") == null) {
+    response.sendRedirect("../login/Manager_login.html");
+    return;
+} 
+%>
 <!DOCTYPE html>
 <html>
 <head>
