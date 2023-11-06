@@ -525,7 +525,7 @@
                   
                // 마커 이미지 URL 설정
                   var markerImageURL = hidden === 
-               'strHidden' ? 'http://localhost/2nd_prj_sub/prj/common/icons/png/start.png' : 'http://localhost/2nd_prj_sub/prj/common/icons/png/end.png';
+               'strHidden' ? '../../common/icon_images/start.png' : '../../common/icon_images/end.png';
 
                // 마커 이미지 설정
                   var markerImage = new kakao.maps.MarkerImage(markerImageURL, new kakao.maps.Size(40, 40));
