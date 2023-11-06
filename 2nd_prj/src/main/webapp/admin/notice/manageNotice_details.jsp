@@ -7,6 +7,7 @@
 <%@ page info="   " %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

@@ -5,6 +5,7 @@
 <%@ page info="cs_sub_admin" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <% request.setCharacterEncoding("UTF-8");
 
 String empno= (String)session.getAttribute("empno"); //직원의 아이디 

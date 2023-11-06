@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ page info="" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <%
 String empno=(String)session.getAttribute("empno");
 String csAnswer=request.getParameter("csAnswer");
