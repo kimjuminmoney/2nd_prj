@@ -39,6 +39,11 @@ public class DashboardReviewVO {
 		this.raname = raname;
 	}
 
+	@Override
+	public String toString() {
+		return "DashboardReviewVO [rvno=" + rvno + ", count=" + count + ", raname=" + raname + "]";
+	}
+
 	
 
 }
