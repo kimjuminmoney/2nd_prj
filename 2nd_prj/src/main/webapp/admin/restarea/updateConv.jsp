@@ -1,8 +1,9 @@
+<%@page import="ra.user.restarea.ConvVO"%>
+<%@page import="ra.admin.restarea.RestDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -46,14 +47,47 @@
 <link href="../../common/css/styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 <script type="text/javascript">
 	$(function() {
+		$("#updateBtn").click(function(){
+			alert(123);
+	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
+	        var restAreaNum = $("#restAreaNum").val();
+	        var convImage = $("#convImage").val(); 
+	        var convNum = $("#convNum").val();
+	        var convName = $("#convName").val(); 
+	        var convDetail = $("#convDetail").val();
 
+	        // 데이터를 객체로 구성
+	        var data = {
+	        	restAreaNum: restAreaNum,
+	        	convImage: convImage,
+	        	convNum: convNum,
+	        	convName: convName,
+	        	convDetail: convDetail,
+	        };
+
+	        // AJAX 요청을 수행
+	        $.ajax({
+	            url: "ajax/ajax_updateConv.jsp",
+	            type: "POST",
+	            data: data,
+	            dataType: "json",
+	            error: function(xhr){
+	                alert("서버에서 문제가 발생하였습니다.");
+	                console.log(xhr.status);
+	            },
+	            success: function(jsonObj){
+	                    alert("추가완료.");
+	            }
+	        });//ajax
+	    });//click
 	});//ready
 	
 	function displaySelectedImage() {
-        const input = document.getElementById("formFileSm");
+        const input = document.getElementById("convImage");
         const image = document.getElementById("selected-image");
 
         if (input.files && input.files[0]) {
@@ -88,12 +122,18 @@
 					</ol>
 
 					<div class="flex-container">
-						<div id="fc">
+						<div id="fc" class="align-self-center">
+						<% 
+						String raNo = request.getParameter("raNo"); 
+						String cNo = request.getParameter("cNo"); 
 						
+						RestDAO rDAO = RestDAO.getInstance();
+						ConvVO cVO = rDAO.selectConv2(raNo,cNo);
+						%>
 							<div class="card" style="width: 18rem;">
-        						<img id="selected-image" src="images/selectImage.png" class="card-img-top">
+        						<img id="selected-image" src="../../common/icon_images/convinient/<%=cVO.getConvIcon() %>.png" class="card-img-top">
         						<div class="card-body">
-            						<input class="form-control form-control-sm" id="formFileSm" type="file" onchange="displaySelectedImage()">
+            						<input class="form-control form-control-sm" id="convImage" type="file" onchange="displaySelectedImage()">
         						</div>
     						</div>
 							
@@ -101,34 +141,26 @@
 
 						<div id="hw" class="align-self-center">
 						
+							<label id="inputRest" class="form-label">휴게소번호</label> 
+							<input id="restAreaNum" class="form-control" type="text" value="<%=raNo %>" readonly="readonly" disabled><br/>
+						
+							<label id="inputRest" class="form-label">시설번호</label> 
+							<input id="convNum" class="form-control" type="text" value="<%=cNo %>" readonly="readonly" disabled><br/>
+						
 							<label id="inputRest" class="form-label">시설명</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br/>
-
-							<label id="inputRest" class="form-label">전화번호</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br />
+							<input id="convName" class="form-control" type="text" placeholder="<%=cVO.getConvName()%>"><br/>
 
 							<label id="inputRest" class="form-label">비고</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br/>
+							<input id="convDetail" class="form-control" type="text" placeholder="<%=cVO.getConvDetail()%>"><br/>
 
 						</div>
 					</div>
 					<br />
-					<button id="inputRest" type="button" class="btn btn-primary btn-lg"
+					<button id="updateBtn" type="button" class="btn btn-primary btn-lg"
 						style="margin-top: 30px;">수정</button>
 				</div>
 			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid px-4">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2023</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
-					</div>
-				</div>
-			</footer>
+			<jsp:include page="../admin_include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 	<script

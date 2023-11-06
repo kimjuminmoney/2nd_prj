@@ -68,16 +68,16 @@ public class ManageBrandDAO {
 				StringBuilder updateBrand = new StringBuilder();
 				updateBrand
 				.append("	update Brand							")
-				.append("	set ino=?, bname=?, btel=?, bdetail=?		")
-				.append("	where bno=?								");
+				.append("	set bino=?, bname=?, bdetail=?		")
+				.append("	where bno=?	and rano=?							");
 				
 				pstmt = con.prepareStatement(updateBrand.toString());
 				
 				pstmt.setString(1, mbVO.getIconNum());
 				pstmt.setString(2, mbVO.getBrandName());
-				pstmt.setString(3, mbVO.getBrandTel());
-				pstmt.setString(4, mbVO.getBrandHome());
-				pstmt.setInt(5, mbVO.getBrandNum());
+				pstmt.setString(3, mbVO.getBrandHome());
+				pstmt.setInt(4, mbVO.getBrandNum());
+				pstmt.setString(5, mbVO.getRestAreaNum());
 				
 				rowCnt = pstmt.executeUpdate();
 				

@@ -11,8 +11,8 @@ ManageConvVO mcVO = new ManageConvVO();
 
 String restAreaNum = request.getParameter("restAreaNum");
 String convImage = request.getParameter("convImage");
+int convNum = Integer.parseInt(request.getParameter("convNum")); 
 String convName = request.getParameter("convName");
-String convTel = request.getParameter("convTel"); 
 String convDetail = request.getParameter("convDetail");
 
 String fiPath = convImage;
@@ -27,13 +27,13 @@ System.out.print("아이콘넘버: "+iconNum);
 mcVO.setRestAreaNum(restAreaNum);
 mcVO.setIconNum(Integer.parseInt(iconNum));
 mcVO.setConvName(convName);
-mcVO.setConvTel(convTel);
+mcVO.setConvNum(convNum);
 mcVO.setConvDetail(convDetail);
 
 boolean flag = false;
 
 try{
-mcDAO.insertConv(mcVO);
+mcDAO.updateConv(mcVO);
 flag=true;
 }catch(SQLException se){
 	se.printStackTrace();
@@ -41,3 +41,16 @@ flag=true;
 
 out.print(flag);
 %>
+
+
+
+
+
+
+
+
+
+
+
+
+

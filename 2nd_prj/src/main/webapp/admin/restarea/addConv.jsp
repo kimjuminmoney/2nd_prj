@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -121,7 +120,7 @@
 					</ol>
 
 					<div class="flex-container">
-						<div id="fc">
+						<div id="fc" class="align-self-center">
 						
 							<div class="card" style="width: 18rem;">
         						<img id="selected-image" src="../../common/images/selectImage.png" class="card-img-top">
@@ -154,19 +153,7 @@
 						style="margin-top: 30px;">추가</button>
 				</div>
 			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid px-4">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2023</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
+			<jsp:include page="../admin_include/footer.jsp"></jsp:include>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

@@ -70,7 +70,7 @@ public class ManageFoodDAO {
 			updateFood
 			.append("	update food									")
 			.append("	set fimage=?, fname=?, fprice=?, fdetail=?	")
-			.append("	where fno=?									");
+			.append("	where fno=? and rano=?						");
 			
 			pstmt = con.prepareStatement(updateFood.toString());
 			
@@ -79,6 +79,7 @@ public class ManageFoodDAO {
 			pstmt.setInt(3, mfVO.getFoodPrice());
 			pstmt.setString(4, mfVO.getFoodDetail());
 			pstmt.setInt(5, mfVO.getFoodNum());
+			pstmt.setString(6, mfVO.getRestAreaNum());
 			
 			rowCnt = pstmt.executeUpdate();
 			

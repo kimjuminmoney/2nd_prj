@@ -5,7 +5,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -67,7 +66,7 @@
 	    	}//end if    	
 	    });//change
 	    
-	    $("#deleteBtn").click(function(){
+	    $("#updateBtn").click(function(){
 	    	var checkboxes = document.querySelectorAll('.conv-checkbox');
 	    	<%
 	    	String paramRaNum=request.getParameter("raNum");
@@ -75,6 +74,21 @@
 	    		paramRaNum="1";
 	    	}
 	    	%>
+			var restareaNum = <%=paramRaNum%>;
+	    	
+	    	checkboxes.forEach(function (checkbox, index){
+	            if (checkbox.checked) {
+	            	
+	            	var tr = checkbox.closest('tr');
+	            	var convNum = checkbox.getAttribute('data-conv-num');
+	            	
+	            	window.location.href = 'updateConv.jsp?raNo='+restareaNum+'&cNo='+convNum;
+	            }//end if
+	    	});//forEach
+	    });//click
+	    
+	    $("#deleteBtn").click(function(){
+	    	var checkboxes = document.querySelectorAll('.conv-checkbox');
 			var restareaNum = <%=paramRaNum%>;
 	    	
 	        // 체크박스를 반복하면서 선택된 것을 확인하고 해당 행을 삭제합니다.
@@ -189,7 +203,7 @@
 										%>
 										<tr>
 											<td><input type="checkbox" class="conv-checkbox" data-conv-num="<%= cVO.getConvNum() %>"/></td>
-											<td><%=cVO.getConvIcon() %></td>
+											<td><img src="../../common/icon_images/convinient/<%=cVO.getConvIcon() %>.png"></td>
 											<td><%=cVO.getConvName() %></td>
 											<td><%=cVO.getConvDetail() %></td>
 										</tr>
@@ -201,23 +215,11 @@
 						</div>
 					</div>
 					<a href="addConv.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="button" value="추가"></a>
-					<a href="updateConv.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="submit" value="수정"></a> 
+					<input id="updateBtn" class="btn btn-primary" type="submit" value="수정">
 					<input id="deleteBtn" class="btn btn-primary" type="reset" value="삭제">
 				</div>
 			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid px-4">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2023</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
+			<jsp:include page="../admin_include/footer.jsp"></jsp:include>		</div>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

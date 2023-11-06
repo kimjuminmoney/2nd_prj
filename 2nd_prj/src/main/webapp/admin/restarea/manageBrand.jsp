@@ -5,7 +5,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -18,15 +17,11 @@
 }
 
 .table th:nth-child(2) {
-	width: 100px; /* 첫 번째 열의 너비 설정 */
+	width: 80px; /* 첫 번째 열의 너비 설정 */
 }
 
 .table th:nth-child(3) {
-	width: 200px; /* 두 번째 열의 너비 설정 */
-}
-
-.table th:nth-child(4) {
-	width: 200px; /* 세 번째 열의 너비 설정 */
+	width: 150px; /* 첫 번째 열의 너비 설정 */
 }
 /* 나머지 열들에 대한 너비 설정 */
 </style>
@@ -73,7 +68,7 @@
 	    	}//end if    	
 	    });//change
 	    
-	    $("#deleteBtn").click(function(){
+	    $("#updateBtn").click(function(){
 	    	var checkboxes = document.querySelectorAll('.brand-checkbox');
 	    	<%
 	    	String paramRaNum=request.getParameter("raNum");
@@ -81,6 +76,21 @@
 	    		paramRaNum="1";
 	    	}
 	    	%>
+			var restareaNum = <%=paramRaNum%>;
+	    	
+	    	checkboxes.forEach(function (checkbox, index){
+	            if (checkbox.checked) {
+	            	
+	            	var tr = checkbox.closest('tr');
+	            	var brandNum = checkbox.getAttribute('data-brand-num');
+	            	
+	            	window.location.href = 'updateBrand.jsp?raNo='+restareaNum+'&bNo='+brandNum;
+	            }//end if
+	    	});//forEach
+	    });//click
+	    
+	    $("#deleteBtn").click(function(){
+	    	var checkboxes = document.querySelectorAll('.brand-checkbox');
 			var restareaNum = <%=paramRaNum%>;
 	    	
 	        // 체크박스를 반복하면서 선택된 것을 확인하고 해당 행을 삭제합니다.
@@ -182,8 +192,7 @@
 										<th><input type="checkbox" /></th>
 										<th>아이콘</th>
 										<th>매장명</th>
-										<th>전화번호</th>
-										<th>홈페이지</th>
+										<th>비고</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -194,9 +203,8 @@
 										%>
 										<tr>
 											<td><input type="checkbox" class="brand-checkbox" data-brand-num="<%= bVO.getBarndNum() %>"/></td>
-											<td><%=bVO.getBrandIcon() %></td>
+											<td><img src="../../common/icon_images/brand/<%=bVO.getBrandIcon() %>.png"></td>
 											<td><%=bVO.getBrandName() %></td>
-											<td><%=bVO.getBrandTel() %></td>
 											<td><%=bVO.getBrandHome() %></td>
 										</tr>
 										<%
@@ -207,22 +215,11 @@
 						</div>
 					</div>
 					<a href="addBrand.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="button" value="추가"></a>
-					<a href="updateBrand.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="submit" value="수정"></a> 
+					<input id="updateBtn" class="btn btn-primary" type="submit" value="수정">
 					<input id="deleteBtn" class="btn btn-primary" type="reset" value="삭제">
 				</div>
 			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid px-4">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2023</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
-					</div>
-				</div>
-			</footer>
+			<jsp:include page="../admin_include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 	<script

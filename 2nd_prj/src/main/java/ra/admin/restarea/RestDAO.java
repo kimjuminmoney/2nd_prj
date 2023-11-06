@@ -163,6 +163,43 @@ public class RestDAO {
 		return foodlist;
 	}//selectFood
 	
+	public FoodVO selectFood2(String raNo, String fNo) throws SQLException{
+		FoodVO fVO = null;
+		
+		DbConnection db = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = db.getConn("jdbc/dbcp");
+			
+			StringBuilder selectFood = new StringBuilder();
+			selectFood
+			.append("	select fno, fname, fimage, fdetail, fprice	")
+			.append("	from food									")
+			.append("	where rano=? and fno=?								");
+			
+			pstmt=con.prepareStatement(selectFood.toString());
+			
+			pstmt.setString(1, raNo);
+			pstmt.setString(2, fNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				fVO = new FoodVO(rs.getString("fno"), rs.getString("fname"), rs.getString("fimage"),rs.getString("fdetail"),rs.getString("fprice"));
+			}
+			
+		}finally {
+			db.dbClose(rs, pstmt, con);
+		}
+		
+		return fVO;
+	}//selectFood2
+	
 	public List<ConvVO> selectConv(String raNo) throws SQLException{
 		ConvVO cVO;
 		
@@ -200,6 +237,43 @@ public class RestDAO {
 		}
 		
 		return convlist;
+	}//selectConv
+	
+	public ConvVO selectConv2(String raNo, String cNo) throws SQLException{
+		ConvVO cVO=null;
+		
+		DbConnection db = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = db.getConn("jdbc/dbcp");
+			
+			StringBuilder selectConv = new StringBuilder();
+			selectConv
+			.append("	select cname, cdetail, ino, cno		")
+			.append("	from convinient						")
+			.append("	where rano=? and cno=?				");
+			
+			pstmt=con.prepareStatement(selectConv.toString());
+			
+			pstmt.setString(1, raNo);
+			pstmt.setString(2, cNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				cVO = new ConvVO(rs.getString("cname"), rs.getString("cdetail"),rs.getString("ino"),rs.getInt("cno"));
+			}
+			
+		}finally {
+			db.dbClose(rs, pstmt, con);
+		}
+		
+		return cVO;
 	}//selectConv
 
 	public List<BrandVO> selectBrand(String raNo) throws SQLException{
@@ -240,6 +314,43 @@ public class RestDAO {
 		
 		return brandlist;
 	}//selectBrand
+	
+	public BrandVO selectBrand2(String raNo, String bNo) throws SQLException{
+		BrandVO bVO=null;
+		
+		DbConnection db = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = db.getConn("jdbc/dbcp");
+			
+			StringBuilder selectBrand = new StringBuilder();
+			selectBrand
+			.append("	select bname, bdetail, bino, bno			")
+			.append("	from brand									")
+			.append("	where rano=? and bno=?								");
+			
+			pstmt=con.prepareStatement(selectBrand.toString());
+			
+			pstmt.setString(1, raNo);
+			pstmt.setString(2, bNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				bVO = new BrandVO(rs.getString("bname"), rs.getString("bdetail"),rs.getString("bino"),rs.getInt("bno"));
+			}
+			
+		}finally {
+			db.dbClose(rs, pstmt, con);
+		}
+		
+		return bVO;
+	}//selectBrand2
 
 	public List<GasVO> selectGas(String raNo) throws SQLException{
 		GasVO gVO;

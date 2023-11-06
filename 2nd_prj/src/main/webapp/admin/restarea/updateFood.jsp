@@ -1,8 +1,10 @@
+<%@page import="ra.user.restarea.FoodVO"%>
+<%@page import="java.util.List"%>
+<%@page import="ra.admin.restarea.RestDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -46,14 +48,49 @@
 <link href="../../common/css/styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 <script type="text/javascript">
 	$(function() {
+		$("#updateBtn").click(function(){
+			alert(123);
+	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
+	        var restAreaNum = $("#restAreaNum").val();
+	        var foodNum = $("#foodNum").val();
+	        var foodImage = $("#foodImage").val(); 
+	        var foodName = $("#foodName").val(); 
+	        var foodPrice = $("#foodPrice").val();
+	        var foodDetail = $("#foodDetail").val();
 
+	        // 데이터를 객체로 구성
+	        var data = {
+	        	restAreaNum: restAreaNum,
+	        	foodNum: foodNum,
+	        	foodImage: foodImage ,
+	            foodName: foodName ,
+	            foodPrice: foodPrice,
+	            foodDetail: foodDetail,
+	        };
+
+	        // AJAX 요청을 수행
+	        $.ajax({
+	            url: "ajax/ajax_updateFood.jsp",
+	            type: "POST",
+	            data: data,
+	            dataType: "json",
+	            error: function(xhr){
+	                alert("서버에서 문제가 발생하였습니다.");
+	                console.log(xhr.status);
+	            },
+	            success: function(jsonObj){
+	                    alert("추가완료.");
+	            }
+	        });//ajax
+	    });//click
 	});//ready
 	
 	function displaySelectedImage() {
-        const input = document.getElementById("formFileSm");
+        const input = document.getElementById("foodImage");
         const image = document.getElementById("selected-image");
 
         if (input.files && input.files[0]) {
@@ -88,12 +125,18 @@
 					</ol>
 
 					<div class="flex-container">
-						<div id="fc">
+						<div id="fc" class="align-self-center">
+						<% 
+						String raNo = request.getParameter("raNo"); 
+						String fNo = request.getParameter("fNo"); 
 						
+						RestDAO rDAO = RestDAO.getInstance();
+						FoodVO fVO = rDAO.selectFood2(raNo,fNo);
+						%>
 							<div class="card" style="width: 18rem;">
-        						<img id="selected-image" src="images/selectImage.png" class="card-img-top">
+        						<img id="selected-image" src="../../common/food_images/<%=fVO.getFoodImage() %>" class="card-img-top">
         						<div class="card-body">
-            						<input class="form-control form-control-sm" id="formFileSm" type="file" onchange="displaySelectedImage()">
+            						<input id="foodImage" class="form-control form-control-sm" type="file" onchange="displaySelectedImage()">
         						</div>
     						</div>
 							
@@ -101,34 +144,29 @@
 
 						<div id="hw" class="align-self-center">
 						
+							<label id="inputRest" class="form-label">휴게소번호</label> 
+							<input id="restAreaNum" class="form-control" type="text" value="<%=raNo %>" readonly="readonly" disabled><br/>
+						
+							<label id="inputRest" class="form-label">메뉴번호</label> 
+							<input id="foodNum" class="form-control" type="text" value="<%=fNo %>" readonly="readonly" disabled><br/>
+						
 							<label id="inputRest" class="form-label">메뉴명</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br/>
+							<input id="foodName" class="form-control" type="text" placeholder="<%=fVO.getFoodName()%>"><br/>
 
 							<label id="inputRest" class="form-label">가격</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br />
+							<input id="foodPrice" class="form-control" type="text" placeholder="<%=fVO.getFoodPrice()%>"><br />
 
 							<label id="inputRest" class="form-label">설명</label> 
-							<input id="inputRest" class="form-control" type="text" placeholder="Default input"><br/>
+							<input id="foodDetail" class="form-control" type="text" placeholder="<%=fVO.getFoodDetail()%>"><br/>
 
 						</div>
 					</div>
 					<br />
-					<button id="inputRest" type="button" class="btn btn-primary btn-lg"
+					<button id="updateBtn" type="button" class="btn btn-primary btn-lg"
 						style="margin-top: 30px;">수정</button>
 				</div>
 			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid px-4">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2023</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
-					</div>
-				</div>
-			</footer>
+			<jsp:include page="../admin_include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 	<script

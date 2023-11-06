@@ -70,16 +70,16 @@ private static ManageConvDAO mcDAO;
 			StringBuilder updateConv = new StringBuilder();
 			updateConv
 			.append("	update convinient						")
-			.append("	set ino=?, cname=?, ctel=?, cdetail=?	")
-			.append("	where cno=?								");
+			.append("	set ino=?, cname=?, cdetail=?	")
+			.append("	where cno=?	and rano=?					");
 			
 			pstmt = con.prepareStatement(updateConv.toString());
 			
 			pstmt.setInt(1, mcVO.getIconNum());
 			pstmt.setString(2, mcVO.getConvName());
-			pstmt.setString(3, mcVO.getConvTel());
-			pstmt.setString(4, mcVO.getConvDetail());
-			pstmt.setInt(5, mcVO.getConvNum());
+			pstmt.setString(3, mcVO.getConvDetail());
+			pstmt.setInt(4, mcVO.getConvNum());
+			pstmt.setString(5, mcVO.getRestAreaNum());
 			
 			rowCnt = pstmt.executeUpdate();
 			

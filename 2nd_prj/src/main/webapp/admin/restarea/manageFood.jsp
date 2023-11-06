@@ -5,7 +5,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -18,7 +17,7 @@
 }
 
 .table th:nth-child(2) {
-	width: 2s0px; /* 첫 번째 열의 너비 설정 */
+	width: 70px; /* 첫 번째 열의 너비 설정 */
 }
 
 .table th:nth-child(3) {
@@ -76,7 +75,7 @@
 	    	}//end if    	
 	    });//change
 	    
-	    $("#deleteBtn").click(function(){
+	    $("#updateBtn").click(function(){
 	    	var checkboxes = document.querySelectorAll('.food-checkbox');
 	    	<%
 	    	String paramRaNum=request.getParameter("raNum");
@@ -84,6 +83,22 @@
 	    		paramRaNum="1";
 	    	}
 	    	%>
+			var restareaNum = <%=paramRaNum%>;
+	    	
+	    	checkboxes.forEach(function (checkbox, index){
+	            if (checkbox.checked) {
+	            	
+	            	var tr = checkbox.closest('tr');
+	            	var foodNum = checkbox.getAttribute('data-food-num');
+	            	
+	            	window.location.href = 'updateFood.jsp?raNo='+restareaNum+'&fNo='+foodNum;
+	            }//end if
+	    	});//forEach
+	    });//click
+	    
+	    $("#deleteBtn").click(function(){
+	    	var checkboxes = document.querySelectorAll('.food-checkbox');
+
 			var restareaNum = <%=paramRaNum%>;
 	    	
 	        // 체크박스를 반복하면서 선택된 것을 확인하고 해당 행을 삭제합니다.
@@ -196,7 +211,7 @@
 										FoodVO fVO = foodList.get(i);
 										%>
 										<tr>
-											<td><input type="checkbox" class="food-checkbox" data-food-num="<%= fVO.getFoodNum() %>"/></td>
+											<td><input type="checkbox" value="" class="food-checkbox" data-food-num="<%= fVO.getFoodNum() %>"/></td>
 											<td><%=fVO.getFoodNum() %></td>
 											<td style="text-align: center"><img src="../../common/food_images/<%=fVO.getFoodImage() %>" style="height:50px; border-radius: 10px;"/></td>
 											<td><%=fVO.getFoodName() %></td>
@@ -211,22 +226,11 @@
 						</div>
 					</div>
 					<a href="addFood.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="button" value="추가"></a>
-					<a href="updateFood.jsp?raNo=<%=raNo%>"><input class="btn btn-primary" type="button" value="수정"></a>
+					<input id="updateBtn" class="btn btn-primary" type="button" value="수정">
 					<input id="deleteBtn" class="btn btn-primary" type="button" value="삭제">
 				</div>
 			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid px-4">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2023</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
-					</div>
-				</div>
-			</footer>
+			<jsp:include page="../admin_include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 	<script
