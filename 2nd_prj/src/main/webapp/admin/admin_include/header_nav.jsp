@@ -9,15 +9,20 @@ ManagerDataVO  mdVO = (ManagerDataVO)session.getAttribute("managerData");
 System.out.println(sesNo);
 System.out.println(mdVO); */
 //session.setAttribute("sesNo", 1);
+if (session.getAttribute("sesNo") == null) {
+	System.out.println(session.getAttribute("sesNo")==null);
+    response.sendRedirect("../login/Manager_login.html");
+    return;
+}
 %>
-<c:choose>
+<%-- <c:choose>
     <c:when test="${empty sesNo}">
         <c:redirect url="../login/Manager_login.html" />
     </c:when>
     <c:otherwise>
         <!-- 다른 처리를 수행하거나 필요에 따라 다른 페이지로 이동 -->
     </c:otherwise>
-</c:choose>
+</c:choose> --%>
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 	<!-- Navbar Brand-->
