@@ -51,7 +51,6 @@ public class myPageDAO {
 			pstmt.setString(3, tel);
 			pstmt.setString(4, id);
 			cnt=pstmt.executeUpdate();
-			System.out.println( id + " "+nick+" "+email + " cnt "+ cnt);
 			
 		} finally {
 			db.dbClose(null, pstmt, con);
@@ -68,6 +67,7 @@ public class myPageDAO {
 
 		DbConnection db= DbConnection.getInstance();
 		con= db.getConn("jdbc/dbcp");
+		
 		try {
 			
 			StringBuilder sb = new StringBuilder();
@@ -92,7 +92,6 @@ public class myPageDAO {
 				uiVO.setName(uname);
 				uiVO.setEmail(uemail);
 				uiVO.setTel(utel);
-				System.out.println(uiVO);
 			}
 			
 		} finally {

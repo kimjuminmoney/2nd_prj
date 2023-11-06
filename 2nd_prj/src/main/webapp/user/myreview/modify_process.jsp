@@ -13,7 +13,7 @@ MyReviewVO mrVO = new MyReviewVO();
 MyReviewDAO mrDAO = MyReviewDAO.getInstance();
 
 String id=request.getParameter("id");
-id="HJS";
+id="test";
 int rvNo=Integer.valueOf(request.getParameter("rvNo"));
 int rvScore=Integer.valueOf(request.getParameter("rvScore"));
 String rvText=request.getParameter("rvText");

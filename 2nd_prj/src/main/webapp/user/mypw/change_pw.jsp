@@ -1,3 +1,4 @@
+<%@page import="ra.user.pw.ModifyPwDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="비밀번호 변경" %>
@@ -5,11 +6,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 String id= request.getParameter("sesId");
+id="test";
 
 %>
-<c:if test="${ empty sesId }">
+<%-- <c:if test="${ empty sesId }">
 <c:redirect url="../login/Client_login.html"/>
-</c:if>
+</c:if> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +35,47 @@ String id= request.getParameter("sesId");
  <script type="text/javascript">
  $(function(){
 	 
+	 $("#btn_modify").click( function(){
+		 
+		var password = $("#pw").val();
+
+		var pattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?!.*\s).{8,20}$/;
+		
+		if (!(password !== null && password !== "" && pattern.test(password))) {
+		    alert("비밀번호 형식이 틀립니다.");
+		    return;
+		} 
+		
+		 if(	!(password == $("#pw2").val()) ){
+			 alert($("#pw2").val());
+			 alert("비밀번호를 확인해주세요.");
+			 return;
+		 }; 
+		 
+		 var jsonObj= { "pw":password};
+		 
+		 $.ajax({
+			 url:"modify_pw_process.jsp",
+			 method:"post",
+			 data:jsonObj,
+			dataType:"json",
+			error:function(xhr){
+				console.log(xhr.status);
+			},
+			success:function( temp ){
+				var cnt=temp.cnt;
+				if(cnt == 1 ){
+					alert("비밀번호 변경이 완료되었습니다.");
+					location.reload();
+				}//endif	
+			}//success
+		 });//ajax
+	 
+	 });//click
+	 
+	 $("#btn_cancel").click( function(){
+		 location.href="../index/index.jsp";
+	 });//click
  });//ready
  </script>
 </head>
@@ -50,22 +93,22 @@ String id= request.getParameter("sesId");
 	        <div class="containter-fluid px-4" >
 	        	<div class="card-body">
                 	<div class="card mb-3" style="margin:10px; padding:10px">
-		            	<div class="row" id="pw" style="margin-top:2%; margin-left:1%;">
+		            	<div class="row" style="margin-top:2%; margin-left:1%;">
 			            	<div class="row">
 			            		<label for="inputPassword5" class="form-label">Password</label>
 			            	</div>
 							<div class="row">
 								<div class="col-8">
-									<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+									<input type="password" id="pw" name="pw" class="form-control" aria-describedby="passwordHelpBlock">
 								</div>
 							</div>
 							<div class="row">
 								<div id="passwordHelpBlock" class="form-text">
-				  					Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+				  					Your password must be 8-20 characters long, contain letters and numbers, using one large letter and special characters. and must not contain spaces and emoji.
 								</div>
 							</div>
 	            		</div>
-		            	<div class="row" id="pw2" style="margin-top:5%; margin-left:1%;">
+		            	<div class="row" style="margin-top:5%; margin-left:1%;">
 				        	<div class="row">
 					    		<label for="inputPassword5" class="form-label">
 					    			Confirm Password
@@ -73,7 +116,7 @@ String id= request.getParameter("sesId");
 					       	</div>
 			            	<div class="row">
 				            	<div class="col-8">
-									<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+									<input type="password" id="pw2" name="pw2" class="form-control" aria-describedby="passwordHelpBlock">
 								</div>
 							</div>
 								<div class="row">
@@ -89,7 +132,7 @@ String id= request.getParameter("sesId");
 									<input type="button" id="btn_modify" class="btn btn-outline-dark" value="수정" style="border:1px solid #000"/>
 								</div>
 								<div class="col-auto">
-									<input type="button" id="btn_cancel" class="btn btn-outline-dark" value="취소"style="border:1px solid #000"/>
+									<input type="button" id="btn_cancel"  class="btn btn-outline-dark" value="취소"style="border:1px solid #000"/>
 								</div>
 		                   	</div>
 	            			</div>

@@ -1,3 +1,4 @@
+<%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="kr.co.sist.util.cipher.DataDecrypt"%>
 <%@page import="oracle.net.resolver.TimeUnitSuffixUtility"%>
@@ -10,25 +11,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%request.setCharacterEncoding("UTF-8");
 
-DataDecrypt dd= new DataDecrypt("a12345678901234567");
+	 DataDecrypt dd= new DataDecrypt("a12345678901234567");
 
-   	String id= request.getParameter("sesId");
-   	id="kjm";
-
-	myPageDAO mpDAO = myPageDAO.getInstance();
-	   	//mpDAO.selectUserInfo(id값으로 변경);
-    userInfoVO uiVO = mpDAO.selectUserInfo(id);
-    
-    String uName=uiVO.getName();
-   //String uName=dd.decryption(uiVO.getName());
-   String uNic=uiVO.getNick();
-    String uTel=dd.decryption(uiVO.getTel());
-    String uEmail=dd.decryption(uiVO.getEmail());
-		    
-%>
-<%-- <c:if test="${ empty sesId }">
+	    String id= request.getParameter("sesId");
+	 	
+	    if(!(id == null && "".equals(id))){
+	 		response.sendRedirect("../login/Client_login.html");
+	 		return;
+	 	}
+	 	
+	 	myPageDAO mpDAO = myPageDAO.getInstance();
+	 	   	//mpDAO.selectUserInfo(id값으로 변경);
+	     userInfoVO uiVO = mpDAO.selectUserInfo(id);
+	 	System.out.println(uiVO);  
+	 	
+	   	String uName=dd.decryption(uiVO.getName());
+	    	String uNic=uiVO.getNick();
+	     String uTel=dd.decryption(uiVO.getTel());
+	     String uEmail=dd.decryption(uiVO.getEmail());
+	 %>
+<c:if test="${ empty sesId }">
 <c:redirect url="../login/Client_login.html"/>
-</c:if> --%>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,6 +56,7 @@ DataDecrypt dd= new DataDecrypt("a12345678901234567");
  <script type="text/javascript">
 
  $(function(){
+	 
 	 
 	 $("#btn_modify").click(function(){
 		
@@ -89,8 +94,8 @@ DataDecrypt dd= new DataDecrypt("a12345678901234567");
 					console.log(xhr.status);
 				},
 				success:function( temp ){
-					
-					if(temp.cnt == 1 ){
+					var cnt= temp.cnt
+					if( temp.cnt == 1 ){
 						alert("수정되었습니다.");
 						location.reload();
 					}//endif	

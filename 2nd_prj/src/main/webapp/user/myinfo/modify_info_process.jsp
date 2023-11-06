@@ -10,15 +10,14 @@ request.setCharacterEncoding("UTF-8");
 DataEncrypt de= new DataEncrypt("a12345678901234567");
 
 String id = request.getParameter("uId");
-System.out.println(id);
 
 String uNic=request.getParameter("uNic");
 
 String uTel=request.getParameter("uTel");
-uTel=DataEncrypt.messageDigest("MD5",uTel);
+uTel=de.encryption(uTel);
 
 String uEmail=request.getParameter("uEmail");
-uEmail=de.messageDigest("MD5",uEmail);
+uEmail=de.encryption(uEmail);
 
 myPageDAO mpDAO = myPageDAO.getInstance();
 

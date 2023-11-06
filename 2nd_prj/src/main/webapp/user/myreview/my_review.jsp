@@ -13,7 +13,7 @@
 <% request.setCharacterEncoding("UTF-8"); 
 
 String id=request.getParameter("sesId");
-
+id="test";
 
 int totalCount=0;
 MyReviewDAO mrDAO = MyReviewDAO.getInstance();
@@ -56,9 +56,9 @@ List<MyReviewVO> rvList=mrDAO.selectReview(id,startNum,endNum);//리뷰조회
 pageContext.setAttribute("rvList",rvList);
 
 %>
-<c:if test="${ empty sesId }">
+<%-- <c:if test="${ empty sesId }">
 <c:redirect url="../login/Client_login.html"/>
-</c:if>
+</c:if> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,6 +87,18 @@ pageContext.setAttribute("rvList",rvList);
  });//ready
  
  function modifyRv( i ){
+	
+	 if (isNaN( $("#rvScore"+i).val()) ) {
+		 	alert($("#rvScore"+i).val());
+		    alert("숫자를 입력해주세요.");
+		    return;
+		}
+	 var inputValue = parseInt($("#rvScore" + i).val());
+	 if (inputValue < 1 || inputValue > 5) {
+	     alert("평점을 1부터 5 사이의 값으로 입력해주세요.");
+	     return;
+	 }
+ 
 	 var jsonObj={ 
 		<%-- "id" : <%= request.getParameter("id")%> --%>
 		"rvNo" :	$("#rvNo"+i).val(),
@@ -103,7 +115,7 @@ pageContext.setAttribute("rvList",rvList);
 				console.log(xhr.status);
 			},
 			success:function( temp ){
-								var tempScore=temp.Score;
+				var tempScore=temp.Score;
 				var tempText=temp.Text;
 				var cnt=temp.cnt;
 				
@@ -164,12 +176,13 @@ pageContext.setAttribute("rvList",rvList);
 	                        <c:forEach var="rv" items="${ rvList }" varStatus="i"> 
 	                        <div class="card mb-4">
 	                        	<div class="card-header" id="review_head">
-	                        		<label class="btn btn-outline-dark" >날짜 : ${ rv.rvDate }</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark"  >날짜</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark"  >${ rv.rvDate }</label>&nbsp;&nbsp;&nbsp;
 	                        		<input type="hidden" id="rvNo${i.count}" name="rvNo${i.count}" value="${ rv.rvNo }"/>
-	                        		<%-- <input type="hidden" id="raName${i.count}" name="raName${i.count}" value="${ rv.raName }"/> --%>
-	                        		<label class="btn btn-outline-dark">휴게소 명 : ${rv.raName }</label>&nbsp;&nbsp;&nbsp;
-	                        		<input type="hidden" id="rvScore${i.count}" name="rvScore${i.count}" value="${ rv.rvScore }"/>
-	                        		<label class="btn btn-outline-dark">평점 : ${ rv.rvScore }</label>
+	                        		<label class="btn btn-outline-dark" disabled>휴게소 명</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark" disabled>${rv.raName }</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark" > 평점</label>
+	                        		<input type="text" id="rvScore${ i.count }" name="rvScore${ i.count }" class="btn btn-outline-dark" value="${ rv.rvScore }" style="width:50px;"/>
 	                       		</div>
 		                           <c:choose>
 		                                <c:when test="${ not empty rv.rvdType}"> 

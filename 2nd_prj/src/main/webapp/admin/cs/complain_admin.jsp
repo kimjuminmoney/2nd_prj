@@ -15,7 +15,7 @@
 
 int totalCount=0;
 String id=(String)session.getAttribute("sesId");
-id="HJS";
+id="1";
 
 AdminCSDAO acDAO= AdminCSDAO.getInstance();
 
@@ -23,9 +23,9 @@ List<AdminCSVO> csList=acDAO.selectAllCS();//리뷰조회
 pageContext.setAttribute("csList",csList);
 
 %>
-<c:if test="${ empty sesId }">
+<%-- <%-- <c:if test="${ empty sesId }">
 <c:redirect url="../login/Manager_login.html"/>
-</c:if>
+</c:if> --%> --%>
 <!DOCTYPE html>
 <html>
 <head>

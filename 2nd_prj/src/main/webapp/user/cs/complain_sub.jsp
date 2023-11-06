@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 String id= (String)session.getAttribute("id"); 
  int csNO=Integer.valueOf(request.getParameter("csNO"));
 //id=(String)session.getAttribute("");
-id="HJS";
+id="test";
 
 
 myCSDAO mcDAO = myCSDAO.getInstance();
@@ -53,8 +53,6 @@ pageContext.setAttribute("cVO", cVO);
 	 $("#btn_close").click(function(){
 			self.close(); 
 		 });
-		 
-		 
 	 
 	 
  });//ready
@@ -91,6 +89,25 @@ pageContext.setAttribute("cVO", cVO);
 	            	<textarea class="form-control" id="csText" style="height: 100px;	" disabled>${ cVO.csText }</textarea>
 	            </div>
 	            <div class="row g-3 align-items-center" id="btn_myinfo" style="margin-top:10px;">
+					<c:if test="${ empty cVO.empno }">
+					<div class="col-2">
+						<input type="button" id="btn_close" class="btn btn-outline-dark" value="닫기" style="border:1px solid #000"/>
+					</div>
+					</c:if>
+			     </div>
+	         </div>
+	     </div>
+	</div>
+<c:if test="${ not empty cVO.empno }">
+	<div class="container-fluid px-4" style="margin-left:2%;">
+	<h1 class="mt-4">답변</h1>
+	<div class="card mb-4">
+		<div class="card-header">
+	        <div class="card-body">
+	        	<div id="ta">
+	            	<textarea class="form-control" id="CSAnswer" name="CSAnswer" style="height: 100px;">${ cVO.csAnswer}</textarea>
+	            </div>
+	            <div class="row g-3 align-items-center" id="btn_myinfo" style="margin-top:10px;">
 					<div class="col-2">
 						<input type="button" id="btn_close" class="btn btn-outline-dark" value="닫기" style="border:1px solid #000"/>
 					</div>
@@ -98,8 +115,8 @@ pageContext.setAttribute("cVO", cVO);
 	         </div>
 	     </div>
 	</div>
-
-
+	</div>
+</c:if>
 
 
 </body>

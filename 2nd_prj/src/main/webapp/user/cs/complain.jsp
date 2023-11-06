@@ -13,6 +13,7 @@
 
 int totalCount=0;
 String id=request.getParameter("sesId");
+id="test";
 myCSDAO mcDAO= myCSDAO.getInstance();
 try{
 totalCount=mcDAO.selectTotalCount(id);//리뷰 전체 개수 count
@@ -50,12 +51,12 @@ if( totalPage < endPage){
 }
 
 List<MyCSVO> csList=mcDAO.selectMyCS(id,startNum,endNum);//리뷰조회
+System.out.println(csList);
 pageContext.setAttribute("csList",csList);
-
 %>
-<c:if test="${ empty sesId }">
+<%-- <c:if test="${ empty sesId }">
 <c:redirect url="../login/Client_login.html"/>
-</c:if>
+</c:if> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,6 +80,9 @@ pageContext.setAttribute("csList",csList);
  </style>
  <script type="text/javascript">
  $(function(){
+	 var typeFlag=false;
+	 var locFlag=false;
+	 var raFlag=false;
 	 $("#select_Type").change(function(){
 		 
 		 if( $("#select_Type").selectedIndex != 0 ){
@@ -134,10 +138,34 @@ pageContext.setAttribute("csList",csList);
 		
 		$("#btn_submit").click(function(){
 			//유효성 검사필요
+			if( ($("#cs_text").val() == null || $("#cs_text").val() == "" ) ){
+				alert("내용을 입력해주세요.")
+				return;				
+			} 
+			
+			if( $("#select_Type")[0].selectedIndex == 0 ){
+				alert("유형을 선택해주세요.");
+				return;
+			}
+			
+			if( $("#select_Type")[0].selectedIndex == 1 ){
+			
+				if( $("#ra_location")[0].selectedIndex == 0 ){
+					alert("지역을 선택해주세요.");
+					return;
+				}
+				
+				if( $("#ra_location")[0].selectedIndex != 0 ){
+					if( $("#ra_name")[0].selectedIndex == 0 ){
+						alert("휴게소를 선택해주세요.");
+						return;
+					}//end raname
+				}//end if
+			}
+			
 			
 			$("#cs_frm").submit();
 			alert("문의가 완료되었습니다.");
-			//location.reload();
 		
 		});//click
 		
@@ -181,6 +209,8 @@ pageContext.setAttribute("csList",csList);
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    	<c:choose>
+										<c:when test="${ not empty csList }">
                                     	<c:forEach var="cs" items="${ csList }" varStatus="i">
 	                                    	<tr id="cs_detail${ i.count }" onclick="open_detail(${i.count})">
 	                                    	
@@ -195,6 +225,9 @@ pageContext.setAttribute("csList",csList);
 	                                    		<td>${ cs.raName }</td>
 	                                    	</tr>
 	                                    </c:forEach>
+	                                    </c:when>
+	                                    <c:otherwise><tr><td colspan="4">문의 내역이 없습니다.<input type="hidden" id="csNO" name="csNO" value="1"/></td></tr></c:otherwise>
+	                                    </c:choose>
 	                                    </tbody>
 									</table>
 									<div id="tbottom">

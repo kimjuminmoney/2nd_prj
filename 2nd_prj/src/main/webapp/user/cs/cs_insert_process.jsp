@@ -11,14 +11,14 @@ JSONObject jsonObj = new JSONObject();
 
 
 String id=(String)session.getAttribute("id");
-System.out.println(id);
-id="HJS";
+id="test";
 
 String raNo=request.getParameter("ra_name");
 
-
 String csType=request.getParameter("csType");
-
+if(csType.equals("U")){
+	raNo=null;
+}
 String csText= request.getParameter("cs_text");
 
 
@@ -26,9 +26,10 @@ cVO.setRaNO((raNo));
 cVO.setCsType(csType);
 cVO.setCsText(csText);
 
-
 myCSDAO mcDAO = myCSDAO.getInstance();
 int cnt = mcDAO.insertCS(id, cVO);
+
+response.sendRedirect("complain.jsp");
 
 
 %>

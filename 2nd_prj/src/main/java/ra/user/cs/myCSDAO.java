@@ -228,7 +228,7 @@ public class myCSDAO {
 			con=db.getConn("jdbc/dbcp");
 			StringBuilder Query = new StringBuilder();
 			Query.append("    insert into customerservice(userid,csno,cstype,rano,csdate,cstext)     ")
-			.append("    values (?,(select max(csno)+1 from customerservice where userid=?),? ,?,sysdate,? )    ");
+			.append("    values (?, (select nvl(max(csNo),0)+1 from customerservice where userid=?), ? ,?,sysdate,? )    ");
 			 		
 			pstmt=con.prepareStatement(Query.toString());
 			String cstype=cVO.getCsType();
@@ -237,6 +237,7 @@ public class myCSDAO {
 			pstmt.setString(1, id);
 			pstmt.setString(2, id);
 			pstmt.setString(3, cstype);
+			System.out.println(rano);
 			pstmt.setString(4, rano);
 			pstmt.setString(5, cstext);
 			
