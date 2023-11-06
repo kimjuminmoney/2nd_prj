@@ -6,13 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import project_VO.Client_joinVO;
-import project_VO.MembershipManagementVO;
+import ra.util.DbConnection;
+
 
 public class MembershipManagementDAO {
 	
 	private static MembershipManagementDAO mmDAO;
-	public MembershipManagementDAO() {
+	private MembershipManagementDAO() {
 		
 	}
 	public static MembershipManagementDAO getInstance() {
@@ -24,7 +24,7 @@ public class MembershipManagementDAO {
 	
 	
 	
-	public int modifyMember(String USERID, String UNICK,  String UTEL)throws SQLException{
+	public int modifyMember(String USERID, String UNICK,  String UTEL) throws SQLException{
 		int cnt=0;
 		Connection con = null;
 		PreparedStatement pstmt = null;

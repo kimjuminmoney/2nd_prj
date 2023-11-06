@@ -25,7 +25,7 @@ pageContext.setAttribute("csList",csList);
 %>
 <%-- <%-- <c:if test="${ empty sesId }">
 <c:redirect url="../login/Manager_login.html"/>
-</c:if> --%> --%>
+</c:if> --%>
 <!DOCTYPE html>
 <html>
 <head>
