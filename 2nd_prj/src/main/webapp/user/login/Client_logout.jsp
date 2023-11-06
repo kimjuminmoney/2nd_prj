@@ -6,5 +6,5 @@
 session.removeAttribute("sesId");
 session.removeAttribute("userData");
 session.invalidate();
-response.sendRedirect("Client_login.html");
+response.sendRedirect("Client_login.jsp");
 %>

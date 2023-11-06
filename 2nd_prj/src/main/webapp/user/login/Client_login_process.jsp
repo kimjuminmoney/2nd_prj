@@ -7,7 +7,7 @@
 <%@ page info="" %>
 <%
 if("GET".equals(request.getMethod().toUpperCase())){
-	response.sendRedirect("Client_login.html");
+	response.sendRedirect("Client_login.jsp");
 	return;
 }
 %>
@@ -47,11 +47,11 @@ try{
 		session.setAttribute("sesId", clVO.getUSERID());
 		session.setAttribute("userData", cdVO);
 		
-		response.sendRedirect("../index/index.jsp");
+		response.sendRedirect("test.jsp");
 }else{
 	%>
 	아이디나 비밀번호를 확인해 주세요<br/>
-	<a href="Client_login.html">로그인</a>
+	<a href="Client_login.jsp">로그인</a>
 <%
 }
 }catch(SQLException se){
@@ -77,9 +77,9 @@ $(document).ready(function(){
 		});
 	
 	//ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장
-	$("#id").keyup(function() {//ID입력 칸에 ID를 입력할 떄
+	$("#USERID").keyup(function() {//ID입력 칸에 ID를 입력할 떄
 		if($("#checkId").is(":checked")){// ID저장하기를 체크한 상태라면
-			setCookie("key",$("#id").val(),7); //7일동안 쿠키 보관
+			setCookie("key",$("#USERID").val(),7); //7일동안 쿠키 보관
 	}
 	})
 });
