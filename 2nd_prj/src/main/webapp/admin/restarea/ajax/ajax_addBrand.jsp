@@ -12,7 +12,6 @@ ManageBrandVO mbVO = new ManageBrandVO();
 String restAreaNum = request.getParameter("restAreaNum");
 String brandImage = request.getParameter("brandImage");
 String brandName = request.getParameter("brandName");
-String brandTel = request.getParameter("brandTel"); 
 String brandDetail = request.getParameter("brandDetail");
 
 String fiPath = brandImage;
@@ -27,7 +26,6 @@ System.out.print("아이콘넘버: "+iconNum);
 mbVO.setRestAreaNum(restAreaNum);
 mbVO.setIconNum(iconNum);
 mbVO.setBrandName(brandName);
-mbVO.setBrandTel(brandTel);
 mbVO.setBrandHome(brandDetail);
 
 boolean flag = false;

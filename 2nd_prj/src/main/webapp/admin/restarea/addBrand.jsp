@@ -55,7 +55,6 @@
 	        var restAreaNum = $("#restAreaNum").val();
 	        var brandImage = $("#brandImage").val(); 
 	        var brandName = $("#brandName").val(); 
-	        var brandTel = $("#brandTel").val();
 	        var brandDetail = $("#brandDetail").val();
 
 	        // 데이터를 객체로 구성
@@ -63,7 +62,6 @@
 	        	restAreaNum: restAreaNum,
 	        	brandImage: brandImage,
 	        	brandName: brandName,
-	        	brandTel: brandTel,
 	        	brandDetail: brandDetail,
 	        };
 

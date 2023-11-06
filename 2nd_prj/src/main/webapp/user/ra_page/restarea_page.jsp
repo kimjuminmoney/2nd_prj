@@ -283,84 +283,85 @@ $(function(){
             <!-- gas section-->
             <script>
             $(function(){
-	            
-	         // 현재 URL에서 파라미터 가져오기
-	            const urlParams = new URLSearchParams(window.location.search);
-	            gasData(urlParams)
-	            // rano 파라미터 가져오기
-	            /* const ranoValue = "1";
-	            alert(ranoValue)
-	            $.ajax({
-	            	url: "gasstation_ajax.jsp",
-	            	type : "get",
-	            	dataType : "text",
-	            	data : "rano=" + ranoValue,
-	            	error : function(xhr){
-	            		console.log(xhr.status);
-	            	},
-	            	success : function(gsno){
-	            		gasData(gsno);
-	            	}
-	            });//ajax */
-	        });//function
-	
-	            // gsno 값을 사용하여 API 호출
-	            function gasData(gsno){
-		            if (gsno) {
-		            	var key = '3332053980';
-		                var apiUrl = "http://data.ex.co.kr/openapi/business/curStateStation?key="
-		                		+key+"&type=json&numOfRows=10&pageNo=1&serviceAreaCode2=" + gsno;
-		
-		                // jQuery를 사용하여 API 요청 보내기
-		                $.ajax({
-		                    url: apiUrl,
-		                    method: 'GET',
-		                    dataType: 'json',
-		                    success: function(jsonData) {
-		                        // API 응답 데이터를 처리
-		                        console.log(jsonData);
-		                     // 변수에 데이터 저장
-		                        var list = jsonData.list[0];
-		                        
-		                        // 주유소 정보 표시
-		                        if (list) {
-		                            document.getElementById("gasStation").textContent = list.serviceAreaName;
-		                            document.getElementById("gasStationNumber").textContent = list.telNo;
-		                        } else {
-		                            console.error('No data available for the given criteria.');
-		                        }
-		                        
-		                        // 유가 정보 표시
-		                        if (list) {
-		                            document.getElementById("gasolinePrice").textContent = list.gasolinePrice;
-		                            document.getElementById("dieselPrice").textContent = list.diselPrice;
-		                        } else {
-		                            console.error('No data available for the given criteria.');
-		                        }
+               
+               // 현재 URL에서 파라미터 가져오기
+                  const urlParams = new URLSearchParams(window.location.search);
 
-		                        // LPG 정보 표시
-		                        if (list && list.lpgYn === 'Y') {
-		                            const lpgRow = document.createElement("tr");
-		                            const lpgType = document.createElement("th");
-		                            lpgType.setAttribute("scope", "row");
-		                            lpgType.textContent = "LPG";
-		                            const lpgPrice = document.createElement("td");
-		                            lpgPrice.textContent = list.lpgPrice;
+                  // rano 파라미터 가져오기
+                  const ranoValue = urlParams.get('rano');
+                  
+                  $.ajax({
+                     url: "gasstaion_ajax.jsp",
+                     type : "get",
+                     dataType : "text",
+                     data : "rano=" + ranoValue,
+                     error : function(xhr){
+                        console.log(xhr.status);
+                     },
+                     success : function(gsno){
+                        gasData(gsno);
+                     }
+                  })
+              })
+      
+   
+               // gsno 값을 사용하여 API 호출
+               function gasData(gsno){
+                  if (gsno) {
+                     var key = '3332053980';
+                      var apiUrl = "http://data.ex.co.kr/openapi/business/curStateStation?key="
+                            +key+"&type=json&numOfRows=10&pageNo=1&serviceAreaCode2=" + gsno;
+      
+                      // jQuery를 사용하여 API 요청 보내기
+                      $.ajax({
+                          url: apiUrl,
+                          method: 'GET',
+                          dataType: 'json',
+                          success: function(jsonData) {
+                              // API 응답 데이터를 처리
+                              console.log(jsonData);
+                           // 변수에 데이터 저장
+                              var list = jsonData.list[0];
+                              
+                              // 주유소 정보 표시
+                              if (list) {
+                                  document.getElementById("gasStation").textContent = list.serviceAreaName;
+                                  document.getElementById("gasStationNumber").textContent = list.telNo;
+                              } else {
+                                  console.error('No data available for the given criteria.');
+                              }
+                              
+                              // 유가 정보 표시
+                              if (list) {
+                                  document.getElementById("gasolinePrice").textContent = list.gasolinePrice;
+                                  document.getElementById("dieselPrice").textContent = list.diselPrice;
+                              } else {
+                                  console.error('No data available for the given criteria.');
+                              }
 
-		                            const fuelInfoTable = document.getElementById("fuelInfoTable");
-		                            const fuelInfoTbody = fuelInfoTable.querySelector("tbody");
+                              // LPG 정보 표시
+                              if (list && list.lpgYn === 'Y') {
+                                  const lpgRow = document.createElement("tr");
+                                  const lpgType = document.createElement("th");
+                                  lpgType.setAttribute("scope", "row");
+                                  lpgType.textContent = "LPG";
+                                  const lpgPrice = document.createElement("td");
+                                  lpgPrice.textContent = list.lpgPrice;
 
-		                            lpgRow.appendChild(lpgType);
-		                            lpgRow.appendChild(lpgPrice);
-		                            fuelInfoTbody.appendChild(lpgRow);
-		                        }
-		                    },
-		                    error: function(jqXHR, textStatus, errorThrown) {
-		                        console.error('Request failed:', errorThrown);
-		                    }
-		                });
-		            }
-	            }
+                                  const fuelInfoTable = document.getElementById("fuelInfoTable");
+                                  const fuelInfoTbody = fuelInfoTable.querySelector("tbody");
+
+                                  lpgRow.appendChild(lpgType);
+                                  lpgRow.appendChild(lpgPrice);
+                                  fuelInfoTbody.appendChild(lpgRow);
+                              }
+                          },
+                          error: function(jqXHR, textStatus, errorThrown) {
+                              console.error('Request failed:', errorThrown);
+                          }
+                      });
+                  }
+               }
             </script>
 
             
@@ -529,6 +530,6 @@ $(function(){
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="../../common/js/scripts.js"></script>
     </body>
 </html>
