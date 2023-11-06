@@ -7,7 +7,7 @@
 <%@ page info="" %>
 <%
 if("GET".equals(request.getMethod().toUpperCase())){
-	response.sendRedirect("Manager_login.html");
+	response.sendRedirect("Manager_login.jsp");
 	return;
 }
 %>
@@ -52,7 +52,7 @@ try{
 }else{
 %>
 	아이디나 비밀번호를 확인해 주세요<br/>
-	<a href="Manager_login.html">로그인</a>
+	<a href="Manager_login.jsp">로그인</a>
 <%
 }
 }catch(SQLException se){
