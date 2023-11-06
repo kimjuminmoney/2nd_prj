@@ -1,5 +1,6 @@
-<%@page import="ra.user.login.ClientDataVO"%>
-<%@page import="ra.user.login.ClientLoginDAO"%>
+<%@page import="project_VO.ClientDataVO"%>
+<%@page import="project_VO.Client_joinVO"%>
+<%@page import="projectDAO.ClientLoginDAO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -33,7 +34,7 @@ $(function(){
 </head>
 <body>
 
-<jsp:useBean id="clVO" class="ra.user.login.ClientLoginVO" scope="page"/>
+<jsp:useBean id="clVO" class="project_VO.ClientLoginVO" scope="page"/>
 <jsp:setProperty property="*" name="clVO"/>
 
 <%
@@ -42,7 +43,6 @@ clVO.setUPW(DataEncrypt.messageDigest("MD5", clVO.getUPW()));
 ClientLoginDAO clDAO = ClientLoginDAO.getInstance();
 try{
 	ClientDataVO cdVO = clDAO.selectLogin(clVO);
-	
 	if(cdVO != null){
 		session.setAttribute("sesId", clVO.getUSERID());
 		session.setAttribute("userData", cdVO);
