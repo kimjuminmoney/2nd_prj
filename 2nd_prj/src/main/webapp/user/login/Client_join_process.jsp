@@ -10,7 +10,7 @@ request.setCharacterEncoding("UTF-8");
 //GET방식의 요청이라면 memberjoin_frm.jsp로 이동
 String method=request.getMethod();
 if("GET".equals(method)){
-	response.sendRedirect("Client_join.jsp");
+	response.sendRedirect("Client_join.html");
 	return;
 }
 %>

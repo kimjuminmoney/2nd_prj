@@ -25,28 +25,82 @@
 
 
 <%
-%>
-$(function(){
-    
-	$("#btnDup").click(function(){
-		var id=$("#USERID").val();
-		window.open("id_dup.jsp?USERID="+id,"id_dup","width=512,height=313,top="
-	            +( window.screenY+150)+",left="+( window.screenX+200));	
-	}); 
 
-	$("#btn").click(function(){
-		//입력값에 대한 유효성 검증
-		if($("#idDupFlag").val()==0){
-			alert($("#USERID").val()+"은 중복확인 되지 않은 아이디 입니다.\n 중복확인을 수행해 주세요.");
-			return;
-		}
-		$("#frm").submit();
-	});//click
+%>
+$(document).ready(function() {
+    // req 체크박스의 상태가 변경될 때 호출할 함수
+    $("input[name='req']").change(function() {
+        if ($(this).is(":checked")) {
+            // req 체크박스가 체크되면 req1과 req2도 체크
+            $("input[name='req1']").prop("checked", true);
+            $("input[name='req2']").prop("checked", true);
+        } else {
+            // req 체크박스가 체크 해제되면 req1과 req2도 해제
+            $("input[name='req1']").prop("checked", false);
+            $("input[name='req2']").prop("checked", false);
+        }
+    });
 	
-	$("#USERID").keydown(function(){
-		$("#idDupFlag").val(0);
-	});
-});//ready
+	
+    $("#frm").submit(function(e) {
+        var password = $("#UPW").val();
+        var confirmPassword = $("#pwchk").val();
+        
+     // 전체 약관 체크박스를 클릭할 때 실행될 함수
+        function selectAll(source) {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"][name="req1"], input[type="checkbox"][name="req2"]');
+            
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+
+        // req 체크박스의 상태가 변경될 때 호출할 함수
+        document.querySelector('input[type="checkbox"][name="req"]').addEventListener('change', function() {
+            selectAll(this); // req 체크박스 클릭 시 req1과 req2 체크박스 상태 변경
+        });
+
+        // 비밀번호가 일치하지 않으면 폼 제출을 막고 경고 메시지를 표시
+        if (password !== confirmPassword) {
+            e.preventDefault();
+            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            return false;
+        }
+
+
+        // 개인회원 약관과 개인정보 수집 및 이용에 동의해야 가입 가능하도록 확인
+        if (!$("input[name='req1']").is(":checked") || !$("input[name='req2']").is(":checked")) {
+            e.preventDefault();
+            alert("개인회원 약관 및 개인정보 수집 및 이용에 모두 동의해야 회원 가입이 가능합니다.");
+        }
+    });
+    function isPasswordValid(password) {
+        // 비밀번호는 8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 모두 포함해야 함
+        var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/;
+        return regex.test(password);
+    }
+
+
+    $("#btnDup").click(function(){
+        var id = $("#USERID").val();
+        window.open("id_dup.jsp?USERID=" + id, "id_dup", "width=512,height=313,top=" + (window.screenY + 150) + ",left=" + (window.screenX + 200));
+    });
+
+    $("#btn").click(function(){
+        // 입력값에 대한 유효성 검증
+        if ($("#idDupFlag").val() == 0) {
+            alert($("#USERID").val() + "은 중복확인 되지 않은 아이디 입니다.\n 중복확인을 수행해 주세요.");
+            return;
+        }
+        $("#frm").submit();
+    });
+
+    $("#USERID").keydown(function(){
+        $("#idDupFlag").val(0);
+    });
+});
+
+
 
 
 </script>
@@ -94,6 +148,7 @@ $(function(){
             <i class="bi bi-lock"></i>
         </span>
     </div>
+    <small id="passwordHelp" class="form-text text-muted">비밀번호는 8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 모두 포함해야 합니다.</small>
 </div>
 
 <div class="form-group mb-3">
@@ -105,6 +160,8 @@ $(function(){
         </span>
     </div>
 </div>
+
+
 
 <div class="form-group mb-3">
     <label for="UNAME">이름</label>
@@ -162,26 +219,20 @@ $(function(){
 - 생성정보 수집 툴을 통한 수집
     </textarea><br/>
     
-    <input type="checkbox" name="req" onclick="selectAll(this)"> (필수)전체 약관에 동의<br/>
+    <input type="checkbox" name="req"> (필수)전체 약관에 동의<br/>
 <hr/>
 <!-- 두 개의 체크박스는 기본적으로 비선택 상태 -->
-<input type="checkbox" name="req"> (필수)개인회원 약관에 동의<br/>
-<input type="checkbox" name="req"> (필수)개인정보 수집 및 이용에 동의합니다.<br/><br/>
+<input type="checkbox" name="req1"> (필수)개인회원 약관에 동의<br/>
+<input type="checkbox" name="req2"> (필수)개인정보 수집 및 이용에 동의합니다.<br/><br/>
 
  <div style="text-align: center;"> <!-- 가운데 정렬 스타일 추가 -->
         <button type="button" value="가입"  id="btn" class="btn btn-success">회원가입</button>
     </div>
 <script>
-// 전체 약관 체크박스를 클릭할 때 실행될 함수
-function selectAll(source) {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"][name="req"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = source.checked;
-    }
 }
 
-</script>
-</div>
+											</script>
+										</div>
                                     </form>
                                 </div>
                             </div>
@@ -189,7 +240,6 @@ function selectAll(source) {
                     </div>
                 </div>
             </main>
-                </div>
                 </div>
                 <!-- 풋터 -->
                 <footer class="py-4 bg-light mt-auto">
