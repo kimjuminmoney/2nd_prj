@@ -60,7 +60,7 @@ pageContext.setAttribute("mList",mList);
  function open_detail( i ){
 	 
 	 var userId=$("#userId"+i).val();
- 	 window.open("MembershipManagement_sub?userId="+csNO,"cs_detail","width=800,height=400,top="
+ 	 window.open("MembershipManagement_sub.jsp?userId="+userId,"member_detail","width=800,height=520,top="
             +( window.screenY+150)+",left="+( window.screenX+200));
  }//open_detail
  
@@ -93,10 +93,10 @@ pageContext.setAttribute("mList",mList);
                                     </thead>
                                     <tbody>
                                     	<c:forEach var="m" items="${ mList }" varStatus="i">
-	                                    	<tr id="m_detail${ i.count }" onclick="open_detail(${i.count})">
+	                                    	<tr id="m_detail${ i.count }" >
 	                                    	<!-- userId, uPw, uName, uNick, uEmail, uTel Date uJoin, uQuit; -->
-	                                    		<td>${ m.uNick }</td>
-	                                    		<td id="userId${i.count }" value="${ m.userId }">${ m.userId }</td>
+	                                    		<td>${ m.uNic }</td>
+	                                    		<td ><a href="#void" onclick="open_detail(${i.count})"><input type="hidden" id="userId${i.count }" value="${ m.userId }">${ m.userId }</a></td>
 	                                    		<td>${ m.uJoin }</td>
 	                                    		<td>${ m.uName }</td>
 	                                    	</tr>

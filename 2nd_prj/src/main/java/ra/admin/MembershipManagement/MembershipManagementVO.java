@@ -3,19 +3,19 @@ package ra.admin.MembershipManagement;
 import java.sql.Date;
 
 public class MembershipManagementVO {
-	private String userId, uPw, uName, uNick, uEmail, uTel;
+	private String userId, uPw, uName, uNic, uEmail, uTel;
 	private Date uJoin, uQuit;
 	public String getUserId() {
 		return userId;
 	}
 	public MembershipManagementVO() {
 	}
-	public MembershipManagementVO(String userId, String uPw, String uName, String uNick, String uEmail, String uTel,
+	public MembershipManagementVO(String userId, String uPw, String uName, String uNic, String uEmail, String uTel,
 			Date uJoin, Date uQuit) {
 		this.userId = userId;
 		this.uPw = uPw;
 		this.uName = uName;
-		this.uNick = uNick;
+		this.uNic = uNic;
 		this.uEmail = uEmail;
 		this.uTel = uTel;
 		this.uJoin = uJoin;
@@ -23,7 +23,7 @@ public class MembershipManagementVO {
 	}
 	@Override
 	public String toString() {
-		return "MembershipManagementVO [userId=" + userId + ", uPw=" + uPw + ", uName=" + uName + ", uNick=" + uNick
+		return "MembershipManagementVO [userId=" + userId + ", uPw=" + uPw + ", uName=" + uName + ", uNic=" + uNic
 				+ ", uEmail=" + uEmail + ", uTel=" + uTel + ", uJoin=" + uJoin + ", uQuit=" + uQuit + "]";
 	}
 
@@ -43,11 +43,11 @@ public class MembershipManagementVO {
 	public void setuName(String uName) {
 		this.uName = uName;
 	}
-	public String getuNick() {
-		return uNick;
+	public String getuNic() {
+		return uNic;
 	}
-	public void setuNick(String uNick) {
-		this.uNick = uNick;
+	public void setuNic(String uNic) {
+		this.uNic = uNic;
 	}
 	public String getuEmail() {
 		return uEmail;

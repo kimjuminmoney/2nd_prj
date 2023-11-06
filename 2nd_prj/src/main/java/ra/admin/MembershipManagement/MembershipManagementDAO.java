@@ -1,5 +1,8 @@
 package ra.admin.MembershipManagement;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -52,7 +55,7 @@ public class MembershipManagementDAO {
 	}//selectTotalCount
 	
 	
-	public List<MembershipManagementVO> selectAllMember() throws SQLException{
+	public List<MembershipManagementVO> selectAllMember() throws SQLException, NoSuchAlgorithmException, GeneralSecurityException{
 		Connection con = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs=null;
@@ -70,6 +73,7 @@ public class MembershipManagementDAO {
 			pstmt=con.prepareStatement(sb.toString());
 
 			rs=pstmt.executeQuery();
+			DataDecrypt dd= new DataDecrypt("a12345678901234567");
 			
 			while(rs.next()) {
 				
@@ -77,22 +81,25 @@ public class MembershipManagementDAO {
 				
 				mmVO.setUserId(rs.getString("userId"));
 				mmVO.setuPw(rs.getString("uPw"));
-				mmVO.setuName(rs.getString("UNAME"));
-				mmVO.setuNick(rs.getString("UNIC"));
-				mmVO.setuEmail(rs.getString("uEmail"));
-				mmVO.setuTel(rs.getString("UTEL"));
+				mmVO.setuName(dd.decryption(rs.getString("UNAME")));
+				mmVO.setuNic(rs.getString("UNIC"));
+				mmVO.setuEmail(dd.decryption(rs.getString("uEmail")));
+				mmVO.setuTel(dd.decryption(rs.getString("UTEL")));
 				mmVO.setuJoin(rs.getDate("ujoin"));
 				mmVO.setuQuit(rs.getDate("uQuit"));
 				
 				list.add(mmVO);
 			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally {
 			db.dbClose(rs, pstmt, con);
 		}
 		return list;
 	}//selectAllMember
 	
-	public MembershipManagementVO selectMember( String userId ) throws SQLException{
+	public MembershipManagementVO selectMember( String userId ) throws SQLException, UnsupportedEncodingException, NoSuchAlgorithmException, GeneralSecurityException{
 		Connection con = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs=null;
@@ -104,13 +111,14 @@ public class MembershipManagementDAO {
 		try {
 			StringBuilder sb = new StringBuilder();
 			sb.append("     select *       ")
-			.append("     from USERINFO where=?     ");
+			.append("     from USERINFO where userId=?     ");
 			
 			pstmt=con.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, userId);
 			
 			rs=pstmt.executeQuery();
+			DataDecrypt dd= new DataDecrypt("a12345678901234567");
 			
 			if(rs.next()) {
 
@@ -118,10 +126,10 @@ public class MembershipManagementDAO {
 				
 				mmVO.setUserId(rs.getString("userId"));
 				mmVO.setuPw(rs.getString("uPw"));
-				mmVO.setuName(rs.getString("UNAME"));
-				mmVO.setuNick(rs.getString("UNICK"));
-				mmVO.setuEmail(rs.getString("uEmail"));
-				mmVO.setuTel(rs.getString("UTEL"));
+				mmVO.setuName(dd.decryption(rs.getString("UNAME")));
+				mmVO.setuNic(rs.getString("UNIC"));
+				mmVO.setuEmail(dd.decryption(rs.getString("uEmail")));
+				mmVO.setuTel(dd.decryption(rs.getString("UTEL")));
 				mmVO.setuJoin(rs.getDate("ujoin"));
 				mmVO.setuQuit(rs.getDate("uQuit"));
 				
@@ -150,7 +158,7 @@ public class MembershipManagementDAO {
 			
 			pstmt.setString(1, mmVO.getuPw());
 			pstmt.setString(2, mmVO.getuName());
-			pstmt.setString(3, mmVO.getuNick());
+			pstmt.setString(3, mmVO.getuNic());
 			pstmt.setString(4, mmVO.getuTel());
 			pstmt.setString(5, mmVO.getuTel());
 			pstmt.setString(6, mmVO.getUserId());

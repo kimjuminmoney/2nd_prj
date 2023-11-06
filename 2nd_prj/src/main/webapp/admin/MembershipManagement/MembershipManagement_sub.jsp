@@ -7,6 +7,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%request.setCharacterEncoding("UTF-8");
 
+String userId= request.getParameter("userId");
+System.out.println(userId);
+
+MembershipManagementDAO mmDAO= MembershipManagementDAO.getInstance();
+
+MembershipManagementVO mmVO= null;
+mmVO=mmDAO.selectMember(userId);
+
+pageContext.setAttribute("mmVO", mmVO);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -33,68 +43,76 @@
 <script type="text/javascript">
 $(function(){
 	
-}
+	$("#btn_modify").click({
+		self.close();
+	
+	
+	
+	
+	});//click
+	
+	
+	
+	$("#btn_quit").click({
+		self.close();
+	});//click
+
+	
+	
+	$("#btn_close").click({
+		self.close();
+	});//click
+	
+})//ready
 
 </script>
 </head>
 <body class="sb-nav-fixed">
 
-        <jsp:include page="../admin_include/header_nav.jsp"></jsp:include>
-        <div id="layoutSidenav">
-			<div id="layoutSidenav_nav">
-        	<jsp:include page="../admin_include/side_bar.jsp"></jsp:include>
-        	</div>
-        	<div id="layoutSidenav_content">
+			<div class="container-fluid px-4">
 				<main>
 					<div class="container-fluid px-4">
-						<div class="mb-4" style="width:20%; height:75px; margin-top:50px; padding: 10px;" >
+						<div style="width:20%; height:75px; margin-top:30px; padding: 10px; width:200px;" >
                        	 	<h1 class="list-unstyled" >회원정보</h1>
                         </div>
                      </div>
-					<div class="container-fluid px-4" style="margin-top:50px;">
-
-						<label id="inputuserid" class="form-label">아이디</label>
-						<input style="width:400px" id="USERID" name="USERID" class="form-control" type="text" value=""><br/>
-							
-						<label id="inputname" class="form-label">이름</label>
-						<input id="UNAME" name="UNAME" class="form-control" type="text" value=""><br/>
-
-						<label for="email">이메일</label>
-							<input class="form-control" name="email1" id="email1" type="text" maxlength="100" placeholder="이메일을 입력해주세요." value=""/>
-						    <span class="input-group-text">@</span>
-						    <select class="form-select" name="email2" id="email2" data-value="이메일을 선택해주세요.">
-						    	<option value="naver.com">naver.com</option>
-						    	<option value="daum.net">daum.net</option>
-						        <option value="gmail.com">gmail.com</option>
-						        <option value="hotmail.com">hotmail.com</option>
-						        <option value="nate.com">nate.com</option>
-						        <option value="korea.com">korea.com</option>
-						            <!-- 다른 도메인 옵션을 추가할 수 있습니다 -->
-						   	</select>
-							 
-						<label id="inputUTEL" class="form-label">전화번호</label>
-						<input id="UTEL" name="UTEL" class="form-control" type="text" value=""><br/>
-
-						<label id="inputNick" class="form-label">닉네임</label>
-						</div>                        
-							
-						<label id="inputUJOIN" class="form-label">가입일</label> 
-						<input id="UJOIN" name="UJOIN" class="form-control" type="text" value=""><br /> 
-							
-						<label id="inputUQUIT" class="form-label">탈퇴일</label> 
-						<input id="UQUIT" name="UQUIT" class="form-control" type="text" value=""><br />
-								  
-								  
-	                    <div class="card-body" style="height:100px;">
-							<input type="button" onclick="deleteMm(${i.count})" class="btn btn-outline-dark" value="회원탈퇴" style="border:1px solid #000"/>
-							<input type="button" onclick="modifyMm(${i.count})" class="btn btn-outline-dark" value="확인" style="border:1px solid #000"/>
+					<div class="container-fluid px-4" style="margin-top:15px;">
+						<div class="row">
+							<div class="col-2 align-self-center"><label id="inputuserid" class="form-label">아이디</label></div>
+							<div class="col align-self-center"><input id="userId" name="userId" class="form-control" type="text" value="${mmVO.userId }"></div>
 						</div>
-             	 </main>
-     			 <footer class="py-4 bg-light mt-auto">
-        			<jsp:include page="../admin_include/footer.jsp"></jsp:include>
-					</footer>
+						<div class="row">
+							<div class="col-2 align-self-center"><label id="inputname" class="form-label">이름</label></div>
+							<div class="col align-self-center"><input id="uName" name="uName" class="form-control" type="text" value="${mmVO.uName }"></div>
+						</div>
+						<div class="row">
+							<div class="col-2 align-self-center"><label for="email">이메일</label></div>
+							<div class="col align-self-center"><input class="form-control" name="uEmail" id="uEmail" type="text" maxlength="100" value="${mmVO.uEmail }"/></div>
+						</div>
+						<div class="row">	
+							<div class="col-2 align-self-center"><label id="inputUTEL" class="form-label">전화번호</label></div>
+							<div class="col align-self-center"><input id="uTel" name="uTel" class="form-control" type="text" value="${ mmVO.uTel }"></div>
+						</div>
+						<div class="row">	
+							<div class="col-2 align-self-center"><label id="inputNick" class="form-label">닉네임</label></div>
+						 	<div class="col align-self-center"><input id="uNic" name="uNic" class="form-control" type="text" value="${mmVO.uNic }"></div>
+						 </div>                       
+						<div class="row">		
+							<div class="col-2 align-self-center"><label id="inputUJOIN" class="form-label">가입일</label></div>
+							<div class="col align-self-center"><input id="uJoin" name="uJoin" class="form-control" type="text" value="${mmVO.uJoin }"></div>
+						</div>     	
+						<div class="row">	
+							<div class="col-2 align-self-center"><label id="inputUQUIT" class="form-label">탈퇴일</label> </div>
+							<div class="col align-self-center"><input id="uQuit" name="uQuit" class="form-control" type="text" value="${mmVO.uQuit }"></div>
+						</div> 	  
+	                    <div class="card-body" style="height:100px; margin-top:10px;">
+							<input type="button" id="btn_modify"class="btn btn-outline-dark" value="수정" style="border:1px solid #000"/>
+							<input type="button" id="btn_quit" class="btn btn-outline-dark" value="회원탈퇴" style="border:1px solid #000"/>
+							<input type="button" id="btn_close" class="btn btn-outline-dark" value="닫기" style="border:1px solid #000"/>
+						</div>
+						</div>	
+             		 </main>
       			</div>
-      		</div>
 
 </body>
 </html>
