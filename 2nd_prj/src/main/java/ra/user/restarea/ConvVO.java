@@ -8,10 +8,9 @@ public class ConvVO {
 		super();
 	}
 
-	public ConvVO(String convName, String convTel, String convDetail, String convIcon, int convNum) {
+	public ConvVO(String convName, String convDetail, String convIcon, int convNum) {
 		super();
 		this.convName = convName;
-		this.convTel = convTel;
 		this.convDetail = convDetail;
 		this.convIcon = convIcon;
 		this.convNum = convNum;

@@ -8,10 +8,9 @@ public class BrandVO {
 		super();
 	}
 
-	public BrandVO(String brandName, String brandTel, String brandHome, String brandIcon, int barndNum) {
+	public BrandVO(String brandName, String brandHome, String brandIcon, int barndNum) {
 		super();
 		this.brandName = brandName;
-		this.brandTel = brandTel;
 		this.brandHome = brandHome;
 		this.brandIcon = brandIcon;
 		this.barndNum = barndNum;

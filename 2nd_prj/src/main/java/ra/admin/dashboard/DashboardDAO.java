@@ -78,7 +78,7 @@ public class DashboardDAO {
 	}
 	
 	//방문자수를 +1 업데이트 해줌
-	public void updateHitsSum () throws SQLException {
+	public void updateHitsSum (int rano) throws SQLException {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
 	    DbConnection db = DbConnection.getInstance();
@@ -88,12 +88,11 @@ public class DashboardDAO {
 	        StringBuilder sb = new StringBuilder();
 	        sb.append("	UPDATE restarea			")
 	        .append("	SET hits = hits + 1		")
-	        .append("	WHERE raname = ?		");
+	        .append("	WHERE rano = ?		");
 	        
 	        pstmt = con.prepareStatement(sb.toString());
 	        
-	        pstmt.setInt(1, "hits");
-	        pstmt.setString(2, "raname");
+	        pstmt.setInt(1, rano);
 	        pstmt.executeUpdate();
 	    } finally {
 	        db.dbClose(null, pstmt, con);
@@ -131,6 +130,7 @@ public class DashboardDAO {
 				dbrVO = new DashboardReviewVO();
 				dbrVO.setCount(rs.getInt("count"));
 				dbrVO.setRaname(rs.getString("raname"));
+				
 				list.add(dbrVO); //list가 더 큰 개념. 값을 넣는다
 			}
 			

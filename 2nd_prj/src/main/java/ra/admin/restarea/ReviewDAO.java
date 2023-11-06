@@ -42,7 +42,7 @@ public class ReviewDAO {
 			
 			StringBuilder selectReview = new StringBuilder();
 			selectReview
-			.append("	select u.uname, r.rvtext, r.rvscore, r.rvreport, r.rvdate	")
+			.append("	select u.unic, r.rvtext, r.rvscore, r.rvreport, r.rvdate	")
 			.append("	from review r, userinfo u									")
 			.append("	where r.userid=u.userid and rano=?								");
 			
@@ -53,7 +53,7 @@ public class ReviewDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				rvVO = new ReviewVO(rs.getString("uname"),rs.getString("rvtext"),rs.getInt("rvscore"),rs.getInt("rvreport"),rs.getDate("rvdate"));
+				rvVO = new ReviewVO(rs.getString("unic"),rs.getString("rvtext"),rs.getInt("rvscore"),rs.getInt("rvreport"),rs.getDate("rvdate"));
 				reviewList.add(rvVO);
 			}
 			
