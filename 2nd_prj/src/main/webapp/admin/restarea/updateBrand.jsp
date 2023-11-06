@@ -13,6 +13,12 @@
 	margin: 0 auto; /* 가운데 정렬 */
 }
 
+#updateBtn {
+	width: 600px;
+	display: block; /* 블록 수준 요소로 변환 */
+	margin: 0 auto; /* 가운데 정렬 */
+}
+
 #fc {
 	margin-top: 30px;
 	margin-bottom: 30px;
@@ -117,7 +123,7 @@
 					<h1 class="mt-4">매장 수정</h1>
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="index.jsp">대시보드</a></li>
-						<li class="breadcrumb-item"><a href="manageFood.jsp">매장 관리</a></li>
+						<li class="breadcrumb-item"><a href="manageBrand.jsp">매장 관리</a></li>
 						<li class="breadcrumb-item active">매장 수정</li>
 					</ol>
 

@@ -205,7 +205,7 @@
 											<td><input type="checkbox" class="brand-checkbox" data-brand-num="<%= bVO.getBarndNum() %>"/></td>
 											<td><img src="../../common/icon_images/brand/<%=bVO.getBrandIcon() %>.png"></td>
 											<td><%=bVO.getBrandName() %></td>
-											<td><%=bVO.getBrandHome() %></td>
+											<td><%=!(bVO.getBrandHome()==null)?bVO.getBrandHome():"" %></td>
 										</tr>
 										<%
 										}

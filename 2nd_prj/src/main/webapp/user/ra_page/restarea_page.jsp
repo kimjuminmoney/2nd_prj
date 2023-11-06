@@ -35,7 +35,7 @@ $(function(){
        var reviewDetail = $("#inputReview").val(); 
        var reviewScore = $("#selectScore").val(); 
        var restareaNum = $("#raNum").val();
-       var userId = ${ sesId } ;
+       var userId = "CJS";
 
        if (reviewDetail === "") {
            alert("리뷰를 입력해주세요");
@@ -81,35 +81,7 @@ $(function(){
     %>
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.jsp">Start Bootstrap</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="about.jsp">About</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pricing.jsp">Pricing</a></li>
-                            <li class="nav-item"><a class="nav-link" href="faq.jsp">FAQ</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="blog-home.jsp">Blog Home</a></li>
-                                    <li><a class="dropdown-item" href="blog-post.jsp">Blog Post</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Portfolio</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                                    <li><a class="dropdown-item" href="portfolio-overview.jsp">Portfolio Overview</a></li>
-                                    <li><a class="dropdown-item" href="portfolio-item.jsp">Portfolio Item</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include>
             <!-- Header-->
             <header class="bg-success py-1">
                 <div class="container px-1">
@@ -214,24 +186,47 @@ $(function(){
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
 								<div id="carouselBrand" class="carousel slide" style="width: 1500px; height: 400px; display: grid; place-items: center;">
-								  <div id="brandItem" style="width: 950px;">
+								  <div class="carousel-inner" id="convItem" style="width: 950px;">
 								    <%
 								      List<BrandVO> brandList = rDAO.selectBrand(rano);
-								      for(int i=0; i<brandList.size(); i++){
-											BrandVO bVO = brandList.get(i);
+								    	String bDetail="";
+								    	int disSize=4;
+								      for(int i=0; i<brandList.size(); i+=disSize){
 								      %>
+								      <div class="carousel-item<%= i == 0 ? " active" : "" %>">
+								      <% for (int j = i; j < i + disSize && j < brandList.size(); j++) {
+										BrandVO bVO = brandList.get(j);
+										bDetail = bVO.getBrandHome();
+										if(bDetail==null){
+											bDetail="";
+										}
+								      %>
+								      <div id="convContent">
 								      <table style=" margin-bottom: 20px">							
 								      	<tr>
-								      		<td><img src="../../common/icon_images/mom.png"><br/></td>
-								      		<td><strong><%=bVO.getBrandName() %></strong><br/><%=bVO.getBrandHome() %></td>
+								      		<td><img src="../../common/icon_images/brand/<%=bVO.getBrandIcon() %>.png"><br/></td>
+								      		<td><strong><%=bVO.getBrandName() %></strong><br/><%=bDetail %></td>
 								      	</tr>
 								      </table>
 								      <hr style="background-color: #E9ECED;">
+								      </div>
 								     
 								      <%
-								      }
+								      }//end for
+								      %>
+								      </div>
+								      <%
+								      }//end for
 								      %>
 								  </div>
+								  <button style="width:50px" class="carousel-control-prev" type="button" data-bs-target="#carouselBrand" data-bs-slide="prev">
+								    <span class="carousel-control-prev-icon btn btn-success" aria-hidden="true"></span>
+								    <span class="visually-hidden">Previous</span>
+								  </button>
+								  <button style="width:55px" class="carousel-control-next" type="button" data-bs-target="#carouselBrand" data-bs-slide="next">
+								    <span class="carousel-control-next-icon btn btn-success" aria-hidden="true"></span>
+								    <span class="visually-hidden">Next</span>
+								  </button>
 								</div>
 
                             </div>
@@ -254,24 +249,46 @@ $(function(){
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
 								<div id="carouselConv" class="carousel slide" style="width: 1500px; height: 400px; display: grid; place-items: center;">
-								  <div id="convItem" style="width: 950px;">
+								  <div class="carousel-inner" id="convItem" style="width: 950px;">
 								    <%
 								      List<ConvVO> convList = rDAO.selectConv(rano);
-								      for(int i=0; i<convList.size(); i++){
-											ConvVO cVO = convList.get(i);
+								    	String cDetail="";
+								      for(int i=0; i<convList.size(); i+=disSize){
 								      %>
+								      <div class="carousel-item<%= i == 0 ? " active" : "" %>">
+								      <% for (int j = i; j < i + disSize && j < convList.size(); j++) {
+										ConvVO cVO = convList.get(j);
+										cDetail=cVO.getConvDetail();
+										if(cDetail==null){
+											cDetail="";
+										}
+								      %>
+								      <div id="convContent">
 								      <table style=" margin-bottom: 20px">							
 								      	<tr>
-								      		<td><img src="../../common/icon_images/mom.png"><br/></td>
+								      		<td><img src="../../common/icon_images/convinient/<%=cVO.getConvIcon() %>.png"><br/></td>
 								      		<td><strong><%=cVO.getConvName() %></strong><br/><%=cVO.getConvDetail() %></td>
 								      	</tr>
 								      </table>
 								      <hr style="background-color: #E9ECED;">
+								      </div>
 								     
 								      <%
-								      }
+								      }//end for
+								      %>
+								      </div>
+								      <%
+								      }//end for
 								      %>
 								  </div>
+								  <button style="width:50px" class="carousel-control-prev" type="button" data-bs-target="#carouselConv" data-bs-slide="prev">
+								    <span class="carousel-control-prev-icon btn btn-success" aria-hidden="true"></span>
+								    <span class="visually-hidden">Previous</span>
+								  </button>
+								  <button style="width:55px" class="carousel-control-next" type="button" data-bs-target="#carouselConv" data-bs-slide="next">
+								    <span class="carousel-control-next-icon btn btn-success" aria-hidden="true"></span>
+								    <span class="visually-hidden">Next</span>
+								  </button>
 								</div>
 
                             </div>
@@ -372,7 +389,7 @@ $(function(){
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
-								<div id="carouselGas" class="carousel slide" style="width: 1500px; height: 400px">
+								<div id="carouselGas" class="carousel slide" style="width: 1500px; height: 400px; display: grid; place-items: center;">
 								  <div class="carousel-inner">
 								    <div class="carousel-item active">
 								      <table class='table'>

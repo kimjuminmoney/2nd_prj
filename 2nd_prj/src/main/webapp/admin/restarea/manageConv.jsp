@@ -17,7 +17,11 @@
 }
 
 .table th:nth-child(2) {
-	width: 100px; /* 첫 번째 열의 너비 설정 */
+	width: 80px; /* 첫 번째 열의 너비 설정 */
+}
+
+.table th:nth-child(3) {
+	width: 150px; /* 첫 번째 열의 너비 설정 */
 }
 
 /* 나머지 열들에 대한 너비 설정 */
@@ -205,7 +209,7 @@
 											<td><input type="checkbox" class="conv-checkbox" data-conv-num="<%= cVO.getConvNum() %>"/></td>
 											<td><img src="../../common/icon_images/convinient/<%=cVO.getConvIcon() %>.png"></td>
 											<td><%=cVO.getConvName() %></td>
-											<td><%=cVO.getConvDetail() %></td>
+											<td><%=!(cVO.getConvDetail()==null)?cVO.getConvDetail():"" %></td>
 										</tr>
 										<%
 										}

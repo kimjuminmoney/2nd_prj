@@ -14,6 +14,12 @@
 	margin: 0 auto; /* 가운데 정렬 */
 }
 
+#updateBtn {
+	width: 600px;
+	display: block; /* 블록 수준 요소로 변환 */
+	margin: 0 auto; /* 가운데 정렬 */
+}
+
 #fc {
 	margin-top: 30px;
 	margin-bottom: 30px;

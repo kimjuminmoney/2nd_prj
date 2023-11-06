@@ -11,6 +11,12 @@
 	margin: 0 auto; /* 가운데 정렬 */
 }
 
+#btnInput {
+	width: 600px;
+	display: block; /* 블록 수준 요소로 변환 */
+	margin: 0 auto; /* 가운데 정렬 */
+}
+
 #fc {
 	margin-top: 30px;
 	margin-bottom: 30px;
@@ -121,7 +127,7 @@
 						<div id="fc" class="align-self-center">
 						
 							<div class="card" style="width: 18rem;">
-        						<img id="selected-image" src="../../common/images/selectImage.png" class="card-img-top">
+        						<img id="selected-image" src="../../common/logo_images/logo.png" class="card-img-top">
         						<div class="card-body">
             						<input class="form-control form-control-sm" id="brandImage" type="file" onchange="displaySelectedImage()">
         						</div>
