@@ -8,7 +8,7 @@
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                <a href="../../user/index/index.jsp">홈페이지로</a>
                             </div>
                         </div>
                     </div>

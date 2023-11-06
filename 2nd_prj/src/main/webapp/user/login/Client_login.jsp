@@ -22,100 +22,116 @@
 <!-- jQuery CDN시작 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-
-
-<%
-%>
 $(function(){
-	$("#USERID").keydown(function( evt ){
-	if(evt.which==13){
-		checkNull();
-	 }//end if
-});//end keydown
-
-$("#UPW").click(function( evt ){
-	if(evt.which == 13){
-		checkNull();
-	}
-});
-$("#btnLogin").click(function(  ){
-		checkNull();
-   });
-});
+	$("#id").keydown(function( evt ){
+		if(evt.which==13){
+			checkNull();
+		 }//end if
+	});//end keydown
+	
+	$("#pass").keydown(function( evt ){
+		if(evt.which == 13){
+			checkNull();
+		}
+	});
+	$("#btnLogin").click(function(  ){
+			checkNull();
+	   });
+	});
 
 function checkNull() {
-	var id=$("#USERID").val();
-	var pass=$("#UPW").val();
+	var id=$("#id").val();
+	var pass=$("#pass").val();
 	
-	$("#USERID").focus();
+	$("#id").focus();
 	if(id.replace(/ /g,"") == ""){
 		alert("아이디를 입력해주세요.");
 		frm.USERID.focus();;
 		return;
 	}
 	
-	$("#UPW").focus();
+	$("#pass").focus();
 	if(pass.replace(/ /g,"") ==""){
 		alert("비밀번호를 입력해주세요.");
 		frm.UPW.focus();;
 		return;
 	}
-	$("#frm").submit();
+	
+	$.ajax({
+		url: "Client_login_ajax.jsp",
+		data: "id="+id+"&pw="+pass,
+		type: "POST",
+		dataType: "json",
+		error: function(xhr){
+			alert("다시 시도해주세요");
+			console.log(xhr)
+		},
+		success: function(data){
+			var flag = data.flag;
+			if(!flag){
+				var output = "<span style='color: red;font-weight: bold;'>아이디와 비밀번호를 확인해주세요</span>";
+				$("#output").html(output);
+			}
+			if(flag){
+				window.location.href = "../index/index.jsp";
+			}
+		}//success
+	})
 }
 
 </script>
 
 </head>
-<body class="sb-nav-fixed">
-        <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include>
-        <div id="layoutSidenav">
-        	<jsp:include page="../myinfo_nav/include_side_nav.jsp"></jsp:include>
-             </div>
-            <div id="layoutSidenav_content">
+<body class="bg-success">
+	<div id="layoutAuthentication">
                 <main>
-           
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header text-center" style="text-align: center; padding: 60px;">
                                      <!-- 이미지를 추가합니다 -->
-                                        <img src="http://localhost/jsp_prj/2_project/admin/assets/img/logo.png" />
+                                        <img src="../../common/logo_images/logo_black.png" />
                                     </div>
                                     <div class="card-body">
-                        <form action="Client_login_process.jsp" method="post" name="frm" id="frm">
-                                    <div class="form-floating mb-3" id="idWarn">
-                                        <input class="form-control" name="USERID" id="USERID" type="text"
-                                               autofocus="autofocus" placeholder="id" style="width: 100%"/>
-                                        <label for="inputId">아이디</label>
-                                    </div>
-                                    <div id="passWarn" class="form-floating mb-3">
-                                        <input class="form-control" name="UPW" id="UPW" type="password"
-                                               placeholder="Password" style="width:100%;"/>
-                                        <label for="inputPassword">비밀번호</label>
-                                    </div>
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" name="checkId" id="checkId" type="checkbox"/>
-                                        <label class="form-check-label" for="inputRememberId">아이디 저장하기</label>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-end mt-4 mb-0">
-                                        <input type="button" value="로그인" id="btnLogin" class="btn btnLogin"/>
-                                    </div>
-                                </form>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="Client_join.html">아직회원이 아니신가요?   <strong>회원가입</strong></a></div>
+                                   
+                                            <div class="form-floating mb-3" id="idWarn">
+                                                <input class="form-control"  name="EMPNO" id="id"  type="text"  autofocus="autofocus" placeholder="id"  style="width: 100%"/>
+                                                <label for="inputId">아이디</label>
+                                            </div>
+                                            <div id="passWarn" class="form-floating mb-3">
+                                                <input class="form-control" name="EPW" id="pass" type="password" placeholder="Password"  style="width:100%;"/>
+                                                <label for="inputPassword">비밀번호</label>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-end mt-4 mb-0">
+                                            <div id="output">
+                                            </div>
+                                            <input type="button" value="로그인" id="btnLogin" class="btn btn-success"/>
+                                            </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
                 </main>
-                </div>
-                </div>
-                <!-- 풋터 -->
-                <footer class="py-4 bg-light mt-auto">
-                    <jsp:include page="../myinfo_nav/include_footer.jsp"></jsp:include>
-                </footer>
+			    <footer class="py-4 bg-light mt-auto">
+					<div id="layoutAuthentication_footer">
+						<div class="container-fluid px-4">
+							<div class="d-flex align-items-center justify-content-between small">
+								<div class="navbar-brand" >
+									<img src="../../common/logo_images/logo_black.png" width="150" height="50" />
+								</div>
+								<div style="position: absolute; left:200px;">
+									<span>1234 - 5678</span><br>
+									<span>평일 09:00 ~ 18:30</span><br>
+									<span>주말 및 공휴일 휴무</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</footer>
+	</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../../common/js/scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../../common/js/datatables-simple-demo.js"></script>
     </body>
 </html>

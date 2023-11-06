@@ -1,7 +1,7 @@
+<%@page import="ra.user.login.ClientDataVO"%>
+<%@page import="ra.user.login.ClientLoginDAO"%>
+<%@page import="ra.user.login.ClientLoginVO"%>
 <%@page import="org.json.simple.JSONObject"%>
-<%@page import="ra.admin.login.ManagerLoginVO"%>
-<%@page import="ra.admin.login.ManagerDataVO"%>
-<%@page import="ra.admin.login.ManagerLoginDAO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,29 +9,26 @@
 <%@ page info="" %>
 <%
 if("GET".equals(request.getMethod().toUpperCase())){
-	response.sendRedirect("Manager_login.jsp");
+	response.sendRedirect("Clientr_login.jsp");
 	return;
 }
-%>
 
-
-<%
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
 
-ManagerLoginVO mlVO = new ManagerLoginVO();
+ClientLoginVO clVO = new ClientLoginVO();
 
-mlVO.setEMPNO(id);
-mlVO.setEPW(DataEncrypt.messageDigest("MD5",pw));
-ManagerLoginDAO mlDAO = ManagerLoginDAO.getInstance();
+clVO.setUSERID(id);
+clVO.setUPW(DataEncrypt.messageDigest("MD5",pw));
+ClientLoginDAO clDAO = ClientLoginDAO.getInstance();
 JSONObject json = new JSONObject();
 boolean flag = false;
 try{
-	ManagerDataVO  mdVO = mlDAO.selectLogin(mlVO);
-	if(mdVO != null){
+	ClientDataVO  cdVO = clDAO.selectLogin(clVO);
+	if(cdVO != null){
 		flag = true;
-		session.setAttribute("sesNo",mlVO.getEMPNO());
-		session.setAttribute("userData", mdVO.getENAME());
+		session.setAttribute("sesId",clVO.getUSERID());
+		session.setAttribute("managerData", cdVO.getUname());
 		json.put("flag", flag);
 		//return;
 	}

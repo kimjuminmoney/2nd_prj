@@ -22,16 +22,14 @@
 <!-- jQuery CDN시작 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-<%
-%>
 $(function(){
-	$("#EMPNO").keydown(function( evt ){
+	$("#id").keydown(function( evt ){
 		if(evt.which==13){
 			checkNull();
 		 }//end if
 	});//end keydown
 	
-	$("#EPW").keydown(function( evt ){
+	$("#pass").keydown(function( evt ){
 		if(evt.which == 13){
 			checkNull();
 		}
@@ -42,17 +40,17 @@ $(function(){
 	});
 
 function checkNull() {
-	var id=$("#EMPNO").val();
-	var pass=$("#EPW").val();
+	var id=$("#id").val();
+	var pass=$("#pass").val();
 	
-	$("#EMPNO").focus();
+	$("#id").focus();
 	if(id.replace(/ /g,"") == ""){
 		alert("아이디를 입력해주세요.");
 		frm.USERID.focus();;
 		return;
 	}
 	
-	$("#EPW").focus();
+	$("#pass").focus();
 	if(pass.replace(/ /g,"") ==""){
 		alert("비밀번호를 입력해주세요.");
 		frm.UPW.focus();;
@@ -71,23 +69,22 @@ function checkNull() {
 		success: function(data){
 			var flag = data.flag;
 			if(!flag){
-				var output = "<span>아이디와 비밀번호를 확인해주세요</span>"
-				$("#output").val(output);
+				var output = "<span style='color: red;font-weight: bold;'>아이디와 비밀번호를 확인해주세요</span>";
+				$("#output").html(output);
+			}
+			if(flag){
+				window.location.href = "../dashboard/index.jsp";
 			}
 		}//success
 	})
-	//$("#frm").submit();
 }
 
 </script>
 
 </head>
 <body class="bg-success">
-  <!-- 해더 nav -->
-            <div id="layoutAuthentication">
-<!--             <div id="layoutSidenav_content"> -->
+	<div id="layoutAuthentication">
                 <main>
-           
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
@@ -98,45 +95,42 @@ function checkNull() {
                                     </div>
                                     <div class="card-body">
                                    
-                                        <form action="Manager_login_process.jsp" method="post" name="frm" id="frm">
                                             <div class="form-floating mb-3" id="idWarn">
-                                                <input class="form-control"  name="EMPNO" id="EMPNO"  type="text"  autofocus="autofocus" placeholder="id"  style="width: 100%"/>
+                                                <input class="form-control"  name="EMPNO" id="id"  type="text"  autofocus="autofocus" placeholder="id"  style="width: 100%"/>
                                                 <label for="inputId">관리자번호</label>
                                             </div>
                                             <div id="passWarn" class="form-floating mb-3">
-                                                <input class="form-control" name="EPW" id="EPW" type="password" placeholder="Password"  style="width:100%;"/>
+                                                <input class="form-control" name="EPW" id="pass" type="password" placeholder="Password"  style="width:100%;"/>
                                                 <label for="inputPassword">비밀번호</label>
                                             </div>
-                                            <div>
-                                            <span id="output"></span>
-                                            </div>
                                             <div class="d-flex align-items-center justify-content-end mt-4 mb-0">
+                                            <div id="output">
+                                            </div>
                                             <input type="button" value="로그인" id="btnLogin" class="btn btn-success"/>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </main>
-    <footer class="py-4 bg-light mt-auto">
-         <div id="layoutAuthentication_footer">
-        <div class="container-fluid px-4">
-            <div class="d-flex align-items-center justify-content-between small">
-                <div class="navbar-brand" >
-                    <img src="../../common/logo_images/logo_black.png" width="150" height="50" />
-                </div>
-                <div style="position: absolute; left:200px;">
-                    <span>1234 - 5678</span><br>
-                    <span>평일 09:00 ~ 18:30</span><br>
-                    <span>주말 및 공휴일 휴무</span>
-                </div>
-                        </div>
-                    </div>
-            </div>
-            </footer>
-                    </div>
+			    <footer class="py-4 bg-light mt-auto">
+					<div id="layoutAuthentication_footer">
+						<div class="container-fluid px-4">
+							<div class="d-flex align-items-center justify-content-between small">
+								<div class="navbar-brand" >
+									<img src="../../common/logo_images/logo_black.png" width="150" height="50" />
+								</div>
+								<div style="position: absolute; left:200px;">
+									<span>1234 - 5678</span><br>
+									<span>평일 09:00 ~ 18:30</span><br>
+									<span>주말 및 공휴일 휴무</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</footer>
+	</div>
                 <!-- 풋터 -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../../common/js/scripts.js"></script>

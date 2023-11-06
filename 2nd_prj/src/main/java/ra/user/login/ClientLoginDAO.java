@@ -44,7 +44,6 @@ public class ClientLoginDAO{
 			pstmt.setString(2, clVO.getUPW());
 			//6.쿼리문 실행 후 결과 얻기
 			rs=pstmt.executeQuery();
-			System.out.println( "------" +clVO );
 			if(rs.next()) {
 				cdVO = new ClientDataVO(rs.getString("uname"),rs.getString("uemail"));				
 			}
