@@ -26,20 +26,20 @@
 %>
 $(function(){
 	$("#EMPNO").keydown(function( evt ){
-	if(evt.which==13){
-		checkNull();
-	 }//end if
-});//end keydown
-
-$("#EPW").click(function( evt ){
-	if(evt.which == 13){
-		checkNull();
-	}
-});
-$("#btnLogin").click(function(  ){
-		checkNull();
-   });
-});
+		if(evt.which==13){
+			checkNull();
+		 }//end if
+	});//end keydown
+	
+	$("#EPW").keydown(function( evt ){
+		if(evt.which == 13){
+			checkNull();
+		}
+	});
+	$("#btnLogin").click(function(  ){
+			checkNull();
+	   });
+	});
 
 function checkNull() {
 	var id=$("#EMPNO").val();
@@ -58,23 +58,34 @@ function checkNull() {
 		frm.UPW.focus();;
 		return;
 	}
-	$("#frm").submit();
+	
+	$.ajax({
+		url: "Manager_login_ajax.jsp",
+		data: "id="+id+"&pw="+pass,
+		type: "POST",
+		dataType: "json",
+		error: function(xhr){
+			alert("다시 시도해주세요");
+			console.log(xhr)
+		},
+		success: function(data){
+			var flag = data.flag;
+			if(!flag){
+				var output = "<span>아이디와 비밀번호를 확인해주세요</span>"
+				$("#output").val(output);
+			}
+		}//success
+	})
+	//$("#frm").submit();
 }
 
 </script>
 
 </head>
-<body class="sb-nav-fixed">
+<body class="bg-success">
   <!-- 해더 nav -->
-        <jsp:include page="../admin_include/header_nav.jsp"></jsp:include>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-            <!-- 사이드바 nav -->
-            <jsp:include page="../admin_include/side_bar.jsp"></jsp:include>
-               
-            </div>
-       </div>
-            <div id="layoutSidenav_content">
+            <div id="layoutAuthentication">
+<!--             <div id="layoutSidenav_content"> -->
                 <main>
            
                     <div class="container">
@@ -83,7 +94,7 @@ function checkNull() {
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header text-center" style="text-align: center; padding: 60px;">
                                      <!-- 이미지를 추가합니다 -->
-                                        <img src="http://localhost/jsp_prj/2_project/admin/assets/img/logo.png" />
+                                        <img src="../../common/logo_images/logo_black.png" />
                                     </div>
                                     <div class="card-body">
                                    
@@ -96,8 +107,11 @@ function checkNull() {
                                                 <input class="form-control" name="EPW" id="EPW" type="password" placeholder="Password"  style="width:100%;"/>
                                                 <label for="inputPassword">비밀번호</label>
                                             </div>
+                                            <div>
+                                            <span id="output"></span>
+                                            </div>
                                             <div class="d-flex align-items-center justify-content-end mt-4 mb-0">
-                                            <input type="button" value="로그인" id="btnLogin" class="btn btnLogin"/>
+                                            <input type="button" value="로그인" id="btnLogin" class="btn btn-success"/>
                                             </div>
                                         </form>
                                     </div>
@@ -106,13 +120,12 @@ function checkNull() {
                         </div>
                     </div>
                 </main>
-                    </div>
+    <footer class="py-4 bg-light mt-auto">
          <div id="layoutAuthentication_footer">
-    <footer class="py-4 bg-light mt-auto sticky-footer">
         <div class="container-fluid px-4">
             <div class="d-flex align-items-center justify-content-between small">
                 <div class="navbar-brand" >
-                    <img src="http://localhost/jsp_prj/2_project/admin/assets/img/logo.png" width="150" height="50" />
+                    <img src="../../common/logo_images/logo_black.png" width="150" height="50" />
                 </div>
                 <div style="position: absolute; left:200px;">
                     <span>1234 - 5678</span><br>
@@ -122,13 +135,10 @@ function checkNull() {
                         </div>
                     </div>
             </div>
+            </footer>
+                    </div>
                 <!-- 풋터 -->
-                <footer class="py-4 bg-light mt-auto">
-                    <jsp:include page="../admin_include/footer.jsp"></jsp:include>
-                </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../../common/js/scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../../common/js/datatables-simple-demo.js"></script>
     </body>
 </html>

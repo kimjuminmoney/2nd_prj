@@ -47,14 +47,13 @@ try{
 	if(mdVO != null){
 		session.setAttribute("sesNo",mlVO.getEMPNO());
 		session.setAttribute("managerData", mdVO.getENAME());
-		System.out.println("로그인 프로세서" + session.getAttribute("sesNo").toString());
 		response.sendRedirect("../dashboard/index.jsp");
-}else{
+	} else {
 %>
 	아이디나 비밀번호를 확인해 주세요<br/>
 	<a href="Manager_login.jsp">로그인</a>
 <%
-}
+	}
 }catch(SQLException se){
 	se.printStackTrace();
 }
