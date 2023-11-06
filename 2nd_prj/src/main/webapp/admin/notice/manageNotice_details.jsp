@@ -76,14 +76,21 @@ $(function(){
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">공지사항</h1>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                <h1>${ noticeVO.ntitle }</h1>
-                                <span>작성자 : ${ noticeVO.writer }</span><span>작성일 : ${ noticeVO.input_date }</span>
+                            <!-- <div class="card-header"> -->
+                                <div class="toast-header" style="background-color: #E2E2E2;opacity 3.00%">
+                                <h1 class="me-auto" style="color: #000000">${ noticeVO.ntitle }</h1>
+								    <div>
+								    <small>작성자 : ${ noticeVO.writer }</small><br>
+								    <small>작성일 : ${ noticeVO.input_date }</small><br>
+								    <div>
                                 <input type="button" class="btn btn-success" value="수정" id="modifyBtn" >
                                 <input type="button" class="btn btn-success" value="삭제" id="deleteBtn" >
+								    </div>
+								    </div>
+							  	</div>
+                                <%-- <span>작성자 : ${ noticeVO.writer }</span><span>작성일 : ${ noticeVO.input_date }</span> --%>
                                 
-                            </div>
+                            <!-- </div> -->
                             <div class="card-body">
 							    <div class="card" >
 							     ${ noticeVO.ncontent }

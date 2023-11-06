@@ -8,7 +8,7 @@
 ManagerDataVO  mdVO = (ManagerDataVO)session.getAttribute("managerData");
 System.out.println(sesNo);
 System.out.println(mdVO); */
-session.setAttribute("sesNo", 1);
+//session.setAttribute("sesNo", 1);
 %>
 <c:choose>
     <c:when test="${empty sesNo}">

@@ -105,37 +105,20 @@ $(function(){
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">공지사항</h1>
-                        <!-- <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Tables</li>
-                        </ol> -->
-                        <!-- <div class="card mb-4">
-                            <div class="card-body">
-                                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                .
-                            </div>
-                        </div> -->
-						        <form action="manageNotice_write_process.jsp" method="post" id="frm">
-						        <input type="hidden" id="nno" name="nno" value="${ maxNno+1 }">
-						        <!-- 세션넘어오면 value empno로 변경하기 -->
-						        <input type="hidden" id="empno" name="empno" value="1">
-                        <div class="card mb-4">
-						    <div class="card-header">
-						        <div class="input-group input-group-lg">
-								  <span class="input-group-text" id="inputGroup-sizing-lg">제 목</span>
-								  <input type="text" id="ntitle" name="ntitle" class="form-control" placeholder="제목을 입력하세요" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-								</div>
-						        <!-- 세션 들어가면 작성자랑 날짜 넣기 -->
-						        <div class="input-group mb-3">
-								  <span class="input-group-text" id="basic-addon1">작성자</span>
-								  <input type="text" id="writer" value="홍지성" name="writer"class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" readonly="readonly">
-								</div>
-						        <div class="input-group mb-3">
-								  <span class="input-group-text" id="basic-addon1">작성일</span>
-								  <input type="text" id="input_date" name="input_date" class="form-control" value="${ input_date }" aria-label="Username" aria-describedby="basic-addon1" readonly="readonly">
-						        </div>
-						    </div>
+				        <form action="manageNotice_write_process.jsp" method="post" id="frm">
+					        <input type="hidden" id="nno" name="nno" value="${ maxNno+1 }">
+					        <!-- 세션넘어오면 value empno로 변경하기 -->
+					        <input type="hidden" id="empno" name="empno" value="1">
+                        	<div class="card mb-4">
+                        	
+                                <div class="toast-header" style="background-color: #E2E2E2;opacity 3.00%">
+									  <span class="input-group-text" id="inputGroup-sizing-lg">제 목</span>
+									  <input type="text" id="ntitle" name="ntitle" class="form-control" placeholder="제목을 입력하세요" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+								    <div style="width: 200px">
+									    <small>작성자 : ${ noticeVO.writer }</small><br>
+									    <small>작성일 : ${ noticeVO.input_date }</small><br>
+								    </div>
+							  	</div>
 						    <div class="card-body">
 						            <textarea id="note" name="ncontent"></textarea>
 						            <div style="text-align: right; margin: 10px;">
