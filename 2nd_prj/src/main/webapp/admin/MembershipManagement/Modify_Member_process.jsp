@@ -1,28 +1,48 @@
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="ra.admin.MembershipManagement.MembershipManagementDAO"%>
+<%@page import="kr.co.sist.util.cipher.DataEncrypt"%>
+<%@page import="ra.admin.MembershipManagement.MembershipManagementVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="icon" href="http://192.168.10.150/jsp_prj/common/main/favicon.png">
-<!-- bootstrap CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<!-- jQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <!-- jQuery CDN 끝 -->
- <style type="text/css">
-   
- </style>
- <script type="text/javascript">
- $(function(){
-	 
- });//ready
- </script>
-</head>
-<body>
+<%
+//userId, uPw, uName, uNick, uEmail, uTel Date uJoin, uQuit; -->
+String userId = request.getParameter("userId");
+String uPw = request.getParameter("uPw");
+String huPw = request.getParameter("huPw");
+String uNic = request.getParameter("uNic");
+String uTel = request.getParameter("uTel");
+String uEmail = request.getParameter("uEmail");
+String uName = request.getParameter("uName");
 
-</body>
-</html>
+MembershipManagementVO mmVO= new MembershipManagementVO();
+MembershipManagementDAO mmDAO=MembershipManagementDAO.getInstance();
+
+DataEncrypt de=new DataEncrypt("a12345678901234567");
+
+//암호화
+mmVO.setUserId(userId);
+
+if(huPw.equals(uPw)){//비밀번호가 바뀌었다면.
+	uPw=DataEncrypt.messageDigest("MD5", huPw);
+}
+mmVO.setuPw(uPw);
+mmVO.setuNic(uNic);
+uTel=de.encryption(uTel);
+mmVO.setuTel(uTel);
+uEmail=de.encryption(uEmail);
+mmVO.setuEmail(uEmail);
+uName=de.encryption(uName);
+mmVO.setuName(uName);
+
+int cnt=0;
+cnt=mmDAO.modifyInfo(mmVO);
+JSONObject jsonObj = new JSONObject();
+
+jsonObj.put("cnt", cnt);
+
+out.print(jsonObj.toJSONString());
+
+
+%>

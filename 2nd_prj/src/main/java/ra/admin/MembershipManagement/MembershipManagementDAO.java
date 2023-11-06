@@ -165,8 +165,6 @@ public class MembershipManagementDAO {
 			
 			int cnt=pstmt.executeUpdate();
 			
-			System.out.println("4---"+cnt);
-			
 			return  cnt;
 		}finally {
 			db.dbClose(null, pstmt, con);

@@ -1,7 +1,7 @@
 <%@page import="ra.util.BoardUtil"%>
 <%@page import="ra.util.BoardUtilVO"%>
-<%@page import="ra.admin.review.reviewAdminVO"%>
-<%@page import="ra.admin.review.reviewAdminDAO"%>
+<%@page import="ra.user.myreview.MyReviewVO"%>
+<%@page import="ra.user.myreview.MyReviewDAO"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
@@ -12,13 +12,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); 
 
-String id=request.getParameter("sesId");
-
+String id=String.valueOf(session.getAttribute("sesId"));
 
 int totalCount=0;
-reviewAdminDAO raDAO = reviewAdminDAO.getInstance();
+MyReviewDAO mrDAO = MyReviewDAO.getInstance();
 try{
-totalCount=raDAO.selectTotalCount(id);//리뷰 전체 개수 count
+totalCount=mrDAO.selectTotalCount(id);//리뷰 전체 개수 count
 }catch(SQLException se){
 	se.printStackTrace();
 }
@@ -52,12 +51,12 @@ if( totalPage < endPage){
     endPage = totalPage;
 }
 
-List<reviewAdminVO> raList=raDAO.selectReivew(id,startNum,endNum);//리뷰조회
-pageContext.setAttribute("raList",raList);
+List<MyReviewVO> rvList=mrDAO.selectReview(id,startNum,endNum);//리뷰조회
+pageContext.setAttribute("rvList",rvList);
 
 %>
 <c:if test="${ empty sesId }">
-<c:redirect url="../login/Client_login.html"/>
+<c:redirect url="../login/Client_login.jsp"/>
 </c:if>
 <!DOCTYPE html>
 <html>
@@ -86,7 +85,48 @@ pageContext.setAttribute("raList",raList);
 	 
  });//ready
  
+ function modifyRv( i ){
+	
+	 if (isNaN( $("#rvScore"+i).val()) ) {
+		 	alert($("#rvScore"+i).val());
+		    alert("숫자를 입력해주세요.");
+		    return;
+		}
+	 var inputValue = parseInt($("#rvScore" + i).val());
+	 if (inputValue < 1 || inputValue > 5) {
+	     alert("평점을 1부터 5 사이의 값으로 입력해주세요.");
+	     return;
+	 }
  
+	 var jsonObj={ 
+		<%-- "id" : <%= request.getParameter("id")%> --%>
+		"rvNo" :	$("#rvNo"+i).val(),
+		"rvScore" :	$("#rvScore"+i).val(),
+		"rvText" : $("#rvText"+i).val()
+	}
+	 
+		$.ajax({	
+			url:"modify_process.jsp",
+			type:"post",
+			data:jsonObj,
+			dataType:"json",
+			error:function(xhr){
+				console.log(xhr.status);
+			},
+			success:function( temp ){
+				var tempScore=temp.Score;
+				var tempText=temp.Text;
+				var cnt=temp.cnt;
+				
+				if(cnt == 1 ){
+					$("#rvText"+i).val(tempText);
+					$("#rvScore"+i).val(tempScore);
+					alert("게시글이 수정되었습니다.");
+					location.reload();
+				}//endif	
+			}//success
+		 });//ajax
+ }//modifyRv
  
  function deleteRv( i ){
 	 
@@ -120,12 +160,10 @@ pageContext.setAttribute("raList",raList);
             <div id="layoutSidenav_content">
                 <main>
 					  <div class="container-fluid px-4">
-					    <div class="mb-4" style="width:20%; height:75px; margin-top:50px; padding: 10px;">
-					        <a href="reviewAdmin.jsp" class="custom-link">모든리뷰</a>
-					        <a href="review_report.jsp" class="custom-link">신고된 리뷰</a>
-					    </div>
-					</div>
-
+						<div class="mb-4" style="width:20%; height:75px; margin-top:50px; padding: 10px;" >
+                       	 	<h1 class="list-unstyled" >내 리뷰 관리</h1>
+                        </div>
+                     </div>
                     <div class="container-fluid px-4" style="margin-top:2%; margin-left:1%;">
 						<c:choose>
 							<c:when test="${ empty rvList }">
@@ -137,17 +175,13 @@ pageContext.setAttribute("raList",raList);
 	                        <c:forEach var="rv" items="${ rvList }" varStatus="i"> 
 	                        <div class="card mb-4">
 	                        	<div class="card-header" id="review_head">
-	                        		<label class="btn btn-outline-dark" >날짜 : ${ rv.rvDate }</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark"  >날짜</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark"  >${ rv.rvDate }</label>&nbsp;&nbsp;&nbsp;
 	                        		<input type="hidden" id="rvNo${i.count}" name="rvNo${i.count}" value="${ rv.rvNo }"/>
-	                        		<%-- <input type="hidden" id="raName${i.count}" name="raName${i.count}" value="${ rv.raName }"/> --%>
-	                        		<label class="btn btn-outline-dark">휴게소 명 : ${rv.raName }</label>&nbsp;&nbsp;&nbsp;
-	                        		<input type="hidden" id="rv.raName${i.count}" name="raName${i.count}" value="${rv.raName }"/>
-	                        		<label class="btn btn-outline-dark">아이디 : ${rv.USERID }</label>&nbsp;&nbsp;&nbsp;
-	                        		<input type="hidden" id="rvUSERID${i.count }" name="rvUSERID${i.count }" value="${rv.USERID }"/>
-	                        		<label class="btn btn-outline-dark">별점 : ${ rv.rvScore }</label>&nbsp;&nbsp;&nbsp;
-	                        		<input type="hidden" id="rvScore${i.count}" name="rvScore${i.count}" value="${ rv.rvScore }"/>
-	                        		<label class="btn btn-outline-dark">신고 : ${ rv.rvReport }</label>&nbsp;&nbsp;&nbsp;
-	                        		<input type="hidden" id="rvReport${i.count}" name="rvReport${i.count}" value="${ rv.rvReport }"/>
+	                        		<label class="btn btn-outline-dark" disabled>휴게소 명</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark" disabled>${rv.raName }</label>&nbsp;&nbsp;&nbsp;
+	                        		<label class="btn btn-outline-dark" > 평점</label>
+	                        		<input type="text" id="rvScore${ i.count }" name="rvScore${ i.count }" class="btn btn-outline-dark" value="${ rv.rvScore }" style="width:50px;"/>
 	                       		</div>
 		                           <c:choose>
 		                                <c:when test="${ not empty rv.rvdType}"> 
@@ -162,6 +196,7 @@ pageContext.setAttribute("raList",raList);
 			                                <textarea id="rvText${ i.count }"  name="rvText${ i.count }" class="form-control">${ rv.rvText }</textarea>
 		                        		</div>
 				                            <div id="btn_review" class="card-footer">
+				                            	<input type="button" onclick="modifyRv(${i.count})" value="수정" style="border: 1px solid #000"/>
 				                            	<input type="button" onclick="deleteRv(${i.count})" value="삭제"style="border: 1px solid #000"/>
 				                            </div>
 		                                </c:otherwise>
@@ -173,7 +208,7 @@ pageContext.setAttribute("raList",raList);
                         <div class="card mb-4">
                         	<div class="card-body">
                         	<%
-                        	BoardUtilVO buVO=new BoardUtilVO("reviewAdmin.jsp",currentPage,totalPage);
+                        	BoardUtilVO buVO=new BoardUtilVO("my_review.jsp",currentPage,totalPage);
 							BoardUtil bu=BoardUtil.getInstance();
                         	out.println(bu.pageNation(buVO));
                         	%>

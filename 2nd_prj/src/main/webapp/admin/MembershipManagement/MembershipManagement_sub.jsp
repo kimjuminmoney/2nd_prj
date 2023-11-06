@@ -42,24 +42,66 @@ pageContext.setAttribute("mmVO", mmVO);
 </style>
 <script type="text/javascript">
 $(function(){
-	
-	$("#btn_modify").click({
-		self.close();
-	
-	
-	
-	
+	//userId, uPw, uName, uNick, uEmail, uTel Date uJoin, uQuit; -->
+	$("#btn_modify").click(function(){
+		//유효성 검증 필요
+		
+		var Obj={
+				"userId":$("#userId").val(),
+				"uPw":$("#uPw").val(),
+				"huPw":$("#huPw").val(),
+				"uName":$("#uName").val(),
+				"uNic":$("#uNic").val(),
+				"uEmail":$("#uEmail").val(),
+				"uTel":$("#uTel").val()
+		};
+		
+		$.ajax({
+			url:"Modify_Member_process.jsp",
+			type:"post",
+			data:Obj,
+			dataType:"json",
+			error:function(xhr){
+				console.log(xhr.status);
+			},
+			success:function( temp ){
+				var cnt= temp.cnt
+				if( cnt == 1 ){
+					alert("회원정보가 수정되었습니다.");
+					self.close();
+				}//endif	
+			}//success
+		});//ajax
+
 	});//click
 	
 	
-	
-	$("#btn_quit").click({
-		self.close();
+	$("#btn_quit").click(function(){
+		//확인메세지 띄우는 메소드가 있을거임 그거 쓰기
+		var Obj={
+				"userId":$("#userId").val() }
+		$.ajax({
+			url:"Delete_Member_process.jsp",
+			type:"post",
+			data:Obj,
+			dataType:"json",
+			error:function(xhr){
+				console.log(xhr.status);
+			},
+			success:function( temp ){
+				var cnt= temp.cnt
+				if( cnt == 1 ){
+					alert("회원이 탈퇴 되었습니다.");
+					self.close();
+				}//endif	
+			}//success
+		});//ajax
+		
 	});//click
 
 	
 	
-	$("#btn_close").click({
+	$("#btn_close").click(function(){
 		self.close();
 	});//click
 	
@@ -80,6 +122,11 @@ $(function(){
 						<div class="row">
 							<div class="col-2 align-self-center"><label id="inputuserid" class="form-label">아이디</label></div>
 							<div class="col align-self-center"><input id="userId" name="userId" class="form-control" type="text" value="${mmVO.userId }"></div>
+						</div>
+						<div class="row">
+							<div class="col-2 align-self-center"><label id="inputuserid" class="form-label">비밀번호</label></div>
+							<div class="col align-self-center"><input id="uPw" name="uPw" class="form-control" type="password" value="${mmVO.uPw }">
+							<input type="hidden" id="huPw" name="huPw" value="${ mmVO.uPw }"/>	</div>
 						</div>
 						<div class="row">
 							<div class="col-2 align-self-center"><label id="inputname" class="form-label">이름</label></div>
