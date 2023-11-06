@@ -174,7 +174,7 @@ public class RestDAO {
 			
 			StringBuilder selectConv = new StringBuilder();
 			selectConv
-			.append("	select cname, ctel, cdetail, ino, cno			")
+			.append("	select cname, cdetail, ino, cno			")
 			.append("	from convinient									")
 			.append("	where rano=?								");
 			
@@ -185,7 +185,7 @@ public class RestDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				cVO = new ConvVO(rs.getString("cname"), rs.getString("ctel"), rs.getString("cdetail"),rs.getString("ino"),rs.getInt("cno"));
+				cVO = new ConvVO(rs.getString("cname"), rs.getString("cdetail"),rs.getString("ino"),rs.getInt("cno"));
 				convlist.add(cVO);
 			}
 			
@@ -213,7 +213,7 @@ public class RestDAO {
 			
 			StringBuilder selectBrand = new StringBuilder();
 			selectBrand
-			.append("	select bname, btel, bdetail, bino, bno			")
+			.append("	select bname, bdetail, bino, bno			")
 			.append("	from brand									")
 			.append("	where rano=?								");
 			
@@ -224,7 +224,7 @@ public class RestDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				bVO = new BrandVO(rs.getString("bname"), rs.getString("btel"), rs.getString("bdetail"),rs.getString("bino"),rs.getInt("bno"));
+				bVO = new BrandVO(rs.getString("bname"), rs.getString("bdetail"),rs.getString("bino"),rs.getInt("bno"));
 				brandlist.add(bVO);
 			}
 			
