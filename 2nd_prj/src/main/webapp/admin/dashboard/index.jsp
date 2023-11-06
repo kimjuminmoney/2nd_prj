@@ -18,7 +18,7 @@
     </head>
         
 	<body class="sb-nav-fixed">
-		<%-- <jsp:include page="../admin_include/header_nav.jsp"></jsp:include> --%>
+		<jsp:include page="../admin_include/header_nav.jsp"></jsp:include>
 	
         <!-- <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             Navbar Brand

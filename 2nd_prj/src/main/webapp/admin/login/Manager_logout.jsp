@@ -6,5 +6,5 @@
 session.removeAttribute("sesNo");
 session.removeAttribute("managerData");
 session.invalidate();
-response.sendRedirect("Manager_login.html");
+response.sendRedirect("Manager_login.jsp");
 %>

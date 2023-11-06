@@ -46,8 +46,8 @@ try{
 	ManagerDataVO  mdVO=mlDAO.selectLogin(mlVO);
 	if(mdVO != null){
 		session.setAttribute("sesNo",mlVO.getEMPNO());
-		session.setAttribute("managerData", mdVO);
-		
+		session.setAttribute("managerData", mdVO.getENAME());
+		System.out.println("로그인 프로세서" + session.getAttribute("sesNo").toString());
 		response.sendRedirect("../dashboard/index.jsp");
 }else{
 %>
