@@ -434,7 +434,7 @@ $(function(){
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
-								<div id="carouselReview" class="carousel slide" style="width: 1500px; height: 500px; display: grid; place-items: center;">
+								<div id="carouselReview" class="carousel slide" style="width: 1500px; height: 500px;">
 								  <div class="carousel-inner">
 								    <%
 								    List<ReviewVO> reviewList = rvDAO.selectReview(rano);
@@ -465,7 +465,11 @@ $(function(){
 								      <br/>
 								      <% } // end for
 								      %>
-								      <div id="reviewContent" style="width: 900px; height: 200px; margin: 0px auto; border: 1px solid gray; border-radius: 10px;">
+								    </div>
+								    <%
+								    } // end for
+								    %>
+								      <div id="addReview" style="width: 900px; height: 200px; margin-left: 40px; margin-top: 300px; border: 1px solid gray; border-radius: 10px;">
 								      	<table style="margin-top:10px">
 								      		<tr>
 								      			<td style="width: 775px;">
@@ -487,10 +491,6 @@ $(function(){
 								        <textarea style="width:850px; margin:0px auto;" class="form-control" id="inputReview" rows="2"></textarea>
 								        <button id="btnReview" type="button" class="btn btn-outline-success" style="width: 200px; margin-top:10px; margin-left:350px">등록</button>
 								      </div>
-								    </div>
-								    <%
-								    } // end for
-								    %>
 								  </div>
 								  <button style="width:50px" class="carousel-control-prev" type="button" data-bs-target="#carouselReview" data-bs-slide="prev">
 								    <span class="carousel-control-prev-icon btn btn-success" aria-hidden="true"></span>
