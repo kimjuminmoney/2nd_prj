@@ -71,12 +71,12 @@
 	                        	<div id="search-results" style="height:700px;">
 		                            <div class="container text-center">
 	    	                       		<div class="row">
-		        	                   		<div class="col">
+		        	                   		<div class="col align-self-center">
 			                               		<div id="hList">
 		                              			</div>
 				                         	</div>
 			                        		<div class="col" >
-			                        			<div id="raList" style="overflow:auto;">
+			                        			<div id="raList" >
 			                        			</div>
 		                        			</div>
 		                            	</div>

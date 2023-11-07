@@ -189,6 +189,10 @@ pageContext.setAttribute("rvList",rvList);
 			                                   ${ rv.rvdDate } : ${ rv.rvdType } 사유로 관리자에 의해 삭제되었습니다.
 			                                </p>
 			                               </div>
+			                               <div id="btn_review" class="card-footer">
+				                            	<input type="button" onclick="modifyRv(${i.count})" value="수정" style="border: 1px solid #000"/>
+				                            	<input type="button" onclick="deleteRv(${i.count})" value="삭제"style="border: 1px solid #000"/>
+				                            </div>
 		                                </c:when>
 		                                <c:otherwise>
 		                            	<div class="card-body" style="height:100px;">

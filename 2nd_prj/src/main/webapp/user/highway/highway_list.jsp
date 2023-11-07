@@ -16,7 +16,7 @@ $(function(){
 				var output="";
 					output+="<table>"
 				$.each(tempArr, function(i, json ){
-					output+="<tr class='row'><td><div value='"+tempArr[i].hNo+"' onclick='raList("+tempArr[i].hNo+")'>"+tempArr[i].hName+"</div></td></tr>"
+					output+="<tr class='row' style='background-color:#D1E7DD; margin:1px;'><td class='btn btn-outline-success' value='"+tempArr[i].hNo+"' onclick='raList("+tempArr[i].hNo+")'>"+tempArr[i].hName+"</td></tr>"
 
 					});//end each
 					output+="</table>"
@@ -41,7 +41,7 @@ function raList( hNo ){
 			var output="";
 			output+="<table>"
 		$.each(tempArr, function(i, json ){
-			output+="<tr class='row'><td><div value='"+tempArr[i].raNo+"' onclick='moveRA("+tempArr[i].raNo+")'>"+tempArr[i].raName+"</div>";
+			output+="<tr class='row' style='background-color:#D1E7DD; margin:1px;'><td class='btn btn-outline-success' value='"+tempArr[i].raNo+"' onclick='moveRA("+tempArr[i].raNo+")'>"+tempArr[i].raName;		
 			output+="<input type='hidden' id='raName"+tempArr[i].raNo+"' value='"+tempArr[i].raName+"'>";
 			output+="<input type='hidden' id='raX"+tempArr[i].raNo+"' value='"+tempArr[i].raX+"'>";
 			output+="<input type='hidden' id='raY"+tempArr[i].raNo+"' value='"+tempArr[i].raY+"'>";
