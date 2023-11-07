@@ -109,8 +109,6 @@
 	                
 	                if (tr) {
 	                	var foodNum = checkbox.getAttribute('data-food-num');
-	                	alert(foodNum)
-	                	alert(restareaNum)
 	                    tr.remove();
 	                	
 	                	var data = {

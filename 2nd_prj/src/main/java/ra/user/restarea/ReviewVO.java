@@ -12,8 +12,9 @@ public class ReviewVO {
 		super();
 	}
 
-	public ReviewVO(String userNick, String reviewText, int reviewScore, int reviewReport, Date reviewDate) {
+	public ReviewVO(int reviewNum, String userNick, String reviewText, int reviewScore, int reviewReport, Date reviewDate) {
 		super();
+		this.reviewNum = reviewNum;
 		this.userNick = userNick;
 		this.reviewText = reviewText;
 		this.reviewScore = reviewScore;
@@ -87,8 +88,10 @@ public class ReviewVO {
 
 	@Override
 	public String toString() {
-		return "ReviewVO [userNick=" + userNick + ", reviewText=" + reviewText + ", reviewScore=" + reviewScore
-				+ ", reviewReport=" + reviewReport + ", reviewDate=" + reviewDate + "]";
+		return "ReviewVO [userNick=" + userNick + ", userId=" + userId + ", reviewText=" + reviewText + ", restAreaNum="
+				+ restAreaNum + ", reviewNum=" + reviewNum + ", reviewScore=" + reviewScore + ", reviewReport="
+				+ reviewReport + ", reviewDate=" + reviewDate + "]";
 	}
+
 	
 }

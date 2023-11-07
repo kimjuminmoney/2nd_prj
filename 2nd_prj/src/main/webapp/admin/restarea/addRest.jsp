@@ -98,6 +98,7 @@ $(function(){
             },
             success: function(jsonObj){
                     alert("추가완료.");
+                    location.reload(); // 현재 페이지를 새로 고침
             }
         });//ajax
     });//click

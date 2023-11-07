@@ -56,7 +56,6 @@
 <script type="text/javascript">
 	$(function() {
 		$("#btnInput").click(function(){
-			alert(123);
 	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
 	        var restAreaNum = $("#restAreaNum").val();
 	        var brandImage = $("#brandImage").val(); 
@@ -82,7 +81,9 @@
 	                console.log(xhr.status);
 	            },
 	            success: function(jsonObj){
-	                    alert("추가완료.");
+	                   	alert("매장이 추가되었습니다.");
+	                    history.back();
+	                    location.reload(); // 현재 페이지를 새로 고침
 	            }
 	        });//ajax
 	    });//click

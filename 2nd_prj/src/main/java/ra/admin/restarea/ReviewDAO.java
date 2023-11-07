@@ -1,4 +1,4 @@
-package ra.admin.restarea;
+package ra.admin.restarea; 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,7 +42,7 @@ public class ReviewDAO {
 			
 			StringBuilder selectReview = new StringBuilder();
 			selectReview
-			.append("	select u.unic, r.rvtext, r.rvscore, r.rvreport, r.rvdate	")
+			.append("	select u.unic, r.rvno, r.rvtext, r.rvscore, r.rvreport, r.rvdate	")
 			.append("	from review r, userinfo u									")
 			.append("	where r.userid=u.userid and rano=?								");
 			
@@ -53,7 +53,7 @@ public class ReviewDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				rvVO = new ReviewVO(rs.getString("unic"),rs.getString("rvtext"),rs.getInt("rvscore"),rs.getInt("rvreport"),rs.getDate("rvdate"));
+				rvVO = new ReviewVO(rs.getInt("rvno"),rs.getString("unic"),rs.getString("rvtext"),rs.getInt("rvscore"),rs.getInt("rvreport"),rs.getDate("rvdate"));
 				reviewList.add(rvVO);
 			}
 			
@@ -98,7 +98,7 @@ public class ReviewDAO {
 		
 	}//insertReview
 	
-	public int updateUser(ReviewVO rvVO) throws SQLException {
+	public int updateReview(ReviewVO rvVO) throws SQLException {
 		int rowCnt = 0;
 		
 		Connection con = null;

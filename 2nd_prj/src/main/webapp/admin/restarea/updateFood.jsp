@@ -89,7 +89,8 @@
 	                console.log(xhr.status);
 	            },
 	            success: function(jsonObj){
-	                    alert("추가완료.");
+	                    alert(foodNum+"번 메뉴가 수정되었습니다.");
+	                    window.history.back();
 	            }
 	        });//ajax
 	    });//click
