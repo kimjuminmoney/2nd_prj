@@ -158,11 +158,12 @@ $(document).ready(function() {
     <label for="inputFirstName">아이디</label>
     <div class="row">
         <div class="col-md-13">
-            <div class="input-group"> <!-- input과 button을 그룹으로 묶음 -->
+                 <div class="input-group"> <!-- input과 button을 그룹으로 묶음 -->
                 <input class="form-control" name="USERID" id="USERID" type="text" maxlength="20" placeholder="아이디를 입력해주세요" style="width: 430px;" />
                 <div class="input-group-append">
                     <input type="button" value="중복확인" class="btn btn-info btn-sm" id="btnDup" />
                 </div>
+                  <small id="passwordHelp" class="form-text text-muted">아이디는 4자 이상 16자 이하로 입력해야 합니다.</small>
             </div>
         </div>
         <div class="col-md-2">
