@@ -39,6 +39,9 @@ pageContext.setAttribute("sesId", sesId);
 			location.href="../login/Client_login.jsp"
 			return;
 		}
+		var confirmation = confirm('리뷰를 신고하시겠습니까?');
+		   
+		   if(confirmation){
 		 $.ajax({
 	           url: "addReport_ajax.jsp",
 	           type: "POST",
@@ -51,12 +54,18 @@ pageContext.setAttribute("sesId", sesId);
 	           success: function(jsonObj){
 	                   alert("리뷰가 신고되었습니다.");
 	           }
-	       });//ajax 
+	       });//ajax
+	   }else{
+		   alert("신고하기가 취소되었습니다.");  
+		}//end else
 	}//click
 	
 $(function(){
 	
    $("#btnReview").click(function(){
+	   var confirmation = confirm('리뷰를 등록하시겠습니까?');
+	   
+	   if(confirmation){
        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
        var reviewDetail = $("#inputReview").val(); 
        var reviewScore = $("#selectScore").val(); 
@@ -97,6 +106,9 @@ $(function(){
 	           }
 	       });//ajax
        }
+			}else{
+			   alert("리뷰 등록이 취소되었습니다.");  
+			}//end else
    });//click
 });//ready
 </script>
@@ -493,6 +505,8 @@ $(function(){
 								    <div class="carousel-item<%= i == 0 ? " active" : "" %>">
 								      <% for (int j = i; j < i + batchSize && j < reviewList.size(); j++) {
 								        rvVO = reviewList.get(j);
+								        if(rvVO.getReviewReport()<6){
+								        	
 								      %>
 								      <div id="reviewContent" style="width: 900px; height: 120px; margin-top:15px; margin-left: 40px; border: 1px solid gray; border-radius: 10px; display: flex; align-items: center;">
 								        <div style="margin-left: 25px; margin-right: 25px;">
@@ -509,7 +523,6 @@ $(function(){
 								              <td style="width: 80px;">평점: <%= rvVO.getReviewScore() %>/5</td>
 								              <td><input id="reviewNum" type="hidden" value="<%=rvVO.getReviewNum()%>"></td>
 								              <td><button id="reportBtn" type="button" class="btn btn-outline-danger" onclick="updateReport(<%=rvVO.getReviewNum()%>)">
-<!-- 								              <td><button id="reportBtn" type="button" class="btn btn-outline-danger" onclick="updateReport()"> -->
 								              신고
 								              </button></td>
 								            </tr>
@@ -517,7 +530,9 @@ $(function(){
 								        </div>
 								      </div>
 								      <br/>
-								      <% } // end for
+								      <% 
+									  	}//end if
+								      } // end for
 								      %>
 								    </div>
 								    <%

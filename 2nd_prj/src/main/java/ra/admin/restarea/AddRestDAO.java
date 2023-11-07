@@ -53,8 +53,6 @@ public class AddRestDAO {
 
 			boolean flag = pstmt.execute();
 			
-			System.out.println(flag);
-
 			return flag;
 		} finally {
 			db.dbClose(null, pstmt, con);

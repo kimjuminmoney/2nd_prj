@@ -22,7 +22,6 @@ String fiName = fiPath.substring(startIndex);
 int fiNameLength = fiName.length();
 
 String iconNum = fiName.substring(0, fiNameLength-4);
-System.out.print("아이콘넘버: "+iconNum);
 
 mbVO.setRestAreaNum(restAreaNum);
 mbVO.setIconNum(iconNum);

@@ -43,7 +43,7 @@ public class ReviewDAO {
 			selectReview
 			.append("	select u.unic, r.rvno, r.rvtext, r.rvscore, r.rvreport, r.rvdate	")
 			.append("	from review r, userinfo u									")
-			.append("	where r.userid=u.userid and rano=?								")
+			.append("	where r.userid=u.userid and rano=? and rvreport<5								")
 			.append("	order by r.rvdate desc								");
 			
 			pstmt=con.prepareStatement(selectReview.toString());

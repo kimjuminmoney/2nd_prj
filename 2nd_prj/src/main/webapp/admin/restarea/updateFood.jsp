@@ -59,7 +59,6 @@
 <script type="text/javascript">
 	$(function() {
 		$("#updateBtn").click(function(){
-			alert(123);
 	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
 	        var restAreaNum = $("#restAreaNum").val();
 	        var foodNum = $("#foodNum").val();
