@@ -84,7 +84,7 @@
 	            },
 	            success: function(jsonObj){
 	                    alert("편의시설이 추가되었습니다.");
-	                    history.back();
+	                    window.location.href = 'manageConv.jsp?raNo='+restAreaNum;
 	            }
 	        });//ajax
 	    });//click

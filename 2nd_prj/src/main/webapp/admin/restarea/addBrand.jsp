@@ -82,8 +82,7 @@
 	            },
 	            success: function(jsonObj){
 	                   	alert("매장이 추가되었습니다.");
-	                    history.back();
-	                    location.reload(); // 현재 페이지를 새로 고침
+	                    window.location.href = 'manageBrand.jsp?raNo='+restAreaNum;
 	            }
 	        });//ajax
 	    });//click

@@ -37,10 +37,6 @@
 									<div class="sb-nav-link-icon">
 										<i class="fas fa-table"></i>
 									</div> 매장시설
-								</a> <a class="nav-link" href="../restarea/manageGas.jsp">
-									<div class="sb-nav-link-icon">
-										<i class="fas fa-table"></i>
-									</div> 주유소 정보
 								</a> <a class="nav-link" href="../restarea/addRest.jsp">
 									<div class="sb-nav-link-icon">
 										<i class="fas fa-table"></i>

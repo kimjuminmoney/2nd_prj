@@ -120,7 +120,7 @@
 	        	            	console.log(xhr);
 	        	            },
 	        	            success: function(response) {
-	        	                alert("삭제완료");
+	        	            	alert(convNum+"번 편의시설이 삭제되었습니다.");
 	        	            }//success
 	        	        });//ajax 
 	                }
@@ -191,7 +191,7 @@
 							<table id="datatablesSimple" class="table">
 								<thead>
 									<tr>
-										<th><input type="checkbox" /></th>
+										<th>#</th>
 										<th>아이콘</th>
 										<th>시설명</th>
 										<th>비고</th>
@@ -204,7 +204,7 @@
 										ConvVO cVO = convList.get(i);
 										%>
 										<tr>
-											<td><input type="checkbox" class="conv-checkbox" data-conv-num="<%= cVO.getConvNum() %>"/></td>
+											<td><input type="radio" id="convRadio" name="convRadio" class="conv-checkbox" data-conv-num="<%= cVO.getConvNum() %>"/></td>
 											<td><img src="../../common/icon_images/convinient/<%=cVO.getConvIcon() %>.png"></td>
 											<td><%=cVO.getConvName() %></td>
 											<td><%=!(cVO.getConvDetail()==null)?cVO.getConvDetail():"" %></td>

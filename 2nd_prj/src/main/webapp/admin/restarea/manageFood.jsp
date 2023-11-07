@@ -77,6 +77,7 @@
 	    
 	    $("#updateBtn").click(function(){
 	    	var checkboxes = document.querySelectorAll('.food-checkbox');
+	    	var checkboxCount = 0;
 	    	<%
 	    	String paramRaNum=request.getParameter("raNum");
 	    	if(paramRaNum==null){
@@ -87,13 +88,13 @@
 	    	
 	    	checkboxes.forEach(function (checkbox, index){
 	            if (checkbox.checked) {
-	            	
 	            	var tr = checkbox.closest('tr');
 	            	var foodNum = checkbox.getAttribute('data-food-num');
-	            	
 	            	window.location.href = 'updateFood.jsp?raNo='+restareaNum+'&fNo='+foodNum;
+	            
 	            }//end if
 	    	});//forEach
+	    		
 	    });//click
 	    
 	    $("#deleteBtn").click(function(){
@@ -126,7 +127,7 @@
 	        	            	console.log(xhr);
 	        	            },
 	        	            success: function(response) {
-	        	                alert("삭제완료");
+	        	            	alert(foodNum+"번 메뉴가 삭제되었습니다.");
 	        	            }//success
 	        	        });//ajax
 	                }
@@ -194,7 +195,7 @@
 							<table id="datatablesSimple" class="table">
 								<thead>
 									<tr>
-										<th><input type="checkbox" /></th>
+										<th>#</th>
 										<th>번호</th>
 										<th>이미지</th>
 										<th>메뉴명</th>
@@ -205,16 +206,21 @@
 								<tbody>
 										<%
 										List<FoodVO> foodList = rDAO.selectFood(raNo);
+										String fDetail = "";
 										for(int i=0; i<foodList.size(); i++){
 										FoodVO fVO = foodList.get(i);
+										fDetail=fVO.getFoodDetail();
+										if(fDetail==null){
+											fDetail="";
+										}
 										%>
 										<tr>
-											<td><input type="checkbox" value="" class="food-checkbox" data-food-num="<%= fVO.getFoodNum() %>"/></td>
+											<td><input type="radio" id="foodRadio" name="foodRadio" value="" class="food-checkbox" data-food-num="<%= fVO.getFoodNum() %>"/></td>
 											<td><%=fVO.getFoodNum() %></td>
 											<td style="text-align: center"><img src="../../common/food_images/<%=fVO.getFoodImage() %>" style="height:50px; border-radius: 10px;"/></td>
 											<td><%=fVO.getFoodName() %></td>
 											<td><%=fVO.getFoodPrice() %></td>
-											<td><%=fVO.getFoodDetail() %></td>
+											<td><%=fDetail %></td>
 										</tr>
 										<%
 										}

@@ -85,7 +85,7 @@ $(function(){
             },
             success: function(jsonObj){
                     alert("메뉴가 추가되었습니다.");
-                    history.back();
+                    window.location.href = 'manageFood.jsp?raNo='+restAreaNum;
             }
         });//ajax
     });//click

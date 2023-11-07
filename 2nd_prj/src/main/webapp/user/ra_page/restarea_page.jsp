@@ -114,7 +114,7 @@ $(function(){
             <!-- Navigation-->
             <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include>
             <!-- Header-->
-            <header class="bg-success py-5">
+            <header class="bg-success py-1">
                 <div class="container px-1">
                     <div class="row gx-5 align-items-center justify-content-center">
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -134,6 +134,7 @@ $(function(){
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="../../common/logo_images/raimage.png" alt="..." /></div>
                     </div>
                 </div>
             </header>
@@ -297,7 +298,7 @@ $(function(){
 								      <table style=" margin-bottom: 20px">							
 								      	<tr>
 								      		<td><img src="../../common/icon_images/convinient/<%=cVO.getConvIcon() %>.png"><br/></td>
-								      		<td><strong><%=cVO.getConvName() %></strong><br/><%=cVO.getConvDetail() %></td>
+								      		<td><strong><%=cVO.getConvName() %></strong><br/><%=cDetail %></td>
 								      	</tr>
 								      </table>
 								      <hr style="background-color: #E9ECED;">
@@ -482,7 +483,7 @@ $(function(){
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
 
-								<div id="carouselReview" class="carousel slide" style="width: 1500px; height: 500px;">
+								<div id="carouselReview" class="carousel slide" style="width: 1500px; height: 550px; ">
 								  <div class="carousel-inner">
 								    <%
 								    List<ReviewVO> reviewList = rvDAO.selectReview(rano);
@@ -493,7 +494,7 @@ $(function(){
 								      <% for (int j = i; j < i + batchSize && j < reviewList.size(); j++) {
 								        rvVO = reviewList.get(j);
 								      %>
-								      <div id="reviewContent" style="width: 900px; height: 120px; margin: 0px auto; border: 1px solid gray; border-radius: 10px; display: flex; align-items: center;">
+								      <div id="reviewContent" style="width: 900px; height: 120px; margin-top:15px; margin-left: 40px; border: 1px solid gray; border-radius: 10px; display: flex; align-items: center;">
 								        <div style="margin-left: 25px; margin-right: 25px;">
 								          <table>
 								            <tr>
@@ -522,7 +523,7 @@ $(function(){
 								    <%
 								    } // end for
 								    %>
-								      <div id="addReview" style="width: 900px; height: 200px; margin-left: 40px; margin-top: 300px; border: 1px solid gray; border-radius: 10px;">
+								      <div id="addReview" style="width: 900px; height: 200px; margin-left: 40px; margin-top: 330px; border: 1px solid gray; border-radius: 10px;">
 								      	<table style="margin-top:10px">
 								      		<tr>
 								      			<td style="width: 775px;">

@@ -118,7 +118,7 @@
 	        	            	console.log(xhr);
 	        	            },
 	        	            success: function(response) {
-	        	                alert("삭제완료");
+	        	            	alert(brandNum+"번 매장이 삭제되었습니다.");
 	        	            }//success
 	        	        });//ajax
 	                }
@@ -187,7 +187,7 @@
 							<table id="datatablesSimple" class="table">
 								<thead>
 									<tr>
-										<th><input type="checkbox" /></th>
+										<th>#</th>
 										<th>아이콘</th>
 										<th>매장명</th>
 										<th>비고</th>
@@ -200,7 +200,7 @@
 										BrandVO bVO = brandList.get(i);
 										%>
 										<tr>
-											<td><input type="checkbox" class="brand-checkbox" data-brand-num="<%= bVO.getBarndNum() %>"/></td>
+											<td><input type="radio" id="brandRadio" name="brandRadio" class="brand-checkbox" data-brand-num="<%= bVO.getBarndNum() %>"/></td>
 											<td><img src="../../common/icon_images/brand/<%=bVO.getBrandIcon() %>.png"></td>
 											<td><%=bVO.getBrandName() %></td>
 											<td><%=!(bVO.getBrandHome()==null)?bVO.getBrandHome():"" %></td>

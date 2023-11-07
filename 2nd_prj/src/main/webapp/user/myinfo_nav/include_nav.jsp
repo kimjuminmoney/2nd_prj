@@ -23,6 +23,4 @@
            </div>
         </nav>
         
-        <a class="navbar-brand ps-3" href="../dashboard/index.jsp"><img src="../../common/logo_images/logo_white.png"></a>
-        
         
