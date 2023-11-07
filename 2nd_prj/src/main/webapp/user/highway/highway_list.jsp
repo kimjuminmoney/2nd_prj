@@ -5,7 +5,7 @@ $(function(){
 	$("#highway-tab").click(function(){
 		var jsonObj ={};
 		$.ajax({
-			url:"highway/Highway_open_process.jsp",
+			url:"../highway/Highway_open_process.jsp",
 			type:"post",
 			data:jsonObj,
 			dataType:"json",
@@ -30,7 +30,7 @@ $(function(){
 function raList( hNo ){
 	var jsonObj ={ "hNo" : hNo };
 	$.ajax({
-		url:"highway/Restarea_open_process.jsp",
+		url:"../highway/Restarea_open_process.jsp",
 		type:"post",
 		data:jsonObj,
 		dataType:"json",
@@ -55,6 +55,7 @@ function raList( hNo ){
 }//raList
 
 function moveRA( rano ){
+	alert(rano);
 	if(markers){
 	removeMarker();
 	};
@@ -78,7 +79,7 @@ function moveRA( rano ){
 	marker.setMap(map);
 	markers.push(marker);
 	
-	var iwContent = "<div style='padding:5px;'><a href='ra_page/restarea_page.jsp?rano='"+rano+"'>"+raName+"</a></div>"
+	var iwContent = "<div style='padding:5px;'><a href='../ra_page/restarea_page.jsp?rano="+rano+"'>"+raName+"</a></div>"
 	var iwRemoveable = true; 
 	var infowindow = new kakao.maps.InfoWindow({
 	    content : iwContent,

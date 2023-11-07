@@ -88,7 +88,6 @@ pageContext.setAttribute("rvList",rvList);
  function modifyRv( i ){
 	
 	 if (isNaN( $("#rvScore"+i).val()) ) {
-		 	alert($("#rvScore"+i).val());
 		    alert("숫자를 입력해주세요.");
 		    return;
 		}
@@ -99,7 +98,7 @@ pageContext.setAttribute("rvList",rvList);
 	 }
  
 	 var jsonObj={ 
-		<%-- "id" : <%= request.getParameter("id")%> --%>
+		"userId" : "${ sesId }",
 		"rvNo" :	$("#rvNo"+i).val(),
 		"rvScore" :	$("#rvScore"+i).val(),
 		"rvText" : $("#rvText"+i).val()
@@ -132,7 +131,7 @@ pageContext.setAttribute("rvList",rvList);
 	 
 	 var jsonObj={ 
 		 "rvNo" :	$("#rvNo"+i).val(),
-		<%-- "id" : <%= request.getParameter("id")%> --%>
+		 "userId" : "${ sesId}"
 		}
 	 
 		$.ajax({	

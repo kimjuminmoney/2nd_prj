@@ -11,15 +11,15 @@
 MyReviewVO mrVO = new MyReviewVO();
 MyReviewDAO mrDAO = MyReviewDAO.getInstance();
 
-String id=request.getParameter("id");
-id="HJS";
+String userId=request.getParameter("userId");
+
 int rvNo=Integer.parseInt(request.getParameter("rvNo"));
 
 JSONObject jsonObj=new JSONObject();
 
 int cnt=0;
 try{
-cnt = mrDAO.deleteReview(id, rvNo);
+cnt = mrDAO.deleteReview(userId, rvNo);
 }catch(SQLException se){
 	se.printStackTrace();
 }
