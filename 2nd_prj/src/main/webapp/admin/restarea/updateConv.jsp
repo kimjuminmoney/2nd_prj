@@ -58,6 +58,10 @@
 <script type="text/javascript">
 	$(function() {
 		$("#updateBtn").click(function(){
+			
+			var confirmation = confirm('편의시설을 수정하시겠습니까?');
+			   
+			if(confirmation){
 	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
 	        var restAreaNum = $("#restAreaNum").val();
 	        var convImage = $("#convImage").val(); 
@@ -81,7 +85,7 @@
 	            data: data,
 	            dataType: "json",
 	            error: function(xhr){
-	                alert("서버에서 문제가 발생하였습니다.");
+	                alert("문제가 발생하였습니다. 값을 다시 확인해주세요.");
 	                console.log(xhr.status);
 	            },
 	            success: function(jsonObj){
@@ -89,6 +93,9 @@
 	                    window.history.back();
 	            }
 	        });//ajax
+		}else{
+			alert("편의시설 수정을 취소하셨습니다.")
+		}
 	    });//click
 	});//ready
 	
@@ -154,10 +161,10 @@
 							<input id="convNum" class="form-control" type="text" value="<%=cNo %>" readonly="readonly" disabled><br/>
 						
 							<label id="inputRest" class="form-label">시설명</label> 
-							<input id="convName" class="form-control" type="text" placeholder="<%=cVO.getConvName()%>"><br/>
+							<input id="convName" class="form-control" type="text" value="<%=cVO.getConvName()%>"><br/>
 
 							<label id="inputRest" class="form-label">비고</label> 
-							<input id="convDetail" class="form-control" type="text" placeholder="<%=cVO.getConvDetail()%>"><br/>
+							<input id="convDetail" class="form-control" type="text" value="<%=cVO.getConvDetail()%>"><br/>
 
 						</div>
 					</div>

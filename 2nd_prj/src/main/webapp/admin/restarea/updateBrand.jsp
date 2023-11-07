@@ -58,6 +58,9 @@
 <script type="text/javascript">
 	$(function() {
 		$("#updateBtn").click(function(){
+			var confirmation = confirm('매장을 수정하시겠습니까?');
+			   
+			if(confirmation){
 	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
 	        var restAreaNum = $("#restAreaNum").val();
 	        var brandImage = $("#brandImage").val(); 
@@ -81,7 +84,7 @@
 	            data: data,
 	            dataType: "json",
 	            error: function(xhr){
-	                alert("서버에서 문제가 발생하였습니다.");
+	                alert("문제가 발생하였습니다. 값을 다시 확인해주세요.");
 	                console.log(xhr.status);
 	            },
 	            success: function(jsonObj){
@@ -90,7 +93,11 @@
 	                    location.reload(); // 현재 페이지를 새로 고침
 	            }
 	        });//ajax
+			}else{
+				alert("매장 수정을 취소하셨습니다.")
+			}
 	    });//click
+		
 	});//ready
 	
 	function displaySelectedImage() {
@@ -136,6 +143,11 @@
 						
 						RestDAO rDAO = RestDAO.getInstance();
 						BrandVO bVO = rDAO.selectBrand2(raNo,bNo);
+						String bDetail=bVO.getBrandHome();
+						if(bDetail==null){
+							bDetail="";
+						}
+						
 						%>
 							<div class="card" style="width: 18rem;">
         						<img id="selected-image" src="../../common/icon_images/brand/<%=bVO.getBrandIcon() %>.png" class="card-img-top">
@@ -155,10 +167,10 @@
 							<input id="brandNum" class="form-control" type="text" value="<%=bNo %>" readonly="readonly" disabled><br/>
 						
 							<label id="inputRest" class="form-label">매장명</label> 
-							<input id="brandName" class="form-control" type="text" placeholder="<%=bVO.getBrandName()%>"><br/>
+							<input id="brandName" class="form-control" type="text" value="<%=bVO.getBrandName()%>"><br/>
 
 							<label id="inputRest" class="form-label">비고</label> 
-							<input id="brandDetail" class="form-control" type="text" placeholder="<%=bVO.getBrandHome()%>"><br/>
+							<input id="brandDetail" class="form-control" type="text" value="<%=bDetail%>"><br/>
 
 						</div>
 					</div>

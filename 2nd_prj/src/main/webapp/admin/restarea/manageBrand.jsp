@@ -46,10 +46,10 @@
 		$("#restareaname").change(function(){
 	    	if($("#restareaname").selectedIndex != 0){
 	    		var data=$("#restareaname").val();
-	    		  // AJAX 요청을 수행
+	    		  
 	            $.ajax({
 	                url: "ajax/ajax_restarea_num.jsp",
-	                type: "POST", // POST 방식을 사용해 데이터를 서버로 보냅니다.
+	                type: "POST", 
 	                data: "restareaname="+data,
 	                dataType: "json",
 	                error: function(xhr){
@@ -90,6 +90,9 @@
 	    });//click
 	    
 	    $("#deleteBtn").click(function(){
+	    	var confirmation = confirm('매장을 삭제하시겠습니까?');
+			   
+			if(confirmation){
 	    	var checkboxes = document.querySelectorAll('.brand-checkbox');
 			var restareaNum = <%=paramRaNum%>;
 	    	
@@ -124,7 +127,9 @@
 	                }
 	            }
 	        });//forEach
-					 
+			}else{
+				alert("취소되었습니다.")
+			}
 	    })//click
 	    
 	});//ready

@@ -64,6 +64,9 @@ $(function(){
 	});//change
 	
     $("#inputBtn").click(function(){
+    	var confirmation = confirm('매장을 추가하시겠습니까?');
+		   
+		if(confirmation){
         // 데이터를 수집하거나 사용자 입력을 가져옵니다.
         var addr = $("#inputAddr").val(); // 예: input 필드의 ID가 "addrInput"인 경우
         var direction = $("#inputDir").val();
@@ -93,7 +96,7 @@ $(function(){
             data: data,
             dataType: "json",
             error: function(xhr){
-                alert("서버에서 문제가 발생하였습니다.");
+                alert("문제가 발생하였습니다. 값을 다시 확인해주세요.");
                 console.log(xhr.status);
             },
             success: function(jsonObj){
@@ -101,6 +104,9 @@ $(function(){
                     location.reload(); // 현재 페이지를 새로 고침
             }
         });//ajax
+		}else{
+			alert("취소하셨습니다.")
+		}
     });//click
     
     $("#inputHname").change(function(){

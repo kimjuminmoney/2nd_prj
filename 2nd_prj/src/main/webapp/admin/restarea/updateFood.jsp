@@ -59,6 +59,10 @@
 <script type="text/javascript">
 	$(function() {
 		$("#updateBtn").click(function(){
+			
+			var confirmation = confirm('메뉴를 수정하시겠습니까?');
+			   
+			if(confirmation){
 	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
 	        var restAreaNum = $("#restAreaNum").val();
 	        var foodNum = $("#foodNum").val();
@@ -84,7 +88,7 @@
 	            data: data,
 	            dataType: "json",
 	            error: function(xhr){
-	                alert("서버에서 문제가 발생하였습니다.");
+	                alert("문제가 발생하였습니다. 값을 다시 확인해주세요.");
 	                console.log(xhr.status);
 	            },
 	            success: function(jsonObj){
@@ -92,6 +96,9 @@
 	                    window.history.back();
 	            }
 	        });//ajax
+			}else{
+				alert("메뉴 수정을 취소하셨습니다.")
+			}
 	    });//click
 	});//ready
 	
@@ -138,6 +145,10 @@
 						
 						RestDAO rDAO = RestDAO.getInstance();
 						FoodVO fVO = rDAO.selectFood2(raNo,fNo);
+						String fDetail=fVO.getFoodDetail();
+						if(fDetail==null){
+							fDetail="";
+						}
 						%>
 							<div class="card" style="width: 18rem;">
         						<img id="selected-image" src="../../common/food_images/<%=fVO.getFoodImage() %>" class="card-img-top">
@@ -157,13 +168,13 @@
 							<input id="foodNum" class="form-control" type="text" value="<%=fNo %>" readonly="readonly" disabled><br/>
 						
 							<label id="inputRest" class="form-label">메뉴명</label> 
-							<input id="foodName" class="form-control" type="text" placeholder="<%=fVO.getFoodName()%>"><br/>
+							<input id="foodName" class="form-control" type="text" value="<%=fVO.getFoodName()%>"><br/>
 
 							<label id="inputRest" class="form-label">가격</label> 
-							<input id="foodPrice" class="form-control" type="text" placeholder="<%=fVO.getFoodPrice()%>"><br />
+							<input id="foodPrice" class="form-control" type="text" value="<%=fVO.getFoodPrice()%>"><br />
 
 							<label id="inputRest" class="form-label">설명</label> 
-							<input id="foodDetail" class="form-control" type="text" placeholder="<%=fVO.getFoodDetail()%>"><br/>
+							<input id="foodDetail" class="form-control" type="text" value="<%=fDetail%>"><br/>
 
 						</div>
 					</div>

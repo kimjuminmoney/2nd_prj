@@ -77,7 +77,7 @@
 	    
 	    $("#updateBtn").click(function(){
 	    	var checkboxes = document.querySelectorAll('.food-checkbox');
-	    	var checkboxCount = 0;
+	    	
 	    	<%
 	    	String paramRaNum=request.getParameter("raNum");
 	    	if(paramRaNum==null){
@@ -88,7 +88,6 @@
 	    	
 	    	checkboxes.forEach(function (checkbox, index){
 	            if (checkbox.checked) {
-	            	var tr = checkbox.closest('tr');
 	            	var foodNum = checkbox.getAttribute('data-food-num');
 	            	window.location.href = 'updateFood.jsp?raNo='+restareaNum+'&fNo='+foodNum;
 	            
@@ -98,6 +97,10 @@
 	    });//click
 	    
 	    $("#deleteBtn").click(function(){
+	    	
+	    	var confirmation = confirm('메뉴를 삭제하시겠습니까?');
+			   
+			if(confirmation){
 	    	var checkboxes = document.querySelectorAll('.food-checkbox');
 
 			var restareaNum = <%=paramRaNum%>;
@@ -130,9 +133,13 @@
 	        	            	alert(foodNum+"번 메뉴가 삭제되었습니다.");
 	        	            }//success
 	        	        });//ajax
-	                }
-	            }
+	                }//end if
+	                }//end if
+	        
 	        });//forEach
+	                }else{
+	                	alert("취소되었습니다.")
+	                }
 					 
 	    })//click
 	});//ready

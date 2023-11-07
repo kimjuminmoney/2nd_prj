@@ -92,6 +92,9 @@
 	    });//click
 	    
 	    $("#deleteBtn").click(function(){
+	    	var confirmation = confirm('편의시설을 삭제하시겠습니까?');
+			   
+			if(confirmation){
 	    	var checkboxes = document.querySelectorAll('.conv-checkbox');
 			var restareaNum = <%=paramRaNum%>;
 	    	
@@ -126,7 +129,9 @@
 	                }
 	            }
 	        });//forEach
-					 
+			}else{
+				alert("취소되었습니다.")
+			} 
 	    })//click
 	    
 	});//ready
