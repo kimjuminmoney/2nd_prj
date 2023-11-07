@@ -9,6 +9,9 @@
 <%@ page info="개인정보 수정 페이지" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:if test="${ empty sesId }">
+<c:redirect url="../login/Client_login.jsp"/>
+</c:if>
 <%request.setCharacterEncoding("UTF-8");
 
 	 DataDecrypt dd= new DataDecrypt("a12345678901234567");
@@ -25,13 +28,10 @@
 	     userInfoVO uiVO = mpDAO.selectUserInfo(id);
 	 	
 	   	String uName=dd.decryption(uiVO.getName());
-	    	String uNic=uiVO.getNick();
+	    String uNic=uiVO.getNick();
 	     String uTel=dd.decryption(uiVO.getTel());
 	     String uEmail=dd.decryption(uiVO.getEmail());
 	 %>
-<c:if test="${ empty sesId }">
-<c:redirect url="../login/Client_login.jsp"/>
-</c:if>
 <!DOCTYPE html>
 <html>
 <head>
