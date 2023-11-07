@@ -47,14 +47,15 @@ $(document).ready(function() {
     
 
     $("#email1").on("input", function() {
-        var regex = /^[a-zA-Z]+$/; // 영어만 입력 가능한 정규 표현식
+        var regex = /^[a-zA-Z0-9]+$/; // 영어와 숫자만 입력 가능한 정규 표현식
         var inputText = $(this).val();
         
         if (!regex.test(inputText)) {
-            alert("영어만 입력 가능합니다.");
+            alert("영어와 숫자만 입력 가능합니다.");
             $(this).val("");
         }
     });
+
     
 
 
