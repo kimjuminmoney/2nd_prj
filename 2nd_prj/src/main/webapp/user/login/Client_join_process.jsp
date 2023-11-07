@@ -70,8 +70,8 @@ if ("GET".equals(method)) {
                 <p class="card-text"><c:out value="${param.UNAME }"/>님께서 입력하신 정보는 아래와 같습니다.</p>
                 <p class="card-text">아이디 : <c:out value="${cjVO.USERID}"/></p>
                 <p class="card-text">닉네임 : <c:out value="${cjVO.UNICK}"/></p>
-                <a href="E:/dev/workspace/project_2/src/main/webapp/login/main.html" class="card-link">메인으로</a>
-                <a href="E:/dev/workspace/project_2/src/main/webapp/login/Client_login.html" class="card-link">로그인</a>
+                <a href="../index/index.jsp" class="card-link">메인으로</a>
+                <a href="Client_login.jsp" class="card-link">로그인</a>
             </div>
         </div>
     </div>

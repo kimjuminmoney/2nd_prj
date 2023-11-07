@@ -29,13 +29,38 @@
         <!-- Jquery CDN시작 -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+<%
+String sesId=(String)session.getAttribute("sesId");
+pageContext.setAttribute("sesId", sesId);
+%>
+	function updateReport(rvNum){
+		if(${empty sesId}){
+			alert("로그인 후 리뷰를 신고할 수 있습니다.")
+			location.href="../login/Client_login.jsp"
+			return;
+		}
+		 $.ajax({
+	           url: "addReport_ajax.jsp",
+	           type: "POST",
+	           data: { rvNum: rvNum },
+	           dataType: "text",
+	           error: function(xhr){
+	               alert("서버에서 문제가 발생하였습니다.");
+	               console.log(xhr.status);
+	           },
+	           success: function(jsonObj){
+	                   alert("리뷰가 신고되었습니다.");
+	           }
+	       });//ajax 
+	}//click
+	
 $(function(){
+	
    $("#btnReview").click(function(){
        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
        var reviewDetail = $("#inputReview").val(); 
        var reviewScore = $("#selectScore").val(); 
        var restareaNum = $("#raNum").val();
-       var userId = "CJS";
 
        if (reviewDetail === "") {
            alert("리뷰를 입력해주세요");
@@ -43,12 +68,17 @@ $(function(){
     	   alert("평점을 선택해주세요");
        }else{
        
+    	   if(${empty sesId}){
+   			alert("로그인 후 리뷰를 작성할 수 있습니다.")
+   			location.href="../login/Client_login.jsp"
+   			return;
+   		}
 	       // 데이터를 객체로 구성
 	       var data = {
 	    		reviewDetail: reviewDetail,
 	    		reviewScore: reviewScore ,
 	    		restareaNum: restareaNum ,
-	    		userId: userId,
+	    		userId: "${sesId}"
 	       };
 	
 	       // AJAX 요청을 수행
@@ -63,6 +93,7 @@ $(function(){
 	           },
 	           success: function(jsonObj){
 	                   alert("리뷰가 등록되었습니다.");
+	                   location.reload(); // 현재 페이지를 새로 고침
 	           }
 	       });//ajax
        }
@@ -83,7 +114,7 @@ $(function(){
             <!-- Navigation-->
             <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include>
             <!-- Header-->
-            <header class="bg-success py-1">
+            <header class="bg-success py-5">
                 <div class="container px-1">
                     <div class="row gx-5 align-items-center justify-content-center">
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -103,7 +134,6 @@ $(function(){
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
                     </div>
                 </div>
             </header>
@@ -475,7 +505,12 @@ $(function(){
 								          <table>
 								            <tr>
 								              <td style="width: 700px;"><%= rvVO.getReviewText() %></td>
-								              <td>평점: <%= rvVO.getReviewScore() %>/5</td>
+								              <td style="width: 80px;">평점: <%= rvVO.getReviewScore() %>/5</td>
+								              <td><input id="reviewNum" type="hidden" value="<%=rvVO.getReviewNum()%>"></td>
+								              <td><button id="reportBtn" type="button" class="btn btn-outline-danger" onclick="updateReport(<%=rvVO.getReviewNum()%>)">
+<!-- 								              <td><button id="reportBtn" type="button" class="btn btn-outline-danger" onclick="updateReport()"> -->
+								              신고
+								              </button></td>
 								            </tr>
 								          </table>
 								        </div>

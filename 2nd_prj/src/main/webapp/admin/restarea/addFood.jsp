@@ -57,7 +57,6 @@
 
 $(function(){
 	$("#btnInput").click(function(){
-		alert(123);
         // 데이터를 수집하거나 사용자 입력을 가져옵니다.
         var restAreaNum = $("#restAreaNum").val();
         var foodImage = $("#foodImage").val(); 
@@ -85,7 +84,8 @@ $(function(){
                 console.log(xhr.status);
             },
             success: function(jsonObj){
-                    alert("추가완료.");
+                    alert("메뉴가 추가되었습니다.");
+                    history.back();
             }
         });//ajax
     });//click

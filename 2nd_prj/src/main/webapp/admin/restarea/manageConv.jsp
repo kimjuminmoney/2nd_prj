@@ -103,8 +103,6 @@
 	                
 	                if (tr) {
 	                	var convNum = checkbox.getAttribute('data-conv-num');
-	                	alert(convNum)
-	                	alert(restareaNum)
 	                    tr.remove();
 	                	
 	                	var data = {

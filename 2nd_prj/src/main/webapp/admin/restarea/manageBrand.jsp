@@ -101,8 +101,6 @@
 	                
 	                if (tr) {
 	                	var brandNum = checkbox.getAttribute('data-brand-num');
-	                	alert(brandNum)
-	                	alert(restareaNum)
 	                    tr.remove();
 	                	
 	                	var data = {
