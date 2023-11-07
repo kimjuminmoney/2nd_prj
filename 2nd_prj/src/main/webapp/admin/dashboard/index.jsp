@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%-- 페이지 지시자 설정 --%>
 <%@ page info="" %>
+<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,7 @@
     </head>
         
 	<body class="sb-nav-fixed">
-	<%-- <jsp:include page="../admin_include/header_nav.jsp"></jsp:include> --%>
+	<jsp:include page="../admin_include/header_nav.jsp"></jsp:include>
        
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">

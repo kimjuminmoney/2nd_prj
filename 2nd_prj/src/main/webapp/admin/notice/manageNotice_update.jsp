@@ -68,7 +68,7 @@ $(function(){
          lang: 'ko-KR'
      });//summernote
      //content값을 summernote에 할당
-     var content = "${ noticeVO.ncontent}";
+     var content = '${ noticeVO.ncontent}';
      $('#note').summernote('code', content);
      
 	 $("#saveBtn").click(function(){

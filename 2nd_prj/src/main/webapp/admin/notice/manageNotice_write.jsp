@@ -79,7 +79,6 @@ $(function(){
              return;
          }//end if
 			 $("#frm").submit();
-             alert("저장되었습니다.");
 	 })//click
 	 
 	 $("#cancelBtn").click(function() {
@@ -108,15 +107,15 @@ $(function(){
 				        <form action="manageNotice_write_process.jsp" method="post" id="frm">
 					        <input type="hidden" id="nno" name="nno" value="${ maxNno+1 }">
 					        <!-- 세션넘어오면 value empno로 변경하기 -->
-					        <input type="hidden" id="empno" name="empno" value="1">
+					        <input type="hidden" id="empno" name="empno" value="${ sesNo }">
                         	<div class="card mb-4">
                         	
                                 <div class="toast-header" style="background-color: #E2E2E2;opacity 3.00%">
 									  <span class="input-group-text" id="inputGroup-sizing-lg">제 목</span>
 									  <input type="text" id="ntitle" name="ntitle" class="form-control" placeholder="제목을 입력하세요" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
 								    <div style="width: 200px">
-									    <small>작성자 : ${ noticeVO.writer }</small><br>
-									    <small>작성일 : ${ noticeVO.input_date }</small><br>
+									    <small>작성자 : ${ managerData }</small><br>
+									    <small>작성일 : ${ input_date }</small><br>
 								    </div>
 							  	</div>
 						    <div class="card-body">

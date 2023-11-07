@@ -31,7 +31,7 @@ try{
 	if(mdVO != null){
 		flag = true;
 		session.setAttribute("sesNo",mlVO.getEMPNO());
-		session.setAttribute("userData", mdVO.getENAME());
+		session.setAttribute("managerData", mdVO.getENAME());
 		json.put("flag", flag);
 		//return;
 	}
