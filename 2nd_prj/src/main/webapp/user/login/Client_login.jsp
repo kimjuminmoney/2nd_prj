@@ -45,14 +45,14 @@ function checkNull() {
 	$("#id").focus();
 	if(id.replace(/ /g,"") == ""){
 		alert("아이디를 입력해주세요.");
-		frm.USERID.focus();;
+		//frm.USERID.focus();;
 		return;
 	}
 	
 	$("#pass").focus();
 	if(pass.replace(/ /g,"") ==""){
 		alert("비밀번호를 입력해주세요.");
-		frm.UPW.focus();;
+		//frm.UPW.focus();;
 		return;
 	}
 	
@@ -102,7 +102,11 @@ function checkNull() {
                                                 <input class="form-control" name="EPW" id="pass" type="password" placeholder="Password"  style="width:100%;"/>
                                                 <label for="inputPassword">비밀번호</label>
                                             </div>
-                                            <div class="d-flex align-items-center justify-content-end mt-4 mb-0">
+                                            <div class="d-flex justify-content-between align-items-center mt-4 mb-0">
+<!--                                             <div class="d-flex align-items-center justify-content-end mt-4 mb-0"> -->
+                                            <div>
+                                            <a href="Client_join.jsp" class="btn btn-success">회원가입</a>
+                                            </div>
                                             <div id="output">
                                             </div>
                                             <input type="button" value="로그인" id="btnLogin" class="btn btn-success"/>
