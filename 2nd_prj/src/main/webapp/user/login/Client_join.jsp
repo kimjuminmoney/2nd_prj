@@ -44,6 +44,19 @@ $(document).ready(function() {
     $("#UPW").change(function(){
         checkPassword($('#UPW').val(), $('#USERID').val());
     });
+    
+
+    $("#email1").on("input", function() {
+        var regex = /^[a-zA-Z]+$/; // 영어만 입력 가능한 정규 표현식
+        var inputText = $(this).val();
+        
+        if (!regex.test(inputText)) {
+            alert("영어만 입력 가능합니다.");
+            $(this).val("");
+        }
+    });
+    
+
 
     function checkPassword(password, id) {
         // 비밀번호 유효성 검사 코드 추가
@@ -139,10 +152,6 @@ $(document).ready(function() {
 
 </head>
 <body class="sb-nav-fixed">
-        <jsp:include page="../myinfo_nav/include_nav.jsp"></jsp:include>
-        <div id="layoutSidenav">
-        	<jsp:include page="../myinfo_nav/include_side_nav.jsp"></jsp:include>
-             </div>
             <div id="layoutSidenav_content">
                <main>
                 <div class="container">
@@ -226,6 +235,29 @@ $(document).ready(function() {
     <label for="UTEL">전화번호</label>
     <input class="form-control" name="UTEL" id="UTEL" type="text" placeholder="전화번호를 입력해주세요" />
 </div>
+<div id="validationResult"></div>
+
+<script>
+const UTELInput = document.getElementById("UTEL");
+const validationResult = document.getElementById("validationResult");
+
+// 입력값이 변경될 때마다 유효성 검사 수행
+UTELInput.addEventListener("input", validatePhoneNumber);
+
+function validatePhoneNumber() {
+    const phoneNumber = UTELInput.value;
+    const phoneNumberPattern = /^\d{3}-\d{4}-\d{4}$/; // 예: 000-0000-0000 형식
+
+    if (phoneNumberPattern.test(phoneNumber)) {
+        validationResult.textContent = "유효한 전화번호입니다.";
+        validationResult.style.color = "green";
+    } else {
+        validationResult.textContent = "유효하지 않은 전화번호입니다. 예: 000-0000-0000 형식으로 입력하세요.";
+        validationResult.style.color = "red";
+    }
+}
+</script>
+
     <p>약관에 동의합니다.</p>
      <textarea id="termsTextarea" rows="10" cols="93" style="resize: horizontal; width: 100% ;" disabled readonly>
 가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.

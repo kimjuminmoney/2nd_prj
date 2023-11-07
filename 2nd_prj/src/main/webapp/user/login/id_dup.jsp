@@ -29,13 +29,12 @@ $(function() {
 });
 
 function chkNull() {
-    var id = $("#userId").val();
+    var id = $("#USERID").val();
 
     if (id.trim() == "") {
         alert("중복확인할 아이디를 입력해 주세요.");
         return;
     }//end if
-
     $("#frm").submit();
 }
 
@@ -55,7 +54,7 @@ function useId(USERID) {
          <div id="idDiv">
             <form name="subFrm" id="frm" action="id_dup.jsp">
                <label>아이디</label>
-               <input type="text" id="userId" name="userId" class="inputBox" style="width:160px;"
+               <input type="text" id="USERID" name="USERID" class="inputBox" style="width:160px;"
                maxlength="16" autofocus="autofocus" value="${param.USERID}" />
                <input type="button" value="중복확인" class="btn" id="btn" />
                <input type="text" style="display:none" />
@@ -76,6 +75,7 @@ function useId(USERID) {
                         ClientDAO cDAO = ClientDAO.getInstance();
                         try {
                             boolean flag = cDAO.selectId(USERID);
+                            System.out.println("ㅇㄹㄴㅇㄹㅇㄴㄹ");
                 %>
                             <strong>${param.USERID}</strong>는
                             <c:choose>
@@ -97,6 +97,7 @@ function useId(USERID) {
             </c:catch>
             <c:if test="${not empty se}">
                 문제가 발생하였습니다. 잠시 후 다시 시도해주세요.
+                ${ se }
             </c:if>
          </div>
       </div>
