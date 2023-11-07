@@ -11,6 +11,7 @@
 <%@ page info=" cs페이지" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <% request.setCharacterEncoding("UTF-8"); 
 
 int totalCount=0;
@@ -22,9 +23,6 @@ List<MembershipManagementVO> mList=mmDAO.selectAllMember();//전체 회원 조�
 System.out.println(mList); //지금 DAO에서 레코드를 분할하는 부분이 없음 추가해야함> 일단 급한거부터
 pageContext.setAttribute("mList",mList);
 %>
-<%-- <c:if test="${ empty sesId }">
-<c:redirect url="../login/Client_login.html"/>
-</c:if> --%>
 <!DOCTYPE html>
 <html>
 <head>

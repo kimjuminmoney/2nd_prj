@@ -23,9 +23,6 @@ List<AdminCSVO> csList=acDAO.selectAllCS();//리뷰조회
 pageContext.setAttribute("csList",csList);
 
 %>
-<%-- <%-- <c:if test="${ empty sesId }">
-<c:redirect url="../login/Manager_login.html"/>
-</c:if> --%>
 <!DOCTYPE html>
 <html>
 <head>
