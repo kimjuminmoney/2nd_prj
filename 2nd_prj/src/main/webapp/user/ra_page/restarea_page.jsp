@@ -1,3 +1,4 @@
+<%@page import="ra.admin.dashboard.DashboardDAO"%>
 <%@page import="ra.user.restarea.ConvVO"%>
 <%@page import="ra.user.restarea.BrandVO"%>
 <%@page import="ra.user.restarea.FoodVO"%>
@@ -30,6 +31,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 <%
+DashboardDAO dDAO = DashboardDAO.getInstance();
+String rano = request.getParameter("rano");
+dDAO.updateHitsSum(rano);
+
 String sesId=(String)session.getAttribute("sesId");
 pageContext.setAttribute("sesId", sesId);
 %>
@@ -116,7 +121,7 @@ $(function(){
     <body class="d-flex flex-column h-100">
     <input type="hidden" name="raNum" id="raNum" value="<%=request.getParameter("rano")%>">
     <%
-    String rano = request.getParameter("rano");
+    //String rano = request.getParameter("rano");
     RestDAO rDAO = RestDAO.getInstance();
     ReviewDAO rvDAO = ReviewDAO.getInstance();
     AddRestDAO arDAO = AddRestDAO.getInstance();
