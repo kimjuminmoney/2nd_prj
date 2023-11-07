@@ -252,9 +252,9 @@
 
 #sidebar-wrapper {
 	position: fixed;
-	width: 120px;
+	width: 130px;
 	height: 100%;
-	margin-left: -120px;
+	margin-left: -130px;
 	background: #212529;
 	overflow-x: hidden;
 	overflow-y: auto;

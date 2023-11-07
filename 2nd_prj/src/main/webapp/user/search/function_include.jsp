@@ -146,9 +146,7 @@
 
                     var el = document.createElement('li'),
                         itemStr = 
-                        /* '<p class="p-3 mb-2 bg-dark text-white">'+(index + 1) +'</p>'+ */
                         '<div class="d-flex flex-row align-items-center">'+
-/*                         '<div class="info">' + */
                         '<div class="d-flex flex-row align-items-center">'+
                         '<span id="spanNum" class="badge rounded-pill bg-success">'+(index + 1) +'</span>'+
                         '<div class="ml-2">'+
@@ -157,7 +155,6 @@
 
                     if (places.road_address_name) {
                         itemStr += '    <span>' + places.road_address_name + '</span>' ;
-                            /* '   <span class="jibun gray">' + places.address_name + '</span>' */
                     } else {
                         itemStr += '    <span>' + places.address_name + '</span>';
                     }
@@ -252,12 +249,12 @@
                 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
                 // 인포윈도우에 장소명을 표시합니다
                 function displayInfowindow(marker, title) {
-                    var content = '<div class="btn btn-success">' + title + '</a></div>';
-                    //<a href="../ra_page/restarea_page.jsp?rano=' + places.rano + '
+                    var content = '<div class="btn btn-success" style="width: 100%;height: 100%;">' + title + '</div>';
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
                 }
-
+                
+                
                 // 검색결과 목록의 자식 Element를 제거하는 함수입니다
                 function removeAllChildNods(el) {
                     while (el.hasChildNodes()) {
@@ -518,7 +515,7 @@
                   
                // 마커 이미지 URL 설정
                   var markerImageURL = hidden === 
-               'strHidden' ? '../../common/icon_images/start.png' : '../../common/icon_images/end.png';
+               'strHidden' ? '../../common/icon_images/marker/start.png' : '../../common/icon_images/marker/end.png';
 
                // 마커 이미지 설정
                   var markerImage = new kakao.maps.MarkerImage(markerImageURL, new kakao.maps.Size(40, 40));
