@@ -15,6 +15,7 @@
 <% request.setCharacterEncoding("UTF-8"); 
 
 ReviewDAO rDAO= ReviewDAO.getInstance();
+
 List<ReviewVO> rvList=rDAO.selectAllReview();//리뷰조회
 List<ReviewVO> rvList2=rDAO.selectOverReport();//리뷰조회
 
@@ -27,22 +28,22 @@ pageContext.setAttribute("rvList2",rvList2);
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-<!-- bootstrap CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<!-- jQuery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
- <!-- jQuery CDN 끝 -->
- <!-- css연결 -->
- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="http://192.168.10.150/jsp_prj/common/css/styles.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>리뷰관리</title>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+<link href="../../common/css/styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+<!-- boost -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- jQuery CDN시작 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="js/scripts.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
- <script src="../../common/js/datatables-simple-demo.js"></script>
-<!-- 연결 끗 -->    
+<script src="../../common/js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="../../common/js/datatables-simple-demo.js"></script>  
  
  <style type="text/css">
    
@@ -65,9 +66,15 @@ pageContext.setAttribute("rvList2",rvList2);
  </script>
 </head>
 <body class="sb-nav-fixed">
-         <jsp:include page="../admin_include/header_nav.jsp"></jsp:include>
+       
+       <!-- 해더 nav -->
+        <jsp:include page="../admin_include/header_nav.jsp"></jsp:include>
         <div id="layoutSidenav">
-        	<jsp:include page="../admin_include/side_bar.jsp"></jsp:include>
+            <div id="layoutSidenav_nav">
+            <!-- 사이드바 nav -->
+            <jsp:include page="../admin_include/side_bar.jsp"></jsp:include>
+               
+            </div>
             <div id="layoutSidenav_content">
                 <main>
 					<div class="container-fluid px-4">

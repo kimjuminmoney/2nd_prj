@@ -207,6 +207,41 @@ public ReviewVO selectOneReview( String userId, String rvNo ) throws SQLExceptio
 	
 }//selectReview
 
+public int deleteOneReview( String userId, int rvNo, String rvdType, String rvdDetail ) throws SQLException {
+	
+	int cnt=0;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs= null;
+	DbConnection db= DbConnection.getInstance();
+	
+	ReviewVO rVO=new ReviewVO();
+	
+	try {
+		
+		con= db.getConn("jdbc/dbcp");
+		StringBuilder Query = new StringBuilder();
+		Query.append("    update review   ")
+		.append("    set rvdType=?, rvdDetail=?, rvdDate=sysdate     ")
+		.append("    where userid=? and rvNo=?    ");
+		
+		pstmt=con.prepareStatement(Query.toString());
+		int rvNO=Integer.valueOf(rvNo);
+		
+		
+		pstmt.setString(1, rvdType);
+		pstmt.setString(2, rvdDetail);
+		pstmt.setString(3, userId);
+		pstmt.setInt(4, rvNO);
+		
+		cnt =pstmt.executeUpdate();		
+		
+	} finally {
+		db.dbClose(rs, pstmt, con);
+	}
+		return cnt;
+}//deleteOneReview
+
 
 
 

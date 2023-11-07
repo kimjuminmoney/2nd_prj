@@ -70,12 +70,15 @@ pageContext.setAttribute("csList",csList);
  </script>
 </head>
 <body class="sb-nav-fixed">
-
-       <jsp:include page="../admin_include/header_nav.jsp"></jsp:include><!-- 위쪽 사이드 nav 넣기 -->
+       
+       <!-- 해더 nav -->
+        <jsp:include page="../admin_include/header_nav.jsp"></jsp:include>
         <div id="layoutSidenav">
-        	<div id="layoutSidenav_nav">
-        	<jsp:include page="../admin_include/side_bar.jsp"></jsp:include><!-- 왼쪽 사이드 nav 넣기 -->
-        	</div>
+            <div id="layoutSidenav_nav">
+            <!-- 사이드바 nav -->
+            <jsp:include page="../admin_include/side_bar.jsp"></jsp:include>
+               
+            </div>
             <div id="layoutSidenav_content">
                 <main>
                       <div class="container-fluid px-4">

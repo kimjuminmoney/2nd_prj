@@ -49,10 +49,10 @@ pageContext.setAttribute("rVO",rVO);
 	 
 	 $("#btn_delete").click(function(){
 			var jsonObj={
-					"rvNo" : ${ rVO.rvNo },
-					"userId" : ${ rVO.userId },
-					"rvdType" : $("#rvdType").val();
-				 	"rvdDetail" : $("#rvdDetail").val();		
+					"rvNo" : "${ rVO.rvNo }",
+					"userId" : "${ rVO.userId }",
+					"rvdType" : $("#rvdType").val(),
+				 	"rvdDetail" : $("#rvdDetail").val()		
 			}
 		 
 		 $.ajax({
