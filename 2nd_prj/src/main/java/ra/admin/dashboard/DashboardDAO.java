@@ -161,7 +161,7 @@ public class DashboardDAO {
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT COUNT(*) 	cnt	")
 			.append("FROM USERINFO  		")
-			.append("WHERE UJOIN=sysdate	");
+			.append("WHERE TRUNC(UJOIN)=TRUNC(sysdate)	");
 			
 			//가입한 날짜가 오늘인 사람의 수를 세기
 			//UJOIN이 DATE형식이기 때문에 where절에 date붙이지 않아도 됨~
@@ -223,7 +223,7 @@ public class DashboardDAO {
 			StringBuilder sb=new StringBuilder();
 			sb.append("SELECT COUNT(*)	cnt	")
 			.append("FROM REVIEW 			")
-			.append("WHERE RVDDATE=sysdate	");
+			.append("WHERE TRUNC(RVDATE) = TRUNC(sysdate)	");
 			
 			pstmt = con.prepareStatement(sb.toString());
 			rs=pstmt.executeQuery();
@@ -281,7 +281,7 @@ public class DashboardDAO {
 			StringBuilder sb = new StringBuilder();
 			sb.append("	SELECT COUNT(*) 	cnt						")
 			.append("	FROM USERINFO  								")
-			.append("	WHERE UQUIT=to_char(sysdate, 'yyyy-mm-dd')	");
+			.append("	WHERE TRUNC(UQUIT)=TRUNC(sysdate)	");
 			
 			pstmt = con.prepareStatement(sb.toString());
 			rs=pstmt.executeQuery();
