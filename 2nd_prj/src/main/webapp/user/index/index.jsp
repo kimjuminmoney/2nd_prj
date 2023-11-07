@@ -98,6 +98,7 @@
             <footer class="bg-dark py-4 mt-auto">
             <div class="container-fluid px-4">
     <div class="d-flex align-items-center justify-content-between small">
+    	<div></div>
         <div>
             <a href="../../admin/login/Manager_login.jsp">관리자 페이지로 이동</a>
         </div>

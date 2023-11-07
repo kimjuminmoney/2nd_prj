@@ -266,7 +266,7 @@ pageContext.setAttribute("csList",csList);
             	            </div>
                         	<div class="card-body">
 	                        	<div id="ta">
-	                        		<textarea class="form-control" id="cs_text" name="cs_text" style="height: 100px;	">[Web발신] 너희는 나를 존중해야한다. 나는 1조 조장으로 .....       [더보기]	</textarea>
+	                        		<textarea class="form-control" id="cs_text" name="cs_text" placeholder="내용을 입력해주세요." style="height: 100px;	"></textarea>
 	                        	</div>
 	                        	<div class="row g-3 align-items-center" id="btn_myinfo" style="margin-top:10px;">
 									<div class="col-auto">

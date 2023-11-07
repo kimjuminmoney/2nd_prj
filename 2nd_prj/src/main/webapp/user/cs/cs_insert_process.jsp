@@ -11,7 +11,7 @@ JSONObject jsonObj = new JSONObject();
 
 
 String id=(String)session.getAttribute("id");
-id="test";
+
 
 String raNo=request.getParameter("ra_name");
 

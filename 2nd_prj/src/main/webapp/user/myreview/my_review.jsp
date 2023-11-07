@@ -128,7 +128,8 @@ pageContext.setAttribute("rvList",rvList);
  }//modifyRv
  
  function deleteRv( i ){
-	 
+	 var del=window.confirm( "리뷰를 지우시겠습니까?" );
+	 if(del){
 	 var jsonObj={ 
 		 "rvNo" :	$("#rvNo"+i).val(),
 		 "userId" : "${ sesId}"
@@ -149,6 +150,7 @@ pageContext.setAttribute("rvList",rvList);
 				location.reload()
 			}//success
 		 });//ajax
+	 }//end if
  }//removeRv
  </script>
 </head>
