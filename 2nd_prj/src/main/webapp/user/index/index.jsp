@@ -66,17 +66,23 @@
 					    
                         <!-- 지성 -->
                         
-	                   <div class="tab-pane" id="highway" role="tabpanel" aria-labelledby="highway-tab">
-	                            <div class="container text-center">
-	                               <div class="row">
-	                                  <div class="col" id="hList">
-	                                     <div class="collapse collapse-horizontal" id="collapseWidthExample">
-	                                     </div>
-	                                  </div>
-	                                  <div class="col" id="raList">
-	                                  </div>
-	                              </div>
-	                            </div>
+	                   <div class="tab-pane" id="highway" role="tabpanel" aria-labelledby="highway-tab" >
+	                   		<div id="menu_wrap" >
+	                        	<div id="search-results" style="height:700px;">
+		                            <div class="container text-center">
+	    	                       		<div class="row">
+		        	                   		<div class="col">
+			                               		<div id="hList">
+		                              			</div>
+				                         	</div>
+			                        		<div class="col" >
+			                        			<div id="raList" style="overflow:auto;">
+			                        			</div>
+		                        			</div>
+		                            	</div>
+	                          		</div>
+		                        </div>
+	                        </div>
 	                   </div>
 	                  </div>
                     
@@ -92,11 +98,8 @@
             <footer class="bg-dark py-4 mt-auto">
             <div class="container-fluid px-4">
     <div class="d-flex align-items-center justify-content-between small">
-        <div class="text-muted">Copyright &copy; Your Website 2023</div>
         <div>
-            <a href="#">Privacy Policy</a>
-            &middot;
-            <a href="../../admin/login/Manager_login.jsp">관리자</a>
+            <a href="../../admin/login/Manager_login.jsp">관리자 페이지로 이동</a>
         </div>
     </div>
 </div>

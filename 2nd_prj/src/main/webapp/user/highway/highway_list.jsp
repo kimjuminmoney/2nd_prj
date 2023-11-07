@@ -55,7 +55,6 @@ function raList( hNo ){
 }//raList
 
 function moveRA( rano ){
-	alert(rano);
 	if(markers){
 	removeMarker();
 	};
