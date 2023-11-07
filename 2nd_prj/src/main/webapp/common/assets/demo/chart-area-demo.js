@@ -7,7 +7,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: [],
+    labels: ["가평(춘천)휴게소", "황간(부산)휴게소", "서울만남(부산)휴게소"],
     datasets: [{
       label: "Sessions",
       lineTension: 0.3,
@@ -20,14 +20,14 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [],
+      data: [321, 32, 31],
     }],
   },
   options: {
     scales: {
       xAxes: [{
         time: {
-          unit: 'hits'
+          unit: 'raname'
         },
         gridLines: {
           display: false

@@ -3,7 +3,6 @@
 <%-- 페이지 지시자 설정 --%>
 <%@ page info="" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../admin_include/login_session_confirm.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +17,12 @@
     </head>
         
 	<body class="sb-nav-fixed">
-		<jsp:include page="../admin_include/header_nav.jsp"></jsp:include>
+	<%-- <jsp:include page="../admin_include/header_nav.jsp"></jsp:include> --%>
+       
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
             <jsp:include page="../admin_include/side_bar.jsp"></jsp:include>
+            
             </div>
             
             <div id="layoutSidenav_content">
@@ -38,6 +39,7 @@
 		                                휴게소 조회수
 		                            </div>
 		                            <jsp:include page="dashboard_hits.jsp"/>
+		                          <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
 		                        </div>
 		                    </div>
 		                    
@@ -48,7 +50,7 @@
 		                                휴게소별 리뷰수
 		                            </div>
 		                            <jsp:include page="dashboard_review_list.jsp"/>
-		                            
+		                            <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
 		                            	
 		                        </div>
 		                    </div>
@@ -82,7 +84,9 @@
 		    </main>
             </div>
 			</div>	
-        <jsp:include page="../admin_include/footer.jsp"></jsp:include>        
+        <jsp:include page="../admin_include/footer.jsp"></jsp:include> 
+        <script src="../../common/assets/demo/chart-area-demo.js"></script>
+        <script src="../../common/assets/demo/chart-bar-demo.js"></script>       
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../../common/js/scripts.js"></script>
     </body>
