@@ -71,7 +71,7 @@ if ("GET".equals(method)) {
                 <p class="card-text">아이디 : <c:out value="${cjVO.USERID}"/></p>
                 <p class="card-text">닉네임 : <c:out value="${cjVO.UNICK}"/></p>
                 <a href="../index/index.jsp" class="card-link">메인으로</a>
-                <a href="Cleint_login.jsp" class="card-link">로그인</a>
+                <a href="Client_login.jsp" class="card-link">로그인</a>
             </div>
         </div>
     </div>
