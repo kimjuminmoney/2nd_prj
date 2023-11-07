@@ -261,7 +261,7 @@ $(document).ready(function() {
         <button type="button" value="가입"  id="btn" class="btn btn-success">회원가입</button>
     </div>
 <script>
-}
+
 
 											</script>
 										</div>
