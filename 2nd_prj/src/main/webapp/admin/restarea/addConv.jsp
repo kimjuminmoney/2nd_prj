@@ -55,10 +55,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		var confirmation = confirm('매장을 추가하시겠습니까?');
+		$("#btnInput").click(function(){
+		var confirmation = confirm('편의시설을 추가하시겠습니까?');
 		   
 		if(confirmation){
-		$("#btnInput").click(function(){
 	        // 데이터를 수집하거나 사용자 입력을 가져옵니다.
 	        var restAreaNum = $("#restAreaNum").val();
 	        var convImage = $("#convImage").val(); 
@@ -151,9 +151,6 @@
 						
 							<label id="inputRest" class="form-label">시설명</label> 
 							<input id="convName" class="form-control" type="text" placeholder="Default input"><br/>
-
-							<label id="inputRest" class="form-label">전화번호</label> 
-							<input id="convTel" class="form-control" type="text" placeholder="Default input"><br />
 
 							<label id="inputRest" class="form-label">비고</label> 
 							<input id="convDetail" class="form-control" type="text" placeholder="Default input"><br/>

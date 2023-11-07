@@ -89,6 +89,8 @@ $(function(){
             tel: tel
         };
 
+        if(restname != ""){
+        	
         // AJAX 요청을 수행
         $.ajax({
             url: "ajax/ajax_addRest.jsp",
@@ -104,6 +106,9 @@ $(function(){
                     location.reload(); // 현재 페이지를 새로 고침
             }
         });//ajax
+        }else{
+        	alert("휴게소명을 입력해주세요.")
+        }
 		}else{
 			alert("취소하셨습니다.")
 		}

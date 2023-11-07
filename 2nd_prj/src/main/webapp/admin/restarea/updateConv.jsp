@@ -90,7 +90,7 @@
 	            },
 	            success: function(jsonObj){
 	                    alert(convNum+"번 편의시설이 수정되었습니다.");
-	                    window.history.back();
+	                    window.location.href = 'manageConv.jsp?raNo='+restAreaNum;
 	            }
 	        });//ajax
 		}else{
