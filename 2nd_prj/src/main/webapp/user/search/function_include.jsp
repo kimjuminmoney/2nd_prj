@@ -33,9 +33,6 @@
                 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
                 var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-                // 키워드로 장소를 검색합니다
-                /* searchPlaces(); */
-
                 // 키워드 검색을 요청하는 함수입니다
                 function searchPlaces() {
                 	var keyword = document.getElementById("keyword");
@@ -43,12 +40,12 @@
                 	    var keyword = keyword.value;
                 	}
 
-                    /* var keyword = document.getElementById('keyword').value;
+                    var keyword = document.getElementById('keyword').value;
 
                     if (!keyword.replace(/^\s+|\s+$/g, '')) {
                         alert('키워드를 입력해주세요!');
                         return false;
-                    } */
+                    } 
 
                     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
                     ps.keywordSearch(keyword, placesSearchCB,{size:15});
