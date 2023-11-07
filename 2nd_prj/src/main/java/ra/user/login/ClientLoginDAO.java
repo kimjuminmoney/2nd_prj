@@ -36,7 +36,7 @@ public class ClientLoginDAO{
 			//3.Connection얻기
 			con=db.getConn("jdbc/dbcp");
 			//4.쿼리문 생성객체 얻기
-			String selectClient = "select uname, uemail from USERINFO where USERID=? and UPW=?";
+			String selectClient = "select uname, uemail from USERINFO where USERID=? and UPW=? and uquit is null ";
 			pstmt=con.prepareStatement(selectClient);
 			
 			//5.바인드변수 값 설정
