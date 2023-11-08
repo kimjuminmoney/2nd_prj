@@ -11,13 +11,6 @@ String userId=request.getParameter("userid");
 String csNo=request.getParameter("csNO");
 int tempNO=Integer.valueOf(csNo);
 
-System.out.println(empno);
-System.out.println(csAnswer);
-System.out.println(userId);
-System.out.println(csNo);
-System.out.println(tempNO);
-
-empno="1";
 
 
 AdminCSDAO acsDAO = AdminCSDAO.getInstance();
@@ -25,7 +18,6 @@ AdminCSVO csVO=acsDAO.selectOneCS(userId, tempNO);
 csVO.setUserId(userId);
 csVO.setEmpno(empno);
 csVO.setCsAnswer(csAnswer);
-System.out.println(csVO);
 acsDAO.modifyCS(csVO);
 
 

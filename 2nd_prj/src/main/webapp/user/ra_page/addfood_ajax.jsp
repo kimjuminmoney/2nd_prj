@@ -15,11 +15,9 @@ String foodData = request.getParameter("foodData");
 String[] fdArray = foodData.split("/");
 
 String rastr = fdArray[1].replace("0", "");
-System.out.println(rastr);
 
 mfVO.setRestAreaNum(rastr);
 mfVO.setBrandName(fdArray[0]);
-System.out.println(fdArray[0]);
 
 String fDetail=fdArray[2];
 if(fDetail.equals("null")){

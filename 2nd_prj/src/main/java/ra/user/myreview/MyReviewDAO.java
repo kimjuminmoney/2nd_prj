@@ -95,7 +95,6 @@ public class MyReviewDAO {
 					mrVO.setRvdDetail(	rs.getString("rvdDetail"));
 					mrVO.setRvdDate(rs.getDate("rvdDate"));
 							
-					System.out.println(mrVO);
 					rvList.add(mrVO);
 				}
 				
@@ -120,7 +119,6 @@ public class MyReviewDAO {
 		PreparedStatement pstmt = null;
 		
 		DbConnection db= DbConnection.getInstance();
-		System.out.println("1");
 		try {
 			
 			con= db.getConn("jdbc/dbcp");
@@ -136,7 +134,6 @@ public class MyReviewDAO {
 			pstmt.setInt(4, rvNO);
 			
 			int cnt=pstmt.executeUpdate();
-			System.out.println("2--"+cnt);
 			return cnt;
 		} finally {
 			db.dbClose(null, pstmt, con);
@@ -144,7 +141,6 @@ public class MyReviewDAO {
 	}//ModifyInfo
 	
 	public int deleteReview(String id, int rvNO) throws SQLException {
-		System.out.println("3");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
@@ -163,7 +159,6 @@ public class MyReviewDAO {
 			pstmt.setInt(2, rvNO);
 			
 			int cnt=pstmt.executeUpdate();
-			System.out.println("4---"+cnt);
 			return cnt;
 		} finally {
 			db.dbClose(null, pstmt, con);

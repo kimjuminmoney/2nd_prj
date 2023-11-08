@@ -133,7 +133,6 @@ public class MembershipManagementDAO {
 				mmVO.setuJoin(rs.getDate("ujoin"));
 				mmVO.setuQuit(rs.getDate("uQuit"));
 				
-				System.out.println(mmVO);
 			}
 		}finally {
 			db.dbClose(rs, pstmt, con);

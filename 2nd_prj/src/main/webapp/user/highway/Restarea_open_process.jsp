@@ -25,7 +25,6 @@ for(RestareaVO raVO : raVOList ){
 	jsonObj.put("raName",raVO.getRaName());
 	jsonObj.put("raX",raVO.getRaX());
 	jsonObj.put("raY",raVO.getRaY());
-	System.out.println(jsonObj.toString());
 	jsonArr.add(jsonObj);
 }
 out.print(jsonArr.toJSONString());

@@ -51,7 +51,6 @@ if( totalPage < endPage){
 }
 
 List<MyCSVO> csList=mcDAO.selectMyCS(id,startNum,endNum);//리뷰조회
-System.out.println(csList);
 pageContext.setAttribute("csList",csList);
 %>
 <c:if test="${ empty sesId }">

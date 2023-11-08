@@ -32,7 +32,6 @@ for(RestSearchVO rsVO : rsVOList ){
 	jsonObj.put("local",rsVO.getLocal());
 	jsonObj.put("x",rsVO.getX());
 	jsonObj.put("y",rsVO.getY());
-	System.out.println(jsonObj.toString());
 	jsonArr.add(jsonObj);
 }
 out.print(jsonArr.toJSONString());

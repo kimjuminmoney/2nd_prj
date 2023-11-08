@@ -15,7 +15,6 @@ cnt=mmDAO.deleteMember(userId);
 JSONObject jsonObj = new JSONObject();
 
 jsonObj.put("cnt", cnt);
-System.out.print(cnt);
 out.print(jsonObj.toJSONString());
 
 %>

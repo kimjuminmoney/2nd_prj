@@ -68,7 +68,6 @@ public class ClientDAO {
 				pstmt = con.prepareStatement( insertUSERINFO.toString() );
 				
 				//5.바인드 변수 값 설정
-				System.out.print(cjVO.getUTEL());
 				pstmt.setString(1, cjVO.getUSERID());
 				pstmt.setString(2, cjVO.getUPW());
 				pstmt.setString(3, cjVO.getUNAME());

@@ -11,7 +11,6 @@ DashboardDAO dbDAO = DashboardDAO.getInstance();
 DashboardReviewVO dbrVO = new DashboardReviewVO();
 
 List<DashboardReviewVO> reviewSum = dbDAO.selectReviewSum();
-/* System.out.println( reviewSum ); */
 pageContext.setAttribute("reviewSum", reviewSum);
 %>
 

@@ -20,7 +20,6 @@ String empno=(String)session.getAttribute("sesNo");
 MembershipManagementDAO mmDAO= MembershipManagementDAO.getInstance();
 
 List<MembershipManagementVO> mList=mmDAO.selectAllMember();//전체 회원 조회
-System.out.println(mList); //지금 DAO에서 레코드를 분할하는 부분이 없음 추가해야함> 일단 급한거부터
 pageContext.setAttribute("mList",mList);
 %>
 <!DOCTYPE html>

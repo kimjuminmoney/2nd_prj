@@ -75,7 +75,6 @@ function useId(USERID) {
                         ClientDAO cDAO = ClientDAO.getInstance();
                         try {
                             boolean flag = cDAO.selectId(USERID);
-                            System.out.println("ㅇㄹㄴㅇㄹㅇㄴㄹ");
                 %>
                             <strong>${param.USERID}</strong>는
                             <c:choose>

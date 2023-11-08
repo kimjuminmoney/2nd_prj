@@ -9,7 +9,6 @@
 <% request.setCharacterEncoding("UTF-8");
 
 String empno= (String)session.getAttribute("empno"); //직원의 아이디 
-System.out.println(empno);
 
 String userId=request.getParameter("userId");//유저의 아이디
 int csNO=Integer.valueOf(request.getParameter("csNO"));//유저의 cs번호

@@ -93,7 +93,6 @@ public List<ReviewVO> selectAllReview( ) throws SQLException {
 					rVO.setRvdDetail(	rs.getString("rvdDetail"));
 					rVO.setRvdDate(rs.getDate("rvdDate"));
 						
-					System.out.println(rVO);
 					rvList.add(rVO);
 				}
 		
@@ -144,7 +143,6 @@ public List<ReviewVO> selectOverReport() throws SQLException {
 				rVO.setRvdDetail(	rs.getString("rvdDetail"));
 				rVO.setRvdDate(rs.getDate("rvdDate"));
 					
-				System.out.println(rVO);
 				rvList.add(rVO);
 			}
 	
@@ -197,7 +195,6 @@ public ReviewVO selectOneReview( String userId, String rvNo ) throws SQLExceptio
 				rVO.setRvdDetail(	rs.getString("rvdDetail"));
 				rVO.setRvdDate(rs.getDate("rvdDate"));
 					
-				System.out.println(rVO);
 			}
 	
 		return rVO;

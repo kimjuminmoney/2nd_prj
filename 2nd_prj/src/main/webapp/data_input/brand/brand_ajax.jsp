@@ -36,14 +36,6 @@ Type listType = new TypeToken<List<BrandItem>>() {
 }.getType();
 List<BrandItem> brandList = gson.fromJson(Strjson, listType);
 // 파싱된 데이터 출력
-/* for (BrandItem bi : brandList) {
-	System.out.println("휴게소번호: " + bi.getStdRestCd());
-	System.out.println("브랜드명: " + bi.getBrdName());
-	System.out.println("설명: " + bi.getBrdDesc());
-	System.out.println("등록일: " + bi.getRedDtime());
-	System.out.println("시설코드: " + bi.getBrdCode());
-	System.out.println("-------------------");
-} */
 BrandInputVO biVO = null;
 BrandInputDAO biDAO = BrandInputDAO.getInstance();
 List<BrandInputVO> list = new ArrayList<BrandInputVO>();
@@ -70,7 +62,6 @@ for (int i = 0; i < brandList.size(); i++) {
 		sqlDate = new java.sql.Date(date.getTime());
 		break; // 올바른 형식을 찾았으면 루프를 종료
 	} catch (ParseException e) {
-		System.out.println("날짜형식 오류 : " +brandList.get(i).toString());
 	}//ParseException
 		}//end for
 
@@ -87,16 +78,10 @@ for (int i = 0; i < brandList.size(); i++) {
 		list.add(biVO);
 		cnt++;
 		biDAO.insertBrand(biVO);
-		System.out.println(cnt+"번 성공");
-		//System.out.println("휴게소 번호 : " + biVO.getRano()+" [편의시설번호 :"+ biVO.getBno() + "]["+ cnt + "번 성공]");
 	} catch (NumberFormatException nfe) {
 		nfe.printStackTrace();
-		System.out.println("NumberFormatException 발생. dVO 정보: " + biVO.toString());
-		System.out.println(cnt+"번 실패");
 	} catch (SQLException se) {
 		se.printStackTrace();
-		System.out.println("SQLException 발생. dVO 정보: " + biVO.toString());
-		System.out.println(cnt+"번 실패");
 	}//catch
 }//end for
 %>

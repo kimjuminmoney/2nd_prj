@@ -32,14 +32,6 @@ Gson gson = new Gson();
 Type listType = new TypeToken<List<ConviItem>>() {}.getType();
 List<ConviItem> conviList = gson.fromJson(Strjson, listType);
 // 파싱된 데이터 출력
-for (ConviItem convi : conviList) {
-    System.out.println("휴게소번호: " + convi.getStdRestCd());
-    System.out.println("편의시설명: " + convi.getPsName());
-    System.out.println("설명: " + convi.getPsDesc());
-    System.out.println("등록일: " + convi.getRedDtime());
-    System.out.println("시설코드: " + convi.getPsCode());
-    System.out.println("-------------------");
-}
 ConviInputVO ciVO = null;
 ConviInputDAO ciDAO = ConviInputDAO.getInstance();
 List<ConviInputVO> list = new ArrayList<ConviInputVO>();
@@ -84,7 +76,6 @@ for(int i=0; i<conviList.size();i++){
 	ciVO.setCno(i+1);
 	list.add(ciVO);
 	cnt += ciDAO.insertConvi(ciVO);
-	System.out.println("휴게소 번호 : " + ciVO.getRano()+" [편의시설번호 :"+ ciVO.getCno() + "]["+ cnt + "번 성공]");
 }
 }catch (SQLException se){
 	se.printStackTrace();

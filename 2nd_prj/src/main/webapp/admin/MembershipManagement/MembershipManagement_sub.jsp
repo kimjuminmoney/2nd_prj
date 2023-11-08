@@ -9,7 +9,6 @@
 <%request.setCharacterEncoding("UTF-8");
 
 String userId= request.getParameter("userId");
-System.out.println(userId);
 
 MembershipManagementDAO mmDAO= MembershipManagementDAO.getInstance();
 

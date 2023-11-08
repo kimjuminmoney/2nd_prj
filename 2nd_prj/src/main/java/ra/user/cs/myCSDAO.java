@@ -237,7 +237,6 @@ public class myCSDAO {
 			pstmt.setString(1, id);
 			pstmt.setString(2, id);
 			pstmt.setString(3, cstype);
-			System.out.println(rano);
 			pstmt.setString(4, rano);
 			pstmt.setString(5, cstext);
 			

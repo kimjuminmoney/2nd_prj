@@ -25,24 +25,14 @@ while ((line = reader.readLine()) != null) {
 }
 // JSON 데이터 예시
 String Strjson = jsonData.toString();
-System.out.println(Strjson);
 // Gson 객체 생성
 Gson gson = new Gson();
-//System.out.print(Strjson);
 // TypeToken을 사용하여 List<FoodItemVO>로 파싱
 Type listType = new TypeToken<List<FoodItem>>() {
 }.getType();
 List<FoodItem> foodList = gson.fromJson(Strjson, listType);
 // 파싱된 데이터 출력
 
-for (FoodItem fVO : foodList) {
-	System.out.println("음식명: " + fVO.getFname());
-	System.out.println("가격: " + fVO.getFprice());
-	System.out.println("기타: " + fVO.getFdetail());
-	System.out.println("코드: " + fVO.getRano());
-	System.out.println("등록날짜: " + fVO.getFdate());
-	System.out.println("-------------------");
-}
 FoodInputVO dVO = null;
 List<FoodInputVO> list = new ArrayList<FoodInputVO>();
 FoodInputDAO dDAO = FoodInputDAO.getInstance();
@@ -72,7 +62,6 @@ for (int i = 0; i < foodList.size(); i++) {
 		break; // 올바른 형식을 찾았으면 루프를 종료
 	} catch (ParseException e) {
 		e.printStackTrace();
-		System.out.println("ParseException 발생. dVO 정보: " + foodList.get(i).toString());
 	}
 		}
 		number = Integer.parseInt(foodList.get(i).getRano());
@@ -87,13 +76,10 @@ for (int i = 0; i < foodList.size(); i++) {
 		dVO.setFno(i + 1);
 		list.add(dVO);
 		cnt += dDAO.insertFood(dVO);
-		//System.out.println( "푸드넘버"+dVO.getFno() + "번 성공 /" +cnt + "번째 " );
 	} catch (NumberFormatException nfe) {
 		nfe.printStackTrace();
-		System.out.println("NumberFormatException 발생. dVO 정보: " + dVO.toString());
 	} catch (SQLException se) {
 		se.printStackTrace();
-		System.out.println("SQLException 발생. dVO 정보: " + dVO.toString());
 	}
 }
 %>

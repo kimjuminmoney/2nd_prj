@@ -9,7 +9,6 @@ String restareaNum = request.getParameter("restareaNum");
 String userId = request.getParameter("userId");
 int reviewScore = Integer.parseInt(request.getParameter("reviewScore"));
 
-System.out.println("아이디:"+userId+"/ 휴번:"+restareaNum+"/ 내용:"+reviewDetail+"/ 점수:"+reviewScore);
 
 boolean flag=false;
 

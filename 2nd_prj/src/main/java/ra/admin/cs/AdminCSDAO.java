@@ -153,9 +153,7 @@ public class AdminCSDAO {
 		PreparedStatement pstmt = null;
 		
 		DbConnection db= DbConnection.getInstance();
-		System.out.println("1");
 		AdminCSVO aVO = acsVO;
-		System.out.println(acsVO);
 		
 		int cnt=0;
 		try {
