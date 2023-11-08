@@ -10,6 +10,7 @@
 <%@ page info="review page" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="icon" href="../../common/icon_images/marker/favicon.png">
 <%@ include file="../admin_include/login_session_confirm.jsp" %>
 <% request.setCharacterEncoding("UTF-8"); 
 
@@ -90,8 +91,6 @@ pageContext.setAttribute("rVO",rVO);
 		 }//end if
 		 
 	 });//end click
-	 
-	 
 	 
 	 $("#btn_cancel").click(function(){
 		 self.close();

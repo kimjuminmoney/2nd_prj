@@ -4,6 +4,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="ra.admin.cs.AdminCSDAO"%>
+<link rel="icon" href="../../common/icon_images/marker/favicon.png">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page info="cs_admin" %>

@@ -5,7 +5,7 @@
 <%@ page info="complain_sub" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<link rel="icon" href="../../common/icon_images/marker/favicon.png">
 <%
 request.setCharacterEncoding("UTF-8");
 

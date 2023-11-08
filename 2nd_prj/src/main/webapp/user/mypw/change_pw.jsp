@@ -4,6 +4,7 @@
 <%@ page info="비밀번호 변경" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="icon" href="../../common/icon_images/marker/favicon.png">
 <%
 String id= request.getParameter("sesId");
 id="test";
