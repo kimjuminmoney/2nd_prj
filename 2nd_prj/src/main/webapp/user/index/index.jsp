@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RestArea</title>
 <jsp:include page="../search/css_include.jsp"></jsp:include>
 <jsp:include page="../search/function_include.jsp"></jsp:include>
 <jsp:include page="../highway/highway_list.jsp"></jsp:include>

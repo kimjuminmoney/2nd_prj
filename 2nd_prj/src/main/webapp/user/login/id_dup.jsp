@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RestArea</title>
 <style type="text/css">
    #wrap { width: 502px; height: 303px; margin: 0px auto; }
    #idDup { width: 502px; height: 303px; background: #FFFFFF url(../../common/logo_images/id_background.png) no-repeat; }
