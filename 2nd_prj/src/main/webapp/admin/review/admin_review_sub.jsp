@@ -49,7 +49,21 @@ pageContext.setAttribute("rVO",rVO);
  $(function(){
 	 
 	 $("#btn_delete").click(function(){
-			var jsonObj={
+		var confirm=window.confirm("리뷰를 삭제하시겠습니까?");	
+		
+		if( $("#rvdType")[0].selectedIndex == 0 ){
+			alert("유형을 선택해주세요.");
+			return;
+		}
+		
+		if($("#rvdDetail").val() == null || $("#rvdDetail").val() == ""){
+			alert("내용을 입력해주세요.");
+			return;
+		}
+		
+		if(confirm){
+			 
+		 var jsonObj={
 					"rvNo" : "${ rVO.rvNo }",
 					"userId" : "${ rVO.userId }",
 					"rvdType" : $("#rvdType").val(),
@@ -72,9 +86,10 @@ pageContext.setAttribute("rVO",rVO);
 				}//end if		
 			}//success
 		});//ajax
+	
+		 }//end if
 		 
-		 
-	 })
+	 });//end click
 	 
 	 
 	 
@@ -117,6 +132,10 @@ pageContext.setAttribute("rVO",rVO);
 	                       		</div>
 	                       	</div>
 			<div class="card">
+					<c:if test="${ not empty rVO.rvdDate }">
+					<div> ${ rVO.rvdDate} 에 [${ rVO.rvdType }] 항목, [${ rVO.rvdDetail }] 사유으로 삭제되었습니다.</div>
+					</c:if>
+					<c:if test="${ empty rVO.rvdDate }">
 		        	<div class="card-header" id="review_head">
 		        		<div class="row">
 			        		<div class="col align-self-center">삭제 유형</div>
@@ -139,6 +158,8 @@ pageContext.setAttribute("rVO",rVO);
 	            	<div class="card-body" style="margin-top:10px;" >
 	                	<textarea id="rvdDetail"  name="rvdDetail" class="form-control" placeholder="자세한 이유를 설명해주세요."></textarea>
 	            	</div>
+	            	</c:if>
+            </div>
             </div>
             </main>
         </div>
