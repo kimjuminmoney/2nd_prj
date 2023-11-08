@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>RestArea</title>
+<link rel="icon" href="../../common/icon_images/marker/favicon.png">
 <jsp:include page="../search/css_include.jsp"></jsp:include>
 <jsp:include page="../search/function_include.jsp"></jsp:include>
 <jsp:include page="../highway/highway_list.jsp"></jsp:include>
