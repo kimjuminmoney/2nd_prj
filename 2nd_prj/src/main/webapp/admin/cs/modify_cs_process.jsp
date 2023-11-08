@@ -12,15 +12,11 @@ String csNo=request.getParameter("csNO");
 int tempNO=Integer.valueOf(csNo);
 
 
-
 AdminCSDAO acsDAO = AdminCSDAO.getInstance();
 AdminCSVO csVO=acsDAO.selectOneCS(userId, tempNO);
 csVO.setUserId(userId);
 csVO.setEmpno(empno);
 csVO.setCsAnswer(csAnswer);
 acsDAO.modifyCS(csVO);
-
-
-
 
 %>

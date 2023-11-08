@@ -7,7 +7,6 @@
 <%@ page info="" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-//userId, uPw, uName, uNick, uEmail, uTel Date uJoin, uQuit; -->
 String userId = request.getParameter("userId");
 String uPw = request.getParameter("uPw");
 String huPw = request.getParameter("huPw");
