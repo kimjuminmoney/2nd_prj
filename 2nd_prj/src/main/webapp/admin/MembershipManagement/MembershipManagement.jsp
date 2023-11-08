@@ -79,7 +79,7 @@ pageContext.setAttribute("mList",mList);
                 <main>
 				  <div class="container-fluid px-4">
 						<div class="mb-4" style="width:20%; height:75px; margin-top:50px; padding: 10px;" >
-                       	 	<h1 class="list-unstyled" >문의 내역</h1>
+                       	 	<h1 class="list-unstyled" >회원 관리</h1>
                         </div>
                      </div>
                     <div class="container-fluid px-4">

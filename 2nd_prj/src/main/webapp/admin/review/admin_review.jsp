@@ -80,7 +80,7 @@ pageContext.setAttribute("rvList2",rvList2);
                 <main>
 					<div class="container-fluid px-4">
 						<div class="mb-4" style="width:20%; height:75px; margin-top:50px; padding: 10px;" >
-                       	 	<h1 class="list-unstyled" >내 리뷰 관리</h1>
+                       	 	<h1 class="list-unstyled" >리뷰 관리</h1>
                     	</div>
                     </div>
                     <div class="container-fluid px-4" style="margin-top:2%; margin-left:1%;">
