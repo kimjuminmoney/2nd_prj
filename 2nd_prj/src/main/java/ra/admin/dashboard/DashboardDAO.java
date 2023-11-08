@@ -250,9 +250,11 @@ public class DashboardDAO {
 
 			con = db.getConn("jdbc/dbcp");
 			StringBuilder sb = new StringBuilder();
-			sb.append("	SELECT RVNO, COUNT(*)	cnt	")
-			.append("	FROM   REVIEW				")
-			.append("	GROUP BY  RVNO				");
+			sb.append("	SELECT COUNT(*)	cnt	")
+			.append("	FROM   REVIEW			");
+			
+			
+			
 			
 			pstmt = con.prepareStatement(sb.toString());
 			rs=pstmt.executeQuery();
