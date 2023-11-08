@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="icon" href="../../common/icon_images/marker/favicon.png">
 <!DOCTYPE html>
 <html lang="en">
 <style>
